@@ -46,11 +46,9 @@ public slots:
     }
 
     void filePathChanged(const QString &text) {
-        if (widget->text() == text) {
-            return;
+        if (widget->text() != text) {
+            widget->setText(text);
         }
-
-        widget->setText(text);
     }
 
 public:

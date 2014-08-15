@@ -52,7 +52,7 @@ public slots:
 
         const QString fn = QFileDialog::getOpenFileName(widget->window(), caption, dir, filter.join(QLatin1String(";;")), 0, options);
 
-        if (!fn.isNull() && fn != filePath) {
+        if (!fn.isNull()) {
             widget->setFilePath(fn);
         }
     }
