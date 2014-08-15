@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QOpenFileButton" name="openFileButton">
+     <property name="caption">
+      <string>Fuck</string>
+     </property>
+     <property name="directory">
+      <string notr="true"/>
+     </property>
+     <property name="filter">
+      <stringlist>
+       <string>Images (*.png)</string>
+       <string>Sound (*.wav)</string>
+      </stringlist>
+     </property>
+     <property name="options">
+      <set>QFileDialog::DontConfirmOverwrite|QFileDialog::DontResolveSymlinks|QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet|QFileDialog::HideNameFilterDetails</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QOpenFileLineEdit" name="openFileLineEdit_2">
+     <property name="text">
+      <string>9545124452</string>
+     </property>
+     <property name="placeholderText">
+      <string>Click the button to choose a file</string>
+     </property>
+     <property name="filePath">
+      <string>9545124452</string>
+     </property>
+     <property name="caption">
+      <string>Choose a fucking file</string>
+     </property>
+     <property name="directory">
+      <string>/opt</string>
+     </property>
+     <property name="filter">
+      <stringlist>
+       <string>Images (*.png)</string>
+       <string>Sounds (*.wav)</string>
+       <string>All (*)</string>
+      </stringlist>
+     </property>
+     <property name="options">
+      <set>QFileDialog::HideNameFilterDetails|QFileDialog::ReadOnly</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QOpenFileButton</class>
+   <extends>QToolButton</extends>
+   <header>QOpenFileButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QOpenFileLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QOpenFileLineEdit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
