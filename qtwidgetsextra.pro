@@ -1,34 +1,8 @@
-TEMPLATE = lib
-TARGET = $$qtLibraryTarget(QtWidgetsExtra$${QT_MAJOR_VERSION})
-CONFIG *= plugin debug_and_release
+TEMPLATE = subdirs
+CONFIG *= ordered
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-    QT *= designer
-} else {
- CONFIG *= designer
+SUBDIRS *= qtwidgetsextra
+
+isEqual(BUILD_RUNNER, 1) {
+    SUBDIRS *= runner
 }
-
-LIBS *= -L.
-
-DEPENDPATH *= .
-INCLUDEPATH *= .
-
-#RESOURCES = qtwidgetsextra.qrc
-
-HEADERS = QtWidgetsExtra.h \
-    QEmbedableButton_p.h \
-    QOpenFileButtonPlugin.h \
-    QOpenFileLineEditPlugin.h \
-    QOpenFolderLineEditPlugin.h
-
-SOURCES = QtWidgetsExtra.cpp \
-    QEmbedableButton.cpp \
-    QOpenFileButtonPlugin.cpp \
-    QOpenFileLineEditPlugin.cpp \
-    QOpenFolderLineEditPlugin.cpp
-
-include(qopenfile.pri)
-include(qopenfolder.pri)
-
-target.path = $$[QT_INSTALL_PLUGINS]/designer
-INSTALLS *= target
