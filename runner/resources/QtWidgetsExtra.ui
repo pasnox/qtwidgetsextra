@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>QtWidgetsExtra</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -36,13 +36,16 @@
    <item row="0" column="1">
     <widget class="QOpenFileLineEdit" name="openFileLineEdit_2">
      <property name="text">
-      <string>9545124452</string>
+      <string>test.png</string>
      </property>
      <property name="placeholderText">
       <string>Click the button to choose a file</string>
      </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
      <property name="filePath">
-      <string>9545124452</string>
+      <string>test.png</string>
      </property>
      <property name="caption">
       <string>Choose a fucking file</string>
