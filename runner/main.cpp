@@ -20,10 +20,10 @@ int main(int argc, char** argv) {
     process->setProcessEnvironment(env);
     process->setProgram(designer);
     process->setArguments(QStringList(uiFile));
-    process->start();
 
     QObject::connect(process, SIGNAL(error(QProcess::ProcessError)), app.data(), SLOT(quit()));
     QObject::connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), app.data(), SLOT(quit()));
 
+    process->start();
     return app->exec();
 }
