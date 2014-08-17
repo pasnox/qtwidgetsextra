@@ -48,7 +48,7 @@ public slots:
     void clicked() {
         QString dir = directory;
 
-        if (!filePath.isEmpty() && QFile::exists(filePath)) {
+        if (!filePath.isEmpty()) {
             dir = filePath;
         }
 
