@@ -16,6 +16,7 @@ int main(int argc, char** argv) {
     env.insert(QLatin1String("QT_PLUGIN_PATH"), app->applicationDirPath());
 
     QProcess* process = new QProcess(app.data());
+    process->setProcessChannelMode(QProcess::ForwardedChannels);
     process->setProcessEnvironment(env);
     process->setProgram(designer);
     process->setArguments(QStringList(uiFile));
