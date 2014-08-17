@@ -3,6 +3,7 @@
 #include "QOpenFileLineEditPlugin.h"
 #include "QSaveFileButtonPlugin.h"
 #include "QSaveFileLineEditPlugin.h"
+#include "QOpenFolderButtonPlugin.h"
 #include "QOpenFolderLineEditPlugin.h"
 
 QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
@@ -14,8 +15,8 @@ QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
     m_widgets.append(new QSaveFileButtonPlugin(this));
     m_widgets.append(new QSaveFileLineEditPlugin(this));
 
-    //m_widgets.append(new QOpenFolderButtonPlugin(this));
-    //m_widgets.append(new QOpenFolderLineEditPlugin(this));
+    m_widgets.append(new QOpenFolderButtonPlugin(this));
+    m_widgets.append(new QOpenFolderLineEditPlugin(this));
 }
 
 QList<QDesignerCustomWidgetInterface*> QtWidgetsExtra::customWidgets() const

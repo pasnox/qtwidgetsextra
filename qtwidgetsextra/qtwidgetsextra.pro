@@ -22,6 +22,7 @@ HEADERS = QtWidgetsExtra.h \
     QOpenFileLineEditPlugin.h \
     QSaveFileButtonPlugin.h \
     QSaveFileLineEditPlugin.h \
+    QOpenFolderButtonPlugin.h \
     QOpenFolderLineEditPlugin.h
 
 SOURCES = QtWidgetsExtra.cpp \
@@ -30,6 +31,7 @@ SOURCES = QtWidgetsExtra.cpp \
     QOpenFileLineEditPlugin.cpp \
     QSaveFileButtonPlugin.cpp \
     QSaveFileLineEditPlugin.cpp \
+    QOpenFolderButtonPlugin.cpp \
     QOpenFolderLineEditPlugin.cpp
 
 include(qopenfile.pri)

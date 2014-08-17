@@ -1,16 +1,16 @@
-#ifndef QOPENFOLDERLINEEDITPLUGIN_H
-#define QOPENFOLDERLINEEDITPLUGIN_H
+#ifndef QOPENFOLDERBUTTONPLUGIN_H
+#define QOPENFOLDERBUTTONPLUGIN_H
 
 #include <QDesignerCustomWidgetInterface>
 
-class QOpenFolderLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
+class QOpenFolderButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 
 public:
-    QOpenFolderLineEditPlugin(QObject *parent = 0);
+    QOpenFolderButtonPlugin(QObject *parent = 0);
 
     bool isContainer() const;
     bool isInitialized() const;
@@ -28,4 +28,4 @@ private:
     bool m_initialized;
 };
 
-#endif // QOPENFOLDERLINEEDITPLUGIN_H
+#endif // QOPENFOLDERBUTTONPLUGIN_H

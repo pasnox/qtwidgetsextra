@@ -42,7 +42,7 @@
     </widget>
    </item>
    <item row="1" column="0" colspan="2">
-    <widget class="QOpenFileLineEdit" name="openFileLineEdit_2">
+    <widget class="QOpenFileLineEdit" name="openFileLineEdit">
      <property name="placeholderText">
       <string>Click the button to choose an opening file</string>
      </property>
@@ -92,6 +92,9 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="0">
+    <widget class="QOpenFolderButton" name="openFolderButton"/>
+   </item>
    <item row="3" column="0" colspan="2">
     <widget class="QSaveFileLineEdit" name="saveFileLineEdit">
      <property name="readOnly">
@@ -120,7 +123,7 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="2">
+   <item row="6" column="0" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -132,6 +135,29 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="4" column="1">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Click the button</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QOpenFolderLineEdit" name="openFolderLineEdit">
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="filePath">
+      <string>/opt</string>
+     </property>
+     <property name="caption">
+      <string>Choose an existing folder</string>
+     </property>
+     <property name="directory">
+      <string>/opt</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -155,6 +181,16 @@
    <class>QSaveFileLineEdit</class>
    <extends>QLineEdit</extends>
    <header>QSaveFileLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QOpenFolderButton</class>
+   <extends>QToolButton</extends>
+   <header>QOpenFolderButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QOpenFolderLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QOpenFolderLineEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -188,6 +224,22 @@
     <hint type="destinationlabel">
      <x>62</x>
      <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openFolderButton</sender>
+   <signal>filePathChanged(QString)</signal>
+   <receiver>label_3</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>18</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>61</x>
+     <y>128</y>
     </hint>
    </hints>
   </connection>

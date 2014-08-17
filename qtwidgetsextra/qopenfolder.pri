@@ -1,2 +1,7 @@
-HEADERS *= QOpenFolderLineEdit.h
-SOURCES *= QOpenFolderLineEdit.cpp
+HEADERS *= \
+    QOpenFolderButton.h \
+    QOpenFolderLineEdit.h
+
+SOURCES *= \
+    QOpenFolderButton.cpp \
+    QOpenFolderLineEdit.cpp

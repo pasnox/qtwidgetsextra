@@ -39,22 +39,22 @@ QString QOpenFolderLineEditPlugin::name() const
 
 QString QOpenFolderLineEditPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra");
+    return QLatin1String("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QOpenFolderLineEditPlugin::icon() const
 {
-    return QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
+    return QApplication::style()->standardIcon(QStyle::SP_DirIcon);
 }
 
 QString QOpenFolderLineEditPlugin::toolTip() const
 {
-    return QLatin1String("");
+    return QLatin1String("A line edit with a tool button that allow to choose an existing folder");
 }
 
 QString QOpenFolderLineEditPlugin::whatsThis() const
 {
-    return QLatin1String("");
+    return toolTip();
 }
 
 bool QOpenFolderLineEditPlugin::isContainer() const
