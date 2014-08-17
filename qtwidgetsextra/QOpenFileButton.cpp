@@ -1,6 +1,8 @@
 #include "QOpenFileButton.h"
 #include "QEmbedableButton_p.h"
 
+#include <QStyle>
+
 class QOpenFileButtonPrivate : public QObject
 {
     Q_OBJECT
@@ -12,7 +14,7 @@ public:
     {
         Q_ASSERT(widget);
 
-        widget->setIcon(QIcon::fromTheme(QLatin1String("document-open")));
+        widget->setIcon(widget->style()->standardIcon(QStyle::SP_DialogOpenButton, 0, widget));
 
         resetCaption();
         resetDirectory();
