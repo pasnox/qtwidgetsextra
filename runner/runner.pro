@@ -6,5 +6,7 @@ DESTDIR = ../bin
 DEPENDPATH *= .
 INCLUDEPATH *= .
 
+DEFINES *= "UI_FILEPATH=\\\"$$PWD/resources/QtWidgetsExtra.ui\\\""
+
 RESOURCES = resources/runner.qrc
 SOURCES = main.cpp

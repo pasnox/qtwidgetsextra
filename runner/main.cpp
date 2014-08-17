@@ -1,17 +1,13 @@
 #include <QCoreApplication>
-#include <QProcessEnvironment>
-#include <QTemporaryFile>
 #include <QLibraryInfo>
-#include <QLibrary>
 #include <QProcess>
 #include <QDir>
 
 int main(int argc, char** argv) {
     QSharedPointer<QCoreApplication> app(new QCoreApplication(argc, argv));
 
-    QTemporaryFile* file = QTemporaryFile::createLocalFile(QLatin1String("://QtWidgetsExtra.ui"));
-    Q_ASSERT(file);
-    file->setParent(app.data());
+    const QString uiFile = QString::fromLocal8Bit(UI_FILEPATH);
+    Q_ASSERT(QFile::exists(uiFile));
 
     const QString qtTools = QLibraryInfo::location(QLibraryInfo::BinariesPath);
     const QString designer = QDir(qtTools).entryInfoList(QStringList(QLatin1String("*designer*")), QDir::Files | QDir::Executable).value(0).absoluteFilePath();
@@ -22,7 +18,7 @@ int main(int argc, char** argv) {
     QProcess* process = new QProcess(app.data());
     process->setProcessEnvironment(env);
     process->setProgram(designer);
-    process->setArguments(QStringList(file->fileName()));
+    process->setArguments(QStringList(uiFile));
     process->start();
 
     QObject::connect(process, SIGNAL(error(QProcess::ProcessError)), app.data(), SLOT(quit()));
