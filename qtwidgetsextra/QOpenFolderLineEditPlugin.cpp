@@ -2,6 +2,8 @@
 #include "QOpenFolderLineEdit.h"
 
 #include <QtPlugin>
+#include <QApplication>
+#include <QStyle>
 
 QOpenFolderLineEditPlugin::QOpenFolderLineEditPlugin(QObject *parent)
     : QObject(parent)
@@ -42,7 +44,7 @@ QString QOpenFolderLineEditPlugin::group() const
 
 QIcon QOpenFolderLineEditPlugin::icon() const
 {
-    return QIcon();
+    return QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
 }
 
 QString QOpenFolderLineEditPlugin::toolTip() const

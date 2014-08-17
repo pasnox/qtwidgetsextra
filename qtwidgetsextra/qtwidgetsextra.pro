@@ -20,15 +20,20 @@ HEADERS = QtWidgetsExtra.h \
     QEmbedableButton_p.h \
     QOpenFileButtonPlugin.h \
     QOpenFileLineEditPlugin.h \
+    QSaveFileButtonPlugin.h \
+    QSaveFileLineEditPlugin.h \
     QOpenFolderLineEditPlugin.h
 
 SOURCES = QtWidgetsExtra.cpp \
     QEmbedableButton.cpp \
     QOpenFileButtonPlugin.cpp \
     QOpenFileLineEditPlugin.cpp \
+    QSaveFileButtonPlugin.cpp \
+    QSaveFileLineEditPlugin.cpp \
     QOpenFolderLineEditPlugin.cpp
 
 include(qopenfile.pri)
+include(qsavefile.pri)
 include(qopenfolder.pri)
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer

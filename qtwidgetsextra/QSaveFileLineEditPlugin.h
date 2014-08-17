@@ -1,16 +1,16 @@
-#ifndef QOPENFILELINEEDITPLUGIN_H
-#define QOPENFILELINEEDITPLUGIN_H
+#ifndef QSAVEFILELINEEDITPLUGIN_H
+#define QSAVEFILELINEEDITPLUGIN_H
 
 #include <QDesignerCustomWidgetInterface>
 
-class QOpenFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
+class QSaveFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 
 public:
-    QOpenFileLineEditPlugin(QObject *parent = 0);
+    QSaveFileLineEditPlugin(QObject *parent = 0);
 
     bool isContainer() const;
     bool isInitialized() const;
@@ -28,4 +28,4 @@ private:
     bool m_initialized;
 };
 
-#endif // QOPENFILELINEEDITPLUGIN_H
+#endif // QSAVEFILELINEEDITPLUGIN_H

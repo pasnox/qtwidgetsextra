@@ -2,6 +2,8 @@
 #include "QOpenFileLineEdit.h"
 
 #include <QtPlugin>
+#include <QApplication>
+#include <QStyle>
 
 QOpenFileLineEditPlugin::QOpenFileLineEditPlugin(QObject *parent)
     : QObject(parent)
@@ -42,12 +44,12 @@ QString QOpenFileLineEditPlugin::group() const
 
 QIcon QOpenFileLineEditPlugin::icon() const
 {
-    return QIcon();
+    return QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
 }
 
 QString QOpenFileLineEditPlugin::toolTip() const
 {
-    return QLatin1String("A line edit with a tool button that allow to choose an existing file");
+    return QLatin1String("A line edit with a tool button that allow to choose an opening file");
 }
 
 QString QOpenFileLineEditPlugin::whatsThis() const

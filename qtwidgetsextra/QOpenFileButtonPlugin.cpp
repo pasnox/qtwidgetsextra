@@ -2,6 +2,8 @@
 #include "QOpenFileButton.h"
 
 #include <QtPlugin>
+#include <QApplication>
+#include <QStyle>
 
 QOpenFileButtonPlugin::QOpenFileButtonPlugin(QObject *parent)
     : QObject(parent)
@@ -42,12 +44,12 @@ QString QOpenFileButtonPlugin::group() const
 
 QIcon QOpenFileButtonPlugin::icon() const
 {
-    return QIcon();
+    return QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
 }
 
 QString QOpenFileButtonPlugin::toolTip() const
 {
-    return QLatin1String("A tool button that allow to choose an existing file");
+    return QLatin1String("A tool button that allow to choose an opening file");
 }
 
 QString QOpenFileButtonPlugin::whatsThis() const

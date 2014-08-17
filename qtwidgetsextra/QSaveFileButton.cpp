@@ -1,21 +1,20 @@
-#include "QOpenFileButton.h"
+#include "QSaveFileButton.h"
 #include "QEmbedableButton_p.h"
 
 #include <QStyle>
-#include <QDebug>
 
-class QOpenFileButtonPrivate : public QObject
+class QSaveFileButtonPrivate : public QObject
 {
     Q_OBJECT
 
 public:
-    QOpenFileButtonPrivate(QOpenFileButton *widgetP)
+    QSaveFileButtonPrivate(QSaveFileButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
     {
         Q_ASSERT(widget);
 
-        widget->setIcon(widget->style()->standardIcon(QStyle::SP_DialogOpenButton, 0, widget));
+        widget->setIcon(widget->style()->standardIcon(QStyle::SP_DialogSaveButton, 0, widget));
 
         resetCaption();
         resetDirectory();
@@ -53,7 +52,7 @@ public slots:
             dir = filePath;
         }
 
-        const QString fn = QFileDialog::getOpenFileName(widget->window(), caption, dir, filter.join(QLatin1String(";;")), 0, options);
+        const QString fn = QFileDialog::getSaveFileName(widget->window(), caption, dir, filter.join(QLatin1String(";;")), 0, options);
 
         if (!fn.isNull()) {
             widget->setFilePath(fn);
@@ -61,7 +60,7 @@ public slots:
     }
 
 public:
-    QOpenFileButton* widget;
+    QSaveFileButton* widget;
     QString filePath;
     QString caption;
     QString directory;
@@ -69,18 +68,18 @@ public:
     QFileDialog::Options options;
 };
 
-QOpenFileButton::QOpenFileButton(QWidget *parent)
+QSaveFileButton::QSaveFileButton(QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QOpenFileButtonPrivate(this))
+    , d(new QSaveFileButtonPrivate(this))
 {
 }
 
-QString QOpenFileButton::filePath() const
+QString QSaveFileButton::filePath() const
 {
     return d->filePath;
 }
 
-void QOpenFileButton::setFilePath(const QString &filePath)
+void QSaveFileButton::setFilePath(const QString &filePath)
 {
     if (d->filePath == filePath) {
         return;
@@ -91,69 +90,69 @@ void QOpenFileButton::setFilePath(const QString &filePath)
     emit filePathChanged(filePath);
 }
 
-QString QOpenFileButton::caption() const
+QString QSaveFileButton::caption() const
 {
     return d->caption;
 }
 
-void QOpenFileButton::setCaption(const QString &caption)
+void QSaveFileButton::setCaption(const QString &caption)
 {
     d->caption = caption;
 }
 
-QString QOpenFileButton::directory() const
+QString QSaveFileButton::directory() const
 {
     return d->directory;
 }
 
-void QOpenFileButton::setDirectory(const QString &directory)
+void QSaveFileButton::setDirectory(const QString &directory)
 {
     d->directory = directory;
 }
 
-QStringList QOpenFileButton::filter() const
+QStringList QSaveFileButton::filter() const
 {
     return d->filter;
 }
 
-void QOpenFileButton::setFilter(const QStringList &filter)
+void QSaveFileButton::setFilter(const QStringList &filter)
 {
     d->filter = filter;
 }
 
-QFileDialog::Options QOpenFileButton::options() const
+QFileDialog::Options QSaveFileButton::options() const
 {
     return d->options;
 }
 
-void QOpenFileButton::setOptions(QFileDialog::Options options)
+void QSaveFileButton::setOptions(QFileDialog::Options options)
 {
     d->options = options;
 }
 
-void QOpenFileButton::resetFilePath()
+void QSaveFileButton::resetFilePath()
 {
     d->resetFilePath();
 }
 
-void QOpenFileButton::resetCaption()
+void QSaveFileButton::resetCaption()
 {
     d->resetCaption();
 }
 
-void QOpenFileButton::resetDirectory()
+void QSaveFileButton::resetDirectory()
 {
     d->resetDirectory();
 }
 
-void QOpenFileButton::resetFilter()
+void QSaveFileButton::resetFilter()
 {
     d->resetFilter();
 }
 
-void QOpenFileButton::resetOptions()
+void QSaveFileButton::resetOptions()
 {
     d->resetOptions();
 }
 
-#include "QOpenFileButton.moc"
+#include "QSaveFileButton.moc"
