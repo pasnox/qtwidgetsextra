@@ -17,15 +17,16 @@
    <item row="0" column="0">
     <widget class="QOpenFileButton" name="openFileButton">
      <property name="caption">
-      <string>Fuck</string>
+      <string>Open file button</string>
      </property>
      <property name="directory">
-      <string notr="true"/>
+      <string notr="true">/opt</string>
      </property>
      <property name="filter">
       <stringlist>
        <string>Images (*.png)</string>
        <string>Sound (*.wav)</string>
+       <string>All (*)</string>
       </stringlist>
      </property>
      <property name="options">
@@ -34,12 +35,16 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QOpenFileLineEdit" name="openFileLineEdit_2">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>test.png</string>
+      <string>Click the button</string>
      </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QOpenFileLineEdit" name="openFileLineEdit_2">
      <property name="placeholderText">
-      <string>Click the button to choose a file</string>
+      <string>Click the button to choose an opening file</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>true</bool>
@@ -48,7 +53,7 @@
       <string>test.png</string>
      </property>
      <property name="caption">
-      <string>Choose a fucking file</string>
+      <string>Open file line edit</string>
      </property>
      <property name="directory">
       <string>/opt</string>
@@ -65,6 +70,69 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="0">
+    <widget class="QSaveFileButton" name="saveFileButton">
+     <property name="caption">
+      <string>Save file button</string>
+     </property>
+     <property name="directory">
+      <string>/opt</string>
+     </property>
+     <property name="filter">
+      <stringlist>
+       <string>All (*)</string>
+      </stringlist>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Click the button</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QSaveFileLineEdit" name="saveFileLineEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>Click the button to choose a saving file</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="filePath">
+      <string>test.png</string>
+     </property>
+     <property name="caption">
+      <string>Save file line edit</string>
+     </property>
+     <property name="directory">
+      <string>/opt</string>
+     </property>
+     <property name="filter">
+      <stringlist/>
+     </property>
+     <property name="options">
+      <set>QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet</set>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>148</width>
+       <height>225</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -78,7 +146,50 @@
    <extends>QLineEdit</extends>
    <header>QOpenFileLineEdit.h</header>
   </customwidget>
+  <customwidget>
+   <class>QSaveFileButton</class>
+   <extends>QToolButton</extends>
+   <header>QSaveFileButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSaveFileLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QSaveFileLineEdit.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>openFileButton</sender>
+   <signal>filePathChanged(QString)</signal>
+   <receiver>label</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>24</x>
+     <y>16</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>59</x>
+     <y>14</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveFileButton</sender>
+   <signal>filePathChanged(QString)</signal>
+   <receiver>label_2</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>28</x>
+     <y>70</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>62</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
