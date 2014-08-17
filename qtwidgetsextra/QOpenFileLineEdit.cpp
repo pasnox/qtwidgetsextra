@@ -24,15 +24,15 @@ public:
         button->setEmbeded(true);
         button->setFixedSize(height, height);
 
-        margins.setRight(margins.right() +(frameMargin *2));
+        margins.setLeft(margins.left() +(frameMargin *4));
 
         QHBoxLayout* hl = new QHBoxLayout(widget);
         hl->setSpacing(0);
         hl->setContentsMargins(margins);
-        hl->addStretch();
         hl->addWidget(button);
+        hl->addStretch();
 
-        margins.setRight(margins.right() +height +(frameMargin *2));
+        margins.setLeft(margins.left() +height);
         widget->setTextMargins(margins);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
