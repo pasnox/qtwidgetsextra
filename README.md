@@ -1,4 +1,6 @@
-qtwidgetsextra
+QtWidgetsExtra
 ==============
 
-QtWidgetsExtra is a module that extends Qt Designer Widgets palette for a really rapid application development (RAD)
+QtWidgetsExtra is a library that extends Qt Designer Widgets palette.
+
+See this wiki [[page|Home]] for a better description.
