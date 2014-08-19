@@ -23,7 +23,9 @@ HEADERS = QtWidgetsExtra.h \
     QSaveFileButtonPlugin.h \
     QSaveFileLineEditPlugin.h \
     QOpenFolderButtonPlugin.h \
-    QOpenFolderLineEditPlugin.h
+    QOpenFolderLineEditPlugin.h \
+    color/QColorPushButtonPlugin.h \
+    color/QColorToolButtonPlugin.h
 
 SOURCES = QtWidgetsExtra.cpp \
     QEmbedableButton.cpp \
@@ -32,11 +34,14 @@ SOURCES = QtWidgetsExtra.cpp \
     QSaveFileButtonPlugin.cpp \
     QSaveFileLineEditPlugin.cpp \
     QOpenFolderButtonPlugin.cpp \
-    QOpenFolderLineEditPlugin.cpp
+    QOpenFolderLineEditPlugin.cpp \
+    color/QColorPushButtonPlugin.cpp \
+    color/QColorToolButtonPlugin.cpp
 
 include(qopenfile.pri)
 include(qsavefile.pri)
 include(qopenfolder.pri)
+include(color/color.pri)
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS *= target

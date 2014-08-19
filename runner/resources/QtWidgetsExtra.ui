@@ -17,9 +17,9 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
-     <widget class="QWidget" name="wFileDialog" native="true">
+     <widget class="QWidget" name="wFileDialog">
       <attribute name="title">
        <string>File Dialog</string>
       </attribute>
@@ -175,10 +175,63 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="wXXX" native="true">
+     <widget class="QWidget" name="wXXX">
       <attribute name="title">
        <string>XXX</string>
       </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QColorPushButton" name="colorPushButton">
+         <property name="color">
+          <color alpha="74">
+           <red>72</red>
+           <green>81</green>
+           <blue>230</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QColorToolButton" name="colorToolButton">
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonIconOnly</enum>
+         </property>
+         <property name="color">
+          <color>
+           <red>63</red>
+           <green>21</green>
+           <blue>223</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>470</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>288</width>
+           <height>278</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -214,6 +267,16 @@
    <class>QOpenFolderLineEdit</class>
    <extends>QLineEdit</extends>
    <header>QOpenFolderLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QColorPushButton</class>
+   <extends>QPushButton</extends>
+   <header>QColorPushButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QColorToolButton</class>
+   <extends>QToolButton</extends>
+   <header>QColorToolButton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

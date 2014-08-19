@@ -5,6 +5,8 @@
 #include "QSaveFileLineEditPlugin.h"
 #include "QOpenFolderButtonPlugin.h"
 #include "QOpenFolderLineEditPlugin.h"
+#include "QColorPushButtonPlugin.h"
+#include "QColorToolButtonPlugin.h"
 
 QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
     : QObject(parent)
@@ -17,6 +19,9 @@ QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
 
     m_widgets.append(new QOpenFolderButtonPlugin(this));
     m_widgets.append(new QOpenFolderLineEditPlugin(this));
+
+    m_widgets.append(new QColorPushButtonPlugin(this));
+    m_widgets.append(new QColorToolButtonPlugin(this));
 }
 
 QList<QDesignerCustomWidgetInterface*> QtWidgetsExtra::customWidgets() const
