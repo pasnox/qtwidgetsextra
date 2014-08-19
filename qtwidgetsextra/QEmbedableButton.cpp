@@ -30,6 +30,9 @@ void QEmbedableButton::paintEvent(QPaintEvent *event)
         opt.state &= ~QStyle::State_Raised;
         opt.state &= ~QStyle::State_Sunken;
         //opt.state &= ~QStyle::State_On;
+#if defined(Q_OS_MACX)
+        opt.subControls &= ~QStyle::SC_ToolButton;
+#endif
         p.drawComplexControl(QStyle::CC_ToolButton, opt);
     }
     else {
