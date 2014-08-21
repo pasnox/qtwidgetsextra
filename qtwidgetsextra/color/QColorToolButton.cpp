@@ -17,11 +17,8 @@ public:
     }
 
     void updateIcon() {
-        QPixmap icon(widget->iconSize());
-        icon.fill(color);
-
-        widget->setIcon(icon);
-        widget->setText((options & QColorDialog::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
+        widget->setIcon(widget->colorIcon(color));
+        widget->setText((options & QColorToolButton::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
         widget->setToolTip(widget->text());
     }
 
@@ -39,7 +36,7 @@ public:
 
 public slots:
     void clicked() {
-        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, options);
+        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, QColorDialog::ColorDialogOptions(int(options)));
 
         if (newColor.isValid()) {
             widget->setColor(newColor);
@@ -51,18 +48,18 @@ public:
     bool alphaEnabled;
     QColor color;
     QString caption;
-    QColorDialog::ColorDialogOptions options;
+    QColorToolButton::ColorDialogOptions options;
 };
 
 QColorToolButton::QColorToolButton(QWidget *parent)
-    : QToolButton(parent)
+    : QEmbedableButton(parent)
     , d(new QColorToolButtonPrivate(this))
 {
     d->updateIcon();
 }
 
 QColorToolButton::QColorToolButton(const QColor &color, QWidget *parent)
-    : QToolButton(parent)
+    : QEmbedableButton(parent)
     , d(new QColorToolButtonPrivate(this))
 {
     d->color = color;
@@ -95,14 +92,21 @@ void QColorToolButton::setCaption(const QString &caption)
     d->caption = caption;
 }
 
-QColorDialog::ColorDialogOptions QColorToolButton::options() const
+QColorToolButton::ColorDialogOptions QColorToolButton::options() const
 {
     return d->options;
 }
 
-void QColorToolButton::setOptions(QColorDialog::ColorDialogOptions options)
+void QColorToolButton::setOptions(QColorToolButton::ColorDialogOptions options)
 {
     d->options = options;
+}
+
+QIcon QColorToolButton::colorIcon(const QColor &color) const
+{
+    QPixmap icon(iconSize());
+    icon.fill(color);
+    return QIcon(icon);
 }
 
 void QColorToolButton::paintEvent(QPaintEvent *event)
@@ -111,7 +115,7 @@ void QColorToolButton::paintEvent(QPaintEvent *event)
         d->updateIcon();
     }
 
-    QToolButton::paintEvent(event);
+    QEmbedableButton::paintEvent(event);
 }
 
 void QColorToolButton::resetColor()

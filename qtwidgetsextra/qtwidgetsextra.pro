@@ -24,6 +24,7 @@ HEADERS = QtWidgetsExtra.h \
     QSaveFileLineEditPlugin.h \
     QOpenFolderButtonPlugin.h \
     QOpenFolderLineEditPlugin.h \
+    color/QColorLineEditPlugin.h \
     color/QColorPushButtonPlugin.h \
     color/QColorToolButtonPlugin.h
 
@@ -35,6 +36,7 @@ SOURCES = QtWidgetsExtra.cpp \
     QSaveFileLineEditPlugin.cpp \
     QOpenFolderButtonPlugin.cpp \
     QOpenFolderLineEditPlugin.cpp \
+    color/QColorLineEditPlugin.cpp \
     color/QColorPushButtonPlugin.cpp \
     color/QColorToolButtonPlugin.cpp
 

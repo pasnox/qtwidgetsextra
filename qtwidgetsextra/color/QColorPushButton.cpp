@@ -21,7 +21,7 @@ public:
         icon.fill(color);
 
         widget->setIcon(icon);
-        widget->setText((options & QColorDialog::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
+        widget->setText((options & QColorPushButton::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
         widget->setToolTip(widget->text());
     }
 
@@ -39,7 +39,7 @@ public:
 
 public slots:
     void clicked() {
-        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, options);
+        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, QColorDialog::ColorDialogOptions(int(options)));
 
         if (newColor.isValid()) {
             widget->setColor(newColor);
@@ -51,7 +51,7 @@ public:
     bool alphaEnabled;
     QColor color;
     QString caption;
-    QColorDialog::ColorDialogOptions options;
+    QColorPushButton::ColorDialogOptions options;
 };
 
 QColorPushButton::QColorPushButton(QWidget *parent)
@@ -95,12 +95,12 @@ void QColorPushButton::setCaption(const QString &caption)
     d->caption = caption;
 }
 
-QColorDialog::ColorDialogOptions QColorPushButton::options() const
+QColorPushButton::ColorDialogOptions QColorPushButton::options() const
 {
     return d->options;
 }
 
-void QColorPushButton::setOptions(QColorDialog::ColorDialogOptions options)
+void QColorPushButton::setOptions(QColorPushButton::ColorDialogOptions options)
 {
     d->options = options;
 }
