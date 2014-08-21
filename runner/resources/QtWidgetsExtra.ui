@@ -205,7 +205,7 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
+       <item row="0" column="3">
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -218,7 +218,7 @@
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" colspan="3">
+       <item row="1" column="0" colspan="4">
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -230,6 +230,9 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="0" column="2">
+        <widget class="QColorLineEdit" name="colorLineEdit"/>
        </item>
       </layout>
      </widget>
@@ -267,6 +270,11 @@
    <class>QOpenFolderLineEdit</class>
    <extends>QLineEdit</extends>
    <header>QOpenFolderLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QColorLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QColorLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>QColorPushButton</class>
