@@ -3,6 +3,13 @@ TARGET = $$qtLibraryTarget(QtWidgetsExtraRunner$${QT_MAJOR_VERSION})
 CONFIG *= debug_and_release
 DESTDIR = ../bin
 
+# Disable some implicit cast to avoid convertion errors
+DEFINES *= \
+    QT_NO_URL_CAST_FROM_STRING \
+    QT_NO_CAST_TO_ASCII \
+    QT_NO_CAST_FROM_ASCII \
+    QT_NO_CAST_FROM_BYTEARRAY
+
 DEPENDPATH *= .
 INCLUDEPATH *= .
 
