@@ -13,10 +13,6 @@ class QColorAction : public QAction
 
     Q_FLAGS(ColorDialogOptions)
 
-    Q_PROPERTY(QColor color READ color WRITE setColor USER true NOTIFY colorChanged)
-    Q_PROPERTY(QString caption READ caption WRITE setCaption)
-    Q_PROPERTY(QColorAction::ColorDialogOptions options READ options WRITE setOptions)
-
 public:
     enum ColorDialogOption {
         ShowAlphaChannel = QColorDialog::ShowAlphaChannel,

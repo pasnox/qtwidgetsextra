@@ -11,12 +11,6 @@ class QFileAction : public QAction
 
     Q_ENUMS(Type)
 
-    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
-    Q_PROPERTY(QString caption READ caption WRITE setCaption)
-    Q_PROPERTY(QString directory READ directory WRITE setDirectory)
-    Q_PROPERTY(QStringList filter READ filter WRITE setFilter)
-    Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
-
 public:
     enum Type {
         Open,
