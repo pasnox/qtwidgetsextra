@@ -2,6 +2,7 @@ DEPENDPATH *= filedialog
 INCLUDEPATH *= filedialog
 
 HEADERS *= \
+    filedialog/QFileAction.h \
     filedialog/QOpenFileLineEdit.h \
     filedialog/QOpenFileButton.h \
     filedialog/QOpenFolderLineEdit.h \
@@ -10,6 +11,7 @@ HEADERS *= \
     filedialog/QSaveFileButton.h
 
 SOURCES *= \
+    filedialog/QFileAction.cpp \
     filedialog/QOpenFileLineEdit.cpp \
     filedialog/QOpenFileButton.cpp \
     filedialog/QOpenFolderLineEdit.cpp \

@@ -1,13 +1,15 @@
-#ifndef QOPENFILEBUTTON_H
-#define QOPENFILEBUTTON_H
+#ifndef QFILEACTION_H
+#define QFILEACTION_H
 
-#include "QEmbedableButton_p.h"
-#include "QFileAction.h"
+#include <QAction>
+#include <QFileDialog>
 
-class QOpenFileButton : public QEmbedableButton
+class QFileAction : public QAction
 {
     Q_OBJECT
-    class QOpenFileButtonPrivate* d;
+    class QFileActionPrivate *d;
+
+    Q_ENUMS(Type)
 
     Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption)
@@ -16,7 +18,16 @@ class QOpenFileButton : public QEmbedableButton
     Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
-    explicit QOpenFileButton(QWidget *parent = 0);
+    enum Type {
+        Open,
+        Save,
+        Folder
+    };
+
+    explicit QFileAction(QObject *parent = 0);
+
+    QFileAction::Type type() const;
+    void setType(QFileAction::Type type);
 
     QString filePath() const;
     void setFilePath(const QString &filePath);
@@ -37,4 +48,4 @@ signals:
     void filePathChanged(const QString &filePath);
 };
 
-#endif // QOPENFILEBUTTON_H
+#endif // QFILEACTION_H

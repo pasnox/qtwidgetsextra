@@ -1,8 +1,4 @@
 #include "QOpenFileButton.h"
-#include "QEmbedableButton_p.h"
-
-#include <QStyle>
-#include <QDebug>
 
 class QOpenFileButtonPrivate : public QObject
 {
@@ -12,61 +8,18 @@ public:
     QOpenFileButtonPrivate(QOpenFileButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-    {
+        , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        widget->setIcon(widget->style()->standardIcon(QStyle::SP_DialogOpenButton, 0, widget));
+        action->setType(QFileAction::Open);
+        widget->setDefaultAction(action);
 
-        resetCaption();
-        resetDirectory();
-        resetFilter();
-        resetOptions();
-
-        connect(widget, SIGNAL(clicked()), this, SLOT(clicked()));
-    }
-
-    void resetFilePath() {
-        widget->setFilePath(QString::null);
-    }
-
-    void resetCaption() {
-        caption.clear();
-    }
-
-    void resetDirectory() {
-        directory.clear();
-    }
-
-    void resetFilter() {
-        filter.clear();
-    }
-
-    void resetOptions() {
-        options = 0;
-    }
-
-public slots:
-    void clicked() {
-        QString dir = directory;
-
-        if (!filePath.isEmpty()) {
-            dir = filePath;
-        }
-
-        const QString fn = QFileDialog::getOpenFileName(widget->window(), caption, dir, filter.join(QLatin1String(";;")), 0, options);
-
-        if (!fn.isNull()) {
-            widget->setFilePath(fn);
-        }
+        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
     }
 
 public:
     QOpenFileButton* widget;
-    QString filePath;
-    QString caption;
-    QString directory;
-    QStringList filter;
-    QFileDialog::Options options;
+    QFileAction *action;
 };
 
 QOpenFileButton::QOpenFileButton(QWidget *parent)
@@ -77,83 +30,52 @@ QOpenFileButton::QOpenFileButton(QWidget *parent)
 
 QString QOpenFileButton::filePath() const
 {
-    return d->filePath;
+    return d->action->filePath();
 }
 
 void QOpenFileButton::setFilePath(const QString &filePath)
 {
-    if (d->filePath == filePath) {
-        return;
-    }
-
-    d->filePath = filePath;
-    setToolTip(d->filePath);
-    emit filePathChanged(filePath);
+    d->action->setFilePath(filePath);
 }
 
 QString QOpenFileButton::caption() const
 {
-    return d->caption;
+    return d->action->caption();
 }
 
 void QOpenFileButton::setCaption(const QString &caption)
 {
-    d->caption = caption;
+    d->action->setCaption(caption);
 }
 
 QString QOpenFileButton::directory() const
 {
-    return d->directory;
+    return d->action->directory();
 }
 
 void QOpenFileButton::setDirectory(const QString &directory)
 {
-    d->directory = directory;
+    d->action->setDirectory(directory);
 }
 
 QStringList QOpenFileButton::filter() const
 {
-    return d->filter;
+    return d->action->filter();
 }
 
 void QOpenFileButton::setFilter(const QStringList &filter)
 {
-    d->filter = filter;
+    d->action->setFilter(filter);
 }
 
 QFileDialog::Options QOpenFileButton::options() const
 {
-    return d->options;
+    return d->action->options();
 }
 
 void QOpenFileButton::setOptions(QFileDialog::Options options)
 {
-    d->options = options;
-}
-
-void QOpenFileButton::resetFilePath()
-{
-    d->resetFilePath();
-}
-
-void QOpenFileButton::resetCaption()
-{
-    d->resetCaption();
-}
-
-void QOpenFileButton::resetDirectory()
-{
-    d->resetDirectory();
-}
-
-void QOpenFileButton::resetFilter()
-{
-    d->resetFilter();
-}
-
-void QOpenFileButton::resetOptions()
-{
-    d->resetOptions();
+    d->action->setOptions(options);
 }
 
 #include "QOpenFileButton.moc"
