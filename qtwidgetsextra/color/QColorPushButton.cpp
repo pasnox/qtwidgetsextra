@@ -1,5 +1,7 @@
 #include "QColorPushButton.h"
 
+#include <QToolButton>
+
 class QColorPushButtonPrivate : public QObject
 {
     Q_OBJECT
@@ -8,125 +10,79 @@ public:
     QColorPushButtonPrivate(QColorPushButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , color(QColor(Qt::black))
-        , options(0)
-    {
+        , action(new QColorAction(this)) {
         Q_ASSERT(widget);
 
-        connect(widget, SIGNAL(clicked()), this, SLOT(clicked()));
-    }
+        action->setProperty("button", QVariant::fromValue(widget));
+        widget->setFixedHeight(QToolButton().sizeHint().height());
+        widget->setIconSize(QSize(widget->height(), widget->height()) -QSize(6, 6));
+        syncButtonWithAction();
 
-    void updateIcon() {
-        QPixmap icon(widget->iconSize());
-        icon.fill(color);
-
-        widget->setIcon(icon);
-        widget->setText((options & QColorPushButton::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
-        widget->setToolTip(widget->text());
-    }
-
-    void resetColor() {
-        widget->setColor(QColor(Qt::black));
-    }
-
-    void resetCaption() {
-        caption.clear();
-    }
-
-    void resetOptions() {
-        options = 0;
+        connect(widget, SIGNAL(clicked()), action, SLOT(trigger()));
+        connect(action, SIGNAL(colorChanged(QColor)), this, SLOT(syncButtonWithAction()));
+        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
     }
 
 public slots:
-    void clicked() {
-        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, QColorDialog::ColorDialogOptions(int(options)));
-
-        if (newColor.isValid()) {
-            widget->setColor(newColor);
-        }
+    void syncButtonWithAction() {
+        widget->setIcon(action->icon());
+        widget->setText(action->text());
+        widget->setToolTip(action->toolTip());
     }
 
 public:
-    QColorPushButton* widget;
-    bool alphaEnabled;
-    QColor color;
-    QString caption;
-    QColorPushButton::ColorDialogOptions options;
+    QColorPushButton *widget;
+    QColorAction *action;
 };
 
 QColorPushButton::QColorPushButton(QWidget *parent)
     : QPushButton(parent)
     , d(new QColorPushButtonPrivate(this))
 {
-    d->updateIcon();
 }
 
 QColorPushButton::QColorPushButton(const QColor &color, QWidget *parent)
     : QPushButton(parent)
     , d(new QColorPushButtonPrivate(this))
 {
-    d->color = color;
-    d->updateIcon();
+    d->action->setColor(color);
+}
+
+QColorPushButton::QColorPushButton(const QString &colorName, QWidget *parent)
+    : QPushButton(parent)
+    , d(new QColorPushButtonPrivate(this))
+{
+    d->action->setColor(QColor(colorName));
 }
 
 QColor QColorPushButton::color() const
 {
-    return d->color;
+    return d->action->color();
 }
 
 void QColorPushButton::setColor(const QColor &color)
 {
-    if (d->color == color) {
-        return;
-    }
-
-    d->color = color;
-    d->updateIcon();
-    emit colorChanged(d->color);
+    d->action->setColor(color);
 }
 
 QString QColorPushButton::caption() const
 {
-    return d->caption;
+    return d->action->caption();
 }
 
 void QColorPushButton::setCaption(const QString &caption)
 {
-    d->caption = caption;
+    d->action->setCaption(caption);
 }
 
-QColorPushButton::ColorDialogOptions QColorPushButton::options() const
+QColorAction::ColorDialogOptions QColorPushButton::options() const
 {
-    return d->options;
+    return d->action->options();
 }
 
-void QColorPushButton::setOptions(QColorPushButton::ColorDialogOptions options)
+void QColorPushButton::setOptions(QColorAction::ColorDialogOptions options)
 {
-    d->options = options;
-}
-
-void QColorPushButton::paintEvent(QPaintEvent *event)
-{
-    if (icon().availableSizes().value(0) != iconSize()) {
-        d->updateIcon();
-    }
-
-    QPushButton::paintEvent(event);
-}
-
-void QColorPushButton::resetColor()
-{
-    d->resetColor();
-}
-
-void QColorPushButton::resetCaption()
-{
-    d->resetCaption();
-}
-
-void QColorPushButton::resetOptions()
-{
-    d->resetOptions();
+    d->action->setOptions(options);
 }
 
 #include "QColorPushButton.moc"

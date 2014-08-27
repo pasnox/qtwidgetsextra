@@ -1,136 +1,78 @@
 #include "QColorToolButton.h"
 
-class QColorToolButtonPrivate : public QObject
-{
+#include <QDebug>
+
+class QColorToolButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
     QColorToolButtonPrivate(QColorToolButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , color(QColor(Qt::black))
-        , options(0)
-    {
+        , action(new QColorAction(this)) {
         Q_ASSERT(widget);
 
-        connect(widget, SIGNAL(clicked()), this, SLOT(clicked()));
-    }
+        action->setProperty("button", QVariant::fromValue(widget));
+        widget->setFixedHeight(widget->sizeHint().height());
+        widget->setIconSize(QSize(widget->height(), widget->height()) -QSize(6, 6));
+        widget->setDefaultAction(action);
 
-    void updateIcon() {
-        widget->setIcon(widget->colorIcon(color));
-        widget->setText((options & QColorToolButton::ShowAlphaChannel) ? color.name(QColor::HexArgb) : color.name(QColor::HexRgb));
-        widget->setToolTip(widget->text());
-    }
-
-    void resetColor() {
-        widget->setColor(QColor(Qt::black));
-    }
-
-    void resetCaption() {
-        caption.clear();
-    }
-
-    void resetOptions() {
-        options = 0;
-    }
-
-public slots:
-    void clicked() {
-        const QColor newColor = QColorDialog::getColor(color, widget->window(), caption, QColorDialog::ColorDialogOptions(int(options)));
-
-        if (newColor.isValid()) {
-            widget->setColor(newColor);
-        }
+        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
     }
 
 public:
-    QColorToolButton* widget;
-    bool alphaEnabled;
-    QColor color;
-    QString caption;
-    QColorToolButton::ColorDialogOptions options;
+    QColorToolButton *widget;
+    QColorAction *action;
 };
 
 QColorToolButton::QColorToolButton(QWidget *parent)
     : QEmbedableButton(parent)
     , d(new QColorToolButtonPrivate(this))
 {
-    d->updateIcon();
 }
 
 QColorToolButton::QColorToolButton(const QColor &color, QWidget *parent)
     : QEmbedableButton(parent)
     , d(new QColorToolButtonPrivate(this))
 {
-    d->color = color;
-    d->updateIcon();
+    d->action->setColor(color);
+}
+
+QColorToolButton::QColorToolButton(const QString &colorName, QWidget *parent)
+    : QEmbedableButton(parent)
+    , d(new QColorToolButtonPrivate(this))
+{
+    d->action->setColor(QColor(colorName));
 }
 
 QColor QColorToolButton::color() const
 {
-    return d->color;
+    return d->action->color();
 }
 
 void QColorToolButton::setColor(const QColor &color)
 {
-    if (d->color == color) {
-        return;
-    }
-
-    d->color = color;
-    d->updateIcon();
-    emit colorChanged(d->color);
+    d->action->setColor(color);
 }
 
 QString QColorToolButton::caption() const
 {
-    return d->caption;
+    return d->action->caption();
 }
 
 void QColorToolButton::setCaption(const QString &caption)
 {
-    d->caption = caption;
+    d->action->setCaption(caption);
 }
 
-QColorToolButton::ColorDialogOptions QColorToolButton::options() const
+QColorAction::ColorDialogOptions QColorToolButton::options() const
 {
-    return d->options;
+    return d->action->options();
 }
 
-void QColorToolButton::setOptions(QColorToolButton::ColorDialogOptions options)
+void QColorToolButton::setOptions(QColorAction::ColorDialogOptions options)
 {
-    d->options = options;
-}
-
-QIcon QColorToolButton::colorIcon(const QColor &color) const
-{
-    QPixmap icon(iconSize());
-    icon.fill(color);
-    return QIcon(icon);
-}
-
-void QColorToolButton::paintEvent(QPaintEvent *event)
-{
-    if (icon().availableSizes().value(0) != iconSize()) {
-        d->updateIcon();
-    }
-
-    QEmbedableButton::paintEvent(event);
-}
-
-void QColorToolButton::resetColor()
-{
-    d->resetColor();
-}
-
-void QColorToolButton::resetCaption()
-{
-    d->resetCaption();
-}
-
-void QColorToolButton::resetOptions()
-{
-    d->resetOptions();
+    d->action->setOptions(options);
 }
 
 #include "QColorToolButton.moc"

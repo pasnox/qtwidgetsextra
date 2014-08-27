@@ -1,7 +1,5 @@
 #include "QColorLineEdit.h"
 
-#include <QHBoxLayout>
-#include <QStyle>
 #include <QRegExpValidator>
 
 class QColorLineEditPrivate : public QObject
@@ -12,39 +10,19 @@ public:
     QColorLineEditPrivate(QColorLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , button(new QColorToolButton(widget))
-    {
+        , action(new QColorAction(this)) {
         Q_ASSERT(widget);
 
-        const int frameMargin = widget->style()->pixelMetric(QStyle::PM_DefaultFrameWidth, 0, widget);
-        const int height = widget->sizeHint().height() -(frameMargin *4);
-        QMargins margins(widget->textMargins());
-
-        button->setCursor(Qt::ArrowCursor);
-        button->setEmbeded(true);
-        button->setFixedSize(height, height);
-
-        margins.setLeft(margins.left() +(frameMargin *4));
-
-        QHBoxLayout* hl = new QHBoxLayout(widget);
-        hl->setSpacing(0);
-        hl->setContentsMargins(margins);
-        hl->addWidget(button);
-        hl->addStretch();
-
-        margins.setLeft(margins.left() +height);
-        widget->setTextMargins(margins);
-
+        widget->setDefaultAction(action);
         updateValidator();
 
         connect(widget, SIGNAL(textEdited(QString)), this, SLOT(textEdited(QString)));
         connect(widget, SIGNAL(editingFinished()), this, SLOT(editingFinished()));
-        connect(button, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
-        connect(button, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
+        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
     }
 
     void updateValidator() {
-        if (button->options() & QColorToolButton::ShowAlphaChannel) {
+        if (action->options().testFlag(QColorAction::ShowAlphaChannel)) {
             widget->setValidator(new QRegExpValidator(QRegExp(QLatin1String("#[A-Fa-f0-9]{2,8}")), this));
         }
         else {
@@ -54,84 +32,83 @@ public:
 
 public slots:
     void textEdited(const QString &text) {
-        button->setIcon(button->colorIcon(QColor(text)));
+        const QColor color = QColor(text);
+
+        if (color.isValid()) {
+            action->setIcon(action->colorIcon(color));
+        }
+        else {
+            action->setIcon(action->colorIcon(action->color()));
+        }
     }
 
     void editingFinished() {
-        button->setColor(QColor(widget->text()));
-    }
+        const QColor color = QColor(widget->text());
 
-    void colorChanged(const QColor &color) {
-        Q_UNUSED(color);
-
-        if (widget->text() != button->text()) {
-            widget->setText(button->text());
+        if (color.isValid()) {
+            action->setColor(color);
+        }
+        else {
+            action->setIcon(action->colorIcon(action->color()));
+            widget->setText(action->colorName(action->color()));
         }
     }
 
 public:
-    QColorLineEdit* widget;
-    QColorToolButton* button;
+    QColorLineEdit *widget;
+    QColorAction *action;
 };
 
 QColorLineEdit::QColorLineEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QAbstractButtonLineEdit(parent)
     , d(new QColorLineEditPrivate(this))
 {
 }
 
 QColorLineEdit::QColorLineEdit(const QColor &color, QWidget *parent)
-    : QLineEdit(parent)
+    : QAbstractButtonLineEdit(parent)
     , d(new QColorLineEditPrivate(this))
 {
-    d->button->setColor(color);
+    d->action->setColor(color);
+}
+
+QColorLineEdit::QColorLineEdit(const QString &colorName, QWidget *parent)
+    : QAbstractButtonLineEdit(parent)
+    , d(new QColorLineEditPrivate(this))
+{
+    d->action->setColor(QColor(colorName));
 }
 
 QColor QColorLineEdit::color() const
 {
-    return d->button->color();
+    return d->action->color();
 }
 
 void QColorLineEdit::setColor(const QColor &color)
 {
-    d->button->setColor(color);
+    d->action->setColor(color);
 }
 
 QString QColorLineEdit::caption() const
 {
-    return d->button->caption();
+    return d->action->caption();
 }
 
 void QColorLineEdit::setCaption(const QString &caption)
 {
-    d->button->setCaption(caption);
+    d->action->setCaption(caption);
 }
 
-QColorToolButton::ColorDialogOptions QColorLineEdit::options() const
+QColorAction::ColorDialogOptions QColorLineEdit::options() const
 {
-    return d->button->options();
+    return d->action->options();
 }
 
-void QColorLineEdit::setOptions(QColorToolButton::ColorDialogOptions options)
+void QColorLineEdit::setOptions(QColorAction::ColorDialogOptions options)
 {
-    d->button->setOptions(options);
-    d->updateValidator();
-}
-
-void QColorLineEdit::resetColor()
-{
-    QMetaObject::invokeMethod(d->button, "resetColor");
-}
-
-void QColorLineEdit::resetCaption()
-{
-    QMetaObject::invokeMethod(d->button, "resetCaption");
-}
-
-void QColorLineEdit::resetOptions()
-{
-    QMetaObject::invokeMethod(d->button, "resetOptions");
+    d->action->setOptions(options);
     d->updateValidator();
 }
 
 #include "QColorLineEdit.moc"
+

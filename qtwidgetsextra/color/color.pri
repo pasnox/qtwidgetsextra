@@ -2,11 +2,13 @@ DEPENDPATH *= color
 INCLUDEPATH *= color
 
 HEADERS *= \
-    $$PWD/QColorPushButton.h \
-    $$PWD/QColorToolButton.h \
-    $$PWD/QColorLineEdit.h
+    color/QColorAction.h \
+    color/QColorLineEdit.h \
+    color/QColorPushButton.h \
+    color/QColorToolButton.h
 
 SOURCES *= \
-    $$PWD/QColorPushButton.cpp \
-    $$PWD/QColorToolButton.cpp \
-    $$PWD/QColorLineEdit.cpp
+    color/QColorAction.cpp \
+    color/QColorLineEdit.cpp \
+    color/QColorPushButton.cpp \
+    color/QColorToolButton.cpp
