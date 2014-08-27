@@ -489,6 +489,64 @@
        </property>
       </widget>
      </widget>
+     <widget class="QWidget" name="wGroupBox">
+      <attribute name="title">
+       <string>GroupBox</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QButtonGroupBox" name="checkGroupBox">
+         <property name="title">
+          <string>Check boxes</string>
+         </property>
+         <property name="items">
+          <stringlist>
+           <string>Item 1</string>
+           <string>Item 2</string>
+           <string>Item 3</string>
+           <string>Item 4</string>
+           <string>Item 5</string>
+          </stringlist>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QButtonGroupBox" name="radioGroupBox">
+         <property name="title">
+          <string>Radio boxes</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="type">
+          <enum>QButtonGroupBox::RadioBox</enum>
+         </property>
+         <property name="items">
+          <stringlist>
+           <string>1</string>
+           <string>2</string>
+           <string>3</string>
+           <string>4</string>
+           <string>5</string>
+          </stringlist>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
@@ -503,6 +561,11 @@
    <class>QUpDownButton</class>
    <extends>QWidget</extends>
    <header>QUpDownButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QButtonGroupBox</class>
+   <extends>QGroupBox</extends>
+   <header>QButtonGroupBox.h</header>
   </customwidget>
   <customwidget>
    <class>QColorComboBox</class>
