@@ -9,14 +9,26 @@ greaterThan(QT_MAJOR_VERSION, 4) {
  CONFIG *= designer
 }
 
+# Disable some implicit cast to avoid convertion errors
+DEFINES *= \
+    QT_NO_URL_CAST_FROM_STRING \
+    QT_NO_CAST_TO_ASCII \
+    QT_NO_CAST_FROM_ASCII \
+    QT_NO_CAST_FROM_BYTEARRAY
+
 LIBS *= -L.
 
-DEPENDPATH *= .
-INCLUDEPATH *= .
+DEPENDPATH *= . \
+    abstract
+
+INCLUDEPATH *= . \
+    abstract
 
 #RESOURCES = qtwidgetsextra.qrc
 
 HEADERS = QtWidgetsExtra.h \
+    QtWidgetsExtraCache.h \
+    abstract/QAbstractButtonLineEdit.h \
     QEmbedableButton_p.h \
     QOpenFileButtonPlugin.h \
     QOpenFileLineEditPlugin.h \
@@ -29,6 +41,8 @@ HEADERS = QtWidgetsExtra.h \
     color/QColorToolButtonPlugin.h
 
 SOURCES = QtWidgetsExtra.cpp \
+    QtWidgetsExtraCache.cpp \
+    abstract/QAbstractButtonLineEdit.cpp \
     QEmbedableButton.cpp \
     QOpenFileButtonPlugin.cpp \
     QOpenFileLineEditPlugin.cpp \
