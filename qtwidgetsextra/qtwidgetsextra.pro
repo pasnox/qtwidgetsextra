@@ -24,40 +24,38 @@ DEPENDPATH *= . \
 INCLUDEPATH *= . \
     abstract
 
-#RESOURCES = qtwidgetsextra.qrc
+#RESOURCES *= qtwidgetsextra.qrc
 
-HEADERS = QtWidgetsExtra.h \
+include(filedialog/filedialog.pri)
+include(color/color.pri)
+
+HEADERS *= QtWidgetsExtra.h \
     QtWidgetsExtraCache.h \
     abstract/QAbstractButtonLineEdit.h \
-    QEmbedableButton_p.h \
-    QOpenFileButtonPlugin.h \
-    QOpenFileLineEditPlugin.h \
-    QSaveFileButtonPlugin.h \
-    QSaveFileLineEditPlugin.h \
-    QOpenFolderButtonPlugin.h \
-    QOpenFolderLineEditPlugin.h \
+    abstract/QEmbedableButton_p.h \
+    filedialog/QOpenFileButtonPlugin.h \
+    filedialog/QOpenFileLineEditPlugin.h \
+    filedialog/QSaveFileButtonPlugin.h \
+    filedialog/QSaveFileLineEditPlugin.h \
+    filedialog/QOpenFolderButtonPlugin.h \
+    filedialog/QOpenFolderLineEditPlugin.h \
     color/QColorLineEditPlugin.h \
     color/QColorPushButtonPlugin.h \
     color/QColorToolButtonPlugin.h
 
-SOURCES = QtWidgetsExtra.cpp \
+SOURCES *= QtWidgetsExtra.cpp \
     QtWidgetsExtraCache.cpp \
     abstract/QAbstractButtonLineEdit.cpp \
-    QEmbedableButton.cpp \
-    QOpenFileButtonPlugin.cpp \
-    QOpenFileLineEditPlugin.cpp \
-    QSaveFileButtonPlugin.cpp \
-    QSaveFileLineEditPlugin.cpp \
-    QOpenFolderButtonPlugin.cpp \
-    QOpenFolderLineEditPlugin.cpp \
+    abstract/QEmbedableButton.cpp \
+    filedialog/QOpenFileButtonPlugin.cpp \
+    filedialog/QOpenFileLineEditPlugin.cpp \
+    filedialog/QSaveFileButtonPlugin.cpp \
+    filedialog/QSaveFileLineEditPlugin.cpp \
+    filedialog/QOpenFolderButtonPlugin.cpp \
+    filedialog/QOpenFolderLineEditPlugin.cpp \
     color/QColorLineEditPlugin.cpp \
     color/QColorPushButtonPlugin.cpp \
     color/QColorToolButtonPlugin.cpp
-
-include(qopenfile.pri)
-include(qsavefile.pri)
-include(qopenfolder.pri)
-include(color/color.pri)
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS *= target
