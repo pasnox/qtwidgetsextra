@@ -1,8 +1,5 @@
 #include "QSaveFileLineEdit.h"
-#include "QSaveFileButton.h"
-
-#include <QHBoxLayout>
-#include <QStyle>
+#include "QFileAction.h"
 
 class QSaveFileLineEditPrivate : public QObject
 {
@@ -12,37 +9,21 @@ public:
     QSaveFileLineEditPrivate(QSaveFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , button(new QSaveFileButton(widget))
+        , action(new QFileAction(this))
     {
         Q_ASSERT(widget);
 
-        const int frameMargin = widget->style()->pixelMetric(QStyle::PM_DefaultFrameWidth, 0, widget);
-        const int height = widget->sizeHint().height() -(frameMargin *4);
-        QMargins margins(widget->textMargins());
-
-        button->setCursor(Qt::ArrowCursor);
-        button->setEmbeded(true);
-        button->setFixedSize(height, height);
-
-        margins.setLeft(margins.left() +(frameMargin *4));
-
-        QHBoxLayout* hl = new QHBoxLayout(widget);
-        hl->setSpacing(0);
-        hl->setContentsMargins(margins);
-        hl->addWidget(button);
-        hl->addStretch();
-
-        margins.setLeft(margins.left() +height);
-        widget->setTextMargins(margins);
+        action->setType(QFileAction::Save);
+        widget->setDefaultAction(action);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
     }
 
 public slots:
     void textChanged(const QString &text) {
-        button->setFilePath(text);
+        action->setFilePath(text);
     }
 
     void filePathChanged(const QString &text) {
@@ -52,89 +33,64 @@ public slots:
     }
 
 public:
-    QSaveFileLineEdit* widget;
-    QSaveFileButton* button;
+    QSaveFileLineEdit *widget;
+    QFileAction *action;
 };
 
 QSaveFileLineEdit::QSaveFileLineEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QAbstractButtonLineEdit(parent)
     , d(new QSaveFileLineEditPrivate(this))
 {
 }
 
 QString QSaveFileLineEdit::filePath() const
 {
-    return d->button->filePath();
+    return d->action->filePath();
 }
 
 void QSaveFileLineEdit::setFilePath(const QString &filePath)
 {
-    d->button->setFilePath(filePath);
+    d->action->setFilePath(filePath);
 }
 
 QString QSaveFileLineEdit::caption() const
 {
-    return d->button->caption();
+    return d->action->caption();
 }
 
 void QSaveFileLineEdit::setCaption(const QString &caption)
 {
-    d->button->setCaption(caption);
+    d->action->setCaption(caption);
 }
 
 QString QSaveFileLineEdit::directory() const
 {
-    return d->button->directory();
+    return d->action->directory();
 }
 
 void QSaveFileLineEdit::setDirectory(const QString &directory)
 {
-    d->button->setDirectory(directory);
+    d->action->setDirectory(directory);
 }
 
 QStringList QSaveFileLineEdit::filter() const
 {
-    return d->button->filter();
+    return d->action->filter();
 }
 
 void QSaveFileLineEdit::setFilter(const QStringList &filter)
 {
-    d->button->setFilter(filter);
+    d->action->setFilter(filter);
 }
 
 QFileDialog::Options QSaveFileLineEdit::options() const
 {
-    return d->button->options();
+    return d->action->options();
 }
 
 void QSaveFileLineEdit::setOptions(QFileDialog::Options options)
 {
-    d->button->setOptions(options);
-}
-
-void QSaveFileLineEdit::resetFilePath()
-{
-    QMetaObject::invokeMethod(d->button, "resetFilePath");
-}
-
-void QSaveFileLineEdit::resetCaption()
-{
-    QMetaObject::invokeMethod(d->button, "resetCaption");
-}
-
-void QSaveFileLineEdit::resetDirectory()
-{
-    QMetaObject::invokeMethod(d->button, "resetDirectory");
-}
-
-void QSaveFileLineEdit::resetFilter()
-{
-    QMetaObject::invokeMethod(d->button, "resetFilter");
-}
-
-void QSaveFileLineEdit::resetOptions()
-{
-    QMetaObject::invokeMethod(d->button, "resetOptions");
+    d->action->setOptions(options);
 }
 
 #include "QSaveFileLineEdit.moc"

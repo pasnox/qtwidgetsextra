@@ -1,19 +1,20 @@
 #ifndef QSAVEFILELINEEDIT_H
 #define QSAVEFILELINEEDIT_H
 
-#include <QLineEdit>
+#include "QAbstractButtonLineEdit.h"
+
 #include <QFileDialog>
 
-class QSaveFileLineEdit : public QLineEdit
+class QSaveFileLineEdit : public QAbstractButtonLineEdit
 {
     Q_OBJECT
     class QSaveFileLineEditPrivate* d;
 
-    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath RESET resetFilePath USER true NOTIFY filePathChanged)
-    Q_PROPERTY(QString caption READ caption WRITE setCaption RESET resetCaption)
-    Q_PROPERTY(QString directory READ directory WRITE setDirectory RESET resetDirectory)
-    Q_PROPERTY(QStringList filter READ filter WRITE setFilter RESET resetFilter)
-    Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions RESET resetOptions)
+    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
+    Q_PROPERTY(QString caption READ caption WRITE setCaption)
+    Q_PROPERTY(QString directory READ directory WRITE setDirectory)
+    Q_PROPERTY(QStringList filter READ filter WRITE setFilter)
+    Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
     QSaveFileLineEdit(QWidget *parent = 0);
@@ -32,13 +33,6 @@ public:
 
     QFileDialog::Options options() const;
     void setOptions(QFileDialog::Options options);
-
-private:
-    void resetFilePath();
-    void resetCaption();
-    void resetDirectory();
-    void resetFilter();
-    void resetOptions();
 
 signals:
     void filePathChanged(const QString &filePath);

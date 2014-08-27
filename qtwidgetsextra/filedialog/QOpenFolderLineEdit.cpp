@@ -1,8 +1,5 @@
 #include "QOpenFolderLineEdit.h"
-#include "QOpenFolderButton.h"
-
-#include <QHBoxLayout>
-#include <QStyle>
+#include "QFileAction.h"
 
 class QOpenFolderLineEditPrivate : public QObject
 {
@@ -12,37 +9,21 @@ public:
     QOpenFolderLineEditPrivate(QOpenFolderLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , button(new QOpenFolderButton(widget))
+        , action(new QFileAction(this))
     {
         Q_ASSERT(widget);
 
-        const int frameMargin = widget->style()->pixelMetric(QStyle::PM_DefaultFrameWidth, 0, widget);
-        const int height = widget->sizeHint().height() -(frameMargin *4);
-        QMargins margins(widget->textMargins());
-
-        button->setCursor(Qt::ArrowCursor);
-        button->setEmbeded(true);
-        button->setFixedSize(height, height);
-
-        margins.setLeft(margins.left() +(frameMargin *4));
-
-        QHBoxLayout* hl = new QHBoxLayout(widget);
-        hl->setSpacing(0);
-        hl->setContentsMargins(margins);
-        hl->addWidget(button);
-        hl->addStretch();
-
-        margins.setLeft(margins.left() +height);
-        widget->setTextMargins(margins);
+        action->setType(QFileAction::Folder);
+        widget->setDefaultAction(action);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
     }
 
 public slots:
     void textChanged(const QString &text) {
-        button->setFilePath(text);
+        action->setFilePath(text);
     }
 
     void filePathChanged(const QString &text) {
@@ -52,74 +33,54 @@ public slots:
     }
 
 public:
-    QOpenFolderLineEdit* widget;
-    QOpenFolderButton* button;
+    QOpenFolderLineEdit *widget;
+    QFileAction *action;
 };
 
 QOpenFolderLineEdit::QOpenFolderLineEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QAbstractButtonLineEdit(parent)
     , d(new QOpenFolderLineEditPrivate(this))
 {
 }
 
 QString QOpenFolderLineEdit::filePath() const
 {
-    return d->button->filePath();
+    return d->action->filePath();
 }
 
 void QOpenFolderLineEdit::setFilePath(const QString &filePath)
 {
-    d->button->setFilePath(filePath);
+    d->action->setFilePath(filePath);
 }
 
 QString QOpenFolderLineEdit::caption() const
 {
-    return d->button->caption();
+    return d->action->caption();
 }
 
 void QOpenFolderLineEdit::setCaption(const QString &caption)
 {
-    d->button->setCaption(caption);
+    d->action->setCaption(caption);
 }
 
 QString QOpenFolderLineEdit::directory() const
 {
-    return d->button->directory();
+    return d->action->directory();
 }
 
 void QOpenFolderLineEdit::setDirectory(const QString &directory)
 {
-    d->button->setDirectory(directory);
+    d->action->setDirectory(directory);
 }
 
 QFileDialog::Options QOpenFolderLineEdit::options() const
 {
-    return d->button->options();
+    return d->action->options();
 }
 
 void QOpenFolderLineEdit::setOptions(QFileDialog::Options options)
 {
-    d->button->setOptions(options);
-}
-
-void QOpenFolderLineEdit::resetFilePath()
-{
-    QMetaObject::invokeMethod(d->button, "resetFilePath");
-}
-
-void QOpenFolderLineEdit::resetCaption()
-{
-    QMetaObject::invokeMethod(d->button, "resetCaption");
-}
-
-void QOpenFolderLineEdit::resetDirectory()
-{
-    QMetaObject::invokeMethod(d->button, "resetDirectory");
-}
-
-void QOpenFolderLineEdit::resetOptions()
-{
-    QMetaObject::invokeMethod(d->button, "resetOptions");
+    d->action->setOptions(options);
 }
 
 #include "QOpenFolderLineEdit.moc"

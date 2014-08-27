@@ -1,18 +1,19 @@
 #ifndef QOPENFOLDERLINEEDIT_H
 #define QOPENFOLDERLINEEDIT_H
 
-#include <QLineEdit>
+#include "QAbstractButtonLineEdit.h"
+
 #include <QFileDialog>
 
-class QOpenFolderLineEdit : public QLineEdit
+class QOpenFolderLineEdit : public QAbstractButtonLineEdit
 {
     Q_OBJECT
     class QOpenFolderLineEditPrivate* d;
 
-    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath RESET resetFilePath USER true NOTIFY filePathChanged)
-    Q_PROPERTY(QString caption READ caption WRITE setCaption RESET resetCaption)
-    Q_PROPERTY(QString directory READ directory WRITE setDirectory RESET resetDirectory)
-    Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions RESET resetOptions)
+    Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
+    Q_PROPERTY(QString caption READ caption WRITE setCaption)
+    Q_PROPERTY(QString directory READ directory WRITE setDirectory)
+    Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
     QOpenFolderLineEdit(QWidget *parent = 0);
@@ -28,12 +29,6 @@ public:
 
     QFileDialog::Options options() const;
     void setOptions(QFileDialog::Options options);
-
-private:
-    void resetFilePath();
-    void resetCaption();
-    void resetDirectory();
-    void resetOptions();
 
 signals:
     void filePathChanged(const QString &filePath);

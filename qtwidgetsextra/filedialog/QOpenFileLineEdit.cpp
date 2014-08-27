@@ -1,8 +1,5 @@
 #include "QOpenFileLineEdit.h"
-#include "QOpenFileButton.h"
-
-#include <QHBoxLayout>
-#include <QStyle>
+#include "QFileAction.h"
 
 class QOpenFileLineEditPrivate : public QObject
 {
@@ -12,37 +9,21 @@ public:
     QOpenFileLineEditPrivate(QOpenFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , button(new QOpenFileButton(widget))
+        , action(new QFileAction(this))
     {
         Q_ASSERT(widget);
 
-        const int frameMargin = widget->style()->pixelMetric(QStyle::PM_DefaultFrameWidth, 0, widget);
-        const int height = widget->sizeHint().height() -(frameMargin *4);
-        QMargins margins(widget->textMargins());
-
-        button->setCursor(Qt::ArrowCursor);
-        button->setEmbeded(true);
-        button->setFixedSize(height, height);
-
-        margins.setLeft(margins.left() +(frameMargin *4));
-
-        QHBoxLayout* hl = new QHBoxLayout(widget);
-        hl->setSpacing(0);
-        hl->setContentsMargins(margins);
-        hl->addWidget(button);
-        hl->addStretch();
-
-        margins.setLeft(margins.left() +height);
-        widget->setTextMargins(margins);
+        action->setType(QFileAction::Open);
+        widget->setDefaultAction(action);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
-        connect(button, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
+        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
     }
 
 public slots:
     void textChanged(const QString &text) {
-        button->setFilePath(text);
+        action->setFilePath(text);
     }
 
     void filePathChanged(const QString &text) {
@@ -52,89 +33,64 @@ public slots:
     }
 
 public:
-    QOpenFileLineEdit* widget;
-    QOpenFileButton* button;
+    QOpenFileLineEdit *widget;
+    QFileAction *action;
 };
 
 QOpenFileLineEdit::QOpenFileLineEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QAbstractButtonLineEdit(parent)
     , d(new QOpenFileLineEditPrivate(this))
 {
 }
 
 QString QOpenFileLineEdit::filePath() const
 {
-    return d->button->filePath();
+    return d->action->filePath();
 }
 
 void QOpenFileLineEdit::setFilePath(const QString &filePath)
 {
-    d->button->setFilePath(filePath);
+    d->action->setFilePath(filePath);
 }
 
 QString QOpenFileLineEdit::caption() const
 {
-    return d->button->caption();
+    return d->action->caption();
 }
 
 void QOpenFileLineEdit::setCaption(const QString &caption)
 {
-    d->button->setCaption(caption);
+    d->action->setCaption(caption);
 }
 
 QString QOpenFileLineEdit::directory() const
 {
-    return d->button->directory();
+    return d->action->directory();
 }
 
 void QOpenFileLineEdit::setDirectory(const QString &directory)
 {
-    d->button->setDirectory(directory);
+    d->action->setDirectory(directory);
 }
 
 QStringList QOpenFileLineEdit::filter() const
 {
-    return d->button->filter();
+    return d->action->filter();
 }
 
 void QOpenFileLineEdit::setFilter(const QStringList &filter)
 {
-    d->button->setFilter(filter);
+    d->action->setFilter(filter);
 }
 
 QFileDialog::Options QOpenFileLineEdit::options() const
 {
-    return d->button->options();
+    return d->action->options();
 }
 
 void QOpenFileLineEdit::setOptions(QFileDialog::Options options)
 {
-    d->button->setOptions(options);
-}
-
-void QOpenFileLineEdit::resetFilePath()
-{
-    QMetaObject::invokeMethod(d->button, "resetFilePath");
-}
-
-void QOpenFileLineEdit::resetCaption()
-{
-    QMetaObject::invokeMethod(d->button, "resetCaption");
-}
-
-void QOpenFileLineEdit::resetDirectory()
-{
-    QMetaObject::invokeMethod(d->button, "resetDirectory");
-}
-
-void QOpenFileLineEdit::resetFilter()
-{
-    QMetaObject::invokeMethod(d->button, "resetFilter");
-}
-
-void QOpenFileLineEdit::resetOptions()
-{
-    QMetaObject::invokeMethod(d->button, "resetOptions");
+    d->action->setOptions(options);
 }
 
 #include "QOpenFileLineEdit.moc"
