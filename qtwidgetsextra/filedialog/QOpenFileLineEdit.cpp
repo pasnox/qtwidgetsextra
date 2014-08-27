@@ -13,7 +13,7 @@ public:
     {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::Open);
+        action->setType(QFileAction::OpenFile);
         widget->setDefaultAction(action);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));

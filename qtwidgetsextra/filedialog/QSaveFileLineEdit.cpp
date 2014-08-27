@@ -13,7 +13,7 @@ public:
     {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::Save);
+        action->setType(QFileAction::SaveFile);
         widget->setDefaultAction(action);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));

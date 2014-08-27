@@ -11,7 +11,7 @@ public:
         , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::Open);
+        action->setType(QFileAction::OpenFile);
         widget->setDefaultAction(action);
 
         connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));

@@ -13,9 +13,9 @@ class QFileAction : public QAction
 
 public:
     enum Type {
-        Open,
-        Save,
-        Folder
+        OpenFile,
+        SaveFile,
+        OpenFolder
     };
 
     explicit QFileAction(QObject *parent = 0);
