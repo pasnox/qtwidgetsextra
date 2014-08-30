@@ -3,12 +3,16 @@ INCLUDEPATH *= color
 
 HEADERS *= \
     color/QColorAction.h \
+    color/QColorListModel.h \
     color/QColorLineEdit.h \
     color/QColorPushButton.h \
-    color/QColorToolButton.h
+    color/QColorToolButton.h \
+    color/QColorComboBox.h
 
 SOURCES *= \
     color/QColorAction.cpp \
+    color/QColorListModel.cpp \
     color/QColorLineEdit.cpp \
     color/QColorPushButton.cpp \
-    color/QColorToolButton.cpp
+    color/QColorToolButton.cpp \
+    color/QColorComboBox.cpp

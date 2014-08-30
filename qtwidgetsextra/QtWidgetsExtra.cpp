@@ -8,6 +8,7 @@
 #include "QColorLineEditPlugin.h"
 #include "QColorPushButtonPlugin.h"
 #include "QColorToolButtonPlugin.h"
+#include "QColorComboBoxPlugin.h"
 
 QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
     : QObject(parent)
@@ -24,6 +25,7 @@ QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
     m_widgets.append(new QColorLineEditPlugin(this));
     m_widgets.append(new QColorPushButtonPlugin(this));
     m_widgets.append(new QColorToolButtonPlugin(this));
+    m_widgets.append(new QColorComboBoxPlugin(this));
 }
 
 QList<QDesignerCustomWidgetInterface*> QtWidgetsExtra::customWidgets() const

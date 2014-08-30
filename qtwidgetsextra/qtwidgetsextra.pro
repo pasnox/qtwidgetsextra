@@ -41,7 +41,8 @@ HEADERS *= QtWidgetsExtra.h \
     filedialog/QOpenFolderLineEditPlugin.h \
     color/QColorLineEditPlugin.h \
     color/QColorPushButtonPlugin.h \
-    color/QColorToolButtonPlugin.h
+    color/QColorToolButtonPlugin.h \
+    color/QColorComboBoxPlugin.h
 
 SOURCES *= QtWidgetsExtra.cpp \
     QtWidgetsExtraCache.cpp \
@@ -55,7 +56,8 @@ SOURCES *= QtWidgetsExtra.cpp \
     filedialog/QOpenFolderLineEditPlugin.cpp \
     color/QColorLineEditPlugin.cpp \
     color/QColorPushButtonPlugin.cpp \
-    color/QColorToolButtonPlugin.cpp
+    color/QColorToolButtonPlugin.cpp \
+    color/QColorComboBoxPlugin.cpp
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS *= target
