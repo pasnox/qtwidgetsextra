@@ -99,29 +99,7 @@ QIcon QColorAction::colorIcon(const QColor &color) const
 {
     QAbstractButton* button = property("button").value<QAbstractButton*>();
     const QSize size = (button ? button->iconSize() : QSize(24, 24)) *2;
-    const QString key = QString(QLatin1String("%1-%2x%3"))
-        .arg(color.name(QColor::HexArgb))
-        .arg(size.width())
-        .arg(size.height())
-    ;
-    QIcon icon = QtWidgetsExtraCache::cachedIcon(key);
-
-    if (icon.isNull()) {
-        QPixmap pixmap = QtWidgetsExtraCache::cachedPixmap(key);
-
-        if (pixmap.isNull()) {
-            pixmap = QPixmap(size);
-            pixmap.fill(color);
-            QtWidgetsExtraCache::cachePixmap(key, pixmap);
-        }
-
-        if (!pixmap.isNull()) {
-            icon = QIcon(pixmap);
-            QtWidgetsExtraCache::cacheIcon(key, icon);
-        }
-    }
-
-    return icon;
+    return QtWidgetsExtraCache::cachedIconColor(color, size);
 }
 
 QString QColorAction::colorName(const QColor &color) const
