@@ -72,13 +72,13 @@
              <bool>true</bool>
             </property>
             <property name="filePath">
-             <string>test.png</string>
+             <string notr="true">test.png</string>
             </property>
             <property name="caption">
              <string>Open file line edit</string>
             </property>
             <property name="directory">
-             <string>/opt</string>
+             <string notr="true">/opt</string>
             </property>
             <property name="filter">
              <stringlist>
@@ -98,7 +98,7 @@
              <string>Save file button</string>
             </property>
             <property name="directory">
-             <string>/opt</string>
+             <string notr="true">/opt</string>
             </property>
             <property name="filter">
              <stringlist>
@@ -126,13 +126,13 @@
              <bool>true</bool>
             </property>
             <property name="filePath">
-             <string>test.png</string>
+             <string notr="true">test.png</string>
             </property>
             <property name="caption">
              <string>Save file line edit</string>
             </property>
             <property name="directory">
-             <string>/opt</string>
+             <string notr="true">/opt</string>
             </property>
             <property name="filter">
              <stringlist/>
@@ -145,7 +145,7 @@
           <item row="4" column="0">
            <widget class="QOpenFolderButton" name="openFolderButton">
             <property name="filePath">
-             <string>test</string>
+             <string notr="true">test</string>
             </property>
            </widget>
           </item>
@@ -162,13 +162,13 @@
              <bool>true</bool>
             </property>
             <property name="filePath">
-             <string>/opt</string>
+             <string notr="true">/opt</string>
             </property>
             <property name="caption">
              <string>Choose an existing folder</string>
             </property>
             <property name="directory">
-             <string>/opt</string>
+             <string notr="true">/opt</string>
             </property>
            </widget>
           </item>
