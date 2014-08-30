@@ -209,6 +209,28 @@
           <item row="1" column="0" colspan="2">
            <widget class="QColorLineEdit" name="colorLineEdit"/>
           </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QColorComboBox" name="colorComboBox">
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="currentIndex">
+             <number>3</number>
+            </property>
+            <property name="nameFormat">
+             <enum>QColorListModel::HexRgb</enum>
+            </property>
+            <property name="colorNames">
+             <stringlist>
+              <string>#ccffdd</string>
+              <string>#0000ff</string>
+              <string>#ddccdd</string>
+              <string>#ff0000</string>
+              <string>#00ff00</string>
+             </stringlist>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -308,6 +330,11 @@
    <extends>QToolButton</extends>
    <header>QColorToolButton.h</header>
   </customwidget>
+  <customwidget>
+   <class>QColorComboBox</class>
+   <extends>QComboBox</extends>
+   <header>QColorComboBox.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
@@ -318,12 +345,12 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>29</x>
-     <y>53</y>
+     <x>50</x>
+     <y>97</y>
     </hint>
     <hint type="destinationlabel">
-     <x>83</x>
-     <y>55</y>
+     <x>133</x>
+     <y>97</y>
     </hint>
    </hints>
   </connection>
@@ -334,12 +361,12 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>36</x>
-     <y>105</y>
+     <x>52</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>108</x>
-     <y>112</y>
+     <x>158</x>
+     <y>159</y>
     </hint>
    </hints>
   </connection>
@@ -350,12 +377,12 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>35</x>
-     <y>168</y>
+     <x>52</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>166</y>
+     <x>150</x>
+     <y>221</y>
     </hint>
    </hints>
   </connection>
