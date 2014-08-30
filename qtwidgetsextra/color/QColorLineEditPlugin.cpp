@@ -2,8 +2,6 @@
 #include "QColorLineEdit.h"
 
 #include <QtPlugin>
-#include <QApplication>
-#include <QStyle>
 
 QColorLineEditPlugin::QColorLineEditPlugin(QObject *parent)
     : QObject(parent)
@@ -44,7 +42,7 @@ QString QColorLineEditPlugin::group() const
 
 QIcon QColorLineEditPlugin::icon() const
 {
-    return QApplication::style()->standardIcon(QStyle::SP_DialogOpenButton);
+    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/lineedit.png")));
 }
 
 QString QColorLineEditPlugin::toolTip() const
