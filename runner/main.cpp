@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
     process->setArguments(QStringList(uiFile));
 
     qDebug("%s: Running %s with file %s", Q_FUNC_INFO, qPrintable(designer), qPrintable(uiFile));
+    qDebug("QT_PLUGIN_PATH=%s && %s %s", qPrintable(appDirPath), qPrintable(designer), qPrintable(uiFile));
 
     QObject::connect(process, SIGNAL(error(QProcess::ProcessError)), app.data(), SLOT(quit()));
     QObject::connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), app.data(), SLOT(quit()));
