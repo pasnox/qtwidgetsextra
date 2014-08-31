@@ -2,7 +2,7 @@
 #define QCOLORLISTMODEL_H
 
 #include <QAbstractItemModel>
-#include <QList>
+#include <QStringList>
 #include <QColor>
 
 // NOTE: This class duplicate QColor::NameFormat because this is not a Qt namespace available enum for Qt Designer.
@@ -19,8 +19,13 @@ public:
         HexArgb = QColor::HexArgb
     };
 
+    enum CustomRoles {
+        HexArgbName = Qt::UserRole
+    };
+
     explicit QColorListModel(QObject *parent = 0);
-    explicit QColorListModel(const QList<QColor> &colors, QObject *parent = 0);
+    explicit QColorListModel(const QStringList &colorListNames, QObject *parent = 0);
+    explicit QColorListModel(const QList<QColor> &colorsList, QObject *parent = 0);
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QModelIndex sibling(int row, int column, const QModelIndex &idx) const;
@@ -40,11 +45,11 @@ public:
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);
 
-    QList<QColor> colorList() const;
-    void setColorList(const QList<QColor> &colors);
-
     QStringList colorListNames() const;
     void setColorListNames(const QStringList &colorListNames);
+
+    QList<QColor> colorsList() const;
+    void setColorsList(const QList<QColor> &colors);
 };
 
 #endif // QCOLORLISTMODEL_H

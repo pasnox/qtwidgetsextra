@@ -11,34 +11,43 @@ class QColorComboBox : public QComboBox
     class QColorComboBoxPrivate *d;
 
     Q_PROPERTY(QColorListModel::NameFormat nameFormat READ nameFormat WRITE setNameFormat)
-    // NOTE: Qt Designer has no editor for QList<QColor>
-    //Q_PROPERTY(QList<QColor> colors READ colors WRITE setColors  USER true)
-    Q_PROPERTY(QStringList colorNames READ colorNames WRITE setColorNames USER true)
+    Q_PROPERTY(QStringList colorListNames READ colorListNames WRITE setColorListNames)
+    Q_PROPERTY(QString currentColorName READ currentColorName WRITE setCurrentColorName USER true)
 
 public:
     explicit QColorComboBox(QWidget *parent = 0);
-    explicit QColorComboBox(const QList<QColor> &colors, QWidget *parent = 0);
+    explicit QColorComboBox(const QStringList &colorListNames, QWidget *parent = 0);
+    explicit QColorComboBox(const QList<QColor> &colorsList, QWidget *parent = 0);
 
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);
 
-    QList<QColor> colors() const;
-    void setColors(const QList<QColor> &colors);
+    QStringList colorListNames() const;
+    void setColorListNames(const QStringList &colorListNames);
 
-    QStringList colorNames() const;
-    void setColorNames(const QStringList &colorNames);
+    QList<QColor> colorsList() const;
+    void setColorsList(const QList<QColor> &colorsList);
+
+    QString currentColorName() const;
+    QString currentTextColorName() const;
 
     QColor currentColor() const;
+    QColor currentTextColor() const;
 
 public slots:
+    void setCurrentColorName(const QString &colorName);
+    void setCurrentTextColorName(const QString &colorName);
+    void setEditTextColorName(const QString &colorName);
+
     void setCurrentColor(const QColor &color);
-    void setEditColor(const QColor &color);
+    void setCurrentTextColor(const QColor &color);
+    void setEditTextColor(const QColor &color);
 
 signals:
     void activated(const QColor &color);
     void currentIndexChanged(const QColor &color);
-    void currentColorChanged(const QColor &color);
-    void editColorChanged(const QColor &color);
+    void currentTextChanged(const QColor &color);
+    void editTextChanged(const QColor &color);
     void highlighted(const QColor &color);
 };
 
