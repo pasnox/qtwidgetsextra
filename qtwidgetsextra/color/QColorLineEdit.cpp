@@ -12,6 +12,7 @@ public:
         Q_ASSERT(widget);
 
         widget->setDefaultAction(action);
+        widget->setText(action->colorName(action->color()));
         updateValidator();
 
         connect(widget, SIGNAL(textEdited(QString)), this, SLOT(textEdited(QString)));
