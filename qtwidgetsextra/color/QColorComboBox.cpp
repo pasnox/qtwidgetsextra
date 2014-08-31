@@ -1,5 +1,7 @@
 #include "QColorComboBox.h"
 
+#include <QLineEdit>
+
 class QColorComboBoxPrivate : public QObject {
     Q_OBJECT
 
@@ -11,12 +13,27 @@ public:
         Q_ASSERT(widget);
 
         widget->setModel(model);
+        updateValidator();
 
         connect(widget, SIGNAL(activated(QString)), this, SLOT(activated(QString)));
         connect(widget, SIGNAL(currentIndexChanged(QString)), this, SLOT(currentIndexChanged(QString)));
         connect(widget, SIGNAL(currentTextChanged(QString)), this, SLOT(currentTextChanged(QString)));
         connect(widget, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
         connect(widget, SIGNAL(highlighted(QString)), this, SLOT(highlighted(QString)));
+    }
+
+    void updateValidator() {
+        if (widget->lineEdit()) {
+            QString mask = QLatin1String("\\#HHHhhh");
+
+            if (model->nameFormat() == QColorListModel::HexArgb) {
+                mask = QLatin1String("\\#HHHhhhhh");
+            }
+
+            if (widget->lineEdit()->inputMask() != mask) {
+                widget->lineEdit()->setInputMask(mask);
+            }
+        }
     }
 
     QString internalColorName(const QColor &color) const {
@@ -77,6 +94,7 @@ QColorListModel::NameFormat QColorComboBox::nameFormat() const
 void QColorComboBox::setNameFormat(QColorListModel::NameFormat nameFormat)
 {
     d->model->setNameFormat(nameFormat);
+    d->updateValidator();
 }
 
 QStringList QColorComboBox::colorListNames() const
@@ -147,6 +165,14 @@ void QColorComboBox::setCurrentTextColor(const QColor &color)
 void QColorComboBox::setEditTextColor(const QColor &color)
 {
     setEditTextColorName(d->internalColorName(color));
+}
+
+void QColorComboBox::paintEvent(QPaintEvent *event)
+{
+    QComboBox::paintEvent(event);
+
+    // there is no real way to be notified about "editable" property change so let check it here...
+    d->updateValidator();
 }
 
 #include "QColorComboBox.moc"

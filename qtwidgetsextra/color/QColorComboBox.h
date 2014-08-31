@@ -43,6 +43,9 @@ public slots:
     void setCurrentTextColor(const QColor &color);
     void setEditTextColor(const QColor &color);
 
+protected:
+    virtual void paintEvent(QPaintEvent *event);
+
 signals:
     void activated(const QColor &color);
     void currentIndexChanged(const QColor &color);

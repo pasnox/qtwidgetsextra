@@ -265,7 +265,7 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0" colspan="2">
+          <item row="4" column="0" colspan="2">
            <widget class="QColorListView" name="colorListView">
             <property name="iconSize">
              <size>
@@ -279,6 +279,22 @@
               <string>#ff00ff00</string>
               <string>#ff0000ff</string>
              </stringlist>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QColorComboBox" name="colorComboBox_2">
+            <property name="colorListNames">
+             <stringlist>
+              <string>#ffccffdd</string>
+              <string>#ff0000ff</string>
+              <string>#ffddccdd</string>
+              <string>#ffff0000</string>
+              <string>#ff00ff00</string>
+             </stringlist>
+            </property>
+            <property name="currentColorName">
+             <string>#ffddccdd</string>
             </property>
            </widget>
           </item>
