@@ -13,8 +13,6 @@ public:
         Q_ASSERT(widget);
 
         action->setProperty("button", QVariant::fromValue(widget));
-        widget->setFixedHeight(widget->sizeHint().height());
-        widget->setIconSize(QSize(widget->height(), widget->height()) -QSize(6, 6));
         widget->setDefaultAction(action);
 
         connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
