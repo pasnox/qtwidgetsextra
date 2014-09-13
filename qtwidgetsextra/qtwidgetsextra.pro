@@ -1,6 +1,6 @@
 TEMPLATE = lib
 TARGET = $$qtLibraryTarget(QtWidgetsExtra$${QT_MAJOR_VERSION})
-CONFIG *= plugin debug_and_release
+CONFIG *= plugin
 DESTDIR = ../bin/designer
 
 greaterThan(QT_MAJOR_VERSION, 4) {
