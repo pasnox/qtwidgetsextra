@@ -1,6 +1,5 @@
 TEMPLATE = app
 TARGET = $$qtLibraryTarget(QtWidgetsExtraRunner$${QT_MAJOR_VERSION})
-CONFIG *= debug_and_release
 DESTDIR = ../bin
 
 # Disable some implicit cast to avoid convertion errors
