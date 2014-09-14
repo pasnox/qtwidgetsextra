@@ -26,40 +26,29 @@ INCLUDEPATH *= . \
 
 #RESOURCES *= qtwidgetsextra.qrc
 
-include(filedialog/filedialog.pri)
-include(color/color.pri)
-
 HEADERS *= QtWidgetsExtra.h \
     QtWidgetsExtraCache.h \
     abstract/QAbstractButtonLineEdit.h \
-    abstract/QEmbedableButton_p.h \
-    filedialog/QOpenFileButtonPlugin.h \
-    filedialog/QOpenFileLineEditPlugin.h \
-    filedialog/QSaveFileButtonPlugin.h \
-    filedialog/QSaveFileLineEditPlugin.h \
-    filedialog/QOpenFolderButtonPlugin.h \
-    filedialog/QOpenFolderLineEditPlugin.h \
-    color/QColorLineEditPlugin.h \
-    color/QColorPushButtonPlugin.h \
-    color/QColorToolButtonPlugin.h \
-    color/QColorComboBoxPlugin.h \
-    color/QColorListViewPlugin.h
+    abstract/QEmbedableButton_p.h
 
 SOURCES *= QtWidgetsExtra.cpp \
     QtWidgetsExtraCache.cpp \
     abstract/QAbstractButtonLineEdit.cpp \
-    abstract/QEmbedableButton.cpp \
-    filedialog/QOpenFileButtonPlugin.cpp \
-    filedialog/QOpenFileLineEditPlugin.cpp \
-    filedialog/QSaveFileButtonPlugin.cpp \
-    filedialog/QSaveFileLineEditPlugin.cpp \
-    filedialog/QOpenFolderButtonPlugin.cpp \
-    filedialog/QOpenFolderLineEditPlugin.cpp \
-    color/QColorLineEditPlugin.cpp \
-    color/QColorPushButtonPlugin.cpp \
-    color/QColorToolButtonPlugin.cpp \
-    color/QColorComboBoxPlugin.cpp \
-    color/QColorListViewPlugin.cpp
+    abstract/QEmbedableButton.cpp
+
+# Auto discover project include files
+projectFiles = $$files(*.pri, true)
+for(projectFile, projectFiles) {
+    include($$projectFile)
+}
+
+# Auto discovered plugins classes
+sourceFiles = $$files(*Plugin.*, true)
+for(sourceFile, sourceFiles) {
+    sourceFileSuffix = $$section(sourceFile, ., -1)
+    isEqual(sourceFileSuffix, h):HEADERS *= $$sourceFile
+    isEqual(sourceFileSuffix, cpp):SOURCES *= $$sourceFile
+}
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS *= target
