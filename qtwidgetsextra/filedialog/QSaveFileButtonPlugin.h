@@ -8,7 +8,6 @@ class QSaveFileButtonPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
-
 public:
     QSaveFileButtonPlugin(QObject *parent = 0);
 

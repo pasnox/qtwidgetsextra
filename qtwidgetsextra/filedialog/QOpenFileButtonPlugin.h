@@ -8,7 +8,6 @@ class QOpenFileButtonPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
-
 public:
     QOpenFileButtonPlugin(QObject *parent = 0);
 

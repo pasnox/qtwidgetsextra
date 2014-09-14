@@ -8,7 +8,6 @@ class QColorLineEditPlugin : public QObject, public QDesignerCustomWidgetInterfa
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
-
 public:
     QColorLineEditPlugin(QObject *parent = 0);
 
