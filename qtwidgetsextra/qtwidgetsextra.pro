@@ -36,18 +36,39 @@ SOURCES *= QtWidgetsExtra.cpp \
     abstract/QAbstractButtonLineEdit.cpp \
     abstract/QEmbedableButton.cpp
 
+# Auto discovering stuffs
+GEN_PLUGINS_HEADERS = generated/pluginsHeaders.h
+GEN_PLUGINS_NEW = generated/pluginsNew.h
+
+# Cleanup, using $$ on system is required so in QtCreator parser do execute the system call...
+win32 {
+    !exists($$dirname(GEN_PLUGINS_HEADERS)):Z = $$system(mkdir $$dirname(GEN_PLUGINS_HEADERS))
+    exists($${GEN_PLUGINS_HEADERS}):Z = $$system(del $${GEN_PLUGINS_HEADERS})
+    exists($${GEN_PLUGINS_NEW}):Z = $$system(del $${GEN_PLUGINS_NEW})
+} else {
+    !exists($$dirname(GEN_PLUGINS_HEADERS)):Z = $$system(mkdir -p $$dirname(GEN_PLUGINS_HEADERS))
+    exists($${GEN_PLUGINS_HEADERS}):Z = $$system(rm ./$${GEN_PLUGINS_HEADERS})
+    exists($${GEN_PLUGINS_NEW}):Z = $$system(rm ./$${GEN_PLUGINS_NEW})
+}
+
 # Auto discover project include files
 projectFiles = $$files(*.pri, true)
 for(projectFile, projectFiles) {
-    include($$projectFile)
+    include($${projectFile})
 }
 
 # Auto discovered plugins classes
 sourceFiles = $$files(*Plugin.*, true)
 for(sourceFile, sourceFiles) {
     sourceFileSuffix = $$section(sourceFile, ., -1)
-    isEqual(sourceFileSuffix, h):HEADERS *= $$sourceFile
-    isEqual(sourceFileSuffix, cpp):SOURCES *= $$sourceFile
+    isEqual(sourceFileSuffix, cpp):SOURCES *= $${sourceFile}
+    isEqual(sourceFileSuffix, h) {
+        HEADERS *= $${sourceFile}
+        # Using $$ on system is required so in QtCreator parser do execute the system call...
+        baseName = $$basename(sourceFile)
+        Z = $$system(echo \"$${LITERAL_HASH}include \\\"$${baseName}\\\"\" >> $${GEN_PLUGINS_HEADERS})
+        Z = $$system(echo \"m_widgets.append(new $$section(baseName, ., 0, 0)(this));\" >> $${GEN_PLUGINS_NEW})
+    }
 }
 
 target.path = $$[QT_INSTALL_PLUGINS]/designer
