@@ -1,7 +1,5 @@
 #include "QColorLineEdit.h"
 
-#include <QRegExpValidator>
-
 class QColorLineEditPrivate : public QObject
 {
     Q_OBJECT
@@ -14,19 +12,20 @@ public:
         Q_ASSERT(widget);
 
         widget->setDefaultAction(action);
+        widget->setText(action->colorName(action->color()));
         updateValidator();
 
         connect(widget, SIGNAL(textEdited(QString)), this, SLOT(textEdited(QString)));
         connect(widget, SIGNAL(editingFinished()), this, SLOT(editingFinished()));
-        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
+        connect(action, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
     }
 
     void updateValidator() {
         if (action->options().testFlag(QColorAction::ShowAlphaChannel)) {
-            widget->setValidator(new QRegExpValidator(QRegExp(QLatin1String("#[A-Fa-f0-9]{2,8}")), this));
+            widget->setInputMask(QLatin1String("\\#HHHhhhhh"));
         }
         else {
-            widget->setValidator(new QRegExpValidator(QRegExp(QLatin1String("#[A-Fa-f0-9]{2,6}")), this));
+            widget->setInputMask(QLatin1String("\\#HHHhhh"));
         }
     }
 
@@ -52,6 +51,11 @@ public slots:
             action->setIcon(action->colorIcon(action->color()));
             widget->setText(action->colorName(action->color()));
         }
+    }
+
+    void colorChanged(const QColor &color) {
+        widget->setText(action->colorName(action->color()));
+        emit widget->colorChanged(color);
     }
 
 public:

@@ -64,15 +64,15 @@ QString QColorComboBoxPlugin::domXml() const
 {
     return QLatin1String(
         "<widget class=\"QColorComboBox\" name=\"colorComboBox\">\n"
-            "<property name=\"colorNames\">\n"
+            "<property name=\"colorListNames\">\n"
             "<stringlist>\n"
              "<string>#ff0000</string>\n"
              "<string>#00ff00</string>\n"
              "<string>#0000ff</string>\n"
             "</stringlist>\n"
            "</property>\n"
-           "<property name=\"currentIndex\">\n"
-            "<number>0</number>\n"
+           "<property name=\"currentColorName\">\n"
+            "<string>#00ff00</string>\n"
            "</property>\n"
         "</widget>\n"
     );

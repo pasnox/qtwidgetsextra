@@ -20,17 +20,17 @@ public:
 public:
     QColorListModel *object;
     QColorListModel::NameFormat nameFormat;
-    QList<QColor> colors;
+    QStringList colors;
 };
 
-static bool ascendingLessThan(const QPair<QColor, int> &s1, const QPair<QColor, int> &s2)
+static bool ascendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2)
 {
-    return s1.first.name(QColor::HexArgb) < s2.first.name(QColor::HexArgb);
+    return s1.first < s2.first;
 }
 
-static bool decendingLessThan(const QPair<QColor, int> &s1, const QPair<QColor, int> &s2)
+static bool decendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2)
 {
-    return s1.first.name(QColor::HexArgb) > s2.first.name(QColor::HexArgb);
+    return s1.first > s2.first;
 }
 
 QColorListModel::QColorListModel(QObject *parent)
@@ -39,10 +39,23 @@ QColorListModel::QColorListModel(QObject *parent)
 {
 }
 
-QColorListModel::QColorListModel(const QList<QColor> &colors, QObject *parent)
+QColorListModel::QColorListModel(const QStringList &colorListNames, QObject *parent)
     : QAbstractListModel(parent)
     , d(new QColorListModelPrivate(this))
 {
+    d->colors = colorListNames;
+}
+
+QColorListModel::QColorListModel(const QList<QColor> &colorsList, QObject *parent)
+    : QAbstractListModel(parent)
+    , d(new QColorListModelPrivate(this))
+{
+    QStringList colors;
+
+    foreach (const QColor &color, colorsList) {
+        colors << color.name(QColor::HexArgb);
+    }
+
     d->colors = colors;
 }
 
@@ -70,11 +83,14 @@ QVariant QColorListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
-    if (role == Qt::DisplayRole || role == Qt::EditRole) {
-        return d->colors.at(index.row()).name(QColor::NameFormat(d->nameFormat));
+    if (role == Qt::DecorationRole) {
+        return QtWidgetsExtraCache::cachedIconColor(QColor(d->colors.at(index.row())), QSize(64, 64));
     }
-    else if (role == Qt::DecorationRole) {
-        return QtWidgetsExtraCache::cachedIconColor(d->colors.at(index.row()), QSize(64, 64));
+    else if (role == Qt::DisplayRole || role == Qt::EditRole) {
+        return QColor(d->colors.at(index.row())).name(QColor::NameFormat(d->nameFormat));
+    }
+    else if (role == QColorListModel::HexArgbName) {
+        return d->colors.at(index.row());
     }
 
     return QVariant();
@@ -93,7 +109,7 @@ bool QColorListModel::setData(const QModelIndex &index, const QVariant &value, i
 {
     if (index.row() >= 0 && index.row() < d->colors.size()
         && (role == Qt::EditRole || role == Qt::DisplayRole)) {
-        d->colors.replace(index.row(), value.value<QColor>());
+        d->colors.replace(index.row(), value.value<QColor>().name(QColor::HexArgb));
         emit dataChanged(index, index, QVector<int>() << role);
         return true;
     }
@@ -110,7 +126,7 @@ bool QColorListModel::insertRows(int row, int count, const QModelIndex &parent)
     beginInsertRows(QModelIndex(), row, row +count -1);
 
     for (int r = 0; r < count; ++r) {
-        d->colors.insert(row, QColor());
+        d->colors.insert(row, QString());
     }
 
     endInsertRows();
@@ -139,9 +155,9 @@ void QColorListModel::sort(int, Qt::SortOrder order)
 {
     emit layoutAboutToBeChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
 
-    QList<QPair<QColor, int> > list;
+    QList<QPair<QString, int> > list;
     for (int i = 0; i < d->colors.count(); ++i) {
-        list.append(QPair<QColor, int>(d->colors.at(i), i));
+        list.append(QPair<QString, int>(d->colors.at(i), i));
     }
 
     if (order == Qt::AscendingOrder) {
@@ -187,38 +203,46 @@ void QColorListModel::setNameFormat(QColorListModel::NameFormat nameFormat)
     }
 }
 
-QList<QColor> QColorListModel::colorList() const
+QStringList QColorListModel::colorListNames() const
 {
     return d->colors;
 }
 
-void QColorListModel::setColorList(const QList<QColor> &colors)
+void QColorListModel::setColorListNames(const QStringList &colorListNames)
 {
+    QStringList colors;
+
+    foreach (const QString &colorName, colorListNames) {
+        colors << QColor(colorName).name(QColor::HexArgb);
+    }
+
     emit beginResetModel();
     d->colors = colors;
     emit endResetModel();
 }
 
-QStringList QColorListModel::colorListNames() const
+QList<QColor> QColorListModel::colorsList() const
 {
-    QStringList colors;
+    QList<QColor> colors;
 
-    for (int i = 0; i < rowCount(); i++) {
-        colors << data(index(i, 0), Qt::DisplayRole).toString();
+    foreach (const QString &colorName, d->colors) {
+        colors << QColor(colorName);
     }
 
     return colors;
 }
 
-void QColorListModel::setColorListNames(const QStringList &colorListNames)
+void QColorListModel::setColorsList(const QList<QColor> &colorsList)
 {
-    QList<QColor> colors;
+    QStringList colors;
 
-    foreach (const QString &colorName, colorListNames) {
-        colors << QColor(colorName);
+    foreach (const QColor &color, colorsList) {
+        colors << color.name(QColor::HexArgb);
     }
 
-    setColorList(colors);
+    emit beginResetModel();
+    d->colors = colors;
+    emit endResetModel();
 }
 
 #include "QColorListModel.moc"

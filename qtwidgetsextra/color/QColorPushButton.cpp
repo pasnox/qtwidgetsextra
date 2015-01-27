@@ -1,7 +1,5 @@
 #include "QColorPushButton.h"
 
-#include <QToolButton>
-
 class QColorPushButtonPrivate : public QObject
 {
     Q_OBJECT
@@ -14,8 +12,6 @@ public:
         Q_ASSERT(widget);
 
         action->setProperty("button", QVariant::fromValue(widget));
-        widget->setFixedHeight(QToolButton().sizeHint().height());
-        widget->setIconSize(QSize(widget->height(), widget->height()) -QSize(6, 6));
         syncButtonWithAction();
 
         connect(widget, SIGNAL(clicked()), action, SLOT(trigger()));

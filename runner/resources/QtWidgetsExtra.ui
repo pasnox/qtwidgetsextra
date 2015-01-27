@@ -24,7 +24,7 @@
        <string>Buttons &amp;&amp; LineEdit</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0" rowspan="2">
+       <item row="0" column="0" rowspan="3">
         <widget class="QGroupBox" name="groupBox">
          <property name="minimumSize">
           <size>
@@ -33,7 +33,7 @@
           </size>
          </property>
          <property name="title">
-          <string>File Dialog</string>
+          <string>File Widgets</string>
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
@@ -175,10 +175,36 @@
          </layout>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="0" column="2" rowspan="4">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>200</width>
+           <height>318</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>298</width>
+           <height>116</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1" rowspan="3">
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>Color Dialog</string>
+          <string>Color Widgets</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
@@ -207,71 +233,73 @@
            </widget>
           </item>
           <item row="1" column="0" colspan="2">
-           <widget class="QColorLineEdit" name="colorLineEdit"/>
+           <widget class="QColorLineEdit" name="colorLineEdit">
+            <property name="color">
+             <color>
+              <red>69</red>
+              <green>166</green>
+              <blue>201</blue>
+             </color>
+            </property>
+            <property name="options">
+             <set>QColorAction::ShowAlphaChannel</set>
+            </property>
+           </widget>
           </item>
           <item row="2" column="0" colspan="2">
            <widget class="QColorComboBox" name="colorComboBox">
             <property name="editable">
              <bool>true</bool>
             </property>
-            <property name="currentIndex">
-             <number>3</number>
-            </property>
-            <property name="nameFormat">
-             <enum>QColorListModel::HexRgb</enum>
-            </property>
-            <property name="colorNames">
+            <property name="colorListNames">
              <stringlist>
-              <string>#ccffdd</string>
-              <string>#0000ff</string>
-              <string>#ddccdd</string>
-              <string>#ff0000</string>
-              <string>#00ff00</string>
+              <string>#ffccffdd</string>
+              <string>#ff0000ff</string>
+              <string>#ffddccdd</string>
+              <string>#ffff0000</string>
+              <string>#ff00ff00</string>
              </stringlist>
+            </property>
+            <property name="currentColorName">
+             <string>#ffddccdd</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="2">
+           <widget class="QColorListView" name="colorListView">
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="colorListNames">
+             <stringlist>
+              <string>#ffff0000</string>
+              <string>#ff00ff00</string>
+              <string>#ff0000ff</string>
+             </stringlist>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2">
+           <widget class="QColorComboBox" name="colorComboBox_2">
+            <property name="colorListNames">
+             <stringlist>
+              <string>#ffccffdd</string>
+              <string>#ff0000ff</string>
+              <string>#ffddccdd</string>
+              <string>#ffff0000</string>
+              <string>#ff00ff00</string>
+             </stringlist>
+            </property>
+            <property name="currentColorName">
+             <string>#ffddccdd</string>
             </property>
            </widget>
           </item>
          </layout>
         </widget>
-       </item>
-       <item row="0" column="2" rowspan="3">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>200</width>
-           <height>318</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="1" column="1">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>116</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="0" colspan="2">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>298</width>
-           <height>116</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -334,6 +362,11 @@
    <class>QColorComboBox</class>
    <extends>QComboBox</extends>
    <header>QColorComboBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QColorListView</class>
+   <extends>QListView</extends>
+   <header>QColorListView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
