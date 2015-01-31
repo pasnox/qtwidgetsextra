@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
+    <width>400</width>
     <height>400</height>
    </rect>
   </property>
@@ -19,294 +19,259 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="wButtonLineEdit">
+     <widget class="QWidget" name="wFileDialog">
       <attribute name="title">
-       <string>Buttons &amp;&amp; LineEdit</string>
+       <string>File Dialog</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0" rowspan="3">
-        <widget class="QGroupBox" name="groupBox">
-         <property name="minimumSize">
-          <size>
-           <width>300</width>
-           <height>0</height>
-          </size>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="1">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Click the button</string>
          </property>
-         <property name="title">
-          <string>File Widgets</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QOpenFileButton" name="openFileButton">
-            <property name="caption">
-             <string>Open file button</string>
-            </property>
-            <property name="directory">
-             <string notr="true">/opt</string>
-            </property>
-            <property name="filter">
-             <stringlist>
-              <string>Images (*.png)</string>
-              <string>Sound (*.wav)</string>
-              <string>All (*)</string>
-             </stringlist>
-            </property>
-            <property name="options">
-             <set>QFileDialog::DontConfirmOverwrite|QFileDialog::DontResolveSymlinks|QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet|QFileDialog::HideNameFilterDetails</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Click the button</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="2">
-           <widget class="QOpenFileLineEdit" name="openFileLineEdit">
-            <property name="placeholderText">
-             <string>Click the button to choose an opening file</string>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-            <property name="filePath">
-             <string notr="true">test.png</string>
-            </property>
-            <property name="caption">
-             <string>Open file line edit</string>
-            </property>
-            <property name="directory">
-             <string notr="true">/opt</string>
-            </property>
-            <property name="filter">
-             <stringlist>
-              <string>Images (*.png)</string>
-              <string>Sounds (*.wav)</string>
-              <string>All (*)</string>
-             </stringlist>
-            </property>
-            <property name="options">
-             <set>QFileDialog::HideNameFilterDetails|QFileDialog::ReadOnly</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QSaveFileButton" name="saveFileButton">
-            <property name="caption">
-             <string>Save file button</string>
-            </property>
-            <property name="directory">
-             <string notr="true">/opt</string>
-            </property>
-            <property name="filter">
-             <stringlist>
-              <string>All (*)</string>
-             </stringlist>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Click the button</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QSaveFileLineEdit" name="saveFileLineEdit">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-            <property name="placeholderText">
-             <string>Click the button to choose a saving file</string>
-            </property>
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-            <property name="filePath">
-             <string notr="true">test.png</string>
-            </property>
-            <property name="caption">
-             <string>Save file line edit</string>
-            </property>
-            <property name="directory">
-             <string notr="true">/opt</string>
-            </property>
-            <property name="filter">
-             <stringlist/>
-            </property>
-            <property name="options">
-             <set>QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet</set>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QOpenFolderButton" name="openFolderButton">
-            <property name="filePath">
-             <string notr="true">test</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Click the button</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="0" colspan="2">
-           <widget class="QOpenFolderLineEdit" name="openFolderLineEdit">
-            <property name="clearButtonEnabled">
-             <bool>true</bool>
-            </property>
-            <property name="filePath">
-             <string notr="true">/opt</string>
-            </property>
-            <property name="caption">
-             <string>Choose an existing folder</string>
-            </property>
-            <property name="directory">
-             <string notr="true">/opt</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
-       <item row="0" column="2" rowspan="4">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+       <item row="1" column="0" colspan="2">
+        <widget class="QOpenFileLineEdit" name="openFileLineEdit">
+         <property name="placeholderText">
+          <string>Click the button to choose an opening file</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>200</width>
-           <height>318</height>
-          </size>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
-        </spacer>
+         <property name="filePath">
+          <string notr="true">test.png</string>
+         </property>
+         <property name="caption">
+          <string>Open file line edit</string>
+         </property>
+         <property name="directory">
+          <string notr="true">/opt</string>
+         </property>
+         <property name="filter">
+          <stringlist>
+           <string>Images (*.png)</string>
+           <string>Sounds (*.wav)</string>
+           <string>All (*)</string>
+          </stringlist>
+         </property>
+         <property name="options">
+          <set>QFileDialog::HideNameFilterDetails|QFileDialog::ReadOnly</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QSaveFileButton" name="saveFileButton">
+         <property name="caption">
+          <string>Save file button</string>
+         </property>
+         <property name="directory">
+          <string notr="true">/opt</string>
+         </property>
+         <property name="filter">
+          <stringlist>
+           <string>All (*)</string>
+          </stringlist>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
+        <widget class="QOpenFolderLineEdit" name="openFolderLineEdit">
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="filePath">
+          <string notr="true">/opt</string>
+         </property>
+         <property name="caption">
+          <string>Choose an existing folder</string>
+         </property>
+         <property name="directory">
+          <string notr="true">/opt</string>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0" colspan="2">
-        <spacer name="verticalSpacer_3">
+        <widget class="QSaveFileLineEdit" name="saveFileLineEdit">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Click the button to choose a saving file</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="filePath">
+          <string notr="true">test.png</string>
+         </property>
+         <property name="caption">
+          <string>Save file line edit</string>
+         </property>
+         <property name="directory">
+          <string notr="true">/opt</string>
+         </property>
+         <property name="filter">
+          <stringlist/>
+         </property>
+         <property name="options">
+          <set>QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QOpenFolderButton" name="openFolderButton">
+         <property name="filePath">
+          <string notr="true">test</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Click the button</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QOpenFileButton" name="openFileButton">
+         <property name="caption">
+          <string>Open file button</string>
+         </property>
+         <property name="directory">
+          <string notr="true">/opt</string>
+         </property>
+         <property name="filter">
+          <stringlist>
+           <string>Images (*.png)</string>
+           <string>Sound (*.wav)</string>
+           <string>All (*)</string>
+          </stringlist>
+         </property>
+         <property name="options">
+          <set>QFileDialog::DontConfirmOverwrite|QFileDialog::DontResolveSymlinks|QFileDialog::DontUseNativeDialog|QFileDialog::DontUseSheet|QFileDialog::HideNameFilterDetails</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Click the button</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" colspan="2">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>298</width>
-           <height>116</height>
+           <width>20</width>
+           <height>40</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="0" column="1" rowspan="3">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Color Widgets</string>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="wColor">
+      <attribute name="title">
+       <string>Color</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QColorPushButton" name="colorPushButton">
+         <property name="color">
+          <color>
+           <red>72</red>
+           <green>81</green>
+           <blue>230</blue>
+          </color>
          </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QColorPushButton" name="colorPushButton">
-            <property name="color">
-             <color>
-              <red>72</red>
-              <green>81</green>
-              <blue>230</blue>
-             </color>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QColorToolButton" name="colorToolButton">
-            <property name="toolButtonStyle">
-             <enum>Qt::ToolButtonIconOnly</enum>
-            </property>
-            <property name="color">
-             <color>
-              <red>63</red>
-              <green>21</green>
-              <blue>223</blue>
-             </color>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="2">
-           <widget class="QColorLineEdit" name="colorLineEdit">
-            <property name="color">
-             <color>
-              <red>69</red>
-              <green>166</green>
-              <blue>201</blue>
-             </color>
-            </property>
-            <property name="options">
-             <set>QColorAction::ShowAlphaChannel</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <widget class="QColorComboBox" name="colorComboBox">
-            <property name="editable">
-             <bool>true</bool>
-            </property>
-            <property name="colorListNames">
-             <stringlist>
-              <string>#ffccffdd</string>
-              <string>#ff0000ff</string>
-              <string>#ffddccdd</string>
-              <string>#ffff0000</string>
-              <string>#ff00ff00</string>
-             </stringlist>
-            </property>
-            <property name="currentColorName">
-             <string>#ffddccdd</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0" colspan="2">
-           <widget class="QColorListView" name="colorListView">
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="colorListNames">
-             <stringlist>
-              <string>#ffff0000</string>
-              <string>#ff00ff00</string>
-              <string>#ff0000ff</string>
-             </stringlist>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QColorComboBox" name="colorComboBox_2">
-            <property name="colorListNames">
-             <stringlist>
-              <string>#ffccffdd</string>
-              <string>#ff0000ff</string>
-              <string>#ffddccdd</string>
-              <string>#ffff0000</string>
-              <string>#ff00ff00</string>
-             </stringlist>
-            </property>
-            <property name="currentColorName">
-             <string>#ffddccdd</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QColorToolButton" name="colorToolButton">
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonIconOnly</enum>
+         </property>
+         <property name="color">
+          <color>
+           <red>63</red>
+           <green>21</green>
+           <blue>223</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QColorLineEdit" name="colorLineEdit">
+         <property name="color">
+          <color>
+           <red>69</red>
+           <green>166</green>
+           <blue>201</blue>
+          </color>
+         </property>
+         <property name="options">
+          <set>QColorAction::ShowAlphaChannel</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QColorComboBox" name="colorComboBox">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="colorListNames">
+          <stringlist>
+           <string>#ffccffdd</string>
+           <string>#ff0000ff</string>
+           <string>#ffddccdd</string>
+           <string>#ffff0000</string>
+           <string>#ff00ff00</string>
+          </stringlist>
+         </property>
+         <property name="currentColorName">
+          <string>#ffddccdd</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" colspan="2">
+        <widget class="QColorComboBox" name="colorComboBox_2">
+         <property name="colorListNames">
+          <stringlist>
+           <string>#ffccffdd</string>
+           <string>#ff0000ff</string>
+           <string>#ffddccdd</string>
+           <string>#ffff0000</string>
+           <string>#ff00ff00</string>
+          </stringlist>
+         </property>
+         <property name="currentColorName">
+          <string>#ffddccdd</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="2">
+        <widget class="QColorListView" name="colorListView">
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="colorListNames">
+          <stringlist>
+           <string>#ffff0000</string>
+           <string>#ff00ff00</string>
+           <string>#ff0000ff</string>
+          </stringlist>
+         </property>
         </widget>
        </item>
       </layout>
-     </widget>
-     <widget class="QWidget" name="wXXX">
-      <attribute name="title">
-       <string>XXX</string>
-      </attribute>
      </widget>
     </widget>
    </item>
@@ -314,39 +279,19 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QOpenFileButton</class>
-   <extends>QToolButton</extends>
-   <header>QOpenFileButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QOpenFileLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>QOpenFileLineEdit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QSaveFileButton</class>
-   <extends>QToolButton</extends>
-   <header>QSaveFileButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QSaveFileLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>QSaveFileLineEdit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QOpenFolderButton</class>
-   <extends>QToolButton</extends>
-   <header>QOpenFolderButton.h</header>
-  </customwidget>
-  <customwidget>
-   <class>QOpenFolderLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>QOpenFolderLineEdit.h</header>
+   <class>QColorComboBox</class>
+   <extends>QComboBox</extends>
+   <header>QColorComboBox.h</header>
   </customwidget>
   <customwidget>
    <class>QColorLineEdit</class>
    <extends>QLineEdit</extends>
    <header>QColorLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QColorListView</class>
+   <extends>QListView</extends>
+   <header>QColorListView.h</header>
   </customwidget>
   <customwidget>
    <class>QColorPushButton</class>
@@ -359,34 +304,38 @@
    <header>QColorToolButton.h</header>
   </customwidget>
   <customwidget>
-   <class>QColorComboBox</class>
-   <extends>QComboBox</extends>
-   <header>QColorComboBox.h</header>
+   <class>QOpenFileButton</class>
+   <extends>QToolButton</extends>
+   <header>QOpenFileButton.h</header>
   </customwidget>
   <customwidget>
-   <class>QColorListView</class>
-   <extends>QListView</extends>
-   <header>QColorListView.h</header>
+   <class>QOpenFileLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QOpenFileLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QOpenFolderButton</class>
+   <extends>QToolButton</extends>
+   <header>QOpenFolderButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QOpenFolderLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QOpenFolderLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSaveFileButton</class>
+   <extends>QToolButton</extends>
+   <header>QSaveFileButton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSaveFileLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>QSaveFileLineEdit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>openFileButton</sender>
-   <signal>filePathChanged(QString)</signal>
-   <receiver>label</receiver>
-   <slot>setText(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>50</x>
-     <y>97</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>133</x>
-     <y>97</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>saveFileButton</sender>
    <signal>filePathChanged(QString)</signal>
@@ -416,6 +365,22 @@
     <hint type="destinationlabel">
      <x>150</x>
      <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openFileButton</sender>
+   <signal>filePathChanged(QString)</signal>
+   <receiver>label</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>97</y>
     </hint>
    </hints>
   </connection>
