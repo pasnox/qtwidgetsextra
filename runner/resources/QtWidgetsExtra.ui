@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>400</height>
+    <width>600</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -273,6 +273,41 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="wFileSystem">
+      <attribute name="title">
+       <string>File System</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="filesystemTreeViewLabel"/>
+       </item>
+       <item>
+        <widget class="QFileSystemTreeView" name="filesystemTreeView">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+         <property name="nameFilters">
+          <stringlist>
+           <string>*.jpg</string>
+          </stringlist>
+         </property>
+         <property name="visibleSections">
+          <set>QFileSystemTreeView::NameSection|QFileSystemTreeView::TypeSection</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="filesystemListViewLabel"/>
+       </item>
+       <item>
+        <widget class="QFileSystemListView" name="filesystemListView">
+         <property name="browsable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="wAdditional">
       <attribute name="title">
        <string>Additional</string>
@@ -524,6 +559,16 @@
    <extends>QLineEdit</extends>
    <header>QSaveFileLineEdit.h</header>
   </customwidget>
+  <customwidget>
+   <class>QFileSystemListView</class>
+   <extends>QListView</extends>
+   <header>QFileSystemListView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QFileSystemTreeView</class>
+   <extends>QTreeView</extends>
+   <header>QFileSystemTreeView.h</header>
+  </customwidget>
  </customwidgets>
  <resources/>
  <connections>
@@ -534,12 +579,12 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>159</y>
+     <x>40</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
-     <x>158</x>
-     <y>159</y>
+     <x>168</x>
+     <y>125</y>
     </hint>
    </hints>
   </connection>
@@ -550,12 +595,12 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>52</x>
-     <y>221</y>
+     <x>40</x>
+     <y>183</y>
     </hint>
     <hint type="destinationlabel">
-     <x>150</x>
-     <y>221</y>
+     <x>160</x>
+     <y>183</y>
     </hint>
    </hints>
   </connection>
@@ -566,12 +611,44 @@
    <slot>setText(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>97</y>
+     <x>40</x>
+     <y>67</y>
     </hint>
     <hint type="destinationlabel">
-     <x>133</x>
-     <y>97</y>
+     <x>143</x>
+     <y>67</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>filesystemTreeView</sender>
+   <signal>rootPathChanged(QString)</signal>
+   <receiver>filesystemTreeViewLabel</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>138</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>filesystemListView</sender>
+   <signal>rootPathChanged(QString)</signal>
+   <receiver>filesystemListViewLabel</receiver>
+   <slot>setText(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>104</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>99</x>
+     <y>386</y>
     </hint>
    </hints>
   </connection>
