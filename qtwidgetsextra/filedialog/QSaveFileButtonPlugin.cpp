@@ -71,4 +71,3 @@ QString QSaveFileButtonPlugin::includeFile() const
 {
     return QLatin1String("QSaveFileButton.h");
 }
-

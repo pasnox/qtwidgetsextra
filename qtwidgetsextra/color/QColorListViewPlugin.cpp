@@ -79,4 +79,3 @@ QString QColorListViewPlugin::includeFile() const
 {
     return QLatin1String("QColorListView.h");
 }
-

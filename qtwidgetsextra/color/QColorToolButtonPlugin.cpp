@@ -69,4 +69,3 @@ QString QColorToolButtonPlugin::includeFile() const
 {
     return QLatin1String("QColorToolButton.h");
 }
-

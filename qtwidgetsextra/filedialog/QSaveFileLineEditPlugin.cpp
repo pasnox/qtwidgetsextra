@@ -71,4 +71,3 @@ QString QSaveFileLineEditPlugin::includeFile() const
 {
     return QLatin1String("QSaveFileLineEdit.h");
 }
-

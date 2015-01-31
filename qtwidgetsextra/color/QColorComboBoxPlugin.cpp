@@ -82,4 +82,3 @@ QString QColorComboBoxPlugin::includeFile() const
 {
     return QLatin1String("QColorComboBox.h");
 }
-

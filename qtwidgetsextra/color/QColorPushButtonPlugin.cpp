@@ -69,4 +69,3 @@ QString QColorPushButtonPlugin::includeFile() const
 {
     return QLatin1String("QColorPushButton.h");
 }
-

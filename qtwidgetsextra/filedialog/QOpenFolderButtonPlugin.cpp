@@ -71,4 +71,3 @@ QString QOpenFolderButtonPlugin::includeFile() const
 {
     return QLatin1String("QOpenFolderButton.h");
 }
-

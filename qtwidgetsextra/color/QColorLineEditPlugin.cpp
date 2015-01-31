@@ -69,4 +69,3 @@ QString QColorLineEditPlugin::includeFile() const
 {
     return QLatin1String("QColorLineEdit.h");
 }
-

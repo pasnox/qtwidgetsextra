@@ -71,4 +71,3 @@ QString QOpenFolderLineEditPlugin::includeFile() const
 {
     return QLatin1String("QOpenFolderLineEdit.h");
 }
-
