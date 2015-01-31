@@ -42,7 +42,7 @@ QString QColorToolButtonPlugin::group() const
 
 QIcon QColorToolButtonPlugin::icon() const
 {
-    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/toolbutton.png")));
+    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/toolbutton.png"));
 }
 
 QString QColorToolButtonPlugin::toolTip() const

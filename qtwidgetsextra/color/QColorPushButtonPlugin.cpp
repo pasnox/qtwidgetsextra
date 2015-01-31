@@ -42,7 +42,7 @@ QString QColorPushButtonPlugin::group() const
 
 QIcon QColorPushButtonPlugin::icon() const
 {
-    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/pushbutton.png")));
+    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/pushbutton.png"));
 }
 
 QString QColorPushButtonPlugin::toolTip() const

@@ -42,7 +42,7 @@ QString QColorComboBoxPlugin::group() const
 
 QIcon QColorComboBoxPlugin::icon() const
 {
-    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/combobox.png")));
+    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/combobox.png"));
 }
 
 QString QColorComboBoxPlugin::toolTip() const

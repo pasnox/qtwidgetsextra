@@ -42,7 +42,7 @@ QString QColorLineEditPlugin::group() const
 
 QIcon QColorLineEditPlugin::icon() const
 {
-    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/lineedit.png")));
+    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/lineedit.png"));
 }
 
 QString QColorLineEditPlugin::toolTip() const

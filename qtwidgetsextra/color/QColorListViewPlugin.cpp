@@ -42,7 +42,7 @@ QString QColorListViewPlugin::group() const
 
 QIcon QColorListViewPlugin::icon() const
 {
-    return QIcon(QString(QLatin1String(":/qt-project.org/formeditor/images/widgets/listbox.png")));
+    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/listbox.png"));
 }
 
 QString QColorListViewPlugin::toolTip() const
