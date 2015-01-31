@@ -7,8 +7,8 @@
 
 QOpenFolderLineEditPlugin::QOpenFolderLineEditPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QOpenFolderLineEditPlugin::initialize(QDesignerFormEditorInterface * /* core */)

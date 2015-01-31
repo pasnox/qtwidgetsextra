@@ -5,8 +5,8 @@
 
 QColorLineEditPlugin::QColorLineEditPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QColorLineEditPlugin::initialize(QDesignerFormEditorInterface * /* core */)

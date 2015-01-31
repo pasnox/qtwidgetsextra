@@ -7,8 +7,8 @@
 
 QOpenFileButtonPlugin::QOpenFileButtonPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QOpenFileButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)

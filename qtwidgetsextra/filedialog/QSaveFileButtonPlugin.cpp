@@ -7,8 +7,8 @@
 
 QSaveFileButtonPlugin::QSaveFileButtonPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QSaveFileButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)

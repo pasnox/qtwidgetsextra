@@ -5,8 +5,8 @@
 
 QColorPushButtonPlugin::QColorPushButtonPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QColorPushButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)

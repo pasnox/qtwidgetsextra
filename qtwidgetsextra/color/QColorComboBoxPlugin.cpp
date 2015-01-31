@@ -5,8 +5,8 @@
 
 QColorComboBoxPlugin::QColorComboBoxPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QColorComboBoxPlugin::initialize(QDesignerFormEditorInterface * /* core */)

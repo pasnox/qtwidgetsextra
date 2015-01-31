@@ -7,8 +7,8 @@
 
 QSaveFileLineEditPlugin::QSaveFileLineEditPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QSaveFileLineEditPlugin::initialize(QDesignerFormEditorInterface * /* core */)

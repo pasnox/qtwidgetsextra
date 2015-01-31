@@ -5,8 +5,8 @@
 
 QColorListViewPlugin::QColorListViewPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QColorListViewPlugin::initialize(QDesignerFormEditorInterface * /* core */)

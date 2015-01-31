@@ -7,8 +7,8 @@
 
 QOpenFolderButtonPlugin::QOpenFolderButtonPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QOpenFolderButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)

@@ -5,8 +5,8 @@
 
 QColorToolButtonPlugin::QColorToolButtonPlugin(QObject *parent)
     : QObject(parent)
+    , m_initialized(false)
 {
-    m_initialized = false;
 }
 
 void QColorToolButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)
