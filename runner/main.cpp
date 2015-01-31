@@ -1,5 +1,6 @@
 #include <QCoreApplication>
 #include <QLibraryInfo>
+#include <QSharedPointer>
 #include <QProcess>
 #include <QDir>
 
@@ -19,18 +20,18 @@ int main(int argc, char** argv) {
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     env.insert(QLatin1String("QT_PLUGIN_PATH"), appDirPath);
 
-    QProcess* process = new QProcess(app.data());
-    process->setProcessChannelMode(QProcess::ForwardedChannels);
-    process->setProcessEnvironment(env);
-    process->setProgram(designer);
-    process->setArguments(QStringList(uiFile));
+    QProcess process;
+    process.setProcessChannelMode(QProcess::ForwardedChannels);
+    process.setProcessEnvironment(env);
+    process.setProgram(designer);
+    process.setArguments(QStringList(uiFile));
 
     qDebug("%s: Running %s with file %s", Q_FUNC_INFO, qPrintable(designer), qPrintable(uiFile));
     qDebug("QT_PLUGIN_PATH=%s && %s %s", qPrintable(appDirPath), qPrintable(designer), qPrintable(uiFile));
 
-    QObject::connect(process, SIGNAL(error(QProcess::ProcessError)), app.data(), SLOT(quit()));
-    QObject::connect(process, SIGNAL(finished(int, QProcess::ExitStatus)), app.data(), SLOT(quit()));
+    QObject::connect(&process, SIGNAL(error(QProcess::ProcessError)), app.data(), SLOT(quit()));
+    QObject::connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), app.data(), SLOT(quit()));
 
-    process->start();
+    process.start();
     return app->exec();
 }
