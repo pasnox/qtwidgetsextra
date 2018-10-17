@@ -1,7 +1,7 @@
 #ifndef QSAVEFILEBUTTONPLUGIN_H
 #define QSAVEFILEBUTTONPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QSaveFileButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

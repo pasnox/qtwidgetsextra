@@ -1,7 +1,7 @@
 #ifndef QOPENFOLDERLINEEDITPLUGIN_H
 #define QOPENFOLDERLINEEDITPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QOpenFolderLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

@@ -1,7 +1,7 @@
 #ifndef QOPENFILELINEEDITPLUGIN_H
 #define QOPENFILELINEEDITPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QOpenFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

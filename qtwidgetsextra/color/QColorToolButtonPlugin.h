@@ -1,7 +1,7 @@
 #ifndef QCOLORTOOLBUTTONPLUGIN_H
 #define QCOLORTOOLBUTTONPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QColorToolButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

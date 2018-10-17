@@ -1,7 +1,7 @@
 #ifndef QCOLORLINEEDITPLUGIN_H
 #define QCOLORLINEEDITPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QColorLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

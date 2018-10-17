@@ -1,7 +1,7 @@
 #ifndef QCOLORCOMBOBOXPLUGIN_H
 #define QCOLORCOMBOBOXPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QColorComboBoxPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

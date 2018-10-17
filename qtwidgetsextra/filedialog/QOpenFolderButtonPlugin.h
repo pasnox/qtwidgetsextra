@@ -1,7 +1,7 @@
 #ifndef QOPENFOLDERBUTTONPLUGIN_H
 #define QOPENFOLDERBUTTONPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QOpenFolderButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

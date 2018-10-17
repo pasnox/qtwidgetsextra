@@ -1,7 +1,7 @@
 #ifndef QOPENFILEBUTTONPLUGIN_H
 #define QOPENFILEBUTTONPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QOpenFileButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

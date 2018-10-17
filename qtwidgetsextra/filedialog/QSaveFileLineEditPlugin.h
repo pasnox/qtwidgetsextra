@@ -1,7 +1,7 @@
 #ifndef QSAVEFILELINEEDITPLUGIN_H
 #define QSAVEFILELINEEDITPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QSaveFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

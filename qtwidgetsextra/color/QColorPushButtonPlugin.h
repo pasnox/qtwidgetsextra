@@ -1,7 +1,7 @@
 #ifndef QCOLORPUSHBUTTONPLUGIN_H
 #define QCOLORPUSHBUTTONPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QColorPushButtonPlugin : public QObject, public QDesignerCustomWidgetInterface
 {

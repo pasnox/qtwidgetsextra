@@ -1,7 +1,7 @@
 #ifndef QCOLORLISTVIEWPLUGIN_H
 #define QCOLORLISTVIEWPLUGIN_H
 
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
 class QColorListViewPlugin : public QObject, public QDesignerCustomWidgetInterface
 {
