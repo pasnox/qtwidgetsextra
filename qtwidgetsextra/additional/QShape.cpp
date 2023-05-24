@@ -1,5 +1,7 @@
 #include "QShape.h"
 
+#include <QPainterPath>
+
 class QShapePrivate : public QObject {
     Q_OBJECT
 
