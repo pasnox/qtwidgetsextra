@@ -32,22 +32,22 @@ QWidget *QColorToolButtonPlugin::createWidget(QWidget *parent)
 
 QString QColorToolButtonPlugin::name() const
 {
-    return QLatin1String("QColorToolButton");
+    return QStringLiteral("QColorToolButton");
 }
 
 QString QColorToolButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Color");
+    return QStringLiteral("Qt Widgets Extra / Color");
 }
 
 QIcon QColorToolButtonPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/toolbutton.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/toolbutton.png"));
 }
 
 QString QColorToolButtonPlugin::toolTip() const
 {
-    return QLatin1String("A tool button that present a QColorDialog on click");
+    return QStringLiteral("A tool button that present a QColorDialog on click");
 }
 
 QString QColorToolButtonPlugin::whatsThis() const
@@ -62,10 +62,10 @@ bool QColorToolButtonPlugin::isContainer() const
 
 QString QColorToolButtonPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QColorToolButton\" name=\"colorToolButton\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QColorToolButton\" name=\"colorToolButton\">\n</widget>\n");
 }
 
 QString QColorToolButtonPlugin::includeFile() const
 {
-    return QLatin1String("QColorToolButton.h");
+    return QStringLiteral("QColorToolButton.h");
 }

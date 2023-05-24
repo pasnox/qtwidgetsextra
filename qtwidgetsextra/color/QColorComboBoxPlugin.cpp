@@ -32,22 +32,22 @@ QWidget *QColorComboBoxPlugin::createWidget(QWidget *parent)
 
 QString QColorComboBoxPlugin::name() const
 {
-    return QLatin1String("QColorComboBox");
+    return QStringLiteral("QColorComboBox");
 }
 
 QString QColorComboBoxPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Color");
+    return QStringLiteral("Qt Widgets Extra / Color");
 }
 
 QIcon QColorComboBoxPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/combobox.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/combobox.png"));
 }
 
 QString QColorComboBoxPlugin::toolTip() const
 {
-    return QLatin1String("A combo box that present a QColorListModel");
+    return QStringLiteral("A combo box that present a QColorListModel");
 }
 
 QString QColorComboBoxPlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QColorComboBoxPlugin::isContainer() const
 
 QString QColorComboBoxPlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QColorComboBox\" name=\"colorComboBox\">\n"
             "<property name=\"colorListNames\">\n"
             "<stringlist>\n"
@@ -80,5 +80,5 @@ QString QColorComboBoxPlugin::domXml() const
 
 QString QColorComboBoxPlugin::includeFile() const
 {
-    return QLatin1String("QColorComboBox.h");
+    return QStringLiteral("QColorComboBox.h");
 }

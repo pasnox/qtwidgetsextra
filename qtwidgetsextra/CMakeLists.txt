@@ -1,0 +1,161 @@
+# QtWidgetsExtra Library
+
+gateau_add_library(QtWidgetsExtraLib
+    AUTOMOC
+    AUTOUIC
+    AUTORCC
+    PROPERTIES
+        LIBRARY_OUTPUT_NAME
+            QtWidgetsExtra${QT_VERSION_MAJOR}
+     INCLUDE_DIRECTORIES
+        PRIVATE
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/abstract>
+    LINK_LIBRARIES
+        PUBLIC
+            Qt${QT_VERSION_MAJOR}::Widgets
+    HEADERS
+        QtWidgetsExtraCache.h
+        abstract/QAbstractButtonLineEdit.h
+        abstract/QEmbedableButton_p.h
+        additional/QShape.h
+        additional/QUpDownButton.h
+        additional/QCollapsibleFrame.h
+        buttongroupbox/QAbstractButtonListModel.h
+        buttongroupbox/QButtonGroupBox.h
+        color/QColorAction.h
+        color/QColorListModel.h
+        color/QColorLineEdit.h
+        color/QColorPushButton.h
+        color/QColorToolButton.h
+        color/QColorComboBox.h
+        color/QColorListView.h
+        filedialog/QFileAction.h
+        filedialog/QOpenFileLineEdit.h
+        filedialog/QOpenFileButton.h
+        filedialog/QOpenFolderLineEdit.h
+        filedialog/QOpenFolderButton.h
+        filedialog/QSaveFileLineEdit.h
+        filedialog/QSaveFileButton.h
+        filesystem/QFileSystemTreeView.h
+        filesystem/QFileSystemListView.h
+    SOURCES
+        QtWidgetsExtraCache.cpp
+        abstract/QAbstractButtonLineEdit.cpp
+        abstract/QEmbedableButton.cpp
+        additional/QShape.cpp
+        additional/QUpDownButton.cpp
+        additional/QCollapsibleFrame.cpp
+        buttongroupbox/QAbstractButtonListModel.cpp
+        buttongroupbox/QButtonGroupBox.cpp
+        color/QColorAction.cpp
+        color/QColorListModel.cpp
+        color/QColorLineEdit.cpp
+        color/QColorPushButton.cpp
+        color/QColorToolButton.cpp
+        color/QColorComboBox.cpp
+        color/QColorListView.cpp
+        filedialog/QFileAction.cpp
+        filedialog/QOpenFileLineEdit.cpp
+        filedialog/QOpenFileButton.cpp
+        filedialog/QOpenFolderLineEdit.cpp
+        filedialog/QOpenFolderButton.cpp
+        filedialog/QSaveFileLineEdit.cpp
+        filedialog/QSaveFileButton.cpp
+        filesystem/QFileSystemTreeView.cpp
+        filesystem/QFileSystemListView.cpp
+)
+
+if (QT_WIDGETS_EXTRA_BUILD_DESIGNER)
+    set(PLUGINS_HEADERS
+        additional/QCollapsibleFramePlugin.h
+        additional/QShapePlugin.h
+        additional/QUpDownButtonPlugin.h
+        buttongroupbox/QButtonGroupBoxPlugin.h
+        color/QColorComboBoxPlugin.h
+        color/QColorLineEditPlugin.h
+        color/QColorListViewPlugin.h
+        color/QColorPushButtonPlugin.h
+        color/QColorToolButtonPlugin.h
+        filedialog/QOpenFileButtonPlugin.h
+        filedialog/QOpenFileLineEditPlugin.h
+        filedialog/QOpenFolderButtonPlugin.h
+        filedialog/QOpenFolderLineEditPlugin.h
+        filedialog/QSaveFileButtonPlugin.h
+        filedialog/QSaveFileLineEditPlugin.h
+        filesystem/QFileSystemListViewPlugin.h
+        filesystem/QFileSystemTreeViewPlugin.h
+    )
+
+    gateau_add_library(QtWidgetsExtraDesignerLib
+        AUTOMOC
+        AUTOUIC
+        AUTORCC
+        PROPERTIES
+            LIBRARY_OUTPUT_NAME
+                QtWidgetsExtraDesigner${QT_VERSION_MAJOR}
+            LIBRARY_OUTPUT_DIRECTORY
+                ${PROJECT_BINARY_DIR}/bin/designer
+         INCLUDE_DIRECTORIES
+            PRIVATE
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/abstract>
+        LINK_LIBRARIES
+            PRIVATE
+                QtWidgetsExtraLib
+            PUBLIC
+                Qt${QT_VERSION_MAJOR}::Designer
+        HEADERS
+            QtWidgetsExtra.h
+            ${PLUGINS_HEADERS}
+        SOURCES
+            QtWidgetsExtra.cpp
+            additional/QCollapsibleFramePlugin.cpp
+            additional/QShapePlugin.cpp
+            additional/QUpDownButtonPlugin.cpp
+            buttongroupbox/QButtonGroupBoxPlugin.cpp
+            color/QColorComboBoxPlugin.cpp
+            color/QColorLineEditPlugin.cpp
+            color/QColorListViewPlugin.cpp
+            color/QColorPushButtonPlugin.cpp
+            color/QColorToolButtonPlugin.cpp
+            filedialog/QOpenFileButtonPlugin.cpp
+            filedialog/QOpenFileLineEditPlugin.cpp
+            filedialog/QOpenFolderButtonPlugin.cpp
+            filedialog/QOpenFolderLineEditPlugin.cpp
+            filedialog/QSaveFileButtonPlugin.cpp
+            filedialog/QSaveFileLineEditPlugin.cpp
+            filesystem/QFileSystemListViewPlugin.cpp
+            filesystem/QFileSystemTreeViewPlugin.cpp
+    )
+
+    list(TRANSFORM PLUGINS_HEADERS
+        REPLACE
+            "(.*Plugin.*)"
+            "#include \"\\1\""
+        OUTPUT_VARIABLE
+            PLUGINS_INCLUDES
+    )
+    list(JOIN PLUGINS_INCLUDES "\n" PLUGINS_INCLUDES)
+
+    file(GENERATE
+        OUTPUT
+            generated/pluginsHeaders.h
+        CONTENT
+            "${PLUGINS_INCLUDES}\n"
+    )
+
+    list(TRANSFORM PLUGINS_HEADERS
+        REPLACE
+            ".*/(.*)\\.h*"
+            "m_widgets.append(new \\1(this))"
+        OUTPUT_VARIABLE
+            PLUGINS_NEW
+    )
+    list(JOIN PLUGINS_NEW ";\n" PLUGINS_NEW)
+
+    file(GENERATE
+        OUTPUT
+            generated/pluginsNew.h
+        CONTENT
+            "${PLUGINS_NEW};\n"
+    )
+endif()

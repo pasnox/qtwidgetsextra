@@ -32,22 +32,22 @@ QWidget *QColorPushButtonPlugin::createWidget(QWidget *parent)
 
 QString QColorPushButtonPlugin::name() const
 {
-    return QLatin1String("QColorPushButton");
+    return QStringLiteral("QColorPushButton");
 }
 
 QString QColorPushButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Color");
+    return QStringLiteral("Qt Widgets Extra / Color");
 }
 
 QIcon QColorPushButtonPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/pushbutton.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/pushbutton.png"));
 }
 
 QString QColorPushButtonPlugin::toolTip() const
 {
-    return QLatin1String("A push button that present a QColorDialog on click");
+    return QStringLiteral("A push button that present a QColorDialog on click");
 }
 
 QString QColorPushButtonPlugin::whatsThis() const
@@ -62,10 +62,10 @@ bool QColorPushButtonPlugin::isContainer() const
 
 QString QColorPushButtonPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QColorPushButton\" name=\"colorPushButton\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QColorPushButton\" name=\"colorPushButton\">\n</widget>\n");
 }
 
 QString QColorPushButtonPlugin::includeFile() const
 {
-    return QLatin1String("QColorPushButton.h");
+    return QStringLiteral("QColorPushButton.h");
 }

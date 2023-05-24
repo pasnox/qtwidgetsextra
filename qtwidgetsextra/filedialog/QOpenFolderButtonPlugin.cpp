@@ -34,12 +34,12 @@ QWidget *QOpenFolderButtonPlugin::createWidget(QWidget *parent)
 
 QString QOpenFolderButtonPlugin::name() const
 {
-    return QLatin1String("QOpenFolderButton");
+    return QStringLiteral("QOpenFolderButton");
 }
 
 QString QOpenFolderButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QOpenFolderButtonPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QOpenFolderButtonPlugin::icon() const
 
 QString QOpenFolderButtonPlugin::toolTip() const
 {
-    return QLatin1String("A tool button that allow to choose an existing folder");
+    return QStringLiteral("A tool button that allow to choose an existing folder");
 }
 
 QString QOpenFolderButtonPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QOpenFolderButtonPlugin::isContainer() const
 
 QString QOpenFolderButtonPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QOpenFolderButton\" name=\"openFolderButton\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QOpenFolderButton\" name=\"openFolderButton\">\n</widget>\n");
 }
 
 QString QOpenFolderButtonPlugin::includeFile() const
 {
-    return QLatin1String("QOpenFolderButton.h");
+    return QStringLiteral("QOpenFolderButton.h");
 }

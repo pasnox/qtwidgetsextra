@@ -22,10 +22,10 @@ public:
 
     void updateValidator() {
         if (action->options().testFlag(QColorAction::ShowAlphaChannel)) {
-            widget->setInputMask(QLatin1String("\\#HHHhhhhh"));
+            widget->setInputMask(QStringLiteral("\\#HHHhhhhh"));
         }
         else {
-            widget->setInputMask(QLatin1String("\\#HHHhhh"));
+            widget->setInputMask(QStringLiteral("\\#HHHhhh"));
         }
     }
 

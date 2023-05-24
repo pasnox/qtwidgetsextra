@@ -16,7 +16,7 @@ public:
         , autoRaise(false) {
         Q_ASSERT(widget);
 
-        layout->setMargin(0);
+        layout->setContentsMargins(0, 0, 0, 0);
         layout->setSpacing(1);
         layout->addWidget(upButton);
         layout->addWidget(downButton);
@@ -178,14 +178,14 @@ void QUpDownButton::setDownMenu(QMenu *menu)
     d->downButton->setMenu(menu);
 }
 
-void QUpDownButton::upAnimateClick(int msec)
+void QUpDownButton::upAnimateClick()
 {
-    d->upButton->animateClick(msec);
+    d->upButton->animateClick();
 }
 
-void QUpDownButton::downAnimateClick(int msec)
+void QUpDownButton::downAnimateClick()
 {
-    d->downButton->animateClick(msec);
+    d->downButton->animateClick();
 }
 
 void QUpDownButton::upClick()

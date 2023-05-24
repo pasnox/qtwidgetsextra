@@ -34,12 +34,12 @@ QWidget *QOpenFileButtonPlugin::createWidget(QWidget *parent)
 
 QString QOpenFileButtonPlugin::name() const
 {
-    return QLatin1String("QOpenFileButton");
+    return QStringLiteral("QOpenFileButton");
 }
 
 QString QOpenFileButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QOpenFileButtonPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QOpenFileButtonPlugin::icon() const
 
 QString QOpenFileButtonPlugin::toolTip() const
 {
-    return QLatin1String("A tool button that allow to choose an opening file");
+    return QStringLiteral("A tool button that allow to choose an opening file");
 }
 
 QString QOpenFileButtonPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QOpenFileButtonPlugin::isContainer() const
 
 QString QOpenFileButtonPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QOpenFileButton\" name=\"openFileButton\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QOpenFileButton\" name=\"openFileButton\">\n</widget>\n");
 }
 
 QString QOpenFileButtonPlugin::includeFile() const
 {
-    return QLatin1String("QOpenFileButton.h");
+    return QStringLiteral("QOpenFileButton.h");
 }

@@ -32,22 +32,22 @@ QWidget *QShapePlugin::createWidget(QWidget *parent)
 
 QString QShapePlugin::name() const
 {
-    return QLatin1String("QShape");
+    return QStringLiteral("QShape");
 }
 
 QString QShapePlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Additional");
+    return QStringLiteral("Qt Widgets Extra / Additional");
 }
 
 QIcon QShapePlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/graphicsview.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/graphicsview.png"));
 }
 
 QString QShapePlugin::toolTip() const
 {
-    return QLatin1String("A widget that draw some defined or custom paths");
+    return QStringLiteral("A widget that draw some defined or custom paths");
 }
 
 QString QShapePlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QShapePlugin::isContainer() const
 
 QString QShapePlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QShape\" name=\"shape\">\n"
         "</widget>\n"
     );
@@ -70,5 +70,5 @@ QString QShapePlugin::domXml() const
 
 QString QShapePlugin::includeFile() const
 {
-    return QLatin1String("QShape.h");
+    return QStringLiteral("QShape.h");
 }

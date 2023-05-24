@@ -28,7 +28,7 @@ QPixmap QtWidgetsExtraCache::cachedPixmap(const QString &key)
 
 QPixmap QtWidgetsExtraCache::cachedPixmapColor(const QColor &color, const QSize &size)
 {
-    const QString key = QString(QLatin1String("%1-%2x%3-pixmap"))
+    const QString key = QString(QStringLiteral("%1-%2x%3-pixmap"))
         .arg(color.name(QColor::HexArgb))
         .arg(size.width())
         .arg(size.height())
@@ -70,7 +70,7 @@ QIcon QtWidgetsExtraCache::cachedIcon(const QString &key)
 
 QIcon QtWidgetsExtraCache::cachedIconColor(const QColor &color, const QSize &size)
 {
-    const QString key = QString(QLatin1String("%1-%2x%3-icon"))
+    const QString key = QString(QStringLiteral("%1-%2x%3-icon"))
         .arg(color.name(QColor::HexArgb))
         .arg(size.width())
         .arg(size.height())

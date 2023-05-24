@@ -34,12 +34,12 @@ QWidget *QOpenFileLineEditPlugin::createWidget(QWidget *parent)
 
 QString QOpenFileLineEditPlugin::name() const
 {
-    return QLatin1String("QOpenFileLineEdit");
+    return QStringLiteral("QOpenFileLineEdit");
 }
 
 QString QOpenFileLineEditPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QOpenFileLineEditPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QOpenFileLineEditPlugin::icon() const
 
 QString QOpenFileLineEditPlugin::toolTip() const
 {
-    return QLatin1String("A line edit with a tool button that allow to choose an opening file");
+    return QStringLiteral("A line edit with a tool button that allow to choose an opening file");
 }
 
 QString QOpenFileLineEditPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QOpenFileLineEditPlugin::isContainer() const
 
 QString QOpenFileLineEditPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QOpenFileLineEdit\" name=\"openFileLineEdit\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QOpenFileLineEdit\" name=\"openFileLineEdit\">\n</widget>\n");
 }
 
 QString QOpenFileLineEditPlugin::includeFile() const
 {
-    return QLatin1String("QOpenFileLineEdit.h");
+    return QStringLiteral("QOpenFileLineEdit.h");
 }

@@ -34,12 +34,12 @@ QWidget *QSaveFileButtonPlugin::createWidget(QWidget *parent)
 
 QString QSaveFileButtonPlugin::name() const
 {
-    return QLatin1String("QSaveFileButton");
+    return QStringLiteral("QSaveFileButton");
 }
 
 QString QSaveFileButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QSaveFileButtonPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QSaveFileButtonPlugin::icon() const
 
 QString QSaveFileButtonPlugin::toolTip() const
 {
-    return QLatin1String("A tool button that allow to choose a saving file");
+    return QStringLiteral("A tool button that allow to choose a saving file");
 }
 
 QString QSaveFileButtonPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QSaveFileButtonPlugin::isContainer() const
 
 QString QSaveFileButtonPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QSaveFileButton\" name=\"saveFileButton\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QSaveFileButton\" name=\"saveFileButton\">\n</widget>\n");
 }
 
 QString QSaveFileButtonPlugin::includeFile() const
 {
-    return QLatin1String("QSaveFileButton.h");
+    return QStringLiteral("QSaveFileButton.h");
 }

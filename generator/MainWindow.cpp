@@ -13,15 +13,15 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->cbInheritingType->addItem("Widget", Generator::Widget);
-    ui->cbInheritingType->addItem("Object", Generator::Object);
+    ui->cbInheritingType->addItem(QStringLiteral("Widget"), Generator::Widget);
+    ui->cbInheritingType->addItem(QStringLiteral("Object"), Generator::Object);
     ui->twMembers->setColumnCount(6);
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnType, QString("Type"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnName, QString("Name"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnParameterType, QString("ParameterType"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnDefaultValue, QString("DefaultValue"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnSignal, QString("Signal"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnProperty, QString("Property"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnType, QStringLiteral("Type"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnName, QStringLiteral("Name"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnParameterType, QStringLiteral("ParameterType"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnDefaultValue, QStringLiteral("DefaultValue"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnSignal, QStringLiteral("Signal"));
+    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnProperty, QStringLiteral("Property"));
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnType, QHeaderView::ResizeToContents);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnName, QHeaderView::Stretch);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnParameterType, QHeaderView::ResizeToContents);
@@ -41,10 +41,10 @@ void MainWindow::on_tbAdd_clicked()
     static int i = 0;
     QTreeWidgetItem* item = new QTreeWidgetItem;
 
-    item->setText(GeneratorDelegate::ColumnType, QString("type%1").arg(i));
-    item->setText(GeneratorDelegate::ColumnName, QString("name%1").arg(i));
+    item->setText(GeneratorDelegate::ColumnType, QStringLiteral("type%1").arg(i));
+    item->setText(GeneratorDelegate::ColumnName, QStringLiteral("name%1").arg(i));
     item->setText(GeneratorDelegate::ColumnParameterType, QString::number(Generator::Reference));
-    item->setText(GeneratorDelegate::ColumnDefaultValue, QString::null);
+    item->setText(GeneratorDelegate::ColumnDefaultValue, QString());
     item->setCheckState(GeneratorDelegate::ColumnSignal, Qt::Unchecked);
     item->setCheckState(GeneratorDelegate::ColumnProperty, Qt::Unchecked);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
@@ -175,25 +175,25 @@ void MainWindow::save()
 
     apply();
 
-    const QString projectFile = QString("%1/%2/%2.pri").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup());
+    const QString projectFile = QStringLiteral("%1/%2/%2.pri").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup());
 
-    saveFile(ui->pteHeader->toPlainText(), QString("%1/%2/%3.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->pteSource->toPlainText(), QString("%1/%2/%3.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->ptePluginHeader->toPlainText(), QString("%1/%2/%3Plugin.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->ptePluginSource->toPlainText(), QString("%1/%2/%3Plugin.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
+    saveFile(ui->pteHeader->toPlainText(), QStringLiteral("%1/%2/%3.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
+    saveFile(ui->pteSource->toPlainText(), QStringLiteral("%1/%2/%3.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
+    saveFile(ui->ptePluginHeader->toPlainText(), QStringLiteral("%1/%2/%3Plugin.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
+    saveFile(ui->ptePluginSource->toPlainText(), QStringLiteral("%1/%2/%3Plugin.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
 
     if (!QFile::exists(projectFile)) {
         saveFile(ui->pteProjectFile->toPlainText(), projectFile);
     }
 
     const QStringList text = QStringList()
-        << tr( "Don't forget to:" ).prepend(QString("<b>")).append(QString("</b>"))
-        << QString("<ul>")
-        << tr( "Update the source project file to add the generated project include file if needed" ).prepend(QString("<li>"))
-        << tr( "Update the source project file HEADERS / SOURCES to add the new plugin" ).prepend(QString("<li>"))
-        << tr( "Update the source class registering the plugins to add the new plugin" ).prepend(QString("<li>"))
-        << QString("<ul>")
+        << tr( "Don't forget to:" ).prepend(QStringLiteral("<b>")).append(QStringLiteral("</b>"))
+        << QStringLiteral("<ul>")
+        << tr( "Update the source project file to add the generated project include file if needed" ).prepend(QStringLiteral("<li>"))
+        << tr( "Update the source project file HEADERS / SOURCES to add the new plugin" ).prepend(QStringLiteral("<li>"))
+        << tr( "Update the source class registering the plugins to add the new plugin" ).prepend(QStringLiteral("<li>"))
+        << QStringLiteral("<ul>")
     ;
 
-    QMessageBox::information(this, windowTitle(), text.join("\n"));
+    QMessageBox::information(this, windowTitle(), text.join(QStringLiteral("\n")));
 }

@@ -34,22 +34,22 @@ QWidget *QButtonGroupBoxPlugin::createWidget(QWidget *parent)
 
 QString QButtonGroupBoxPlugin::name() const
 {
-    return QLatin1String("QButtonGroupBox");
+    return QStringLiteral("QButtonGroupBox");
 }
 
 QString QButtonGroupBoxPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Group Box");
+    return QStringLiteral("Qt Widgets Extra / Group Box");
 }
 
 QIcon QButtonGroupBoxPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/groupbox.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/groupbox.png"));
 }
 
 QString QButtonGroupBoxPlugin::toolTip() const
 {
-    return QLatin1String("A widget to manage multiple checkable buttons");
+    return QStringLiteral("A widget to manage multiple checkable buttons");
 }
 
 QString QButtonGroupBoxPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QButtonGroupBoxPlugin::isContainer() const
 
 QString QButtonGroupBoxPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QButtonGroupBox\" name=\"buttonGroupBox\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QButtonGroupBox\" name=\"buttonGroupBox\">\n</widget>\n");
 }
 
 QString QButtonGroupBoxPlugin::includeFile() const
 {
-    return QLatin1String("QButtonGroupBox.h");
+    return QStringLiteral("QButtonGroupBox.h");
 }

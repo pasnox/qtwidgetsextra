@@ -10,7 +10,7 @@ public:
     QColorActionPrivate(QColorAction *actionP)
         : QObject(actionP)
         , action(actionP)
-        , options(0) {
+        , options() {
         Q_ASSERT(action);
 
         connect(action, SIGNAL(triggered()), this, SLOT(triggered()));

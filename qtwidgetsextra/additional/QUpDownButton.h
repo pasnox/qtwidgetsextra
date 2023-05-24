@@ -45,8 +45,8 @@ public:
     void setDownMenu(QMenu *menu);
 
 public slots:
-    void upAnimateClick(int msec = 100);
-    void downAnimateClick(int msec = 100);
+    void upAnimateClick();
+    void downAnimateClick();
     void upClick();
     void downClick();
     void upToggle();

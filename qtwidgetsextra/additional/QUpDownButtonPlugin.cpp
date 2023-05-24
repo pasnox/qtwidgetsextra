@@ -32,22 +32,22 @@ QWidget *QUpDownButtonPlugin::createWidget(QWidget *parent)
 
 QString QUpDownButtonPlugin::name() const
 {
-    return QLatin1String("QUpDownButton");
+    return QStringLiteral("QUpDownButton");
 }
 
 QString QUpDownButtonPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Additional");
+    return QStringLiteral("Qt Widgets Extra / Additional");
 }
 
 QIcon QUpDownButtonPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/toolbutton.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/toolbutton.png"));
 }
 
 QString QUpDownButtonPlugin::toolTip() const
 {
-    return QLatin1String("A widget that show an up/down (or left/right) pair of button with arrow");
+    return QStringLiteral("A widget that show an up/down (or left/right) pair of button with arrow");
 }
 
 QString QUpDownButtonPlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QUpDownButtonPlugin::isContainer() const
 
 QString QUpDownButtonPlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QUpDownButton\" name=\"upDownButton\">\n"
         "</widget>\n"
     );
@@ -70,5 +70,5 @@ QString QUpDownButtonPlugin::domXml() const
 
 QString QUpDownButtonPlugin::includeFile() const
 {
-    return QLatin1String("QUpDownButton.h");
+    return QStringLiteral("QUpDownButton.h");
 }

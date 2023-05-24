@@ -34,12 +34,12 @@ QWidget *QSaveFileLineEditPlugin::createWidget(QWidget *parent)
 
 QString QSaveFileLineEditPlugin::name() const
 {
-    return QLatin1String("QSaveFileLineEdit");
+    return QStringLiteral("QSaveFileLineEdit");
 }
 
 QString QSaveFileLineEditPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QSaveFileLineEditPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QSaveFileLineEditPlugin::icon() const
 
 QString QSaveFileLineEditPlugin::toolTip() const
 {
-    return QLatin1String("A line edit with a tool button that allow to choose a saving file");
+    return QStringLiteral("A line edit with a tool button that allow to choose a saving file");
 }
 
 QString QSaveFileLineEditPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QSaveFileLineEditPlugin::isContainer() const
 
 QString QSaveFileLineEditPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QSaveFileLineEdit\" name=\"saveFileLineEdit\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QSaveFileLineEdit\" name=\"saveFileLineEdit\">\n</widget>\n");
 }
 
 QString QSaveFileLineEditPlugin::includeFile() const
 {
-    return QLatin1String("QSaveFileLineEdit.h");
+    return QStringLiteral("QSaveFileLineEdit.h");
 }

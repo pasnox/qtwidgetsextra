@@ -32,22 +32,22 @@ QWidget *QFileSystemListViewPlugin::createWidget(QWidget *parent)
 
 QString QFileSystemListViewPlugin::name() const
 {
-    return QLatin1String("QFileSystemListView");
+    return QStringLiteral("QFileSystemListView");
 }
 
 QString QFileSystemListViewPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File System");
+    return QStringLiteral("Qt Widgets Extra / File System");
 }
 
 QIcon QFileSystemListViewPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/designer/treeview.png"));
+    return QIcon(QStringLiteral(":/designer/treeview.png"));
 }
 
 QString QFileSystemListViewPlugin::toolTip() const
 {
-    return QLatin1String("A QListView presenting a QFileSystemModel");
+    return QStringLiteral("A QListView presenting a QFileSystemModel");
 }
 
 QString QFileSystemListViewPlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QFileSystemListViewPlugin::isContainer() const
 
 QString QFileSystemListViewPlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QFileSystemListView\" name=\"filesystemListView\">\n"
         "</widget>\n"
     );
@@ -70,5 +70,5 @@ QString QFileSystemListViewPlugin::domXml() const
 
 QString QFileSystemListViewPlugin::includeFile() const
 {
-    return QLatin1String("QFileSystemListView.h");
+    return QStringLiteral("QFileSystemListView.h");
 }

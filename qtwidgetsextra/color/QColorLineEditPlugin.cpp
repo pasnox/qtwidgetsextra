@@ -32,22 +32,22 @@ QWidget *QColorLineEditPlugin::createWidget(QWidget *parent)
 
 QString QColorLineEditPlugin::name() const
 {
-    return QLatin1String("QColorLineEdit");
+    return QStringLiteral("QColorLineEdit");
 }
 
 QString QColorLineEditPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Color");
+    return QStringLiteral("Qt Widgets Extra / Color");
 }
 
 QIcon QColorLineEditPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/lineedit.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/lineedit.png"));
 }
 
 QString QColorLineEditPlugin::toolTip() const
 {
-    return QLatin1String("A line edit with a tool button that allow to choose a color");
+    return QStringLiteral("A line edit with a tool button that allow to choose a color");
 }
 
 QString QColorLineEditPlugin::whatsThis() const
@@ -62,10 +62,10 @@ bool QColorLineEditPlugin::isContainer() const
 
 QString QColorLineEditPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QColorLineEdit\" name=\"colorLineEdit\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QColorLineEdit\" name=\"colorLineEdit\">\n</widget>\n");
 }
 
 QString QColorLineEditPlugin::includeFile() const
 {
-    return QLatin1String("QColorLineEdit.h");
+    return QStringLiteral("QColorLineEdit.h");
 }

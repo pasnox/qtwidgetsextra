@@ -11,7 +11,7 @@ public:
         : QObject(actionP)
         , action(actionP)
         , type(QFileAction::OpenFile)
-        , options(0) {
+        , options() {
         Q_ASSERT(action);
 
         updateIcon();
@@ -44,10 +44,10 @@ public slots:
 
         switch (type) {
             case QFileAction::OpenFile:
-                fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QLatin1String(";;")), 0, options);
+                fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
                 break;
             case QFileAction::SaveFile:
-                fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QLatin1String(";;")), 0, options);
+                fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
                 break;
             case QFileAction::OpenFolder:
                 fn = QFileDialog::getExistingDirectory(0, caption, dir, options);

@@ -32,22 +32,22 @@ QWidget *QColorListViewPlugin::createWidget(QWidget *parent)
 
 QString QColorListViewPlugin::name() const
 {
-    return QLatin1String("QColorListView");
+    return QStringLiteral("QColorListView");
 }
 
 QString QColorListViewPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Color");
+    return QStringLiteral("Qt Widgets Extra / Color");
 }
 
 QIcon QColorListViewPlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/listbox.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/listbox.png"));
 }
 
 QString QColorListViewPlugin::toolTip() const
 {
-    return QLatin1String("A list view that present a QColorListModel");
+    return QStringLiteral("A list view that present a QColorListModel");
 }
 
 QString QColorListViewPlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QColorListViewPlugin::isContainer() const
 
 QString QColorListViewPlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QColorListView\" name=\"colorListView\">\n"
             "<property name=\"colorListNames\">\n"
             "<stringlist>\n"
@@ -77,5 +77,5 @@ QString QColorListViewPlugin::domXml() const
 
 QString QColorListViewPlugin::includeFile() const
 {
-    return QLatin1String("QColorListView.h");
+    return QStringLiteral("QColorListView.h");
 }

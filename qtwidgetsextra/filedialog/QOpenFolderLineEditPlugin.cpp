@@ -34,12 +34,12 @@ QWidget *QOpenFolderLineEditPlugin::createWidget(QWidget *parent)
 
 QString QOpenFolderLineEditPlugin::name() const
 {
-    return QLatin1String("QOpenFolderLineEdit");
+    return QStringLiteral("QOpenFolderLineEdit");
 }
 
 QString QOpenFolderLineEditPlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / File Dialog");
+    return QStringLiteral("Qt Widgets Extra / File Dialog");
 }
 
 QIcon QOpenFolderLineEditPlugin::icon() const
@@ -49,7 +49,7 @@ QIcon QOpenFolderLineEditPlugin::icon() const
 
 QString QOpenFolderLineEditPlugin::toolTip() const
 {
-    return QLatin1String("A line edit with a tool button that allow to choose an existing folder");
+    return QStringLiteral("A line edit with a tool button that allow to choose an existing folder");
 }
 
 QString QOpenFolderLineEditPlugin::whatsThis() const
@@ -64,10 +64,10 @@ bool QOpenFolderLineEditPlugin::isContainer() const
 
 QString QOpenFolderLineEditPlugin::domXml() const
 {
-    return QLatin1String("<widget class=\"QOpenFolderLineEdit\" name=\"openFolderLineEdit\">\n</widget>\n");
+    return QStringLiteral("<widget class=\"QOpenFolderLineEdit\" name=\"openFolderLineEdit\">\n</widget>\n");
 }
 
 QString QOpenFolderLineEditPlugin::includeFile() const
 {
-    return QLatin1String("QOpenFolderLineEdit.h");
+    return QStringLiteral("QOpenFolderLineEdit.h");
 }

@@ -24,10 +24,10 @@ public:
 
     void updateValidator() {
         if (widget->lineEdit()) {
-            QString mask = QLatin1String("\\#HHHhhh");
+            QString mask = QStringLiteral("\\#HHHhhh");
 
             if (model->nameFormat() == QColorListModel::HexArgb) {
-                mask = QLatin1String("\\#HHHhhhhh");
+                mask = QStringLiteral("\\#HHHhhhhh");
             }
 
             if (widget->lineEdit()->inputMask() != mask) {

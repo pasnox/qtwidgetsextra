@@ -32,22 +32,22 @@ QWidget *QCollapsibleFramePlugin::createWidget(QWidget *parent)
 
 QString QCollapsibleFramePlugin::name() const
 {
-    return QLatin1String("QCollapsibleFrame");
+    return QStringLiteral("QCollapsibleFrame");
 }
 
 QString QCollapsibleFramePlugin::group() const
 {
-    return QLatin1String("Qt Widgets Extra / Additional");
+    return QStringLiteral("Qt Widgets Extra / Additional");
 }
 
 QIcon QCollapsibleFramePlugin::icon() const
 {
-    return QIcon(QLatin1String(":/qt-project.org/formeditor/images/widgets/frame.png"));
+    return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/frame.png"));
 }
 
 QString QCollapsibleFramePlugin::toolTip() const
 {
-    return QLatin1String("A widget that can shrink and grow using a collapse button");
+    return QStringLiteral("A widget that can shrink and grow using a collapse button");
 }
 
 QString QCollapsibleFramePlugin::whatsThis() const
@@ -62,7 +62,7 @@ bool QCollapsibleFramePlugin::isContainer() const
 
 QString QCollapsibleFramePlugin::domXml() const
 {
-    return QLatin1String(
+    return QStringLiteral(
         "<widget class=\"QCollapsibleFrame\" name=\"collapsibleFrame\">\n"
         "</widget>\n"
     );
@@ -70,5 +70,5 @@ QString QCollapsibleFramePlugin::domXml() const
 
 QString QCollapsibleFramePlugin::includeFile() const
 {
-    return QLatin1String("QCollapsibleFrame.h");
+    return QStringLiteral("QCollapsibleFrame.h");
 }

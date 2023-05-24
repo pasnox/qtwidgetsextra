@@ -29,9 +29,9 @@ QWidget *GeneratorDelegate::createEditor(QWidget *parent, const QStyleOptionView
         case GeneratorDelegate::ColumnParameterType: {
             QComboBox *cb = new QComboBox(parent);
 
-            cb->addItem(QString("Variable"), Generator::Variable);
-            cb->addItem(QString("Reference"), Generator::Reference);
-            cb->addItem(QString("Pointer"), Generator::Pointer);
+            cb->addItem(QStringLiteral("Variable"), Generator::Variable);
+            cb->addItem(QStringLiteral("Reference"), Generator::Reference);
+            cb->addItem(QStringLiteral("Pointer"), Generator::Pointer);
 
             return cb;
         }
@@ -141,19 +141,19 @@ const QHash<QString, Generator::ParameterType>& GeneratorDelegate::constTypes()
     static QHash<QString, Generator::ParameterType> types;
 
     if (types.isEmpty()) {
-        types[ "QColor" ] = Generator::Reference;
-        types[ "QVariant" ] = Generator::Reference;
-        types[ "QString" ] = Generator::Reference;
-        types[ "QStringList" ] = Generator::Reference;
-        types[ "bool" ] = Generator::Variable;
-        types[ "QSize" ] = Generator::Reference;
-        types[ "QFont" ] = Generator::Reference;
-        types[ "QRect" ] = Generator::Reference;
-        types[ "QPoint" ] = Generator::Reference;
-        types[ "QBrush" ] = Generator::Reference;
-        types[ "QPen" ] = Generator::Reference;
-        types[ "QObject" ] = Generator::Pointer;
-        types[ "QWidget" ] = Generator::Pointer;
+        types[ QStringLiteral("QColor") ] = Generator::Reference;
+        types[ QStringLiteral("QVariant") ] = Generator::Reference;
+        types[ QStringLiteral("QString") ] = Generator::Reference;
+        types[ QStringLiteral("QStringList") ] = Generator::Reference;
+        types[ QStringLiteral("bool") ] = Generator::Variable;
+        types[ QStringLiteral("QSize") ] = Generator::Reference;
+        types[ QStringLiteral("QFont") ] = Generator::Reference;
+        types[ QStringLiteral("QRect") ] = Generator::Reference;
+        types[ QStringLiteral("QPoint") ] = Generator::Reference;
+        types[ QStringLiteral("QBrush") ] = Generator::Reference;
+        types[ QStringLiteral("QPen") ] = Generator::Reference;
+        types[ QStringLiteral("QObject") ] = Generator::Pointer;
+        types[ QStringLiteral("QWidget") ] = Generator::Pointer;
     }
 
     return types;
