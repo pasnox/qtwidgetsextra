@@ -3,7 +3,7 @@
 
 #include <QListView>
 
-#include "QColorListModel.h"
+#include <QtWidgetsExtra/Color/QColorListModel.h>
 
 class QColorListView : public QListView
 {

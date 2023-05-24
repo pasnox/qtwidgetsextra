@@ -1,14 +1,13 @@
-#ifndef QOPENFILELINEEDIT_H
-#define QOPENFILELINEEDIT_H
+#ifndef QOPENFILEBUTTON_H
+#define QOPENFILEBUTTON_H
 
-#include "QAbstractButtonLineEdit.h"
+#include <QtWidgetsExtra/QEmbedableButton_p.h>
+#include <QtWidgetsExtra/FileDialog/QFileAction.h>
 
-#include <QFileDialog>
-
-class QOpenFileLineEdit : public QAbstractButtonLineEdit
+class QOpenFileButton : public QEmbedableButton
 {
     Q_OBJECT
-    class QOpenFileLineEditPrivate* d;
+    class QOpenFileButtonPrivate* d;
 
     Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption)
@@ -17,7 +16,7 @@ class QOpenFileLineEdit : public QAbstractButtonLineEdit
     Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
-    QOpenFileLineEdit(QWidget *parent = 0);
+    explicit QOpenFileButton(QWidget *parent = 0);
 
     QString filePath() const;
     void setFilePath(const QString &filePath);
@@ -38,4 +37,4 @@ signals:
     void filePathChanged(const QString &filePath);
 };
 
-#endif // QOPENFILELINEEDIT_H
+#endif // QOPENFILEBUTTON_H

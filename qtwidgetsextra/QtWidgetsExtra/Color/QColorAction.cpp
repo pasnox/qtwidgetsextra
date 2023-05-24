@@ -1,5 +1,5 @@
 #include "QColorAction.h"
-#include "QtWidgetsExtraCache.h"
+#include "QtWidgetsExtra/QtWidgetsExtraCache.h"
 
 #include <QAbstractButton>
 

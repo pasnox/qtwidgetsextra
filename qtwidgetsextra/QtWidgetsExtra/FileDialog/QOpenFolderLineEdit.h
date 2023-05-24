@@ -1,7 +1,7 @@
 #ifndef QOPENFOLDERLINEEDIT_H
 #define QOPENFOLDERLINEEDIT_H
 
-#include "QAbstractButtonLineEdit.h"
+#include <QtWidgetsExtra/QAbstractButtonLineEdit.h>
 
 #include <QFileDialog>
 

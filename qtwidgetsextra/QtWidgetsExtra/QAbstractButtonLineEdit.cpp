@@ -1,5 +1,5 @@
 #include "QAbstractButtonLineEdit.h"
-#include "QEmbedableButton_p.h"
+#include "QtWidgetsExtra/QEmbedableButton_p.h"
 
 #include <QStyle>
 #include <QHBoxLayout>

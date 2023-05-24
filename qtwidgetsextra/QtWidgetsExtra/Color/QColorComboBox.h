@@ -3,7 +3,7 @@
 
 #include <QComboBox>
 
-#include "QColorListModel.h"
+#include <QtWidgetsExtra/Color/QColorListModel.h>
 
 class QColorComboBox : public QComboBox
 {

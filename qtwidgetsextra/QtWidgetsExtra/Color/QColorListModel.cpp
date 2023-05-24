@@ -1,5 +1,5 @@
 #include "QColorListModel.h"
-#include "QtWidgetsExtraCache.h"
+#include "QtWidgetsExtra/QtWidgetsExtraCache.h"
 
 #include <QVector>
 #include <QIcon>

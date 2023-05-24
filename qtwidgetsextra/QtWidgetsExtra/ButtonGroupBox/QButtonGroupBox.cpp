@@ -1,5 +1,5 @@
 #include "QButtonGroupBox.h"
-#include "QAbstractButtonListModel.h"
+#include "QtWidgetsExtra/ButtonGroupBox/QAbstractButtonListModel.h"
 
 #include <QButtonGroup>
 #include <QBoxLayout>

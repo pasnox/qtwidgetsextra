@@ -3,7 +3,7 @@
 
 #include <QPushButton>
 
-#include "QColorAction.h"
+#include <QtWidgetsExtra/Color/QColorAction.h>
 
 class QColorPushButton : public QPushButton
 {

@@ -1,8 +1,8 @@
 #ifndef QCOLORTOOLBUTTON_H
 #define QCOLORTOOLBUTTON_H
 
-#include "QEmbedableButton_p.h"
-#include "QColorAction.h"
+#include <QtWidgetsExtra/QEmbedableButton_p.h>
+#include <QtWidgetsExtra/Color/QColorAction.h>
 
 class QColorToolButton : public QEmbedableButton
 {

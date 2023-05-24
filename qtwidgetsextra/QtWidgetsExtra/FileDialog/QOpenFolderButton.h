@@ -1,8 +1,8 @@
 #ifndef QOPENFOLDERBUTTON_H
 #define QOPENFOLDERBUTTON_H
 
-#include "QEmbedableButton_p.h"
-#include "QFileAction.h"
+#include <QtWidgetsExtra/QEmbedableButton_p.h>
+#include <QtWidgetsExtra/FileDialog/QFileAction.h>
 
 class QOpenFolderButton : public QEmbedableButton
 {

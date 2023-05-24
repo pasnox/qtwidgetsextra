@@ -1,8 +1,8 @@
 #ifndef QCOLORLINEEDIT_H
 #define QCOLORLINEEDIT_H
 
-#include "QAbstractButtonLineEdit.h"
-#include "QColorAction.h"
+#include <QtWidgetsExtra/QAbstractButtonLineEdit.h>
+#include <QtWidgetsExtra/Color/QColorAction.h>
 
 class QColorLineEdit : public QAbstractButtonLineEdit
 {
