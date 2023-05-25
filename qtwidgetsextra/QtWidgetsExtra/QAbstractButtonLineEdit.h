@@ -11,22 +11,12 @@ class QAbstractButtonLineEdit : public QLineEdit
 
 public:
     explicit QAbstractButtonLineEdit(QWidget *parent = 0);
-    explicit QAbstractButtonLineEdit(QAction *action, QWidget *parent = 0);
-    explicit QAbstractButtonLineEdit(QMenu *menu, QWidget *parent = 0);
-
-    QAction *defaultAction() const;
-    void setDefaultAction(QAction *action);
-
-    QMenu *menu() const;
-    void setMenu(QMenu *menu);
+    explicit QAbstractButtonLineEdit(QAction *action, QLineEdit::ActionPosition position, QWidget *parent = 0);
+    explicit QAbstractButtonLineEdit(QMenu *menu, QLineEdit::ActionPosition position, QWidget *parent = 0);
 
 signals:
     void returnPressed(const QString &text);
     void editingFinished(const QString &text);
-
-protected:
-    QToolButton *button() const;
-    virtual QToolButton *createButton();
 };
 
 #endif // QABSTRACTBUTTONLINEEDIT_H

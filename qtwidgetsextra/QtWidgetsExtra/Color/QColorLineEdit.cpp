@@ -11,7 +11,7 @@ public:
         , action(new QColorAction(this)) {
         Q_ASSERT(widget);
 
-        widget->setDefaultAction(action);
+        widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
         widget->setText(action->colorName(action->color()));
         updateValidator();
 

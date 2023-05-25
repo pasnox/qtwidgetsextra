@@ -14,7 +14,7 @@ public:
         Q_ASSERT(widget);
 
         action->setType(QFileAction::OpenFolder);
-        widget->setDefaultAction(action);
+        widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
 
         connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
         connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
