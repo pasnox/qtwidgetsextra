@@ -20,6 +20,10 @@ public:
     QMenu *menu() const;
     void setMenu(QMenu *menu);
 
+signals:
+    void returnPressed(const QString &text);
+    void editingFinished(const QString &text);
+
 protected:
     QToolButton *button() const;
     virtual QToolButton *createButton();

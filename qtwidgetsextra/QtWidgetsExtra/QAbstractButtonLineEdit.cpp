@@ -33,6 +33,11 @@ public:
 
         margins.setLeft(margins.left() +height);
         widget->setTextMargins(margins);
+
+        connect(widgetP, &QLineEdit::returnPressed, this,
+                [widgetP]() { emit widgetP->returnPressed(widgetP->text()); });
+        connect(widgetP, &QLineEdit::editingFinished, this,
+                [widgetP]() { emit widgetP->editingFinished(widgetP->text()); });
     }
 
 public:
