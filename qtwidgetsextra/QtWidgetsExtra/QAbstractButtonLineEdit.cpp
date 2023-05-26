@@ -12,9 +12,9 @@ public:
         Q_ASSERT(widget);
 
         connect(widgetP, &QLineEdit::returnPressed, this,
-                [widgetP]() { emit widgetP->returnPressed(widgetP->text()); });
+                [widgetP]() { Q_EMIT widgetP->returnPressed(widgetP->text()); });
         connect(widgetP, &QLineEdit::editingFinished, this,
-                [widgetP]() { emit widgetP->editingFinished(widgetP->text()); });
+                [widgetP]() { Q_EMIT widgetP->editingFinished(widgetP->text()); });
     }
 
 public:

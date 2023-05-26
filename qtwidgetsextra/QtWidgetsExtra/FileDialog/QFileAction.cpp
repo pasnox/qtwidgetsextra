@@ -33,7 +33,7 @@ public:
         }
     }
 
-public slots:
+public Q_SLOTS:
     void triggered() {
         QString dir = directory;
         QString fn;
@@ -99,7 +99,7 @@ void QFileAction::setFilePath(const QString &filePath)
 
     d->filePath = filePath;
     setToolTip(d->filePath);
-    emit filePathChanged(filePath);
+    Q_EMIT filePathChanged(filePath);
 }
 
 QString QFileAction::caption() const

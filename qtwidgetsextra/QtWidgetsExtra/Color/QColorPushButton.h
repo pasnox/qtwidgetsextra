@@ -29,7 +29,7 @@ public:
     QColorAction::ColorDialogOptions options() const;
     void setOptions(QColorAction::ColorDialogOptions options);
 
-signals:
+Q_SIGNALS:
     void colorChanged(const QColor &color);
 };
 

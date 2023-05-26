@@ -19,7 +19,7 @@ public:
         connect(action, &QColorAction::colorChanged, widget, &QColorPushButton::colorChanged);
     }
 
-public slots:
+public Q_SLOTS:
     void syncButtonWithAction() {
         widget->setIcon(action->icon());
         widget->setText(action->text());

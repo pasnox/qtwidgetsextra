@@ -40,25 +40,25 @@ public:
         return color.name(QColor::HexArgb);
     }
 
-public slots:
+public Q_SLOTS:
     void textActivated(const QString &text) {
-        emit widget->activated(QColor(text));
+        Q_EMIT widget->activated(QColor(text));
     }
 
     void currentIndexChanged(int index) {
-        emit widget->currentIndexChanged(QColor(widget->itemText(index)));
+        Q_EMIT widget->currentIndexChanged(QColor(widget->itemText(index)));
     }
 
     void currentTextChanged(const QString &text) {
-        emit widget->currentTextChanged(QColor(text));
+        Q_EMIT widget->currentTextChanged(QColor(text));
     }
 
     void editTextChanged(const QString &text) {
-        emit widget->editTextChanged(QColor(text));
+        Q_EMIT widget->editTextChanged(QColor(text));
     }
 
     void textHighlighted(const QString &text) {
-        emit widget->highlighted(QColor(text));
+        Q_EMIT widget->highlighted(QColor(text));
     }
 
 public:

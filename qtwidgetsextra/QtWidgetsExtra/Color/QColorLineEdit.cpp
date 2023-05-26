@@ -29,7 +29,7 @@ public:
         }
     }
 
-public slots:
+public Q_SLOTS:
     void textEdited(const QString &text) {
         const QColor color = QColor(text);
 
@@ -55,7 +55,7 @@ public slots:
 
     void colorChanged(const QColor &color) {
         widget->setText(action->colorName(action->color()));
-        emit widget->colorChanged(color);
+        Q_EMIT widget->colorChanged(color);
     }
 
 public:

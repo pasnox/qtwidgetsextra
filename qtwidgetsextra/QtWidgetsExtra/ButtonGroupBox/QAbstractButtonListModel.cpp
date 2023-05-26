@@ -71,7 +71,7 @@ bool QAbstractButtonListModel::setData(const QModelIndex &index, const QVariant 
                 }
             }
 
-        emit dataChanged(index, index, QVector<int>() << role);
+        Q_EMIT dataChanged(index, index, QVector<int>() << role);
         return true;
     }
 

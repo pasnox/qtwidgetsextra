@@ -44,7 +44,7 @@ public:
     QMenu *downMenu() const;
     void setDownMenu(QMenu *menu);
 
-public slots:
+public Q_SLOTS:
     void upAnimateClick();
     void downAnimateClick();
     void upClick();
@@ -54,7 +54,7 @@ public slots:
     void upShowMenu();
     void downShowMenu();
 
-signals:
+Q_SIGNALS:
     void upClicked(bool checked = false);
     void downClicked(bool checked = false);
     void upPressed();

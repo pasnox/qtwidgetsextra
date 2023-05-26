@@ -29,7 +29,7 @@ public:
     QFileDialog::Options options() const;
     void setOptions(QFileDialog::Options options);
 
-signals:
+Q_SIGNALS:
     void filePathChanged(const QString &filePath);
 };
 

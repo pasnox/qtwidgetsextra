@@ -110,7 +110,7 @@ bool QColorListModel::setData(const QModelIndex &index, const QVariant &value, i
     if (index.row() >= 0 && index.row() < d->colors.size()
         && (role == Qt::EditRole || role == Qt::DisplayRole)) {
         d->colors.replace(index.row(), value.value<QColor>().name(QColor::HexArgb));
-        emit dataChanged(index, index, QVector<int>() << role);
+        Q_EMIT dataChanged(index, index, QVector<int>() << role);
         return true;
     }
 
@@ -153,7 +153,7 @@ bool QColorListModel::removeRows(int row, int count, const QModelIndex &parent)
 
 void QColorListModel::sort(int, Qt::SortOrder order)
 {
-    emit layoutAboutToBeChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
+    Q_EMIT layoutAboutToBeChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
 
     QList<QPair<QString, int> > list;
     for (int i = 0; i < d->colors.count(); ++i) {
@@ -181,7 +181,7 @@ void QColorListModel::sort(int, Qt::SortOrder order)
     }
     changePersistentIndexList(oldList, newList);
 
-    emit layoutChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
+    Q_EMIT layoutChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
 }
 
 Qt::DropActions QColorListModel::supportedDropActions() const
@@ -199,7 +199,7 @@ void QColorListModel::setNameFormat(QColorListModel::NameFormat nameFormat)
     d->nameFormat = nameFormat;
 
     if (rowCount() > 0) {
-        emit dataChanged(index(0,0), index(rowCount() -1, 0), QVector<int>() << Qt::DisplayRole);
+        Q_EMIT dataChanged(index(0,0), index(rowCount() -1, 0), QVector<int>() << Qt::DisplayRole);
     }
 }
 
@@ -216,9 +216,9 @@ void QColorListModel::setColorListNames(const QStringList &colorListNames)
         colors << QColor(colorName).name(QColor::HexArgb);
     }
 
-    emit beginResetModel();
+    Q_EMIT beginResetModel();
     d->colors = colors;
-    emit endResetModel();
+    Q_EMIT endResetModel();
 }
 
 QList<QColor> QColorListModel::colorsList() const
@@ -240,9 +240,9 @@ void QColorListModel::setColorsList(const QList<QColor> &colorsList)
         colors << color.name(QColor::HexArgb);
     }
 
-    emit beginResetModel();
+    Q_EMIT beginResetModel();
     d->colors = colors;
-    emit endResetModel();
+    Q_EMIT endResetModel();
 }
 
 #include "QColorListModel.moc"

@@ -66,7 +66,7 @@ public:
         connect(button, &QAbstractButton::toggled, this, &QCollapsibleFramePrivate::button_toggled);
     }
 
-public slots:
+public Q_SLOTS:
     void button_toggled(bool toggled) {
         switch (resizeBehavior) {
         case QCollapsibleFrame::RestoreWindowSizeBehavior:
@@ -79,10 +79,10 @@ public slots:
         collapsed = !toggled;
 
         if (collapsed) {
-            emit editor->aboutToCollapse();
+            Q_EMIT editor->aboutToCollapse();
         }
         else {
-            emit editor->aboutToExpand();
+            Q_EMIT editor->aboutToExpand();
         }
 
         button->setIcon(collapsed ? editor->collapsedIcon() : editor->expandedIcon());
@@ -127,7 +127,7 @@ public slots:
 
                 widget->resize(oldCollapsedSize);
             }
-            emit editor->collapsed();
+            Q_EMIT editor->collapsed();
         } else {
             if (oldExpandedSize.isValid()) {
                 const auto layouts = widget->findChildren<QLayout *>();
@@ -138,7 +138,7 @@ public slots:
 
                 widget->resize(oldExpandedSize);
             }
-            emit editor->expanded();
+            Q_EMIT editor->expanded();
         }
     }
 };
@@ -231,7 +231,7 @@ void QCollapsibleFrame::setTitle(QWidget *title)
         d->button_toggled(d->button->isChecked());
     }
 
-    emit titleChanged();
+    Q_EMIT titleChanged();
 }
 
 QWidget *QCollapsibleFrame::widget() const {
@@ -266,7 +266,7 @@ void QCollapsibleFrame::setWidget(QWidget *widget) {
         d->button_toggled(d->button->isChecked());
     }
 
-    emit widgetChanged();
+    Q_EMIT widgetChanged();
 }
 
 QString QCollapsibleFrame::collapseToolTip() const

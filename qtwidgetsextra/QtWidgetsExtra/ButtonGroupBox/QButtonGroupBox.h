@@ -73,7 +73,7 @@ public:
         setButtonData(index, role, QVariant::fromValue(data));
     }
 
-signals:
+Q_SIGNALS:
     void buttonClicked(int index, int id);
     void buttonPressed(int index, int id);
     void buttonReleased(int index, int id);

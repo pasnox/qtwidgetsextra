@@ -34,7 +34,7 @@ public:
     QColor currentColor() const;
     QColor currentTextColor() const;
 
-public slots:
+public Q_SLOTS:
     void setCurrentColorName(const QString &colorName);
     void setCurrentTextColorName(const QString &colorName);
     void setEditTextColorName(const QString &colorName);
@@ -46,7 +46,7 @@ public slots:
 protected:
     virtual void paintEvent(QPaintEvent *event);
 
-signals:
+Q_SIGNALS:
     void activated(const QColor &color);
     void currentIndexChanged(const QColor &color);
     void currentTextChanged(const QColor &color);

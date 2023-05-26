@@ -94,7 +94,7 @@ public:
         widget->selectionModel()->select(itemSelection, flags);
     }
 
-public slots:
+public Q_SLOTS:
     void activated(const QModelIndex &index) {
         if (!browsable || !model->isDir(index) || QApplication::keyboardModifiers() != Qt::NoModifier) {
             return;

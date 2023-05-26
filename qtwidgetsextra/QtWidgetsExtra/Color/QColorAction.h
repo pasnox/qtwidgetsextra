@@ -37,7 +37,7 @@ public:
     QIcon colorIcon(const QColor &color) const;
     QString colorName(const QColor &color) const;
 
-signals:
+Q_SIGNALS:
     void colorChanged(const QColor &color);
 };
 

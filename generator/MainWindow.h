@@ -20,7 +20,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private slots:
+private Q_SLOTS:
     void on_tbAdd_clicked();
     void on_tbRemove_clicked();
     void on_tbUp_clicked();

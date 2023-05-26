@@ -14,7 +14,7 @@ public:
     explicit QAbstractButtonLineEdit(QAction *action, QLineEdit::ActionPosition position, QWidget *parent = 0);
     explicit QAbstractButtonLineEdit(QMenu *menu, QLineEdit::ActionPosition position, QWidget *parent = 0);
 
-signals:
+Q_SIGNALS:
     void returnPressed(const QString &text);
     void editingFinished(const QString &text);
 };

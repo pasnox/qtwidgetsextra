@@ -71,7 +71,7 @@ public:
     void addSelection(QStringList &selection);
     void clearSelection();
 
-signals:
+Q_SIGNALS:
     void directoryLoaded(const QString &path);
     void fileRenamed(const QString &path, const QString &oldName, const QString &newName);
     void rootPathChanged(const QString &newPath);

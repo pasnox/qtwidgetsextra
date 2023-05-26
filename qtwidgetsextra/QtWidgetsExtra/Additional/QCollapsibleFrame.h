@@ -38,7 +38,7 @@ public:
   bool isExpanded() const;
   int indentation() const;
 
-public slots:
+public Q_SLOTS:
   void setCollapseToolTip(const QString &toolTip);
   void setCollapsedIcon(const QIcon &icon);
   void setExpandedIcon(const QIcon &icon);
@@ -47,7 +47,7 @@ public slots:
   void setExpanded(bool expanded);
   void setIndentation(int indentation);
 
-signals:
+Q_SIGNALS:
   void titleChanged();
   void widgetChanged();
   void aboutToCollapse();

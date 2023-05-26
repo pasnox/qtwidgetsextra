@@ -47,21 +47,21 @@ public:
 
         connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonClicked),
                 this, [this](QAbstractButton *button) {
-            emit this->widget->buttonClicked(layout->indexOf(button), group->id(button));
+            Q_EMIT this->widget->buttonClicked(layout->indexOf(button), group->id(button));
         });
         connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonPressed),
                 this, [this](QAbstractButton *button) {
-            emit this->widget->buttonPressed(layout->indexOf(button), group->id(button));
+            Q_EMIT this->widget->buttonPressed(layout->indexOf(button), group->id(button));
         });
         connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonReleased),
                 this, [this](QAbstractButton *button) {
-            emit this->widget->buttonReleased(layout->indexOf(button), group->id(button));
+            Q_EMIT this->widget->buttonReleased(layout->indexOf(button), group->id(button));
         });
         connect(group, qOverload<QAbstractButton *, bool>(&QButtonGroup::buttonToggled),
                 this, [this](QAbstractButton *button, bool checked) {
             const int index = layout->indexOf(button);
             this->model->setData(this->model->index(index), checked ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
-            emit this->widget->buttonToggled(index, group->id(button), checked);
+            Q_EMIT this->widget->buttonToggled(index, group->id(button), checked);
         });
     }
 

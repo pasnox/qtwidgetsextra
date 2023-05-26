@@ -308,7 +308,7 @@ QString Generator::classHeader() const
     if (hasSignals) {
         output << QString();
 
-        output << QStringLiteral("signals:");
+        output << QStringLiteral("Q_SIGNALS:");
 
         foreach (const Generator::Entry &entry, m_entries) {
             if (!entry.s) {

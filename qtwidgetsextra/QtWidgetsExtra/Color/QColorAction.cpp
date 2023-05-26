@@ -16,7 +16,7 @@ public:
         connect(action, &QAction::triggered, this, &QColorActionPrivate::triggered);
     }
 
-public slots:
+public Q_SLOTS:
     void triggered() {
         const QColor newColor = QColorDialog::getColor(color, 0, caption, QColorDialog::ColorDialogOptions(int(options)));
 
@@ -72,7 +72,7 @@ void QColorAction::setColor(const QColor &color)
     setIcon(colorIcon(d->color));
     setText(colorName(color));
     setToolTip(text());
-    emit colorChanged(d->color);
+    Q_EMIT colorChanged(d->color);
 }
 
 QString QColorAction::caption() const

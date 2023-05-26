@@ -21,7 +21,7 @@ public:
         connect(action, &QFileAction::filePathChanged, widget, &QSaveFileLineEdit::filePathChanged);
     }
 
-public slots:
+public Q_SLOTS:
     void textChanged(const QString &text) {
         action->setFilePath(text);
     }
