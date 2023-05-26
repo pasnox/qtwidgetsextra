@@ -14,7 +14,7 @@ public:
         Q_ASSERT(widget);
 
         action->setType(QFileAction::OpenFile);
-        widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
+        widget->addAction(action, position);
 
         connect(widget, &QLineEdit::textChanged, this, &QOpenFileLineEditPrivate::textChanged);
         connect(action, &QFileAction::filePathChanged, this, &QOpenFileLineEditPrivate::filePathChanged);
@@ -34,6 +34,7 @@ public Q_SLOTS:
 
 public:
     QOpenFileLineEdit *widget;
+    QLineEdit::ActionPosition position = QLineEdit::ActionPosition::LeadingPosition;
     QFileAction *action;
 };
 
@@ -41,6 +42,20 @@ QOpenFileLineEdit::QOpenFileLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
     , d(new QOpenFileLineEditPrivate(this))
 {
+}
+
+QLineEdit::ActionPosition QOpenFileLineEdit::embededActionPosition() const
+{
+    return d->position;
+}
+
+void QOpenFileLineEdit::setEmbededActionPosition(ActionPosition position)
+{
+    if (d->position != position) {
+        d->position = position;
+        addAction(d->action, d->position);
+        Q_EMIT embededActionPositionChanged(d->position);
+    }
 }
 
 QString QOpenFileLineEdit::filePath() const

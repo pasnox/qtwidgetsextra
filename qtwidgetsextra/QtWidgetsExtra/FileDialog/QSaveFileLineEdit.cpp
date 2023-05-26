@@ -14,7 +14,7 @@ public:
         Q_ASSERT(widget);
 
         action->setType(QFileAction::SaveFile);
-        widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
+        widget->addAction(action, position);
 
         connect(widget, &QLineEdit::textChanged, this, &QSaveFileLineEditPrivate::textChanged);
         connect(action, &QFileAction::filePathChanged, this, &QSaveFileLineEditPrivate::filePathChanged);
@@ -34,6 +34,7 @@ public Q_SLOTS:
 
 public:
     QSaveFileLineEdit *widget;
+    QLineEdit::ActionPosition position = QLineEdit::ActionPosition::LeadingPosition;
     QFileAction *action;
 };
 
@@ -41,6 +42,20 @@ QSaveFileLineEdit::QSaveFileLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
     , d(new QSaveFileLineEditPrivate(this))
 {
+}
+
+QLineEdit::ActionPosition QSaveFileLineEdit::embededActionPosition() const
+{
+    return d->position;
+}
+
+void QSaveFileLineEdit::setEmbededActionPosition(ActionPosition position)
+{
+    if (d->position != position) {
+        d->position = position;
+        addAction(d->action, d->position);
+        Q_EMIT embededActionPositionChanged(d->position);
+    }
 }
 
 QString QSaveFileLineEdit::filePath() const

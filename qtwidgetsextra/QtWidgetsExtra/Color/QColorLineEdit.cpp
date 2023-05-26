@@ -11,7 +11,7 @@ public:
         , action(new QColorAction(this)) {
         Q_ASSERT(widget);
 
-        widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
+        widget->addAction(action, position);
         widget->setText(action->colorName(action->color()));
         updateValidator();
 
@@ -60,6 +60,7 @@ public Q_SLOTS:
 
 public:
     QColorLineEdit *widget;
+    QLineEdit::ActionPosition position = QLineEdit::ActionPosition::LeadingPosition;
     QColorAction *action;
 };
 
@@ -81,6 +82,20 @@ QColorLineEdit::QColorLineEdit(const QString &colorName, QWidget *parent)
     , d(new QColorLineEditPrivate(this))
 {
     d->action->setColor(QColor(colorName));
+}
+
+QLineEdit::ActionPosition QColorLineEdit::embededActionPosition() const
+{
+    return d->position;
+}
+
+void QColorLineEdit::setEmbededActionPosition(ActionPosition position)
+{
+    if (d->position != position) {
+        d->position = position;
+        addAction(d->action, d->position);
+        Q_EMIT embededActionPositionChanged(d->position);
+    }
 }
 
 QColor QColorLineEdit::color() const
