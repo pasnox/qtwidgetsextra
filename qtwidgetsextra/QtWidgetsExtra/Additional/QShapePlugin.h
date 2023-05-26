@@ -1,5 +1,4 @@
-#ifndef QSHAPEPLUGIN_H
-#define QSHAPEPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QSHAPEPLUGIN_H

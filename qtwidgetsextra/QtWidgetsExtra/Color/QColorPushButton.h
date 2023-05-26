@@ -1,5 +1,4 @@
-#ifndef QCOLORPUSHBUTTON_H
-#define QCOLORPUSHBUTTON_H
+#pragma once
 
 #include <QPushButton>
 
@@ -32,5 +31,3 @@ public:
 Q_SIGNALS:
     void colorChanged(const QColor &color);
 };
-
-#endif // QCOLORPUSHBUTTON_H

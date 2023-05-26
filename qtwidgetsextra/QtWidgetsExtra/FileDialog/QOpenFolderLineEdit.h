@@ -1,5 +1,4 @@
-#ifndef QOPENFOLDERLINEEDIT_H
-#define QOPENFOLDERLINEEDIT_H
+#pragma once
 
 #include <QtWidgetsExtra/QAbstractButtonLineEdit.h>
 
@@ -38,5 +37,3 @@ Q_SIGNALS:
     void embededActionPositionChanged(QLineEdit::ActionPosition position);
     void filePathChanged(const QString &filePath);
 };
-
-#endif // QOPENFOLDERLINEEDIT_H

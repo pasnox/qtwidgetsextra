@@ -1,5 +1,4 @@
-#ifndef QOPENFOLDERBUTTONPLUGIN_H
-#define QOPENFOLDERBUTTONPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QOPENFOLDERBUTTONPLUGIN_H

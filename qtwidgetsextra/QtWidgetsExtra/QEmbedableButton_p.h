@@ -1,5 +1,4 @@
-#ifndef QEMBEDABLEBUTTON_P_H
-#define QEMBEDABLEBUTTON_P_H
+#pragma once
 
 #include <QToolButton>
 
@@ -21,5 +20,3 @@ protected:
 private:
     bool embeded;
 };
-
-#endif // QEMBEDABLEBUTTON_P_H

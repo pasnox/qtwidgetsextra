@@ -1,5 +1,4 @@
-#ifndef QCOLORLINEEDIT_H
-#define QCOLORLINEEDIT_H
+#pragma once
 
 #include <QtWidgetsExtra/QAbstractButtonLineEdit.h>
 #include <QtWidgetsExtra/Color/QColorAction.h>
@@ -35,5 +34,3 @@ Q_SIGNALS:
     void embededActionPositionChanged(QLineEdit::ActionPosition position);
     void colorChanged(const QColor &color);
 };
-
-#endif // QCOLORLINEEDIT_H

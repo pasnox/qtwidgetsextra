@@ -1,5 +1,4 @@
-#ifndef QFILESYSTEMTREEVIEWPLUGIN_H
-#define QFILESYSTEMTREEVIEWPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QFILESYSTEMTREEVIEWPLUGIN_H

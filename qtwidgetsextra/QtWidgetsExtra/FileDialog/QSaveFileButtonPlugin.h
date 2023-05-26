@@ -1,5 +1,4 @@
-#ifndef QSAVEFILEBUTTONPLUGIN_H
-#define QSAVEFILEBUTTONPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QSAVEFILEBUTTONPLUGIN_H

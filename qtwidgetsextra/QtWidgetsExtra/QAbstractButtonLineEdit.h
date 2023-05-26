@@ -1,5 +1,4 @@
-#ifndef QABSTRACTBUTTONLINEEDIT_H
-#define QABSTRACTBUTTONLINEEDIT_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -20,5 +19,3 @@ Q_SIGNALS:
     void returnPressed(const QString &text);
     void editingFinished(const QString &text);
 };
-
-#endif // QABSTRACTBUTTONLINEEDIT_H

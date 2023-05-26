@@ -1,5 +1,4 @@
-#ifndef QCOLORPUSHBUTTONPLUGIN_H
-#define QCOLORPUSHBUTTONPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QCOLORPUSHBUTTONPLUGIN_H

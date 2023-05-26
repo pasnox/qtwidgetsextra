@@ -1,5 +1,4 @@
-#ifndef QFILESYSTEMLISTVIEWPLUGIN_H
-#define QFILESYSTEMLISTVIEWPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QFILESYSTEMLISTVIEWPLUGIN_H

@@ -1,5 +1,4 @@
-#ifndef QCOLORLISTVIEWPLUGIN_H
-#define QCOLORLISTVIEWPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QCOLORLISTVIEWPLUGIN_H

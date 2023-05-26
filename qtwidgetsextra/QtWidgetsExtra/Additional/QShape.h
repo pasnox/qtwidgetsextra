@@ -1,5 +1,4 @@
-#ifndef QSHAPE_H
-#define QSHAPE_H
+#pragma once
 
 #include <QFrame>
 #include <QBrush>
@@ -79,5 +78,3 @@ protected:
     virtual void paintEvent(QPaintEvent *event);
     virtual void resizeEvent(QResizeEvent *event);
 };
-
-#endif // QSHAPE_H

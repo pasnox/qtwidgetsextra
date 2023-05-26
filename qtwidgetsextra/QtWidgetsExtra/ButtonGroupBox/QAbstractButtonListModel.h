@@ -1,5 +1,4 @@
-#ifndef QABSTRACTBUTTONLISTMODEL_H
-#define QABSTRACTBUTTONLISTMODEL_H
+#pragma once
 
 #include <QAbstractItemModel>
 
@@ -30,5 +29,3 @@ public:
 
     void clear();
 };
-
-#endif // QABSTRACTBUTTONLISTMODEL_H

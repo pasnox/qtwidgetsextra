@@ -1,5 +1,4 @@
-#ifndef QCOLORLINEEDITPLUGIN_H
-#define QCOLORLINEEDITPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QCOLORLINEEDITPLUGIN_H

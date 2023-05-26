@@ -1,5 +1,4 @@
-#ifndef QBUTTONGROUPBOX_H
-#define QBUTTONGROUPBOX_H
+#pragma once
 
 #include <QGroupBox>
 #include <QVariant>
@@ -84,5 +83,3 @@ Q_SIGNALS:
 protected:
     virtual QAbstractButton *createButton() const;
 };
-
-#endif // QBUTTONGROUPBOX_H

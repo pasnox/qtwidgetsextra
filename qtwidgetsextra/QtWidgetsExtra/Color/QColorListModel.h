@@ -1,5 +1,4 @@
-#ifndef QCOLORLISTMODEL_H
-#define QCOLORLISTMODEL_H
+#pragma once
 
 #include <QAbstractItemModel>
 #include <QStringList>
@@ -53,5 +52,3 @@ public:
     QList<QColor> colorsList() const;
     void setColorsList(const QList<QColor> &colors);
 };
-
-#endif // QCOLORLISTMODEL_H

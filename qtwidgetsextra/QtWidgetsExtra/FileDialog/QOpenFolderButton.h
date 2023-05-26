@@ -1,5 +1,4 @@
-#ifndef QOPENFOLDERBUTTON_H
-#define QOPENFOLDERBUTTON_H
+#pragma once
 
 #include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/FileDialog/QFileAction.h>
@@ -32,5 +31,3 @@ public:
 Q_SIGNALS:
     void filePathChanged(const QString &filePath);
 };
-
-#endif // QOPENFOLDERBUTTON_H

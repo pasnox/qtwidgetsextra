@@ -1,5 +1,4 @@
-#ifndef QTWIDGETSEXTRACACHE_H
-#define QTWIDGETSEXTRACACHE_H
+#pragma once
 
 #include <QString>
 
@@ -19,5 +18,3 @@ namespace QtWidgetsExtraCache
     QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QIcon cachedIcon(const QString &key);
     QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QIcon cachedIconColor(const QColor &color, const QSize &size);
 }
-
-#endif // QTWIDGETSEXTRACACHE_H

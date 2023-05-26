@@ -1,5 +1,4 @@
-#ifndef QOPENFOLDERLINEEDITPLUGIN_H
-#define QOPENFOLDERLINEEDITPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QOPENFOLDERLINEEDITPLUGIN_H

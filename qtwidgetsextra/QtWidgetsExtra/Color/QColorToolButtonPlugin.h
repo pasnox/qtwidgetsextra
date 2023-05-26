@@ -1,5 +1,4 @@
-#ifndef QCOLORTOOLBUTTONPLUGIN_H
-#define QCOLORTOOLBUTTONPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QCOLORTOOLBUTTONPLUGIN_H

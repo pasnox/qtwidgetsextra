@@ -1,5 +1,4 @@
-#ifndef QFILESYSTEMTREEVIEW_H
-#define QFILESYSTEMTREEVIEW_H
+#pragma once
 
 #include <QTreeView>
 #include <QDir>
@@ -74,5 +73,3 @@ Q_SIGNALS:
     void fileRenamed(const QString &path, const QString &oldName, const QString &newName);
     void rootPathChanged(const QString &newPath);
 };
-
-#endif // QFILESYSTEMTREEVIEW_H

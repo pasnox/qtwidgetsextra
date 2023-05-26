@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -36,5 +35,3 @@ private:
     void apply();
     void save();
 };
-
-#endif // MAINWINDOW_H

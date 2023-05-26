@@ -1,5 +1,4 @@
-#ifndef QUPDOWNBUTTON_H
-#define QUPDOWNBUTTON_H
+#pragma once
 
 #include <QWidget>
 #include <QToolButton>
@@ -68,5 +67,3 @@ Q_SIGNALS:
     void upTriggered(QAction *action);
     void downTriggered(QAction *action);
 };
-
-#endif // QUPDOWNBUTTON_H

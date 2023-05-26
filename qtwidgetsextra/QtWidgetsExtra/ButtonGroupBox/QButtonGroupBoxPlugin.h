@@ -1,5 +1,4 @@
-#ifndef QBUTTONGROUPBOXPLUGIN_H
-#define QBUTTONGROUPBOXPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -27,5 +26,3 @@ private:
     bool m_initialized;
 
 };
-
-#endif // QBUTTONGROUPBOXPLUGIN_H

@@ -1,5 +1,4 @@
-#ifndef GENERATOR_H
-#define GENERATOR_H
+#pragma once
 
 #include <QList>
 #include <QStringList>
@@ -95,5 +94,3 @@ private:
     QString privateObjectName() const;
     QString inheritingTypeClassName() const;
 };
-
-#endif // GENERATOR_H

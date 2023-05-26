@@ -1,5 +1,4 @@
-#ifndef QSAVEFILELINEEDITPLUGIN_H
-#define QSAVEFILELINEEDITPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QSAVEFILELINEEDITPLUGIN_H

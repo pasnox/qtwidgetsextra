@@ -1,5 +1,4 @@
-#ifndef QOPENFILELINEEDITPLUGIN_H
-#define QOPENFILELINEEDITPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QOPENFILELINEEDITPLUGIN_H

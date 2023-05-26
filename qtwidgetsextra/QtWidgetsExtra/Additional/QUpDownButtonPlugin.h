@@ -1,5 +1,4 @@
-#ifndef QUPDOWNBUTTONPLUGIN_H
-#define QUPDOWNBUTTONPLUGIN_H
+#pragma once
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
@@ -26,5 +25,3 @@ public:
 private:
     bool m_initialized;
 };
-
-#endif // QUPDOWNBUTTONPLUGIN_H

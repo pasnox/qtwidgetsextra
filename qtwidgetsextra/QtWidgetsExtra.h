@@ -1,5 +1,4 @@
-#ifndef QTWIDGETSEXTRA_H
-#define QTWIDGETSEXTRA_H
+#pragma once
 
 #include <QtDesigner>
 #include <QtPlugin>
@@ -20,5 +19,3 @@ public:
 private:
     QList<QDesignerCustomWidgetInterface*> m_widgets;
 };
-
-#endif

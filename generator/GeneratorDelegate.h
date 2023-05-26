@@ -1,5 +1,4 @@
-#ifndef GENERATORDELEGATE_H
-#define GENERATORDELEGATE_H
+#pragma once
 
 #include <QStyledItemDelegate>
 
@@ -30,5 +29,3 @@ public:
 
     static const QHash<QString, Generator::ParameterType>& constTypes();
 };
-
-#endif // GENERATORDELEGATE_H

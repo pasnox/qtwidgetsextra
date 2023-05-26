@@ -1,5 +1,4 @@
-#ifndef QCOLORACTION_H
-#define QCOLORACTION_H
+#pragma once
 
 #include <QAction>
 #include <QColorDialog>
@@ -44,5 +43,3 @@ Q_SIGNALS:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(QColorAction::ColorDialogOptions)
-
-#endif // QCOLORACTION_H

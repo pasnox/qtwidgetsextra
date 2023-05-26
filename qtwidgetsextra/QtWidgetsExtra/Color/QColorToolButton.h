@@ -1,5 +1,4 @@
-#ifndef QCOLORTOOLBUTTON_H
-#define QCOLORTOOLBUTTON_H
+#pragma once
 
 #include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/Color/QColorAction.h>
@@ -30,5 +29,3 @@ public:
 Q_SIGNALS:
     void colorChanged(const QColor &color);
 };
-
-#endif // QCOLORTOOLBUTTON_H

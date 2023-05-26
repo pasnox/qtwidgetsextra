@@ -1,5 +1,4 @@
-#ifndef QFILESYSTEMLISTVIEW_H
-#define QFILESYSTEMLISTVIEW_H
+#pragma once
 
 #include <QListView>
 #include <QDir>
@@ -78,5 +77,3 @@ Q_SIGNALS:
     void fileRenamed(const QString &path, const QString &oldName, const QString &newName);
     void rootPathChanged(const QString &newPath);
 };
-
-#endif // QFILESYSTEMLISTVIEW_H

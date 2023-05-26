@@ -1,5 +1,4 @@
-#ifndef QCOLORCOMBOBOX_H
-#define QCOLORCOMBOBOX_H
+#pragma once
 
 #include <QComboBox>
 
@@ -53,5 +52,3 @@ Q_SIGNALS:
     void editTextChanged(const QColor &color);
     void highlighted(const QColor &color);
 };
-
-#endif // QCOLORCOMBOBOX_H

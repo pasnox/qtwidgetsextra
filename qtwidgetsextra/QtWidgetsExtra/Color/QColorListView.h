@@ -1,5 +1,4 @@
-#ifndef QCOLORLISTVIEW_H
-#define QCOLORLISTVIEW_H
+#pragma once
 
 #include <QListView>
 
@@ -33,5 +32,3 @@ public:
     QList<QColor> selectedColorsList() const;
     void setSelectedColorsList(const QList<QColor> &colorsList);
 };
-
-#endif // QCOLORLISTVIEW_H

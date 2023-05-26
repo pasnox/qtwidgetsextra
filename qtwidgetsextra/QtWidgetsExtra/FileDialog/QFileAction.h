@@ -1,5 +1,4 @@
-#ifndef QFILEACTION_H
-#define QFILEACTION_H
+#pragma once
 
 #include <QAction>
 #include <QFileDialog>
@@ -43,5 +42,3 @@ public:
 Q_SIGNALS:
     void filePathChanged(const QString &filePath);
 };
-
-#endif // QFILEACTION_H
