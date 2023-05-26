@@ -19,7 +19,7 @@ public:
         ColumnProperty
     };
 
-    explicit GeneratorDelegate(QObject *parent = 0);
+    explicit GeneratorDelegate(QObject *parent = nullptr);
 
     virtual QWidget *createEditor( QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index ) const;
     virtual void setEditorData( QWidget *editor, const QModelIndex &index ) const;

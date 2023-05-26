@@ -47,8 +47,8 @@ public:
         User = 0x0
     };
 
-    explicit QShape(QWidget *parent = 0);
-    explicit QShape(QShape::Shape shape, QWidget *parent = 0);
+    explicit QShape(QWidget *parent = nullptr);
+    explicit QShape(QShape::Shape shape, QWidget *parent = nullptr);
 
     virtual QSize minimumSizeHint() const;
     virtual QSize sizeHint() const;

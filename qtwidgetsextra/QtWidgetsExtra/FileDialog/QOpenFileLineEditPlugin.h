@@ -8,7 +8,7 @@ class QOpenFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInte
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QOpenFileLineEditPlugin(QObject *parent = 0);
+    QOpenFileLineEditPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

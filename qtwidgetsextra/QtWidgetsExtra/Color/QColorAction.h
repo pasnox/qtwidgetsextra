@@ -22,9 +22,9 @@ public:
     };
     Q_DECLARE_FLAGS(ColorDialogOptions, ColorDialogOption)
 
-    explicit QColorAction(QObject *parent = 0);
-    explicit QColorAction(const QColor &color, QObject *parent = 0);
-    explicit QColorAction(const QString &colorName, QObject *parent = 0);
+    explicit QColorAction(QObject *parent = nullptr);
+    explicit QColorAction(const QColor &color, QObject *parent = nullptr);
+    explicit QColorAction(const QString &colorName, QObject *parent = nullptr);
 
     QColor color() const;
     void setColor(const QColor &color);

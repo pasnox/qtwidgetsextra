@@ -24,9 +24,9 @@ public:
         HexArgbName = Qt::UserRole
     };
 
-    explicit QColorListModel(QObject *parent = 0);
-    explicit QColorListModel(const QStringList &colorListNames, QObject *parent = 0);
-    explicit QColorListModel(const QList<QColor> &colorsList, QObject *parent = 0);
+    explicit QColorListModel(QObject *parent = nullptr);
+    explicit QColorListModel(const QStringList &colorListNames, QObject *parent = nullptr);
+    explicit QColorListModel(const QList<QColor> &colorsList, QObject *parent = nullptr);
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QModelIndex sibling(int row, int column, const QModelIndex &idx) const;

@@ -8,7 +8,7 @@ class QSaveFileButtonPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QSaveFileButtonPlugin(QObject *parent = 0);
+    QSaveFileButtonPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

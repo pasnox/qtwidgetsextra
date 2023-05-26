@@ -8,7 +8,7 @@ class QColorToolButtonPlugin : public QObject, public QDesignerCustomWidgetInter
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QColorToolButtonPlugin(QObject *parent = 0);
+    QColorToolButtonPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

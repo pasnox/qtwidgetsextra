@@ -11,9 +11,9 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonLineEdit : pub
     class QAbstractButtonLineEditPrivate* d;
 
 public:
-    explicit QAbstractButtonLineEdit(QWidget *parent = 0);
-    explicit QAbstractButtonLineEdit(QAction *action, QLineEdit::ActionPosition position, QWidget *parent = 0);
-    explicit QAbstractButtonLineEdit(QMenu *menu, QLineEdit::ActionPosition position, QWidget *parent = 0);
+    explicit QAbstractButtonLineEdit(QWidget *parent = nullptr);
+    explicit QAbstractButtonLineEdit(QAction *action, QLineEdit::ActionPosition position, QWidget *parent = nullptr);
+    explicit QAbstractButtonLineEdit(QMenu *menu, QLineEdit::ActionPosition position, QWidget *parent = nullptr);
 
 Q_SIGNALS:
     void returnPressed(const QString &text);

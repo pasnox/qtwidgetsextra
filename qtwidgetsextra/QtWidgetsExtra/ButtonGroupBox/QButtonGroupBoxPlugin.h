@@ -8,7 +8,7 @@ class QButtonGroupBoxPlugin : public QObject, public QDesignerCustomWidgetInterf
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QButtonGroupBoxPlugin(QObject *parent = 0);
+    QButtonGroupBoxPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

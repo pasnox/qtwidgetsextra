@@ -9,7 +9,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QEmbedableButton : public QTo
     Q_OBJECT
 
 public:
-    explicit QEmbedableButton(QWidget *parent = 0);
+    explicit QEmbedableButton(QWidget *parent = nullptr);
 
     bool isEmbeded() const;
     void setEmbeded(bool embed);

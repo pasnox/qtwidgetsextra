@@ -8,7 +8,7 @@ class QColorListViewPlugin : public QObject, public QDesignerCustomWidgetInterfa
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QColorListViewPlugin(QObject *parent = 0);
+    QColorListViewPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

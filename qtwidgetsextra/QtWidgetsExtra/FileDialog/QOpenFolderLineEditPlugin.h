@@ -8,7 +8,7 @@ class QOpenFolderLineEditPlugin : public QObject, public QDesignerCustomWidgetIn
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QOpenFolderLineEditPlugin(QObject *parent = 0);
+    QOpenFolderLineEditPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

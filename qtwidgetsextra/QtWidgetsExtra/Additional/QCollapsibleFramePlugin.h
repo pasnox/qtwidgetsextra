@@ -8,7 +8,7 @@ class QCollapsibleFramePlugin : public QObject, public QDesignerCustomWidgetInte
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QCollapsibleFramePlugin(QObject *parent = 0);
+    QCollapsibleFramePlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

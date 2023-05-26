@@ -19,7 +19,7 @@ public:
         OpenFolder
     };
 
-    explicit QFileAction(QObject *parent = 0);
+    explicit QFileAction(QObject *parent = nullptr);
 
     QFileAction::Type type() const;
     void setType(QFileAction::Type type);

@@ -13,9 +13,9 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListView : public QList
     Q_PROPERTY(QStringList colorListNames READ colorListNames WRITE setColorListNames)
 
 public:
-    explicit QColorListView(QWidget *parent = 0);
-    explicit QColorListView(const QStringList &colorListNames, QWidget *parent = 0);
-    explicit QColorListView(const QList<QColor> &colorsList, QWidget *parent = 0);
+    explicit QColorListView(QWidget *parent = nullptr);
+    explicit QColorListView(const QStringList &colorListNames, QWidget *parent = nullptr);
+    explicit QColorListView(const QList<QColor> &colorsList, QWidget *parent = nullptr);
 
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);

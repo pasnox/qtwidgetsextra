@@ -18,8 +18,8 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QUpDownButton : public QWidge
     Q_PROPERTY(QKeySequence downShortcut READ downShortcut WRITE setDownShortcut)
 
 public:
-    explicit QUpDownButton(QWidget *parent = 0);
-    explicit QUpDownButton(Qt::Orientation orientation, QWidget *parent = 0);
+    explicit QUpDownButton(QWidget *parent = nullptr);
+    explicit QUpDownButton(Qt::Orientation orientation, QWidget *parent = nullptr);
 
     Qt::Orientation orientation() const;
     void setOrientation(Qt::Orientation orientation);

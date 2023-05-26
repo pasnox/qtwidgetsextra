@@ -15,7 +15,7 @@ public:
         ShortcutRole
     };
 
-    explicit QAbstractButtonListModel(QObject *parent = 0);
+    explicit QAbstractButtonListModel(QObject *parent = nullptr);
 
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
 

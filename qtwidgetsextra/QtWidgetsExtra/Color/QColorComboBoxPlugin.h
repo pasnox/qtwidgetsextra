@@ -8,7 +8,7 @@ class QColorComboBoxPlugin : public QObject, public QDesignerCustomWidgetInterfa
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QColorComboBoxPlugin(QObject *parent = 0);
+    QColorComboBoxPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

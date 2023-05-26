@@ -39,7 +39,7 @@ public:
 
     Q_DECLARE_FLAGS(Sections, SectionFlag)
 
-    explicit QFileSystemListView(QWidget *parent = 0);
+    explicit QFileSystemListView(QWidget *parent = nullptr);
 
     void setModel(QAbstractItemModel *model) Q_DECL_OVERRIDE;
 

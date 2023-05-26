@@ -14,7 +14,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFolderButton : public QE
     Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
-    explicit QOpenFolderButton(QWidget *parent = 0);
+    explicit QOpenFolderButton(QWidget *parent = nullptr);
 
     QString filePath() const;
     void setFilePath(const QString &filePath);

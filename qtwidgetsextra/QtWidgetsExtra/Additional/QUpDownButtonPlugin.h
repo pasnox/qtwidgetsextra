@@ -8,7 +8,7 @@ class QUpDownButtonPlugin : public QObject, public QDesignerCustomWidgetInterfac
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QUpDownButtonPlugin(QObject *parent = 0);
+    QUpDownButtonPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

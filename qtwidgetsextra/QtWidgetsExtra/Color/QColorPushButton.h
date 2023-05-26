@@ -15,9 +15,9 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorPushButton : public QPu
 
 public:
 
-    explicit QColorPushButton(QWidget *parent = 0);
-    explicit QColorPushButton(const QColor &color, QWidget *parent = 0);
-    explicit QColorPushButton(const QString &colorName, QWidget *parent = 0);
+    explicit QColorPushButton(QWidget *parent = nullptr);
+    explicit QColorPushButton(const QColor &color, QWidget *parent = nullptr);
+    explicit QColorPushButton(const QString &colorName, QWidget *parent = nullptr);
 
     QColor color() const;
     void setColor(const QColor &color);

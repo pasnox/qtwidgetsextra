@@ -8,7 +8,7 @@ class QShapePlugin : public QObject, public QDesignerCustomWidgetInterface
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QShapePlugin(QObject *parent = 0);
+    QShapePlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

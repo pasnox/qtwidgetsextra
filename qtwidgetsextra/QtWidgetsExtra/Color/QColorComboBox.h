@@ -14,9 +14,9 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorComboBox : public QComb
     Q_PROPERTY(QString currentColorName READ currentColorName WRITE setCurrentColorName USER true)
 
 public:
-    explicit QColorComboBox(QWidget *parent = 0);
-    explicit QColorComboBox(const QStringList &colorListNames, QWidget *parent = 0);
-    explicit QColorComboBox(const QList<QColor> &colorsList, QWidget *parent = 0);
+    explicit QColorComboBox(QWidget *parent = nullptr);
+    explicit QColorComboBox(const QStringList &colorListNames, QWidget *parent = nullptr);
+    explicit QColorComboBox(const QList<QColor> &colorsList, QWidget *parent = nullptr);
 
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);

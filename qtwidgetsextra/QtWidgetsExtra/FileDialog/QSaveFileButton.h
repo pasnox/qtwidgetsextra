@@ -15,7 +15,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QSaveFileButton : public QEmb
     Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
-    explicit QSaveFileButton(QWidget *parent = 0);
+    explicit QSaveFileButton(QWidget *parent = nullptr);
 
     QString filePath() const;
     void setFilePath(const QString &filePath);

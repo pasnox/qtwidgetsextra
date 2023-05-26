@@ -13,9 +13,9 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorToolButton : public QEm
     Q_PROPERTY(QColorAction::ColorDialogOptions options READ options WRITE setOptions)
 
 public:
-    explicit QColorToolButton(QWidget *parent = 0);
-    explicit QColorToolButton(const QColor &color, QWidget *parent = 0);
-    explicit QColorToolButton(const QString &colorName, QWidget *parent = 0);
+    explicit QColorToolButton(QWidget *parent = nullptr);
+    explicit QColorToolButton(const QColor &color, QWidget *parent = nullptr);
+    explicit QColorToolButton(const QString &colorName, QWidget *parent = nullptr);
 
     QColor color() const;
     void setColor(const QColor &color);

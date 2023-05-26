@@ -8,7 +8,7 @@ class QColorLineEditPlugin : public QObject, public QDesignerCustomWidgetInterfa
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QColorLineEditPlugin(QObject *parent = 0);
+    QColorLineEditPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

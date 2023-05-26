@@ -8,7 +8,7 @@ class QFileSystemListViewPlugin : public QObject, public QDesignerCustomWidgetIn
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QFileSystemListViewPlugin(QObject *parent = 0);
+    QFileSystemListViewPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

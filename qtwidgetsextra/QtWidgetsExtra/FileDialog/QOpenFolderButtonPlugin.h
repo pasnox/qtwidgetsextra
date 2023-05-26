@@ -8,7 +8,7 @@ class QOpenFolderButtonPlugin : public QObject, public QDesignerCustomWidgetInte
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QOpenFolderButtonPlugin(QObject *parent = 0);
+    QOpenFolderButtonPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

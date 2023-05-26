@@ -38,7 +38,7 @@ public:
 
     Q_DECLARE_FLAGS(Sections, SectionFlag)
 
-    explicit QFileSystemTreeView(QWidget *parent = 0);
+    explicit QFileSystemTreeView(QWidget *parent = nullptr);
 
     void setModel(QAbstractItemModel *model) Q_DECL_OVERRIDE;
 

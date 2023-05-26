@@ -8,7 +8,7 @@ class QFileSystemTreeViewPlugin : public QObject, public QDesignerCustomWidgetIn
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QFileSystemTreeViewPlugin(QObject *parent = 0);
+    QFileSystemTreeViewPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

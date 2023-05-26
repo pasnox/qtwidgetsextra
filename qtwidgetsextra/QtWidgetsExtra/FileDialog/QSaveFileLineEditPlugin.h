@@ -8,7 +8,7 @@ class QSaveFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInte
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QSaveFileLineEditPlugin(QObject *parent = 0);
+    QSaveFileLineEditPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

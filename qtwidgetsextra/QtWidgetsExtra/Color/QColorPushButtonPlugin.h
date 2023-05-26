@@ -8,7 +8,7 @@ class QColorPushButtonPlugin : public QObject, public QDesignerCustomWidgetInter
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 
 public:
-    QColorPushButtonPlugin(QObject *parent = 0);
+    QColorPushButtonPlugin(QObject *parent = nullptr);
 
     bool isContainer() const;
     bool isInitialized() const;

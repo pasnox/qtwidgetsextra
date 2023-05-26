@@ -12,7 +12,7 @@ class QtWidgetsExtra : public QObject, public QDesignerCustomWidgetCollectionInt
 #endif // QT_VERSION >= 0x050000
 
 public:
-    explicit QtWidgetsExtra(QObject *parent = 0);
+    explicit QtWidgetsExtra(QObject *parent = nullptr);
 
     virtual QList<QDesignerCustomWidgetInterface*> customWidgets() const;
 
