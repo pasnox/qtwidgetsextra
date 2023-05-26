@@ -4,7 +4,7 @@
 #include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/Color/QColorAction.h>
 
-class QColorToolButton : public QEmbedableButton
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorToolButton : public QEmbedableButton
 {
     Q_OBJECT
     class QColorToolButtonPrivate *d;

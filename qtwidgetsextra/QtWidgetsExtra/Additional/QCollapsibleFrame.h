@@ -2,9 +2,11 @@
 
 #include <QFrame>
 
+#include <QtWidgetsExtraLibExport.h>
+
 class QIcon;
 
-class QCollapsibleFrame : public QFrame {
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QCollapsibleFrame : public QFrame {
   Q_OBJECT
   friend class QCollapsibleFramePrivate;
   class QCollapsibleFramePrivate *d;

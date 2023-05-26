@@ -4,7 +4,7 @@
 #include <QtWidgetsExtra/QAbstractButtonLineEdit.h>
 #include <QtWidgetsExtra/Color/QColorAction.h>
 
-class QColorLineEdit : public QAbstractButtonLineEdit
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorLineEdit : public QAbstractButtonLineEdit
 {
     Q_OBJECT
     class QColorLineEditPrivate* d;

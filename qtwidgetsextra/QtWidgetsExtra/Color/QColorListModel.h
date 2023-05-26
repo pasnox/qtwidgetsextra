@@ -5,9 +5,11 @@
 #include <QStringList>
 #include <QColor>
 
+#include <QtWidgetsExtraLibExport.h>
+
 // NOTE: This class duplicate QColor::NameFormat because this is not a Qt namespace available enum for Qt Designer.
 
-class QColorListModel : public QAbstractListModel
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListModel : public QAbstractListModel
 {
     Q_OBJECT
     class QColorListModelPrivate *d;

@@ -5,7 +5,7 @@
 
 #include <QFileDialog>
 
-class QOpenFileLineEdit : public QAbstractButtonLineEdit
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFileLineEdit : public QAbstractButtonLineEdit
 {
     Q_OBJECT
     class QOpenFileLineEditPrivate* d;

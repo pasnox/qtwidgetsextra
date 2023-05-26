@@ -5,7 +5,7 @@
 
 #include <QtWidgetsExtra/Color/QColorListModel.h>
 
-class QColorListView : public QListView
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListView : public QListView
 {
     Q_OBJECT
     class QColorListViewPrivate *d;

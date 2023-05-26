@@ -4,7 +4,9 @@
 #include <QTreeView>
 #include <QDir>
 
-class QFileSystemTreeView : public QTreeView
+#include <QtWidgetsExtraLibExport.h>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemTreeView : public QTreeView
 {
     Q_OBJECT
     class QFileSystemTreeViewPrivate* d;

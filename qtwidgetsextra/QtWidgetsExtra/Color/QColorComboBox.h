@@ -5,7 +5,7 @@
 
 #include <QtWidgetsExtra/Color/QColorListModel.h>
 
-class QColorComboBox : public QComboBox
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorComboBox : public QComboBox
 {
     Q_OBJECT
     class QColorComboBoxPrivate *d;

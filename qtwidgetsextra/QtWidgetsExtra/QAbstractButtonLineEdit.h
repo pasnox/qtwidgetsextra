@@ -3,7 +3,9 @@
 
 #include <QLineEdit>
 
-class QAbstractButtonLineEdit : public QLineEdit
+#include <QtWidgetsExtraLibExport.h>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonLineEdit : public QLineEdit
 {
     Q_OBJECT
     friend class QAbstractButtonLineEditPrivate;

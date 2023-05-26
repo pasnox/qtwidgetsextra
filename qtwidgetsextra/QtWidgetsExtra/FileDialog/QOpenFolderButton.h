@@ -4,7 +4,7 @@
 #include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/FileDialog/QFileAction.h>
 
-class QOpenFolderButton : public QEmbedableButton
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFolderButton : public QEmbedableButton
 {
     Q_OBJECT
     class QOpenFolderButtonPrivate* d;

@@ -6,7 +6,9 @@
 #include <QPen>
 #include <QPainter>
 
-class QShape : public QFrame
+#include <QtWidgetsExtraLibExport.h>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QShape : public QFrame
 {
     Q_OBJECT
     class QShapePrivate *d;

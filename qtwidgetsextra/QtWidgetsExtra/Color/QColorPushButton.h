@@ -5,7 +5,7 @@
 
 #include <QtWidgetsExtra/Color/QColorAction.h>
 
-class QColorPushButton : public QPushButton
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorPushButton : public QPushButton
 {
     Q_OBJECT
     class QColorPushButtonPrivate* d;

@@ -4,7 +4,9 @@
 #include <QWidget>
 #include <QToolButton>
 
-class QUpDownButton : public QWidget
+#include <QtWidgetsExtraLibExport.h>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QUpDownButton : public QWidget
 {
     Q_OBJECT
     class QUpDownButtonPrivate *d;

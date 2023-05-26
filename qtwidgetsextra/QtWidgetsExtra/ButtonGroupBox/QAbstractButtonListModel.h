@@ -3,7 +3,9 @@
 
 #include <QAbstractItemModel>
 
-class QAbstractButtonListModel : public QAbstractListModel
+#include <QtWidgetsExtraLibExport.h>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonListModel : public QAbstractListModel
 {
     Q_OBJECT
     class QAbstractButtonListModelPrivate *d;
