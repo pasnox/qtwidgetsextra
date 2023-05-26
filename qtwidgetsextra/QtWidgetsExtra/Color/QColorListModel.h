@@ -12,17 +12,18 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListModel : public QAbs
 {
     Q_OBJECT
     class QColorListModelPrivate *d;
-    Q_ENUMS(NameFormat)
 
 public:
     enum NameFormat {
         HexRgb = QColor::HexRgb,
         HexArgb = QColor::HexArgb
     };
+    Q_ENUM(NameFormat)
 
     enum CustomRoles {
         HexArgbName = Qt::UserRole
     };
+    Q_ENUM(CustomRoles)
 
     explicit QColorListModel(QObject *parent = nullptr);
     explicit QColorListModel(const QStringList &colorListNames, QObject *parent = nullptr);

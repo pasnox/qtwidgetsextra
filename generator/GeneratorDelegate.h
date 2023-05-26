@@ -18,6 +18,7 @@ public:
         ColumnSignal,
         ColumnProperty
     };
+    Q_ENUM(Columns)
 
     explicit GeneratorDelegate(QObject *parent = nullptr);
 

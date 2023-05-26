@@ -9,8 +9,6 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemListView : public 
 {
     Q_OBJECT
     class QFileSystemListViewPrivate* d;
-    Q_FLAGS(Sections)
-    Q_ENUMS(SectionFlag)
 
     Q_PROPERTY(bool nameFilterDisables READ nameFilterDisables WRITE setNameFilterDisables)
     Q_PROPERTY(bool readOnly READ readOnly WRITE setReadOnly)
@@ -28,6 +26,7 @@ public:
         TypeColumn,
         LastModificationColumn
     };
+    Q_ENUM(Column)
 
     enum SectionFlag {
         AllSections = 0,
@@ -36,12 +35,13 @@ public:
         TypeSection = 0x4,
         LastModificationSection = 0x8
     };
-
+    Q_ENUM(SectionFlag)
     Q_DECLARE_FLAGS(Sections, SectionFlag)
+    Q_FLAG(Sections)
 
     explicit QFileSystemListView(QWidget *parent = nullptr);
 
-    void setModel(QAbstractItemModel *model) Q_DECL_OVERRIDE;
+    void setModel(QAbstractItemModel *model) override;
 
     bool nameFilterDisables() const;
     void setNameFilterDisables(bool nameFilterDisables);

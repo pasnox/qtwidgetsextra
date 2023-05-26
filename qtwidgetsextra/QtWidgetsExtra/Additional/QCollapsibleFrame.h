@@ -15,7 +15,11 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QCollapsibleFrame : public QF
   Q_PROPERTY(QWidget *widget READ widget WRITE setWidget NOTIFY widgetChanged)
 
 public:
-  enum RestoreSizeBehavior { NoRestoreSizeBehavior, RestoreWindowSizeBehavior };
+  enum RestoreSizeBehavior {
+      NoRestoreSizeBehavior,
+      RestoreWindowSizeBehavior
+  };
+  Q_ENUM(RestoreSizeBehavior)
 
   explicit QCollapsibleFrame(QWidget *parent = nullptr);
 

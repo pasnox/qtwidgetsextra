@@ -12,7 +12,6 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QShape : public QFrame
     Q_OBJECT
     class QShapePrivate *d;
     friend class QShapePrivate;
-    Q_ENUMS(Shape)
 
     Q_PROPERTY(QPainter::RenderHints renderHints READ renderHints WRITE setRenderHints)
     Q_PROPERTY(QMargins margins READ margins WRITE setMargins)
@@ -46,6 +45,7 @@ public:
         SquaredTriangle = QShape::TriangleFlag | QShape::SquaredFlag,
         User = 0x0
     };
+    Q_ENUM(Shape)
 
     explicit QShape(QWidget *parent = nullptr);
     explicit QShape(QShape::Shape shape, QWidget *parent = nullptr);

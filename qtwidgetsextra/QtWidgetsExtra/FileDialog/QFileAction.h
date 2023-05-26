@@ -10,14 +10,13 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileAction : public QAction
     Q_OBJECT
     class QFileActionPrivate *d;
 
-    Q_ENUMS(Type)
-
 public:
     enum Type {
         OpenFile,
         SaveFile,
         OpenFolder
     };
+    Q_ENUM(Type)
 
     explicit QFileAction(QObject *parent = nullptr);
 

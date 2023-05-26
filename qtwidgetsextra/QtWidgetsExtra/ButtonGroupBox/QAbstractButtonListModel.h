@@ -14,6 +14,7 @@ public:
         IdRole = Qt::UserRole,
         ShortcutRole
     };
+    Q_ENUM(Roles)
 
     explicit QAbstractButtonListModel(QObject *parent = nullptr);
 

@@ -1,10 +1,13 @@
 #pragma once
 
+#include <QObject>
 #include <QList>
 #include <QStringList>
 
 class Generator
 {
+    Q_GADGET
+
 public:
     static QString Tab;
 
@@ -13,11 +16,13 @@ public:
         Reference,
         Pointer
     };
+    Q_ENUM(ParameterType)
 
     enum InheritingType {
         Widget,
         Object
     };
+    Q_ENUM(InheritingType)
 
     struct Entry {
         typedef QList<Generator::Entry> List;
