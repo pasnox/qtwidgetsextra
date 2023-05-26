@@ -15,7 +15,7 @@ public:
         action->setProperty("button", QVariant::fromValue(widget));
         widget->setDefaultAction(action);
 
-        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
+        connect(action, &QColorAction::colorChanged, widget, &QColorToolButton::colorChanged);
     }
 
 public:

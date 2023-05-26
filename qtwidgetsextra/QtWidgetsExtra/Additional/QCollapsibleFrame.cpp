@@ -63,7 +63,7 @@ public:
         verticalLayout->addLayout(horizontalLayout);
         verticalLayout->setAlignment(horizontalLayout, Qt::AlignTop);
 
-        connect(button, SIGNAL(toggled(bool)), this, SLOT(button_toggled(bool)));
+        connect(button, &QAbstractButton::toggled, this, &QCollapsibleFramePrivate::button_toggled);
     }
 
 public slots:

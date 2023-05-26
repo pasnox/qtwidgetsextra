@@ -14,7 +14,7 @@ public:
         action->setType(QFileAction::OpenFile);
         widget->setDefaultAction(action);
 
-        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(action, &QFileAction::filePathChanged, widget, &QOpenFileButton::filePathChanged);
     }
 
 public:

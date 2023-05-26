@@ -16,9 +16,9 @@ public:
         action->setType(QFileAction::OpenFile);
         widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
 
-        connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
-        connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
-        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(widget, &QLineEdit::textChanged, this, &QOpenFileLineEditPrivate::textChanged);
+        connect(action, &QFileAction::filePathChanged, this, &QOpenFileLineEditPrivate::filePathChanged);
+        connect(action, &QFileAction::filePathChanged, widget, &QOpenFileLineEdit::filePathChanged);
     }
 
 public slots:

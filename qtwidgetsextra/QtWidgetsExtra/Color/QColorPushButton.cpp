@@ -14,9 +14,9 @@ public:
         action->setProperty("button", QVariant::fromValue(widget));
         syncButtonWithAction();
 
-        connect(widget, SIGNAL(clicked()), action, SLOT(trigger()));
-        connect(action, SIGNAL(colorChanged(QColor)), this, SLOT(syncButtonWithAction()));
-        connect(action, SIGNAL(colorChanged(QColor)), widget, SIGNAL(colorChanged(QColor)));
+        connect(widget, &QAbstractButton::clicked, action, &QAction::trigger);
+        connect(action, &QColorAction::colorChanged, this, &QColorPushButtonPrivate::syncButtonWithAction);
+        connect(action, &QColorAction::colorChanged, widget, &QColorPushButton::colorChanged);
     }
 
 public slots:

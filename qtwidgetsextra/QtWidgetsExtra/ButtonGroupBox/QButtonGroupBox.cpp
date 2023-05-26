@@ -45,19 +45,19 @@ public:
             }
         });
 
-        connect(group, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonClicked),
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonClicked),
                 this, [this](QAbstractButton *button) {
             emit this->widget->buttonClicked(layout->indexOf(button), group->id(button));
         });
-        connect(group, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonPressed),
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonPressed),
                 this, [this](QAbstractButton *button) {
             emit this->widget->buttonPressed(layout->indexOf(button), group->id(button));
         });
-        connect(group, QOverload<QAbstractButton *>::of(&QButtonGroup::buttonReleased),
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonReleased),
                 this, [this](QAbstractButton *button) {
             emit this->widget->buttonReleased(layout->indexOf(button), group->id(button));
         });
-        connect(group, QOverload<QAbstractButton *, bool>::of(&QButtonGroup::buttonToggled),
+        connect(group, qOverload<QAbstractButton *, bool>(&QButtonGroup::buttonToggled),
                 this, [this](QAbstractButton *button, bool checked) {
             const int index = layout->indexOf(button);
             this->model->setData(this->model->index(index), checked ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);

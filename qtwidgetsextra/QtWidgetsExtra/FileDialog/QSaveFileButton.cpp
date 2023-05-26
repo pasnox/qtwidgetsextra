@@ -14,7 +14,7 @@ public:
         action->setType(QFileAction::SaveFile);
         widget->setDefaultAction(action);
 
-        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(action, &QFileAction::filePathChanged, widget, &QSaveFileButton::filePathChanged);
     }
 
 public:

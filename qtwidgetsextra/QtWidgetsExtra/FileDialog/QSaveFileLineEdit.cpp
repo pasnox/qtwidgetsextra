@@ -16,9 +16,9 @@ public:
         action->setType(QFileAction::SaveFile);
         widget->addAction(action, QLineEdit::ActionPosition::LeadingPosition);
 
-        connect(widget, SIGNAL(textChanged(QString)), this, SLOT(textChanged(QString)));
-        connect(action, SIGNAL(filePathChanged(QString)), this, SLOT(filePathChanged(QString)));
-        connect(action, SIGNAL(filePathChanged(QString)), widget, SIGNAL(filePathChanged(QString)));
+        connect(widget, &QLineEdit::textChanged, this, &QSaveFileLineEditPrivate::textChanged);
+        connect(action, &QFileAction::filePathChanged, this, &QSaveFileLineEditPrivate::filePathChanged);
+        connect(action, &QFileAction::filePathChanged, widget, &QSaveFileLineEdit::filePathChanged);
     }
 
 public slots:

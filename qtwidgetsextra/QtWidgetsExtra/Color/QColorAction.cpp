@@ -13,7 +13,7 @@ public:
         , options() {
         Q_ASSERT(action);
 
-        connect(action, SIGNAL(triggered()), this, SLOT(triggered()));
+        connect(action, &QAction::triggered, this, &QColorActionPrivate::triggered);
     }
 
 public slots:

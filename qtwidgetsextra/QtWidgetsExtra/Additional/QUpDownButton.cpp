@@ -1,6 +1,7 @@
 #include "QUpDownButton.h"
 
 #include <QToolButton>
+#include <QAction>
 #include <QBoxLayout>
 
 class QUpDownButtonPrivate : public QObject {
@@ -27,16 +28,16 @@ public:
 
         updateButtonArrows();
 
-        connect(upButton, SIGNAL(clicked(bool)), widget, SIGNAL(upClicked(bool)));
-        connect(downButton, SIGNAL(clicked(bool)), widget, SIGNAL(downClicked(bool)));
-        connect(upButton, SIGNAL(pressed()), widget, SIGNAL(upPressed()));
-        connect(downButton, SIGNAL(pressed()), widget, SIGNAL(downPressed()));
-        connect(upButton, SIGNAL(released()), widget, SIGNAL(upReleased()));
-        connect(downButton, SIGNAL(released()), widget, SIGNAL(downReleased()));
-        connect(upButton, SIGNAL(toggled(bool)), widget, SIGNAL(upToggled(bool)));
-        connect(downButton, SIGNAL(toggled(bool)), widget, SIGNAL(downToggled(bool)));
-        connect(upButton, SIGNAL(triggered(QAction*)), widget, SIGNAL(upTriggered(QAction*)));
-        connect(downButton, SIGNAL(triggered(QAction*)), widget, SIGNAL(downTriggered(QAction*)));
+        connect(upButton, &QAbstractButton::clicked, widget, &QUpDownButton::upClicked);
+        connect(downButton, &QAbstractButton::clicked, widget, &QUpDownButton::downClicked);
+        connect(upButton, &QAbstractButton::pressed, widget, &QUpDownButton::upPressed);
+        connect(downButton, &QAbstractButton::pressed, widget, &QUpDownButton::downPressed);
+        connect(upButton, &QAbstractButton::released, widget, &QUpDownButton::upReleased);
+        connect(downButton, &QAbstractButton::released, widget, &QUpDownButton::downReleased);
+        connect(upButton, &QAbstractButton::toggled, widget, &QUpDownButton::upToggled);
+        connect(downButton, &QAbstractButton::toggled, widget, &QUpDownButton::downToggled);
+        connect(upButton, &QToolButton::triggered, widget, &QUpDownButton::upTriggered);
+        connect(downButton, &QToolButton::triggered, widget, &QUpDownButton::downTriggered);
     }
 
     Qt::Orientation directionToOrientation(QBoxLayout::Direction direction) const {

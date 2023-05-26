@@ -15,9 +15,9 @@ public:
         widget->setText(action->colorName(action->color()));
         updateValidator();
 
-        connect(widget, SIGNAL(textEdited(QString)), this, SLOT(textEdited(QString)));
-        connect(widget, SIGNAL(editingFinished()), this, SLOT(editingFinished()));
-        connect(action, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
+        connect(widget, &QLineEdit::textEdited, this, &QColorLineEditPrivate::textEdited);
+        connect(widget, &QLineEdit::editingFinished, this, &QColorLineEditPrivate::editingFinished);
+        connect(action, &QColorAction::colorChanged, this, &QColorLineEditPrivate::colorChanged);
     }
 
     void updateValidator() {

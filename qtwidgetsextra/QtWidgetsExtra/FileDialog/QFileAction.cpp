@@ -16,7 +16,7 @@ public:
 
         updateIcon();
 
-        connect(action, SIGNAL(triggered()), this, SLOT(triggered()));
+        connect(action, &QAction::triggered, this, &QFileActionPrivate::triggered);
     }
 
     void updateIcon() {

@@ -37,8 +37,8 @@ int main(int argc, char** argv) {
     qDebug("%s: Running %s with file %s", Q_FUNC_INFO, qPrintable(designer), qPrintable(file->fileName()));
     qDebug("QT_PLUGIN_PATH=%s && %s %s", qPrintable(appDirPath), qPrintable(designer), qPrintable(file->fileName()));
 
-    QObject::connect(&process, SIGNAL(error(QProcess::ProcessError)), app.get(), SLOT(quit()));
-    QObject::connect(&process, SIGNAL(finished(int, QProcess::ExitStatus)), app.get(), SLOT(quit()));
+    QObject::connect(&process, &QProcess::errorOccurred, app.get(), &QCoreApplication::quit);
+    QObject::connect(&process, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), app.get(), &QCoreApplication::quit);
 
     process.start();
     return app->exec();

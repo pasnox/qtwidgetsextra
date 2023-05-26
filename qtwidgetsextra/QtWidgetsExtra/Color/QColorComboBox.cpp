@@ -15,11 +15,11 @@ public:
         widget->setModel(model);
         updateValidator();
 
-        connect(widget, SIGNAL(activated(QString)), this, SLOT(activated(QString)));
-        connect(widget, SIGNAL(currentIndexChanged(QString)), this, SLOT(currentIndexChanged(QString)));
-        connect(widget, SIGNAL(currentTextChanged(QString)), this, SLOT(currentTextChanged(QString)));
-        connect(widget, SIGNAL(editTextChanged(QString)), this, SLOT(editTextChanged(QString)));
-        connect(widget, SIGNAL(highlighted(QString)), this, SLOT(highlighted(QString)));
+        connect(widget, &QComboBox::textActivated, this, &QColorComboBoxPrivate::textActivated);
+        connect(widget, qOverload<int>(&QComboBox::currentIndexChanged), this, &QColorComboBoxPrivate::currentIndexChanged);
+        connect(widget, &QComboBox::currentTextChanged, this, &QColorComboBoxPrivate::currentTextChanged);
+        connect(widget, &QComboBox::editTextChanged, this, &QColorComboBoxPrivate::editTextChanged);
+        connect(widget, &QComboBox::textHighlighted, this, &QColorComboBoxPrivate::textHighlighted);
     }
 
     void updateValidator() {
@@ -41,12 +41,12 @@ public:
     }
 
 public slots:
-    void activated(const QString &text) {
+    void textActivated(const QString &text) {
         emit widget->activated(QColor(text));
     }
 
-    void currentIndexChanged(const QString &text) {
-        emit widget->currentIndexChanged(QColor(text));
+    void currentIndexChanged(int index) {
+        emit widget->currentIndexChanged(QColor(widget->itemText(index)));
     }
 
     void currentTextChanged(const QString &text) {
@@ -57,7 +57,7 @@ public slots:
         emit widget->editTextChanged(QColor(text));
     }
 
-    void highlighted(const QString &text) {
+    void textHighlighted(const QString &text) {
         emit widget->highlighted(QColor(text));
     }
 
