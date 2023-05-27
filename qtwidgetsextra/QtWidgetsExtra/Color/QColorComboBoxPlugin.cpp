@@ -50,7 +50,7 @@ bool QColorComboBoxPlugin::isContainer() const {
 
 QString QColorComboBoxPlugin::domXml() const {
     return QStringLiteral("<widget class=\"QColorComboBox\" name=\"colorComboBox\">\n"
-                          "<property name=\"colorListNames\">\n"
+                          "<property name=\"colorNames\">\n"
                           "<stringlist>\n"
                           "<string>#ff0000</string>\n"
                           "<string>#00ff00</string>\n"

@@ -9,22 +9,22 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorComboBox : public QComb
     class QColorComboBoxPrivate *d;
 
     Q_PROPERTY(QColorListModel::NameFormat nameFormat READ nameFormat WRITE setNameFormat)
-    Q_PROPERTY(QStringList colorListNames READ colorListNames WRITE setColorListNames)
+    Q_PROPERTY(QStringList colorNames READ colorNames WRITE setColorNames)
     Q_PROPERTY(QString currentColorName READ currentColorName WRITE setCurrentColorName USER true)
 
 public:
     explicit QColorComboBox(QWidget *parent = nullptr);
-    explicit QColorComboBox(const QStringList &colorListNames, QWidget *parent = nullptr);
-    explicit QColorComboBox(const QList<QColor> &colorsList, QWidget *parent = nullptr);
+    explicit QColorComboBox(const QStringList &colorNames, QWidget *parent = nullptr);
+    explicit QColorComboBox(const QList<QColor> &colors, QWidget *parent = nullptr);
 
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);
 
-    QStringList colorListNames() const;
-    void setColorListNames(const QStringList &colorListNames);
+    QStringList colorNames() const;
+    void setColorNames(const QStringList &colorNames);
 
-    QList<QColor> colorsList() const;
-    void setColorsList(const QList<QColor> &colorsList);
+    QList<QColor> colors() const;
+    void setColors(const QList<QColor> &colors);
 
     QString currentColorName() const;
     QString currentTextColorName() const;
@@ -45,9 +45,9 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 Q_SIGNALS:
-    void activated(const QColor &color);
-    void currentIndexChanged(const QColor &color);
-    void currentTextChanged(const QColor &color);
-    void editTextChanged(const QColor &color);
-    void highlighted(const QColor &color);
+    void colorActivated(const QColor &color);
+    void currentColorChanged(const QColor &color);
+    void currentTextColorChanged(const QColor &color);
+    void editTextColorChanged(const QColor &color);
+    void colorHighlighted(const QColor &color);
 };

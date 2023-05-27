@@ -42,23 +42,23 @@ public:
     }
 
     void textActivated(const QString &text) {
-        Q_EMIT widget->activated(QColor(text));
+        Q_EMIT widget->colorActivated(QColor(text));
     }
 
     void currentIndexChanged(int index) {
-        Q_EMIT widget->currentIndexChanged(QColor(widget->itemText(index)));
+        Q_EMIT widget->currentColorChanged(QColor(widget->itemText(index)));
     }
 
     void currentTextChanged(const QString &text) {
-        Q_EMIT widget->currentTextChanged(QColor(text));
+        Q_EMIT widget->currentTextColorChanged(QColor(text));
     }
 
     void editTextChanged(const QString &text) {
-        Q_EMIT widget->editTextChanged(QColor(text));
+        Q_EMIT widget->editTextColorChanged(QColor(text));
     }
 
     void textHighlighted(const QString &text) {
-        Q_EMIT widget->highlighted(QColor(text));
+        Q_EMIT widget->colorHighlighted(QColor(text));
     }
 
 public:
@@ -71,10 +71,10 @@ QColorComboBox::QColorComboBox(QWidget *parent)
     , d(new QColorComboBoxPrivate(this)) {
 }
 
-QColorComboBox::QColorComboBox(const QStringList &colorListNames, QWidget *parent)
+QColorComboBox::QColorComboBox(const QStringList &colorNames, QWidget *parent)
     : QComboBox(parent)
     , d(new QColorComboBoxPrivate(this)) {
-    d->model->setColorListNames(colorListNames);
+    d->model->setColorListNames(colorNames);
 }
 
 QColorComboBox::QColorComboBox(const QList<QColor> &colors, QWidget *parent)
@@ -92,19 +92,19 @@ void QColorComboBox::setNameFormat(QColorListModel::NameFormat nameFormat) {
     d->updateValidator();
 }
 
-QStringList QColorComboBox::colorListNames() const {
+QStringList QColorComboBox::colorNames() const {
     return d->model->colorListNames();
 }
 
-void QColorComboBox::setColorListNames(const QStringList &colorNames) {
+void QColorComboBox::setColorNames(const QStringList &colorNames) {
     d->model->setColorListNames(colorNames);
 }
 
-QList<QColor> QColorComboBox::colorsList() const {
+QList<QColor> QColorComboBox::colors() const {
     return d->model->colorsList();
 }
 
-void QColorComboBox::setColorsList(const QList<QColor> &colors) {
+void QColorComboBox::setColors(const QList<QColor> &colors) {
     d->model->setColorsList(colors);
 }
 

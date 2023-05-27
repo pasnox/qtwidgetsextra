@@ -50,7 +50,7 @@ bool QColorListViewPlugin::isContainer() const {
 
 QString QColorListViewPlugin::domXml() const {
     return QStringLiteral("<widget class=\"QColorListView\" name=\"colorListView\">\n"
-                          "<property name=\"colorListNames\">\n"
+                          "<property name=\"colorNames\">\n"
                           "<stringlist>\n"
                           "<string>#ff0000</string>\n"
                           "<string>#00ff00</string>\n"

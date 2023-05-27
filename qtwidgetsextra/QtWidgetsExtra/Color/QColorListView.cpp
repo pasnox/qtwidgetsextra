@@ -48,23 +48,23 @@ void QColorListView::setNameFormat(QColorListModel::NameFormat nameFormat) {
     d->model->setNameFormat(nameFormat);
 }
 
-QStringList QColorListView::colorListNames() const {
+QStringList QColorListView::colorNames() const {
     return d->model->colorListNames();
 }
 
-void QColorListView::setColorListNames(const QStringList &colorNames) {
+void QColorListView::setColorNames(const QStringList &colorNames) {
     d->model->setColorListNames(colorNames);
 }
 
-QList<QColor> QColorListView::colorsList() const {
+QList<QColor> QColorListView::colors() const {
     return d->model->colorsList();
 }
 
-void QColorListView::setColorsList(const QList<QColor> &colors) {
+void QColorListView::setColors(const QList<QColor> &colors) {
     d->model->setColorsList(colors);
 }
 
-QStringList QColorListView::selectedColorListNames() const {
+QStringList QColorListView::selectedColorNames() const {
     const QModelIndexList indexes = selectionModel()->selectedRows();
     QStringList colors;
 
@@ -75,7 +75,7 @@ QStringList QColorListView::selectedColorListNames() const {
     return colors;
 }
 
-void QColorListView::setSelectedColorListNames(const QStringList &colorListNames) {
+void QColorListView::setSelectedColorNames(const QStringList &colorListNames) {
     QSet<QString> colors;
     QItemSelection selection;
 
@@ -95,7 +95,7 @@ void QColorListView::setSelectedColorListNames(const QStringList &colorListNames
     selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
-QList<QColor> QColorListView::selectedColorsList() const {
+QList<QColor> QColorListView::selectedColors() const {
     const QModelIndexList indexes = selectionModel()->selectedRows();
     QList<QColor> colors;
 
@@ -106,7 +106,7 @@ QList<QColor> QColorListView::selectedColorsList() const {
     return colors;
 }
 
-void QColorListView::setSelectedColorsList(const QList<QColor> &colorsList) {
+void QColorListView::setSelectedColors(const QList<QColor> &colorsList) {
     QSet<QString> colors;
     QItemSelection selection;
 
