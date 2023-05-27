@@ -63,6 +63,8 @@ public:
     QString rootPath() const;
     void setRootPath(const QString &rootPath);
 
+    using QTreeView::setSelection;
+
     QStringList selection() const;
     void setSelection(const QStringList &selection);
     void addSelection(QStringList &selection);
