@@ -18,23 +18,23 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemTreeView : public 
     Q_PROPERTY(QString rootPath READ rootPath WRITE setRootPath NOTIFY rootPathChanged)
 
 public:
-    enum Column {
-        NameColumn,
-        SizeColumn,
-        TypeColumn,
-        LastModificationColumn
+    enum class Column {
+        Name,
+        Size,
+        Type,
+        LastModification
     };
     Q_ENUM(Column)
 
-    enum SectionFlag {
-        AllSections = 0,
-        NameSection = 0x1,
-        SizeSection = 0x2,
-        TypeSection = 0x4,
-        LastModificationSection = 0x8
+    enum class Section {
+        All = 0,
+        Name = 0x1,
+        Size = 0x2,
+        Type = 0x4,
+        LastModification = 0x8
     };
-    Q_ENUM(SectionFlag)
-    Q_DECLARE_FLAGS(Sections, SectionFlag)
+    Q_ENUM(Section)
+    Q_DECLARE_FLAGS(Sections, Section)
     Q_FLAG(Sections)
 
     explicit QFileSystemTreeView(QWidget *parent = nullptr);
@@ -74,3 +74,5 @@ Q_SIGNALS:
     void fileRenamed(const QString &path, const QString &oldName, const QString &newName);
     void rootPathChanged(const QString &newPath);
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(QFileSystemTreeView::Sections)

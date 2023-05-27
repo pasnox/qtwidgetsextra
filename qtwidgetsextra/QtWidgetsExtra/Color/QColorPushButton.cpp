@@ -4,7 +4,7 @@ class QColorPushButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorPushButtonPrivate(QColorPushButton *widgetP)
+    explicit QColorPushButtonPrivate(QColorPushButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QColorAction(this)) {
@@ -18,7 +18,6 @@ public:
         connect(action, &QColorAction::colorChanged, widget, &QColorPushButton::colorChanged);
     }
 
-public Q_SLOTS:
     void syncButtonWithAction() {
         widget->setIcon(action->icon());
         widget->setText(action->text());

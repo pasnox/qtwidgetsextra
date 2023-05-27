@@ -10,10 +10,10 @@ class QColorListModelPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorListModelPrivate(QColorListModel *objectP)
+    explicit QColorListModelPrivate(QColorListModel *objectP)
         : QObject(objectP)
         , object(objectP)
-        , nameFormat(QColorListModel::HexRgb) {
+        , nameFormat(QColorListModel::NameFormat::HexRgb) {
         Q_ASSERT(object);
     }
 
@@ -79,7 +79,7 @@ QVariant QColorListModel::data(const QModelIndex &index, int role) const {
         return QtWidgetsExtraCache::cachedIconColor(QColor(d->colors.at(index.row())), QSize(64, 64));
     } else if (role == Qt::DisplayRole || role == Qt::EditRole) {
         return QColor(d->colors.at(index.row())).name(QColor::NameFormat(d->nameFormat));
-    } else if (role == QColorListModel::HexArgbName) {
+    } else if (role == static_cast<int>(QColorListModel::Role::HexArgbName)) {
         return d->colors.at(index.row());
     }
 

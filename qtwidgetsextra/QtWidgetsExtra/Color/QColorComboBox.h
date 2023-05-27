@@ -42,7 +42,7 @@ public Q_SLOTS:
     void setEditTextColor(const QColor &color);
 
 protected:
-    virtual void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) override;
 
 Q_SIGNALS:
     void activated(const QColor &color);

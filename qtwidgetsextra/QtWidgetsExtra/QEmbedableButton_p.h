@@ -14,7 +14,7 @@ public:
     void setEmbeded(bool embed);
 
 protected:
-    virtual void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     bool embeded;

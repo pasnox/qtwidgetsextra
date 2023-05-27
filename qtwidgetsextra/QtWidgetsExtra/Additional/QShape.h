@@ -31,7 +31,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QShape : public QFrame {
     };
 
 public:
-    enum Shape {
+    enum class Shape {
         Circle = QShape::CircleFlag,
         SquaredCircle = QShape::CircleFlag | QShape::SquaredFlag,
         Diamond = QShape::DiamondFlag,
@@ -49,8 +49,8 @@ public:
     explicit QShape(QWidget *parent = nullptr);
     explicit QShape(QShape::Shape shape, QWidget *parent = nullptr);
 
-    virtual QSize minimumSizeHint() const;
-    virtual QSize sizeHint() const;
+    QSize minimumSizeHint() const override;
+    QSize sizeHint() const override;
 
     QPainter::RenderHints renderHints() const;
     void setRenderHints(QPainter::RenderHints renderHints);
@@ -74,6 +74,6 @@ public:
     void setUserPath(const QPainterPath &userPath);
 
 protected:
-    virtual void paintEvent(QPaintEvent *event);
-    virtual void resizeEvent(QResizeEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 };

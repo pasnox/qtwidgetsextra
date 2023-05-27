@@ -7,7 +7,7 @@ class QFileSystemTreeViewPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QFileSystemTreeViewPrivate(QFileSystemTreeView *widgetP)
+    explicit QFileSystemTreeViewPrivate(QFileSystemTreeView *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , model(new QFileSystemModel(this)) {
@@ -98,7 +98,7 @@ QFileSystemTreeView::QFileSystemTreeView(QWidget *parent)
     QTreeView::setModel(d->model);
     setRootPath(QDir::homePath());
     header()->setStretchLastSection(false);
-    header()->setSectionResizeMode(QFileSystemTreeView::NameColumn, QHeaderView::Stretch);
+    header()->setSectionResizeMode(static_cast<int>(QFileSystemTreeView::Column::Name), QHeaderView::Stretch);
 }
 
 void QFileSystemTreeView::setModel(QAbstractItemModel *model) {
@@ -146,23 +146,26 @@ void QFileSystemTreeView::setNameFilters(const QStringList &nameFilters) {
 }
 
 QFileSystemTreeView::Sections QFileSystemTreeView::visibleSections() const {
-    QFileSystemTreeView::Sections sections = QFileSystemTreeView::AllSections;
+    const auto isSectionHidden = [this](QFileSystemTreeView::Column column) {
+        return header()->isSectionHidden(static_cast<int>(column));
+    };
+    QFileSystemTreeView::Sections sections = QFileSystemTreeView::Section::All;
 
     if (header()->hiddenSectionCount() > 0) {
-        if (!header()->isSectionHidden(QFileSystemTreeView::NameColumn)) {
-            sections |= QFileSystemTreeView::NameSection;
+        if (!isSectionHidden(QFileSystemTreeView::Column::Name)) {
+            sections |= QFileSystemTreeView::Section::Name;
         }
 
-        if (!header()->isSectionHidden(QFileSystemTreeView::SizeColumn)) {
-            sections |= QFileSystemTreeView::SizeSection;
+        if (!isSectionHidden(QFileSystemTreeView::Column::Size)) {
+            sections |= QFileSystemTreeView::Section::Size;
         }
 
-        if (!header()->isSectionHidden(QFileSystemTreeView::TypeColumn)) {
-            sections |= QFileSystemTreeView::TypeSection;
+        if (!isSectionHidden(QFileSystemTreeView::Column::Type)) {
+            sections |= QFileSystemTreeView::Section::Type;
         }
 
-        if (!header()->isSectionHidden(QFileSystemTreeView::LastModificationColumn)) {
-            sections |= QFileSystemTreeView::LastModificationSection;
+        if (!isSectionHidden(QFileSystemTreeView::Column::LastModification)) {
+            sections |= QFileSystemTreeView::Section::LastModification;
         }
     }
 
@@ -170,27 +173,34 @@ QFileSystemTreeView::Sections QFileSystemTreeView::visibleSections() const {
 }
 
 void QFileSystemTreeView::setVisibleSections(QFileSystemTreeView::Sections sections) {
-    if (sections == QFileSystemTreeView::AllSections) {
-        header()->setSectionHidden(QFileSystemTreeView::NameColumn, false);
-        header()->setSectionHidden(QFileSystemTreeView::SizeColumn, false);
-        header()->setSectionHidden(QFileSystemTreeView::TypeColumn, false);
-        header()->setSectionHidden(QFileSystemTreeView::LastModificationColumn, false);
+    const auto isSectionHidden = [this](QFileSystemTreeView::Column column) {
+        return header()->isSectionHidden(static_cast<int>(column));
+    };
+    const auto setSectionHidden = [this](QFileSystemTreeView::Column column, bool hidden) {
+        header()->setSectionHidden(static_cast<int>(column), hidden);
+    };
+    const auto resizeSection = [this](QFileSystemTreeView::Column column, int size) {
+        header()->resizeSection(static_cast<int>(column), size);
+    };
+
+    if (sections == Sections(QFileSystemTreeView::Section::All)) {
+        setSectionHidden(QFileSystemTreeView::Column::Name, false);
+        setSectionHidden(QFileSystemTreeView::Column::Size, false);
+        setSectionHidden(QFileSystemTreeView::Column::Type, false);
+        setSectionHidden(QFileSystemTreeView::Column::LastModification, false);
     } else {
-        header()->setSectionHidden(QFileSystemTreeView::NameColumn,
-                                   !sections.testFlag(QFileSystemTreeView::NameSection));
-        header()->setSectionHidden(QFileSystemTreeView::SizeColumn,
-                                   !sections.testFlag(QFileSystemTreeView::SizeSection));
-        header()->setSectionHidden(QFileSystemTreeView::TypeColumn,
-                                   !sections.testFlag(QFileSystemTreeView::TypeSection));
-        header()->setSectionHidden(QFileSystemTreeView::LastModificationColumn,
-                                   !sections.testFlag(QFileSystemTreeView::LastModificationSection));
+        setSectionHidden(QFileSystemTreeView::Column::Name, !sections.testFlag(QFileSystemTreeView::Section::Name));
+        setSectionHidden(QFileSystemTreeView::Column::Size, !sections.testFlag(QFileSystemTreeView::Section::Size));
+        setSectionHidden(QFileSystemTreeView::Column::Type, !sections.testFlag(QFileSystemTreeView::Section::Type));
+        setSectionHidden(QFileSystemTreeView::Column::LastModification,
+                         !sections.testFlag(QFileSystemTreeView::Section::LastModification));
     }
 
-    header()->setStretchLastSection(header()->isSectionHidden(QFileSystemTreeView::NameColumn));
-    header()->resizeSection(QFileSystemTreeView::NameColumn, header()->defaultSectionSize());
-    header()->resizeSection(QFileSystemTreeView::SizeColumn, header()->defaultSectionSize());
-    header()->resizeSection(QFileSystemTreeView::TypeColumn, header()->defaultSectionSize());
-    header()->resizeSection(QFileSystemTreeView::LastModificationColumn, header()->defaultSectionSize());
+    header()->setStretchLastSection(isSectionHidden(QFileSystemTreeView::Column::Name));
+    resizeSection(QFileSystemTreeView::Column::Name, header()->defaultSectionSize());
+    resizeSection(QFileSystemTreeView::Column::Size, header()->defaultSectionSize());
+    resizeSection(QFileSystemTreeView::Column::Type, header()->defaultSectionSize());
+    resizeSection(QFileSystemTreeView::Column::LastModification, header()->defaultSectionSize());
 }
 
 QString QFileSystemTreeView::rootPath() const {

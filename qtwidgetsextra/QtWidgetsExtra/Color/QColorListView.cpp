@@ -4,7 +4,7 @@ class QColorListViewPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorListViewPrivate(QColorListView *widgetP)
+    explicit QColorListViewPrivate(QColorListView *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , model(new QColorListModel(this)) {
@@ -69,7 +69,7 @@ QStringList QColorListView::selectedColorListNames() const {
     QStringList colors;
 
     foreach (const QModelIndex &index, indexes) {
-        colors << index.data(QColorListModel::HexArgbName).toString();
+        colors << index.data(static_cast<int>(QColorListModel::Role::HexArgbName)).toString();
     }
 
     return colors;
@@ -85,7 +85,7 @@ void QColorListView::setSelectedColorListNames(const QStringList &colorListNames
 
     for (int i = 0; i < d->model->rowCount(); i++) {
         const QModelIndex index = d->model->index(i, 0);
-        const QString colorName = index.data(QColorListModel::HexArgbName).toString();
+        const QString colorName = index.data(static_cast<int>(QColorListModel::Role::HexArgbName)).toString();
 
         if (colors.contains(colorName)) {
             selection.select(index, index);
@@ -100,7 +100,7 @@ QList<QColor> QColorListView::selectedColorsList() const {
     QList<QColor> colors;
 
     foreach (const QModelIndex &index, indexes) {
-        colors << QColor(index.data(QColorListModel::HexArgbName).toString());
+        colors << QColor(index.data(static_cast<int>(QColorListModel::Role::HexArgbName)).toString());
     }
 
     return colors;
@@ -116,7 +116,7 @@ void QColorListView::setSelectedColorsList(const QList<QColor> &colorsList) {
 
     for (int i = 0; i < d->model->rowCount(); i++) {
         const QModelIndex index = d->model->index(i, 0);
-        const QString colorName = index.data(QColorListModel::HexArgbName).toString();
+        const QString colorName = index.data(static_cast<int>(QColorListModel::Role::HexArgbName)).toString();
 
         if (colors.contains(colorName)) {
             selection.select(index, index);

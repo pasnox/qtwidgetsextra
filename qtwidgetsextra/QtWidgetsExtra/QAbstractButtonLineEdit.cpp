@@ -6,7 +6,7 @@ class QAbstractButtonLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QAbstractButtonLineEditPrivate(QAbstractButtonLineEdit *widgetP)
+    explicit QAbstractButtonLineEditPrivate(QAbstractButtonLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP) {
         Q_ASSERT(widget);

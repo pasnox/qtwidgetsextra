@@ -4,7 +4,7 @@ class QColorLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorLineEditPrivate(QColorLineEdit *widgetP)
+    explicit QColorLineEditPrivate(QColorLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QColorAction(this)) {
@@ -20,14 +20,13 @@ public:
     }
 
     void updateValidator() {
-        if (action->options().testFlag(QColorAction::ShowAlphaChannel)) {
+        if (action->options().testFlag(QColorAction::ColorDialogOption::ShowAlphaChannel)) {
             widget->setInputMask(QStringLiteral("\\#HHHhhhhh"));
         } else {
             widget->setInputMask(QStringLiteral("\\#HHHhhh"));
         }
     }
 
-public Q_SLOTS:
     void textEdited(const QString &text) {
         const QColor color = QColor(text);
 

@@ -10,14 +10,14 @@ class Generator {
 public:
     static QString Tab;
 
-    enum ParameterType {
+    enum class ParameterType {
         Variable,
         Reference,
         Pointer
     };
     Q_ENUM(ParameterType)
 
-    enum InheritingType {
+    enum class InheritingType {
         Widget,
         Object
     };

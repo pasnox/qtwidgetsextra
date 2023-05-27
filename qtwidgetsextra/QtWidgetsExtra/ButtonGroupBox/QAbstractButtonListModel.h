@@ -9,23 +9,23 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonListModel : pu
     class QAbstractButtonListModelPrivate *d;
 
 public:
-    enum Roles {
-        IdRole = Qt::UserRole,
-        ShortcutRole
+    enum class Role {
+        Id = Qt::UserRole,
+        Shortcut
     };
-    Q_ENUM(Roles)
+    Q_ENUM(Role)
 
     explicit QAbstractButtonListModel(QObject *parent = nullptr);
 
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    virtual QVariant data(const QModelIndex &index, int role) const;
-    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
-    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    virtual bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex());
-    virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
     void clear();
 };

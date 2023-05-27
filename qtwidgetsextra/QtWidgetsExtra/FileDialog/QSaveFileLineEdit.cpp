@@ -5,13 +5,13 @@ class QSaveFileLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QSaveFileLineEditPrivate(QSaveFileLineEdit *widgetP)
+    explicit QSaveFileLineEditPrivate(QSaveFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::SaveFile);
+        action->setType(QFileAction::Type::SaveFile);
         widget->addAction(action, position);
 
         connect(widget, &QLineEdit::textChanged, this, &QSaveFileLineEditPrivate::textChanged);
@@ -19,7 +19,6 @@ public:
         connect(action, &QFileAction::filePathChanged, widget, &QSaveFileLineEdit::filePathChanged);
     }
 
-public Q_SLOTS:
     void textChanged(const QString &text) {
         action->setFilePath(text);
     }

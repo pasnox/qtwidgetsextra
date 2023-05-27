@@ -5,13 +5,13 @@ class QOpenFileLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QOpenFileLineEditPrivate(QOpenFileLineEdit *widgetP)
+    explicit QOpenFileLineEditPrivate(QOpenFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::OpenFile);
+        action->setType(QFileAction::Type::OpenFile);
         widget->addAction(action, position);
 
         connect(widget, &QLineEdit::textChanged, this, &QOpenFileLineEditPrivate::textChanged);
@@ -19,7 +19,6 @@ public:
         connect(action, &QFileAction::filePathChanged, widget, &QOpenFileLineEdit::filePathChanged);
     }
 
-public Q_SLOTS:
     void textChanged(const QString &text) {
         action->setFilePath(text);
     }

@@ -8,38 +8,38 @@ GeneratorDelegate::GeneratorDelegate(QObject *parent)
 
 QWidget *GeneratorDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                                          const QModelIndex &index) const {
-    switch (index.column()) {
-    case GeneratorDelegate::ColumnType: {
+    switch (static_cast<GeneratorDelegate::Column>(index.column())) {
+    case GeneratorDelegate::Column::Type: {
         const QHash<QString, Generator::ParameterType> &types = GeneratorDelegate::constTypes();
         QComboBox *cb = new QComboBox(parent);
 
         cb->setEditable(true);
 
         foreach (const QString &type, types.keys()) {
-            cb->addItem(type, types[type]);
+            cb->addItem(type, QVariant::fromValue(types[type]));
         }
 
         return cb;
     }
 
-    case GeneratorDelegate::ColumnName:
+    case GeneratorDelegate::Column::Name:
         return QStyledItemDelegate::createEditor(parent, option, index);
 
-    case GeneratorDelegate::ColumnParameterType: {
+    case GeneratorDelegate::Column::ParameterType: {
         QComboBox *cb = new QComboBox(parent);
 
-        cb->addItem(QStringLiteral("Variable"), Generator::Variable);
-        cb->addItem(QStringLiteral("Reference"), Generator::Reference);
-        cb->addItem(QStringLiteral("Pointer"), Generator::Pointer);
+        cb->addItem(QStringLiteral("Variable"), QVariant::fromValue(Generator::ParameterType::Variable));
+        cb->addItem(QStringLiteral("Reference"), QVariant::fromValue(Generator::ParameterType::Reference));
+        cb->addItem(QStringLiteral("Pointer"), QVariant::fromValue(Generator::ParameterType::Pointer));
 
         return cb;
     }
 
-    case GeneratorDelegate::ColumnDefaultValue:
+    case GeneratorDelegate::Column::DefaultValue:
         return QStyledItemDelegate::createEditor(parent, option, index);
 
-    case GeneratorDelegate::ColumnSignal:
-    case GeneratorDelegate::ColumnProperty:
+    case GeneratorDelegate::Column::Signal:
+    case GeneratorDelegate::Column::Property:
         break;
     }
 
@@ -47,8 +47,8 @@ QWidget *GeneratorDelegate::createEditor(QWidget *parent, const QStyleOptionView
 }
 
 void GeneratorDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const {
-    switch (index.column()) {
-    case GeneratorDelegate::ColumnType: {
+    switch (static_cast<GeneratorDelegate::Column>(index.column())) {
+    case GeneratorDelegate::Column::Type: {
         QComboBox *cb = qobject_cast<QComboBox *>(editor);
         const QString type = index.data(Qt::DisplayRole).toString();
         int index = cb->findText(type);
@@ -62,8 +62,8 @@ void GeneratorDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
         break;
     }
 
-    case GeneratorDelegate::ColumnParameterType: {
-        const Generator::ParameterType type = Generator::ParameterType(index.data(Qt::DisplayRole).toInt());
+    case GeneratorDelegate::Column::ParameterType: {
+        const auto type = index.data(Qt::DisplayRole);
         QComboBox *cb = qobject_cast<QComboBox *>(editor);
         int index = cb->findData(type);
 
@@ -75,35 +75,36 @@ void GeneratorDelegate::setEditorData(QWidget *editor, const QModelIndex &index)
         break;
     }
 
-    case GeneratorDelegate::ColumnName:
-    case GeneratorDelegate::ColumnDefaultValue:
-    case GeneratorDelegate::ColumnSignal:
-    case GeneratorDelegate::ColumnProperty:
+    case GeneratorDelegate::Column::Name:
+    case GeneratorDelegate::Column::DefaultValue:
+    case GeneratorDelegate::Column::Signal:
+    case GeneratorDelegate::Column::Property:
         QStyledItemDelegate::setEditorData(editor, index);
         break;
     }
 }
 
 void GeneratorDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const {
-    switch (index.column()) {
-    case GeneratorDelegate::ColumnType: {
+    switch (static_cast<GeneratorDelegate::Column>(index.column())) {
+    case GeneratorDelegate::Column::Type: {
         QComboBox *cb = qobject_cast<QComboBox *>(editor);
         model->setData(index, cb->currentText(), Qt::DisplayRole);
-        model->setData(index.sibling(index.row(), GeneratorDelegate::ColumnParameterType),
-                       constTypes().value(cb->currentText(), Generator::Variable), Qt::DisplayRole);
+        model->setData(index.sibling(index.row(), static_cast<int>(GeneratorDelegate::Column::ParameterType)),
+                       QVariant::fromValue(constTypes().value(cb->currentText(), Generator::ParameterType::Variable)),
+                       Qt::DisplayRole);
         break;
     }
 
-    case GeneratorDelegate::ColumnParameterType: {
+    case GeneratorDelegate::Column::ParameterType: {
         QComboBox *cb = qobject_cast<QComboBox *>(editor);
         model->setData(index, cb->currentData().toInt(), Qt::DisplayRole);
         break;
     }
 
-    case GeneratorDelegate::ColumnName:
-    case GeneratorDelegate::ColumnDefaultValue:
-    case GeneratorDelegate::ColumnSignal:
-    case GeneratorDelegate::ColumnProperty:
+    case GeneratorDelegate::Column::Name:
+    case GeneratorDelegate::Column::DefaultValue:
+    case GeneratorDelegate::Column::Signal:
+    case GeneratorDelegate::Column::Property:
         QStyledItemDelegate::setModelData(editor, model, index);
         break;
     }
@@ -115,42 +116,40 @@ QSize GeneratorDelegate::sizeHint(const QStyleOptionViewItem &option, const QMod
 
 void GeneratorDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option,
                                              const QModelIndex &index) const {
-    switch (index.column()) {
-    case GeneratorDelegate::ColumnType: {
+    switch (static_cast<GeneratorDelegate::Column>(index.column())) {
+    case GeneratorDelegate::Column::Type: {
         QRect r = option.rect;
         r.setWidth(editor->minimumSizeHint().width());
         editor->setGeometry(r);
         break;
     }
 
-    case GeneratorDelegate::ColumnName:
-    case GeneratorDelegate::ColumnParameterType:
-    case GeneratorDelegate::ColumnDefaultValue:
-    case GeneratorDelegate::ColumnSignal:
-    case GeneratorDelegate::ColumnProperty:
+    case GeneratorDelegate::Column::Name:
+    case GeneratorDelegate::Column::ParameterType:
+    case GeneratorDelegate::Column::DefaultValue:
+    case GeneratorDelegate::Column::Signal:
+    case GeneratorDelegate::Column::Property:
         QStyledItemDelegate::updateEditorGeometry(editor, option, index);
         break;
     }
 }
 
 const QHash<QString, Generator::ParameterType> &GeneratorDelegate::constTypes() {
-    static QHash<QString, Generator::ParameterType> types;
-
-    if (types.isEmpty()) {
-        types[QStringLiteral("QColor")] = Generator::Reference;
-        types[QStringLiteral("QVariant")] = Generator::Reference;
-        types[QStringLiteral("QString")] = Generator::Reference;
-        types[QStringLiteral("QStringList")] = Generator::Reference;
-        types[QStringLiteral("bool")] = Generator::Variable;
-        types[QStringLiteral("QSize")] = Generator::Reference;
-        types[QStringLiteral("QFont")] = Generator::Reference;
-        types[QStringLiteral("QRect")] = Generator::Reference;
-        types[QStringLiteral("QPoint")] = Generator::Reference;
-        types[QStringLiteral("QBrush")] = Generator::Reference;
-        types[QStringLiteral("QPen")] = Generator::Reference;
-        types[QStringLiteral("QObject")] = Generator::Pointer;
-        types[QStringLiteral("QWidget")] = Generator::Pointer;
-    }
+    static const QHash<QString, Generator::ParameterType> types {
+        {QStringLiteral("QColor"), Generator::ParameterType::Reference},
+        {QStringLiteral("QVariant"), Generator::ParameterType::Reference},
+        {QStringLiteral("QString"), Generator::ParameterType::Reference},
+        {QStringLiteral("QStringList"), Generator::ParameterType::Reference},
+        {QStringLiteral("bool"), Generator::ParameterType::Variable},
+        {QStringLiteral("QSize"), Generator::ParameterType::Reference},
+        {QStringLiteral("QFont"), Generator::ParameterType::Reference},
+        {QStringLiteral("QRect"), Generator::ParameterType::Reference},
+        {QStringLiteral("QPoint"), Generator::ParameterType::Reference},
+        {QStringLiteral("QBrush"), Generator::ParameterType::Reference},
+        {QStringLiteral("QPen"), Generator::ParameterType::Reference},
+        {QStringLiteral("QObject"), Generator::ParameterType::Pointer},
+        {QStringLiteral("QWidget"), Generator::ParameterType::Pointer},
+    };
 
     return types;
 }

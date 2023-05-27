@@ -10,77 +10,93 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow) {
-    ui->setupUi(this);
-    ui->cbInheritingType->addItem(QStringLiteral("Widget"), Generator::Widget);
-    ui->cbInheritingType->addItem(QStringLiteral("Object"), Generator::Object);
-    ui->twMembers->setColumnCount(6);
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnType, QStringLiteral("Type"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnName, QStringLiteral("Name"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnParameterType, QStringLiteral("ParameterType"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnDefaultValue, QStringLiteral("DefaultValue"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnSignal, QStringLiteral("Signal"));
-    ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnProperty, QStringLiteral("Property"));
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnType, QHeaderView::ResizeToContents);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnName, QHeaderView::Stretch);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnParameterType,
-                                                  QHeaderView::ResizeToContents);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnDefaultValue, QHeaderView::ResizeToContents);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnSignal, QHeaderView::ResizeToContents);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnProperty, QHeaderView::ResizeToContents);
-    ui->twMembers->setItemDelegate(new GeneratorDelegate(this));
+    , m_ui(new Ui_MainWindow) {
+    m_ui->setupUi(this);
+
+    m_ui->cbInheritingType->addItem(QStringLiteral("Widget"), QVariant::fromValue(Generator::InheritingType::Widget));
+    m_ui->cbInheritingType->addItem(QStringLiteral("Object"), QVariant::fromValue(Generator::InheritingType::Object));
+
+    m_ui->twMembers->setColumnCount(6);
+
+    const auto setHeaderText = [this](GeneratorDelegate::Column column, const QString &text) {
+        m_ui->twMembers->headerItem()->setText(static_cast<int>(column), text);
+    };
+    const auto setHeaderSectionResizeMode = [this](GeneratorDelegate::Column column, QHeaderView::ResizeMode mode) {
+        m_ui->twMembers->header()->setSectionResizeMode(static_cast<int>(column), mode);
+    };
+
+    setHeaderText(GeneratorDelegate::Column::Type, QStringLiteral("Type"));
+    setHeaderText(GeneratorDelegate::Column::Name, QStringLiteral("Name"));
+    setHeaderText(GeneratorDelegate::Column::ParameterType, QStringLiteral("ParameterType"));
+    setHeaderText(GeneratorDelegate::Column::DefaultValue, QStringLiteral("DefaultValue"));
+    setHeaderText(GeneratorDelegate::Column::Signal, QStringLiteral("Signal"));
+    setHeaderText(GeneratorDelegate::Column::Property, QStringLiteral("Property"));
+
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::Type, QHeaderView::ResizeToContents);
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::Name, QHeaderView::Stretch);
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::ParameterType, QHeaderView::ResizeToContents);
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::DefaultValue, QHeaderView::ResizeToContents);
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::Signal, QHeaderView::ResizeToContents);
+    setHeaderSectionResizeMode(GeneratorDelegate::Column::Property, QHeaderView::ResizeToContents);
+
+    m_ui->twMembers->setItemDelegate(new GeneratorDelegate(this));
 }
 
-MainWindow::~MainWindow() {
-    delete ui;
-}
+MainWindow::~MainWindow() = default;
 
 void MainWindow::on_tbAdd_clicked() {
     static int i = 0;
     QTreeWidgetItem *item = new QTreeWidgetItem;
+    const auto setItemText = [&](GeneratorDelegate::Column column, const QString &text) {
+        item->setText(static_cast<int>(column), text);
+    };
+    const auto setItemCheckState = [&](GeneratorDelegate::Column column, Qt::CheckState state) {
+        item->setCheckState(static_cast<int>(column), state);
+    };
 
-    item->setText(GeneratorDelegate::ColumnType, QStringLiteral("type%1").arg(i));
-    item->setText(GeneratorDelegate::ColumnName, QStringLiteral("name%1").arg(i));
-    item->setText(GeneratorDelegate::ColumnParameterType, QString::number(Generator::Reference));
-    item->setText(GeneratorDelegate::ColumnDefaultValue, QString());
-    item->setCheckState(GeneratorDelegate::ColumnSignal, Qt::Unchecked);
-    item->setCheckState(GeneratorDelegate::ColumnProperty, Qt::Unchecked);
+    setItemText(GeneratorDelegate::Column::Type, QStringLiteral("type%1").arg(i));
+    setItemText(GeneratorDelegate::Column::Name, QStringLiteral("name%1").arg(i));
+    setItemText(GeneratorDelegate::Column::ParameterType,
+                QString::number(static_cast<int>(Generator::ParameterType::Reference)));
+    setItemText(GeneratorDelegate::Column::DefaultValue, QString());
+    setItemCheckState(GeneratorDelegate::Column::Signal, Qt::Unchecked);
+    setItemCheckState(GeneratorDelegate::Column::Property, Qt::Unchecked);
     item->setFlags(item->flags() | Qt::ItemIsEditable);
 
-    ui->twMembers->addTopLevelItem(item);
-    ui->twMembers->setCurrentItem(item);
+    m_ui->twMembers->addTopLevelItem(item);
+    m_ui->twMembers->setCurrentItem(item);
 
     i++;
 }
 
 void MainWindow::on_tbRemove_clicked() {
-    delete ui->twMembers->selectedItems().value(0);
+    delete m_ui->twMembers->selectedItems().value(0);
 }
 
 void MainWindow::on_tbUp_clicked() {
-    QTreeWidgetItem *item = ui->twMembers->selectedItems().value(0);
-    int row = ui->twMembers->indexOfTopLevelItem(item);
+    QTreeWidgetItem *item = m_ui->twMembers->selectedItems().value(0);
+    int row = m_ui->twMembers->indexOfTopLevelItem(item);
 
     if (row > 0) {
-        ui->twMembers->takeTopLevelItem(row);
-        ui->twMembers->insertTopLevelItem(row - 1, item);
-        ui->twMembers->setCurrentItem(item);
+        m_ui->twMembers->takeTopLevelItem(row);
+        m_ui->twMembers->insertTopLevelItem(row - 1, item);
+        m_ui->twMembers->setCurrentItem(item);
     }
 }
 
 void MainWindow::on_tbDown_clicked() {
-    QTreeWidgetItem *item = ui->twMembers->selectedItems().value(0);
-    int row = ui->twMembers->indexOfTopLevelItem(item);
+    QTreeWidgetItem *item = m_ui->twMembers->selectedItems().value(0);
+    int row = m_ui->twMembers->indexOfTopLevelItem(item);
 
-    if (row < ui->twMembers->topLevelItemCount() - 1) {
-        ui->twMembers->takeTopLevelItem(row);
-        ui->twMembers->insertTopLevelItem(row + 1, item);
-        ui->twMembers->setCurrentItem(item);
+    if (row < m_ui->twMembers->topLevelItemCount() - 1) {
+        m_ui->twMembers->takeTopLevelItem(row);
+        m_ui->twMembers->insertTopLevelItem(row + 1, item);
+        m_ui->twMembers->setCurrentItem(item);
     }
 }
 
 void MainWindow::on_dbbButtons_clicked(QAbstractButton *button) {
-    QDialogButtonBox::StandardButton sb = ui->dbbButtons->standardButton(button);
+    QDialogButtonBox::StandardButton sb = m_ui->dbbButtons->standardButton(button);
 
     switch (sb) {
     case QDialogButtonBox::Close:
@@ -127,34 +143,38 @@ bool MainWindow::saveFile(const QString &content, const QString &filePath) const
 void MainWindow::apply() {
     Generator::Entry::List entries;
 
-    for (int i = 0; i < ui->twMembers->topLevelItemCount(); i++) {
-        const QTreeWidgetItem *item = ui->twMembers->topLevelItem(i);
+    for (int i = 0; i < m_ui->twMembers->topLevelItemCount(); i++) {
+        const QTreeWidgetItem *item = m_ui->twMembers->topLevelItem(i);
+        const auto itemText = [item](GeneratorDelegate::Column column) { return item->text(static_cast<int>(column)); };
+        const auto itemCheckState = [item](GeneratorDelegate::Column column) {
+            return item->checkState(static_cast<int>(column));
+        };
         Generator::Entry entry;
 
-        entry.t = item->text(GeneratorDelegate::ColumnType);
-        entry.n = item->text(GeneratorDelegate::ColumnName);
-        entry.pt = Generator::ParameterType(item->text(GeneratorDelegate::ColumnParameterType).toInt());
-        entry.dv = item->text(GeneratorDelegate::ColumnDefaultValue);
-        entry.s = item->checkState(GeneratorDelegate::ColumnSignal) == Qt::Checked;
-        entry.p = item->checkState(GeneratorDelegate::ColumnProperty) == Qt::Checked;
+        entry.n = itemText(GeneratorDelegate::Column::Name);
+        entry.t = itemText(GeneratorDelegate::Column::Type);
+        entry.pt = Generator::ParameterType(itemText(GeneratorDelegate::Column::ParameterType).toInt());
+        entry.dv = itemText(GeneratorDelegate::Column::DefaultValue);
+        entry.s = itemCheckState(GeneratorDelegate::Column::Signal) == Qt::Checked;
+        entry.p = itemCheckState(GeneratorDelegate::Column::Property) == Qt::Checked;
 
         entries << entry;
     }
 
     m_generator.setEntries(entries);
-    m_generator.setNameSpace(ui->leNameSpace->text());
-    m_generator.setClassName(ui->leClassName->text());
-    m_generator.setInheriting(ui->leInheriting->text());
-    m_generator.setInheritingType(Generator::InheritingType(ui->cbInheritingType->currentData().toInt()));
-    m_generator.setPluginGroup(ui->lePluginGroup->text());
-    m_generator.setPluginIconFilePath(ui->lePluginIconFilePath->text());
-    m_generator.setPluginToolTip(ui->lePluginToolTip->text());
+    m_generator.setNameSpace(m_ui->leNameSpace->text());
+    m_generator.setClassName(m_ui->leClassName->text());
+    m_generator.setInheriting(m_ui->leInheriting->text());
+    m_generator.setInheritingType(Generator::InheritingType(m_ui->cbInheritingType->currentData().toInt()));
+    m_generator.setPluginGroup(m_ui->lePluginGroup->text());
+    m_generator.setPluginIconFilePath(m_ui->lePluginIconFilePath->text());
+    m_generator.setPluginToolTip(m_ui->lePluginToolTip->text());
 
-    ui->pteHeader->setPlainText(m_generator.classHeader());
-    ui->pteSource->setPlainText(m_generator.classSource());
-    ui->ptePluginHeader->setPlainText(m_generator.pluginHeader());
-    ui->ptePluginSource->setPlainText(m_generator.pluginSource());
-    ui->pteProjectFile->setPlainText(m_generator.projectFileSource());
+    m_ui->pteHeader->setPlainText(m_generator.classHeader());
+    m_ui->pteSource->setPlainText(m_generator.classSource());
+    m_ui->ptePluginHeader->setPlainText(m_generator.pluginHeader());
+    m_ui->ptePluginSource->setPlainText(m_generator.pluginSource());
+    m_ui->pteProjectFile->setPlainText(m_generator.projectFileSource());
 }
 
 void MainWindow::save() {
@@ -170,29 +190,29 @@ void MainWindow::save() {
     const QString projectFile =
         QStringLiteral("%1/%2/%2.pri").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup());
 
-    saveFile(ui->pteHeader->toPlainText(),
+    saveFile(m_ui->pteHeader->toPlainText(),
              QStringLiteral("%1/%2/%3.h")
                  .arg(projectSourceFilePath)
                  .arg(m_generator.normalizedPluginGroup())
                  .arg(m_generator.className()));
-    saveFile(ui->pteSource->toPlainText(),
+    saveFile(m_ui->pteSource->toPlainText(),
              QStringLiteral("%1/%2/%3.cpp")
                  .arg(projectSourceFilePath)
                  .arg(m_generator.normalizedPluginGroup())
                  .arg(m_generator.className()));
-    saveFile(ui->ptePluginHeader->toPlainText(),
+    saveFile(m_ui->ptePluginHeader->toPlainText(),
              QStringLiteral("%1/%2/%3Plugin.h")
                  .arg(projectSourceFilePath)
                  .arg(m_generator.normalizedPluginGroup())
                  .arg(m_generator.className()));
-    saveFile(ui->ptePluginSource->toPlainText(),
+    saveFile(m_ui->ptePluginSource->toPlainText(),
              QStringLiteral("%1/%2/%3Plugin.cpp")
                  .arg(projectSourceFilePath)
                  .arg(m_generator.normalizedPluginGroup())
                  .arg(m_generator.className()));
 
     if (!QFile::exists(projectFile)) {
-        saveFile(ui->pteProjectFile->toPlainText(), projectFile);
+        saveFile(m_ui->pteProjectFile->toPlainText(), projectFile);
     }
 
     const QStringList text = QStringList()

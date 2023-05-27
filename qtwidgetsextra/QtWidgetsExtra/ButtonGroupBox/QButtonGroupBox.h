@@ -23,7 +23,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QButtonGroupBox : public QGro
     Q_PROPERTY(QStringList items READ items WRITE setItems)
 
 public:
-    enum Type {
+    enum class Type {
         CheckBox,
         RadioBox
     };

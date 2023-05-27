@@ -17,7 +17,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFileLineEdit : public QA
     Q_PROPERTY(QFileDialog::Options options READ options WRITE setOptions)
 
 public:
-    QOpenFileLineEdit(QWidget *parent = nullptr);
+    explicit QOpenFileLineEdit(QWidget *parent = nullptr);
 
     QLineEdit::ActionPosition embededActionPosition() const;
     void setEmbededActionPosition(QLineEdit::ActionPosition position);

@@ -13,7 +13,7 @@ class QtWidgetsExtra : public QObject, public QDesignerCustomWidgetCollectionInt
 public:
     explicit QtWidgetsExtra(QObject *parent = nullptr);
 
-    virtual QList<QDesignerCustomWidgetInterface *> customWidgets() const;
+    QList<QDesignerCustomWidgetInterface *> customWidgets() const override;
 
 private:
     QList<QDesignerCustomWidgetInterface *> m_widgets;

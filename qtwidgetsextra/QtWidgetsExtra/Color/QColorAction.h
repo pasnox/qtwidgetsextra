@@ -12,7 +12,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorAction : public QAction
     class QColorActionPrivate *d;
 
 public:
-    enum ColorDialogOption {
+    enum class ColorDialogOption {
         ShowAlphaChannel = QColorDialog::ShowAlphaChannel,
         NoButtons = QColorDialog::NoButtons,
         DontUseNativeDialog = QColorDialog::DontUseNativeDialog

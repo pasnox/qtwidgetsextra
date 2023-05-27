@@ -4,13 +4,13 @@ class QOpenFileButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QOpenFileButtonPrivate(QOpenFileButton *widgetP)
+    explicit QOpenFileButtonPrivate(QOpenFileButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::OpenFile);
+        action->setType(QFileAction::Type::OpenFile);
         widget->setDefaultAction(action);
 
         connect(action, &QFileAction::filePathChanged, widget, &QOpenFileButton::filePathChanged);

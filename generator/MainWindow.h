@@ -4,9 +4,9 @@
 
 #include <QMainWindow>
 
-namespace Ui {
-class MainWindow;
-}
+#include <memory>
+
+class Ui_MainWindow;
 
 class QTreeWidgetItem;
 class QAbstractButton;
@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow {
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    ~MainWindow() override;
 
 private Q_SLOTS:
     void on_tbAdd_clicked();
@@ -26,7 +26,7 @@ private Q_SLOTS:
     void on_dbbButtons_clicked(QAbstractButton *button);
 
 private:
-    Ui::MainWindow *ui;
+    std::unique_ptr<Ui_MainWindow> m_ui;
     Generator m_generator;
 
     bool saveFile(const QString &content, const QString &filePath) const;

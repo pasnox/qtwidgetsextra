@@ -42,12 +42,12 @@ public:
     QIcon expandedIcon;
     bool collapsed;
     //
-    QCollapsibleFrame::RestoreSizeBehavior resizeBehavior = QCollapsibleFrame::RestoreWindowSizeBehavior;
+    QCollapsibleFrame::RestoreSizeBehavior resizeBehavior = QCollapsibleFrame::RestoreSizeBehavior::Window;
     QSize oldCollapsedSize;
     QSize oldExpandedSize;
 
 public:
-    QCollapsibleFramePrivate(QCollapsibleFrame *_editor)
+    explicit QCollapsibleFramePrivate(QCollapsibleFrame *_editor)
         : QObject(_editor)
         , editor(_editor)
         , horizontalLayout(new QHBoxLayout)
@@ -66,13 +66,12 @@ public:
         connect(button, &QAbstractButton::toggled, this, &QCollapsibleFramePrivate::button_toggled);
     }
 
-public Q_SLOTS:
     void button_toggled(bool toggled) {
         switch (resizeBehavior) {
-        case QCollapsibleFrame::RestoreWindowSizeBehavior:
+        case QCollapsibleFrame::RestoreSizeBehavior::Window:
             storeSizes(editor->window());
             break;
-        case QCollapsibleFrame::NoRestoreSizeBehavior:
+        case QCollapsibleFrame::RestoreSizeBehavior::None:
             break;
         }
 
@@ -92,11 +91,11 @@ public Q_SLOTS:
         }
 
         switch (resizeBehavior) {
-        case QCollapsibleFrame::RestoreWindowSizeBehavior:
+        case QCollapsibleFrame::RestoreSizeBehavior::Window:
             QMetaObject::invokeMethod(
                 this, [this]() { restoreSize(editor->window()); }, Qt::QueuedConnection);
             break;
-        case QCollapsibleFrame::NoRestoreSizeBehavior:
+        case QCollapsibleFrame::RestoreSizeBehavior::None:
             break;
         }
     }

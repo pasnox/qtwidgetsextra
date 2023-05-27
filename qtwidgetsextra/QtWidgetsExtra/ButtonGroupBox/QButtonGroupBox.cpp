@@ -11,13 +11,13 @@ class QButtonGroupBoxPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QButtonGroupBoxPrivate(QButtonGroupBox *widget)
+    explicit QButtonGroupBoxPrivate(QButtonGroupBox *widget)
         : QObject(widget)
         , widget(widget)
         , layout(new QBoxLayout(QBoxLayout::TopToBottom, widget))
         , group(new QButtonGroup(this))
         , model(new QAbstractButtonListModel(this))
-        , type(QButtonGroupBox::CheckBox) {
+        , type(QButtonGroupBox::Type::CheckBox) {
         Q_ASSERT(widget);
         const int hint = widget->style()->pixelMetric(QStyle::PM_ButtonIconSize);
         iconSize = QSize(hint, hint);
@@ -80,7 +80,8 @@ public:
         button->setCheckable(true);
         button->setIconSize(iconSize);
 
-        group->addButton(button, model->data(model->index(index), QAbstractButtonListModel::IdRole).toInt());
+        group->addButton(
+            button, model->data(model->index(index), static_cast<int>(QAbstractButtonListModel::Role::Id)).toInt());
         layout->insertWidget(index, button);
 
         updateButton(index);
@@ -93,7 +94,7 @@ public:
         QAbstractButton *button = qobject_cast<QAbstractButton *>(layout->itemAt(index)->widget());
         Q_ASSERT(button);
 
-        group->setId(button, data.value(QAbstractButtonListModel::IdRole).toInt());
+        group->setId(button, data.value(static_cast<int>(QAbstractButtonListModel::Role::Id)).toInt());
 
         button->setChecked(data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked);
         button->setIcon(data.value(Qt::DecorationRole).value<QIcon>());
@@ -103,14 +104,15 @@ public:
         button->setStatusTip(data.value(Qt::StatusTipRole).toString());
         button->setAccessibleName(data.value(Qt::AccessibleTextRole).toString());
         button->setAccessibleDescription(data.value(Qt::AccessibleDescriptionRole).toString());
-        button->setShortcut(data.value(QAbstractButtonListModel::ShortcutRole).value<QKeySequence>());
+        button->setShortcut(
+            data.value(static_cast<int>(QAbstractButtonListModel::Role::Shortcut)).value<QKeySequence>());
 
         const QVariant font = data.value(Qt::FontRole);
         if (font.isValid()) {
             button->setFont(font.value<QFont>());
         }
 
-        // Exclusive group would not undeck the checked button
+        // Exclusive group would not uncheck the checked button
         if (button->isChecked()
             != (data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked)) {
             model->setData(model->index(index), button->isChecked() ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
@@ -253,9 +255,9 @@ void QButtonGroupBox::setItems(const QStringList &items) {
 
 QAbstractButton *QButtonGroupBox::createButton() const {
     switch (d->type) {
-    case QButtonGroupBox::CheckBox:
+    case QButtonGroupBox::Type::CheckBox:
         return new QCheckBox;
-    case QButtonGroupBox::RadioBox:
+    case QButtonGroupBox::Type::RadioBox:
         return new QRadioButton;
     default:
         Q_UNREACHABLE();

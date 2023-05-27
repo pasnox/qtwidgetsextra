@@ -7,7 +7,7 @@ class QColorActionPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorActionPrivate(QColorAction *actionP)
+    explicit QColorActionPrivate(QColorAction *actionP)
         : QObject(actionP)
         , action(actionP)
         , options() {
@@ -16,7 +16,6 @@ public:
         connect(action, &QAction::triggered, this, &QColorActionPrivate::triggered);
     }
 
-public Q_SLOTS:
     void triggered() {
         const QColor newColor =
             QColorDialog::getColor(color, 0, caption, QColorDialog::ColorDialogOptions(int(options)));
@@ -56,7 +55,7 @@ QColor QColorAction::color() const {
 }
 
 void QColorAction::setColor(const QColor &color) {
-    if (color.alpha() != 255 && !d->options.testFlag(QColorAction::ShowAlphaChannel)) {
+    if (color.alpha() != 255 && !d->options.testFlag(QColorAction::ColorDialogOption::ShowAlphaChannel)) {
         qWarning("%s: Trying to set a color with alpha with options not allowing alpha", Q_FUNC_INFO);
     }
 
@@ -94,7 +93,8 @@ QIcon QColorAction::colorIcon(const QColor &color) const {
 }
 
 QString QColorAction::colorName(const QColor &color) const {
-    return color.name(d->options.testFlag(QColorAction::ShowAlphaChannel) ? QColor::HexArgb : QColor::HexRgb);
+    return color.name(d->options.testFlag(QColorAction::ColorDialogOption::ShowAlphaChannel) ? QColor::HexArgb
+                                                                                             : QColor::HexRgb);
 }
 
 #include "QColorAction.moc"

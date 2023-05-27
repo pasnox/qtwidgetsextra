@@ -7,7 +7,7 @@ class QFileSystemListViewPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QFileSystemListViewPrivate(QFileSystemListView *widgetP)
+    explicit QFileSystemListViewPrivate(QFileSystemListView *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , model(new QFileSystemModel(this))
@@ -90,7 +90,6 @@ public:
         widget->selectionModel()->select(itemSelection, flags);
     }
 
-public Q_SLOTS:
     void activated(const QModelIndex &index) {
         if (!browsable || !model->isDir(index) || QApplication::keyboardModifiers() != Qt::NoModifier) {
             return;
@@ -184,37 +183,37 @@ void QFileSystemListView::setNameFilters(const QStringList &nameFilters) {
     d->model->setNameFilters(nameFilters);
 }
 
-QFileSystemListView::SectionFlag QFileSystemListView::visibleSection() const {
-    switch (modelColumn()) {
-    case QFileSystemListView::NameColumn:
-        return QFileSystemListView::NameSection;
-    case QFileSystemListView::SizeColumn:
-        return QFileSystemListView::SizeSection;
-    case QFileSystemListView::TypeColumn:
-        return QFileSystemListView::TypeSection;
-    case QFileSystemListView::LastModificationColumn:
-        return QFileSystemListView::LastModificationSection;
+QFileSystemListView::Section QFileSystemListView::visibleSection() const {
+    switch (static_cast<QFileSystemListView::Column>(modelColumn())) {
+    case QFileSystemListView::Column::Name:
+        return QFileSystemListView::Section::Name;
+    case QFileSystemListView::Column::Size:
+        return QFileSystemListView::Section::Size;
+    case QFileSystemListView::Column::Type:
+        return QFileSystemListView::Section::Type;
+    case QFileSystemListView::Column::LastModification:
+        return QFileSystemListView::Section::LastModification;
     default:
-        return QFileSystemListView::NameSection;
+        return QFileSystemListView::Section::Name;
     }
 }
 
-void QFileSystemListView::setVisibleSection(QFileSystemListView::SectionFlag section) {
+void QFileSystemListView::setVisibleSection(QFileSystemListView::Section section) {
     switch (section) {
-    case QFileSystemListView::NameSection:
-        setModelColumn(QFileSystemListView::NameColumn);
+    case QFileSystemListView::Section::Name:
+        setModelColumn(static_cast<int>(QFileSystemListView::Column::Name));
         break;
-    case QFileSystemListView::SizeSection:
-        setModelColumn(QFileSystemListView::SizeColumn);
+    case QFileSystemListView::Section::Size:
+        setModelColumn(static_cast<int>(QFileSystemListView::Column::Size));
         break;
-    case QFileSystemListView::TypeSection:
-        setModelColumn(QFileSystemListView::TypeColumn);
+    case QFileSystemListView::Section::Type:
+        setModelColumn(static_cast<int>(QFileSystemListView::Column::Type));
         break;
-    case QFileSystemListView::LastModificationSection:
-        setModelColumn(QFileSystemListView::LastModificationColumn);
+    case QFileSystemListView::Section::LastModification:
+        setModelColumn(static_cast<int>(QFileSystemListView::Column::LastModification));
         break;
     default:
-        setModelColumn(QFileSystemListView::NameColumn);
+        setModelColumn(static_cast<int>(QFileSystemListView::Column::Name));
         break;
     }
 }

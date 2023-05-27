@@ -7,10 +7,10 @@ class QFileActionPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QFileActionPrivate(QFileAction *actionP)
+    explicit QFileActionPrivate(QFileAction *actionP)
         : QObject(actionP)
         , action(actionP)
-        , type(QFileAction::OpenFile)
+        , type(QFileAction::Type::OpenFile)
         , options() {
         Q_ASSERT(action);
 
@@ -21,19 +21,18 @@ public:
 
     void updateIcon() {
         switch (type) {
-        case QFileAction::OpenFile:
+        case QFileAction::Type::OpenFile:
             action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogOpenButton));
             break;
-        case QFileAction::SaveFile:
+        case QFileAction::Type::SaveFile:
             action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogSaveButton));
             break;
-        case QFileAction::OpenFolder:
+        case QFileAction::Type::OpenFolder:
             action->setIcon(qApp->style()->standardIcon(QStyle::SP_DirIcon));
             break;
         }
     }
 
-public Q_SLOTS:
     void triggered() {
         QString dir = directory;
         QString fn;
@@ -43,13 +42,13 @@ public Q_SLOTS:
         }
 
         switch (type) {
-        case QFileAction::OpenFile:
+        case QFileAction::Type::OpenFile:
             fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
             break;
-        case QFileAction::SaveFile:
+        case QFileAction::Type::SaveFile:
             fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
             break;
-        case QFileAction::OpenFolder:
+        case QFileAction::Type::OpenFolder:
             fn = QFileDialog::getExistingDirectory(0, caption, dir, options);
             break;
         }

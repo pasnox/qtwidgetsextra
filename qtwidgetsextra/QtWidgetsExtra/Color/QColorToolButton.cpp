@@ -4,7 +4,7 @@ class QColorToolButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorToolButtonPrivate(QColorToolButton *widgetP)
+    explicit QColorToolButtonPrivate(QColorToolButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QColorAction(this)) {

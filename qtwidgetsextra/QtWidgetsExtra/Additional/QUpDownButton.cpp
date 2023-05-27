@@ -8,7 +8,7 @@ class QUpDownButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QUpDownButtonPrivate(QUpDownButton *widgetP, Qt::Orientation orientation)
+    explicit QUpDownButtonPrivate(QUpDownButton *widgetP, Qt::Orientation orientation)
         : QObject(widgetP)
         , widget(widgetP)
         , layout(new QBoxLayout(orientationToDirection(orientation), widget))

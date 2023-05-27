@@ -6,7 +6,7 @@ class QColorComboBoxPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QColorComboBoxPrivate(QColorComboBox *widgetP)
+    explicit QColorComboBoxPrivate(QColorComboBox *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , model(new QColorListModel(this)) {
@@ -27,7 +27,7 @@ public:
         if (widget->lineEdit()) {
             QString mask = QStringLiteral("\\#HHHhhh");
 
-            if (model->nameFormat() == QColorListModel::HexArgb) {
+            if (model->nameFormat() == QColorListModel::NameFormat::HexArgb) {
                 mask = QStringLiteral("\\#HHHhhhhh");
             }
 
@@ -41,7 +41,6 @@ public:
         return color.name(QColor::HexArgb);
     }
 
-public Q_SLOTS:
     void textActivated(const QString &text) {
         Q_EMIT widget->activated(QColor(text));
     }
@@ -110,11 +109,12 @@ void QColorComboBox::setColorsList(const QList<QColor> &colors) {
 }
 
 QString QColorComboBox::currentColorName() const {
-    return currentData(QColorListModel::HexArgbName).toString();
+    return currentData(static_cast<int>(QColorListModel::Role::HexArgbName)).toString();
 }
 
 void QColorComboBox::setCurrentColorName(const QString &colorName) {
-    setCurrentIndex(findData(d->internalColorName(QColor(colorName)), QColorListModel::HexArgbName));
+    setCurrentIndex(
+        findData(d->internalColorName(QColor(colorName)), static_cast<int>(QColorListModel::Role::HexArgbName)));
 }
 
 QString QColorComboBox::currentTextColorName() const {

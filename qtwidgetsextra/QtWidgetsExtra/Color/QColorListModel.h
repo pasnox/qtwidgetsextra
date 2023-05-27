@@ -13,35 +13,35 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListModel : public QAbs
     class QColorListModelPrivate *d;
 
 public:
-    enum NameFormat {
+    enum class NameFormat {
         HexRgb = QColor::HexRgb,
         HexArgb = QColor::HexArgb
     };
     Q_ENUM(NameFormat)
 
-    enum CustomRoles {
+    enum class Role {
         HexArgbName = Qt::UserRole
     };
-    Q_ENUM(CustomRoles)
+    Q_ENUM(Role)
 
     explicit QColorListModel(QObject *parent = nullptr);
     explicit QColorListModel(const QStringList &colorListNames, QObject *parent = nullptr);
     explicit QColorListModel(const QList<QColor> &colorsList, QObject *parent = nullptr);
 
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-    virtual QModelIndex sibling(int row, int column, const QModelIndex &idx) const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QModelIndex sibling(int row, int column, const QModelIndex &idx) const override;
 
-    virtual QVariant data(const QModelIndex &index, int role) const;
-    virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
-    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    virtual bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex());
-    virtual bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex());
+    bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
+    bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
 
-    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
 
-    virtual Qt::DropActions supportedDropActions() const;
+    Qt::DropActions supportedDropActions() const override;
 
     QColorListModel::NameFormat nameFormat() const;
     void setNameFormat(QColorListModel::NameFormat nameFormat);

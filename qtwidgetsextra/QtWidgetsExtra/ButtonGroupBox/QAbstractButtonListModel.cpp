@@ -6,7 +6,7 @@ class QAbstractButtonListModelPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QAbstractButtonListModelPrivate(QAbstractButtonListModel *model)
+    explicit QAbstractButtonListModelPrivate(QAbstractButtonListModel *model)
         : QObject(model)
         , model(model) {
         Q_ASSERT(model);

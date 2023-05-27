@@ -10,7 +10,7 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileAction : public QAction 
     class QFileActionPrivate *d;
 
 public:
-    enum Type {
+    enum class Type {
         OpenFile,
         SaveFile,
         OpenFolder

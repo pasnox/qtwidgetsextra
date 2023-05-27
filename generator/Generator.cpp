@@ -24,10 +24,10 @@ QString Generator::Entry::signalName() const {
 
 QString Generator::Entry::typeReturn() const {
     switch (pt) {
-    case Generator::Variable:
-    case Generator::Reference:
+    case Generator::ParameterType::Variable:
+    case Generator::ParameterType::Reference:
         return t;
-    case Generator::Pointer:
+    case Generator::ParameterType::Pointer:
         return QStringLiteral("%1 *").arg(t);
     }
 
@@ -37,11 +37,11 @@ QString Generator::Entry::typeReturn() const {
 
 QString Generator::Entry::typeValue() const {
     switch (pt) {
-    case Generator::Variable:
+    case Generator::ParameterType::Variable:
         return QStringLiteral("%1 %2").arg(t).arg(propertyName());
-    case Generator::Reference:
+    case Generator::ParameterType::Reference:
         return QStringLiteral("const %1 &%2").arg(t).arg(propertyName());
-    case Generator::Pointer:
+    case Generator::ParameterType::Pointer:
         return QStringLiteral("%1 *%2").arg(t).arg(propertyName());
     }
 
@@ -65,7 +65,7 @@ QString Generator::Entry::signal() const {
 QString Generator::Entry::headerGetter() const {
     return QStringLiteral("%1%2%3() const;")
         .arg(typeReturn())
-        .arg(pt == Generator::Pointer ? QString() : QStringLiteral(" "))
+        .arg(pt == Generator::ParameterType::Pointer ? QString() : QStringLiteral(" "))
         .arg(getterName());
 }
 
@@ -82,7 +82,7 @@ QStringList Generator::Entry::sourceGetter(const QString &className, const QStri
                           "\treturn d->%5;\n"
                           "}")
         .arg(typeReturn())
-        .arg(pt == Generator::Pointer ? QString() : QStringLiteral(" "))
+        .arg(pt == Generator::ParameterType::Pointer ? QString() : QStringLiteral(" "))
         .arg(className)
         .arg(getterName())
         .arg(propertyName())
@@ -205,10 +205,10 @@ QString Generator::classHeader() const {
 
     foreach (const Generator::Entry &entry, m_entries) {
         switch (entry.pt) {
-        case Generator::Variable:
+        case Generator::ParameterType::Variable:
             break;
-        case Generator::Reference:
-        case Generator::Pointer:
+        case Generator::ParameterType::Reference:
+        case Generator::ParameterType::Pointer:
             output << QStringLiteral("class %1;").arg(entry.t);
             hasReferencesOrPointers = true;
             break;
@@ -301,10 +301,10 @@ QString Generator::classSource() const {
 
     foreach (const Generator::Entry &entry, m_entries) {
         switch (entry.pt) {
-        case Generator::Variable:
+        case Generator::ParameterType::Variable:
             break;
-        case Generator::Reference:
-        case Generator::Pointer:
+        case Generator::ParameterType::Reference:
+        case Generator::ParameterType::Pointer:
             output << QStringLiteral("#include <%1>").arg(entry.t);
             hasReferencesOrPointers = true;
             break;
@@ -359,7 +359,7 @@ QString Generator::classSource() const {
     foreach (const Generator::Entry &entry, m_entries) {
         output << QStringLiteral("%1%2%3;")
                       .arg(entry.typeReturn())
-                      .arg(entry.pt == Generator::Pointer ? QString() : QStringLiteral(" "))
+                      .arg(entry.pt == Generator::ParameterType::Pointer ? QString() : QStringLiteral(" "))
                       .arg(entry.propertyName())
                       .prepend(Generator::Tab);
     }
@@ -608,9 +608,9 @@ QString Generator::nonTitleCased(const QString &string) {
 
 QString Generator::privateObjectName() const {
     switch (m_inheritingType) {
-    case Generator::Widget:
+    case Generator::InheritingType::Widget:
         return QStringLiteral("widget");
-    case Generator::Object:
+    case Generator::InheritingType::Object:
         return QStringLiteral("object");
     }
 
@@ -619,5 +619,6 @@ QString Generator::privateObjectName() const {
 }
 
 QString Generator::inheritingTypeClassName() const {
-    return m_inheritingType == Generator::Widget ? QStringLiteral("QWidget") : QStringLiteral("QObject");
+    return m_inheritingType == Generator::InheritingType::Widget ? QStringLiteral("QWidget")
+                                                                 : QStringLiteral("QObject");
 }

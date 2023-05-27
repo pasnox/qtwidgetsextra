@@ -4,13 +4,13 @@ class QSaveFileButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
-    QSaveFileButtonPrivate(QSaveFileButton *widgetP)
+    explicit QSaveFileButtonPrivate(QSaveFileButton *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
         , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
-        action->setType(QFileAction::SaveFile);
+        action->setType(QFileAction::Type::SaveFile);
         widget->setDefaultAction(action);
 
         connect(action, &QFileAction::filePathChanged, widget, &QSaveFileButton::filePathChanged);
