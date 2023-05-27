@@ -60,7 +60,8 @@ public:
         connect(group, qOverload<QAbstractButton *, bool>(&QButtonGroup::buttonToggled), this,
                 [this](QAbstractButton *button, bool checked) {
                     const int index = layout->indexOf(button);
-                    this->model->setData(this->model->index(index), checked ? Qt::Checked : Qt::Unchecked,
+                    this->model->setData(this->model->index(index),
+                                         QVariant::fromValue(checked ? Qt::Checked : Qt::Unchecked),
                                          Qt::CheckStateRole);
                     Q_EMIT this->widget->buttonToggled(index, group->id(button), checked);
                 });
@@ -96,7 +97,8 @@ public:
 
         group->setId(button, data.value(static_cast<int>(QAbstractButtonListModel::Role::Id)).toInt());
 
-        button->setChecked(data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked);
+        button->setChecked(data.value(Qt::CheckStateRole, QVariant::fromValue(Qt::Unchecked)).value<Qt::CheckState>()
+                           == Qt::Checked);
         button->setIcon(data.value(Qt::DecorationRole).value<QIcon>());
         button->setText(data.value(Qt::DisplayRole).toString());
         button->setToolTip(data.value(Qt::ToolTipRole).toString());
@@ -114,8 +116,10 @@ public:
 
         // Exclusive group would not uncheck the checked button
         if (button->isChecked()
-            != (data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked)) {
-            model->setData(model->index(index), button->isChecked() ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
+            != (data.value(Qt::CheckStateRole, QVariant::fromValue(Qt::Unchecked)).value<Qt::CheckState>()
+                == Qt::Checked)) {
+            model->setData(model->index(index), QVariant::fromValue(button->isChecked() ? Qt::Checked : Qt::Unchecked),
+                           Qt::CheckStateRole);
         }
     }
 

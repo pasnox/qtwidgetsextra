@@ -36,6 +36,8 @@ gateau_configure(
     #NAME_PREFIX Qt
 )
 
+set(QT_WIDGETS_EXTRA_ENABLE_MANY_WARNINGS ON)
+
 if (QT_WIDGETS_EXTRA_BUILD_DESIGNER)
     set(DESIGNER_LIB "Designer")
 endif()
@@ -43,7 +45,7 @@ endif()
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Test ${DESIGNER_LIB})
 gateau_find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Test ${DESIGNER_LIB})
 
-gateau_other_files(Others
+gateau_other_files(QOthers
     TODO.md
     README.md
     LICENSE.md
