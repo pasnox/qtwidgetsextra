@@ -49,7 +49,7 @@ bool QFileSystemListViewPlugin::isContainer() const {
 }
 
 QString QFileSystemListViewPlugin::domXml() const {
-    return QStringLiteral("<widget class=\"QFileSystemListView\" name=\"filesystemListView\">\n"
+    return QStringLiteral("<widget class=\"QFileSystemListView\" name=\"fileSystemListView\">\n"
                           "</widget>\n");
 }
 

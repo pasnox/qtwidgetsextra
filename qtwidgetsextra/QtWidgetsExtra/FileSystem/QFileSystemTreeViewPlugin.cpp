@@ -49,7 +49,7 @@ bool QFileSystemTreeViewPlugin::isContainer() const {
 }
 
 QString QFileSystemTreeViewPlugin::domXml() const {
-    return QStringLiteral("<widget class=\"QFileSystemTreeView\" name=\"filesystemTreeView\">\n"
+    return QStringLiteral("<widget class=\"QFileSystemTreeView\" name=\"fileSystemTreeView\">\n"
                           "</widget>\n");
 }
 
