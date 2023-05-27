@@ -54,5 +54,5 @@ QString QFileSystemListViewPlugin::domXml() const {
 }
 
 QString QFileSystemListViewPlugin::includeFile() const {
-    return QStringLiteral("QFileSystemListView.h");
+    return QStringLiteral("QtWidgetsExtra/FileSystem/QFileSystemListView.h");
 }

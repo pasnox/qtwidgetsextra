@@ -53,5 +53,5 @@ QString QColorPushButtonPlugin::domXml() const {
 }
 
 QString QColorPushButtonPlugin::includeFile() const {
-    return QStringLiteral("QColorPushButton.h");
+    return QStringLiteral("QtWidgetsExtra/Color/QColorPushButton.h");
 }

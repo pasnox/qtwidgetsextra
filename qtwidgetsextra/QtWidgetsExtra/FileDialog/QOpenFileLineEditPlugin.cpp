@@ -56,5 +56,5 @@ QString QOpenFileLineEditPlugin::domXml() const {
 }
 
 QString QOpenFileLineEditPlugin::includeFile() const {
-    return QStringLiteral("QOpenFileLineEdit.h");
+    return QStringLiteral("QtWidgetsExtra/FileDialog/QOpenFileLineEdit.h");
 }

@@ -56,5 +56,5 @@ QString QSaveFileLineEditPlugin::domXml() const {
 }
 
 QString QSaveFileLineEditPlugin::includeFile() const {
-    return QStringLiteral("QSaveFileLineEdit.h");
+    return QStringLiteral("QtWidgetsExtra/FileDialog/QSaveFileLineEdit.h");
 }

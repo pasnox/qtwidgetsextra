@@ -56,5 +56,5 @@ QString QOpenFolderButtonPlugin::domXml() const {
 }
 
 QString QOpenFolderButtonPlugin::includeFile() const {
-    return QStringLiteral("QOpenFolderButton.h");
+    return QStringLiteral("QtWidgetsExtra/FileDialog/QOpenFolderButton.h");
 }

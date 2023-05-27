@@ -64,5 +64,5 @@ QString QColorComboBoxPlugin::domXml() const {
 }
 
 QString QColorComboBoxPlugin::includeFile() const {
-    return QStringLiteral("QColorComboBox.h");
+    return QStringLiteral("QtWidgetsExtra/Color/QColorComboBox.h");
 }

@@ -56,5 +56,5 @@ QString QSaveFileButtonPlugin::domXml() const {
 }
 
 QString QSaveFileButtonPlugin::includeFile() const {
-    return QStringLiteral("QSaveFileButton.h");
+    return QStringLiteral("QtWidgetsExtra/FileDialog/QSaveFileButton.h");
 }

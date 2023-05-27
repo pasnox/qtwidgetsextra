@@ -53,5 +53,5 @@ QString QButtonGroupBoxPlugin::domXml() const {
 }
 
 QString QButtonGroupBoxPlugin::includeFile() const {
-    return QStringLiteral("QButtonGroupBox.h");
+    return QStringLiteral("QtWidgetsExtra/ButtonGroupBox/QButtonGroupBox.h");
 }

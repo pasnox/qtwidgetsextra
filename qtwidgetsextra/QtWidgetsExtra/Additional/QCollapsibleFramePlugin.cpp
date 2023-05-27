@@ -54,5 +54,5 @@ QString QCollapsibleFramePlugin::domXml() const {
 }
 
 QString QCollapsibleFramePlugin::includeFile() const {
-    return QStringLiteral("QCollapsibleFrame.h");
+    return QStringLiteral("QtWidgetsExtra/Additional/QCollapsibleFrame.h");
 }

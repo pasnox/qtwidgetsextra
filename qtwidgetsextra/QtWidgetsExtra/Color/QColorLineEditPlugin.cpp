@@ -53,5 +53,5 @@ QString QColorLineEditPlugin::domXml() const {
 }
 
 QString QColorLineEditPlugin::includeFile() const {
-    return QStringLiteral("QColorLineEdit.h");
+    return QStringLiteral("QtWidgetsExtra/Color/QColorLineEdit.h");
 }

@@ -53,5 +53,5 @@ QString QColorToolButtonPlugin::domXml() const {
 }
 
 QString QColorToolButtonPlugin::includeFile() const {
-    return QStringLiteral("QColorToolButton.h");
+    return QStringLiteral("QtWidgetsExtra/Color/QColorToolButton.h");
 }

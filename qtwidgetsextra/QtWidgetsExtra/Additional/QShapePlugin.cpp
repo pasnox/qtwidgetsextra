@@ -54,5 +54,5 @@ QString QShapePlugin::domXml() const {
 }
 
 QString QShapePlugin::includeFile() const {
-    return QStringLiteral("QShape.h");
+    return QStringLiteral("QtWidgetsExtra/Additional/QShape.h");
 }

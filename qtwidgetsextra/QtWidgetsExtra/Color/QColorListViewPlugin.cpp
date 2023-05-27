@@ -61,5 +61,5 @@ QString QColorListViewPlugin::domXml() const {
 }
 
 QString QColorListViewPlugin::includeFile() const {
-    return QStringLiteral("QColorListView.h");
+    return QStringLiteral("QtWidgetsExtra/Color/QColorListView.h");
 }

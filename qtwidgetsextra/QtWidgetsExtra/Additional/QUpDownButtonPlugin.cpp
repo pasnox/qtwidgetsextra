@@ -54,5 +54,5 @@ QString QUpDownButtonPlugin::domXml() const {
 }
 
 QString QUpDownButtonPlugin::includeFile() const {
-    return QStringLiteral("QUpDownButton.h");
+    return QStringLiteral("QtWidgetsExtra/Additional/QUpDownButton.h");
 }

@@ -54,5 +54,5 @@ QString QFileSystemTreeViewPlugin::domXml() const {
 }
 
 QString QFileSystemTreeViewPlugin::includeFile() const {
-    return QStringLiteral("QFileSystemTreeView.h");
+    return QStringLiteral("QtWidgetsExtra/FileSystem/QFileSystemTreeView.h");
 }
