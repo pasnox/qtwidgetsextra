@@ -59,7 +59,7 @@ public:
 
         horizontalLayout->addWidget(button, 0, Qt::AlignLeft);
 
-        verticalLayout->setContentsMargins(0, 3, 0, 0);
+        verticalLayout->setContentsMargins(3, 3, 3, 3);
         verticalLayout->addLayout(horizontalLayout);
         verticalLayout->setAlignment(horizontalLayout, Qt::AlignTop);
 
@@ -180,12 +180,10 @@ QCollapsibleFrame::RestoreSizeBehavior QCollapsibleFrame::restoreSizeBehavior() 
 }
 
 void QCollapsibleFrame::setRestoreSizeBehavior(QCollapsibleFrame::RestoreSizeBehavior behavior) {
-    if (d->resizeBehavior == behavior) {
-        return;
+    if (d->resizeBehavior != behavior) {
+        d->resizeBehavior = behavior;
+        d->button_toggled(d->button->isChecked());
     }
-
-    d->resizeBehavior = behavior;
-    d->button_toggled(d->button->isChecked());
 }
 
 QWidget *QCollapsibleFrame::title() const {
@@ -204,23 +202,23 @@ QWidget *QCollapsibleFrame::takeTitle() {
 
     d->button_toggled(d->button->isChecked());
 
+    Q_EMIT titleChanged();
+
     return title;
 }
 
 void QCollapsibleFrame::setTitle(QWidget *title) {
-    if (d->title == title) {
-        return;
+    if (d->title != title) {
+        /*delete*/ takeTitle();
+
+        if (title) {
+            d->title = title;
+            d->horizontalLayout->addWidget(title, 1);
+            d->button_toggled(d->button->isChecked());
+        }
+
+        Q_EMIT titleChanged();
     }
-
-    delete takeTitle();
-
-    if (title) {
-        d->title = title;
-        d->horizontalLayout->addWidget(title);
-        d->button_toggled(d->button->isChecked());
-    }
-
-    Q_EMIT titleChanged();
 }
 
 QWidget *QCollapsibleFrame::widget() const {
@@ -239,23 +237,61 @@ QWidget *QCollapsibleFrame::takeWidget() {
 
     d->button_toggled(d->button->isChecked());
 
+    Q_EMIT widgetChanged();
+
     return widget;
 }
 
 void QCollapsibleFrame::setWidget(QWidget *widget) {
-    if (d->widget == widget) {
-        return;
+    if (d->widget != widget) {
+        /*delete*/ takeWidget();
+
+        if (widget) {
+            d->widget = widget;
+            d->verticalLayout->addWidget(widget);
+            d->button_toggled(d->button->isChecked());
+        }
+
+        Q_EMIT widgetChanged();
+    }
+}
+
+QString QCollapsibleFrame::titleObjectName() const {
+    if (auto w = title()) {
+        return w->objectName();
     }
 
-    delete takeWidget();
+    return {};
+}
 
-    if (widget) {
-        d->widget = widget;
-        d->verticalLayout->addWidget(widget);
-        d->button_toggled(d->button->isChecked());
+void QCollapsibleFrame::setTitleObjectName(const QString &name) {
+    QMetaObject::invokeMethod(
+        this,
+        [this, name]() {
+            if (titleObjectName() != name) {
+                setTitle(findChild<QWidget *>(name));
+            }
+        },
+        Qt::QueuedConnection);
+}
+
+QString QCollapsibleFrame::widgetObjectName() const {
+    if (auto w = widget()) {
+        return w->objectName();
     }
 
-    Q_EMIT widgetChanged();
+    return {};
+}
+
+void QCollapsibleFrame::setWidgetObjectName(const QString &name) {
+    QMetaObject::invokeMethod(
+        this,
+        [this, name]() {
+            if (widgetObjectName() != name) {
+                setWidget(findChild<QWidget *>(name));
+            }
+        },
+        Qt::QueuedConnection);
 }
 
 QString QCollapsibleFrame::collapseToolTip() const {
@@ -288,6 +324,7 @@ void QCollapsibleFrame::setCollapseToolTip(const QString &toolTip) {
 
 void QCollapsibleFrame::setCollapsedIcon(const QIcon &icon) {
     d->collapsedIcon = icon;
+    Q_EMIT collapsedIconChanged();
 
     if (d->collapsed) {
         d->button->setIcon(collapsedIcon());
@@ -296,6 +333,7 @@ void QCollapsibleFrame::setCollapsedIcon(const QIcon &icon) {
 
 void QCollapsibleFrame::setExpandedIcon(const QIcon &icon) {
     d->expandedIcon = icon;
+    Q_EMIT expandedIconChanged();
 
     if (!d->collapsed) {
         d->button->setIcon(expandedIcon());
@@ -308,11 +346,9 @@ void QCollapsibleFrame::setIcon(const QIcon &icon) {
 }
 
 void QCollapsibleFrame::setCollapsed(bool collapsed) {
-    if (d->collapsed == collapsed) {
-        return;
+    if (d->collapsed != collapsed) {
+        d->button->setChecked(!collapsed);
     }
-
-    d->button->setChecked(!collapsed);
 }
 
 void QCollapsibleFrame::setExpanded(bool expanded) {
@@ -320,9 +356,12 @@ void QCollapsibleFrame::setExpanded(bool expanded) {
 }
 
 void QCollapsibleFrame::setIndentation(int indentation) {
-    QMargins margins = d->verticalLayout->contentsMargins();
-    margins.setLeft(indentation);
-    d->verticalLayout->setContentsMargins(margins);
+    if (QCollapsibleFrame::indentation() != indentation) {
+        QMargins margins = d->verticalLayout->contentsMargins();
+        margins.setLeft(indentation);
+        d->verticalLayout->setContentsMargins(margins);
+        Q_EMIT indentationChanged();
+    }
 }
 
 #include "QCollapsibleFrame.moc"

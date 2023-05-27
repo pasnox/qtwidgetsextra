@@ -3,6 +3,7 @@
 #include <QtWidgetsExtraLibExport.h>
 
 #include <QFrame>
+#include <QIcon>
 
 class QIcon;
 
@@ -11,8 +12,17 @@ class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QCollapsibleFrame : public QF
     friend class QCollapsibleFramePrivate;
     class QCollapsibleFramePrivate *d;
 
+    Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expanded)
+    Q_PROPERTY(QIcon collapsedIcon READ collapsedIcon WRITE setCollapsedIcon NOTIFY collapsedIconChanged)
+    Q_PROPERTY(QIcon expandedIcon READ expandedIcon WRITE setExpandedIcon NOTIFY expandedIconChanged)
+    Q_PROPERTY(int indentation READ indentation WRITE setIndentation NOTIFY indentationChanged)
     Q_PROPERTY(QWidget *title READ title WRITE setTitle NOTIFY titleChanged)
     Q_PROPERTY(QWidget *widget READ widget WRITE setWidget NOTIFY widgetChanged)
+
+    // Qt Designer does not support pointer based properties, so we work around this by adding those extra properties.
+    // Those will lookup objects by name in the collapsible frame and set the native property in the next event loop.
+    Q_PROPERTY(QString titleObjectName READ titleObjectName WRITE setTitleObjectName NOTIFY titleChanged)
+    Q_PROPERTY(QString widgetObjectName READ widgetObjectName WRITE setWidgetObjectName NOTIFY widgetChanged)
 
 public:
     enum RestoreSizeBehavior {
@@ -35,6 +45,12 @@ public:
     QWidget *widget() const;
     QWidget *takeWidget();
     void setWidget(QWidget *widget);
+
+    QString titleObjectName() const;
+    void setTitleObjectName(const QString &name);
+
+    QString widgetObjectName() const;
+    void setWidgetObjectName(const QString &name);
 
     QString collapseToolTip() const;
     QIcon collapsedIcon() const;
@@ -60,4 +76,7 @@ Q_SIGNALS:
     void collapsed();
     void aboutToExpand();
     void expanded();
+    void collapsedIconChanged();
+    void expandedIconChanged();
+    void indentationChanged();
 };

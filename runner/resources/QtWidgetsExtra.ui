@@ -312,228 +312,228 @@
       <attribute name="title">
        <string>Additional</string>
       </attribute>
-      <widget class="QUpDownButton" name="upDownButton">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>24</width>
-         <height>47</height>
-        </rect>
-       </property>
-       <property name="upShortcut">
-        <string>Ctrl+Up</string>
-       </property>
-       <property name="downShortcut">
-        <string>Ctrl+Down</string>
-       </property>
-      </widget>
-      <widget class="QShape" name="shape">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>80</y>
-         <width>61</width>
-         <height>50</height>
-        </rect>
-       </property>
-       <property name="renderHints">
-        <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
-       </property>
-       <property name="brush">
-        <brush brushstyle="Dense5Pattern">
-         <color alpha="255">
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </property>
-       <property name="shape">
-        <enum>QShape::RoundedSquare</enum>
-       </property>
-      </widget>
-      <widget class="QUpDownButton" name="upDownButton_2">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>10</y>
-         <width>24</width>
-         <height>47</height>
-        </rect>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-       <property name="upShortcut">
-        <string>Ctrl+Up</string>
-       </property>
-       <property name="downShortcut">
-        <string>Ctrl+Down</string>
-       </property>
-      </widget>
-      <widget class="QUpDownButton" name="upDownButton_3">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>10</y>
-         <width>47</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="upShortcut">
-        <string>Ctrl+Up</string>
-       </property>
-       <property name="downShortcut">
-        <string>Ctrl+Down</string>
-       </property>
-      </widget>
-      <widget class="QUpDownButton" name="upDownButton_4">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>10</y>
-         <width>47</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="autoRaise">
-        <bool>true</bool>
-       </property>
-       <property name="upShortcut">
-        <string>Ctrl+Up</string>
-       </property>
-       <property name="downShortcut">
-        <string>Ctrl+Down</string>
-       </property>
-      </widget>
-      <widget class="QShape" name="shape_2">
-       <property name="geometry">
-        <rect>
-         <x>80</x>
-         <y>80</y>
-         <width>61</width>
-         <height>50</height>
-        </rect>
-       </property>
-       <property name="renderHints">
-        <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
-       </property>
-       <property name="brush">
-        <brush brushstyle="Dense5Pattern">
-         <color alpha="255">
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </property>
-       <property name="shape">
-        <enum>QShape::SquaredDiamond</enum>
-       </property>
-      </widget>
-      <widget class="QShape" name="shape_3">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>80</y>
-         <width>61</width>
-         <height>50</height>
-        </rect>
-       </property>
-       <property name="renderHints">
-        <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
-       </property>
-       <property name="brush">
-        <brush brushstyle="Dense5Pattern">
-         <color alpha="255">
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </property>
-       <property name="shape">
-        <enum>QShape::SquaredCircle</enum>
-       </property>
-      </widget>
-      <widget class="QShape" name="shape_4">
-       <property name="geometry">
-        <rect>
-         <x>230</x>
-         <y>80</y>
-         <width>61</width>
-         <height>50</height>
-        </rect>
-       </property>
-       <property name="renderHints">
-        <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
-       </property>
-       <property name="brush">
-        <brush brushstyle="Dense5Pattern">
-         <color alpha="255">
-          <red>0</red>
-          <green>0</green>
-          <blue>255</blue>
-         </color>
-        </brush>
-       </property>
-       <property name="shape">
-        <enum>QShape::SquaredTriangle</enum>
-       </property>
-      </widget>
-      <widget class="QCollapsibleFrame" name="collapsibleFrame">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>150</y>
-         <width>451</width>
-         <height>161</height>
-        </rect>
-       </property>
-       <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Sunken</enum>
-       </property>
-       <widget class="QLabel" name="label_4">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>10</y>
-          <width>53</width>
-          <height>18</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>The title</string>
-        </property>
-       </widget>
-       <widget class="QTextBrowser" name="textBrowser">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>70</y>
-          <width>401</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="html">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QUpDownButton" name="upDownButton">
+           <property name="upShortcut">
+            <string>Ctrl+Up</string>
+           </property>
+           <property name="downShortcut">
+            <string>Ctrl+Down</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QUpDownButton" name="upDownButton_2">
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+           <property name="upShortcut">
+            <string>Ctrl+Up</string>
+           </property>
+           <property name="downShortcut">
+            <string>Ctrl+Down</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QUpDownButton" name="upDownButton_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="upShortcut">
+            <string>Ctrl+Up</string>
+           </property>
+           <property name="downShortcut">
+            <string>Ctrl+Down</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QUpDownButton" name="upDownButton_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="autoRaise">
+            <bool>true</bool>
+           </property>
+           <property name="upShortcut">
+            <string>Ctrl+Up</string>
+           </property>
+           <property name="downShortcut">
+            <string>Ctrl+Down</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>8</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QShape" name="shape">
+           <property name="renderHints">
+            <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
+           </property>
+           <property name="brush">
+            <brush brushstyle="Dense5Pattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </property>
+           <property name="shape">
+            <enum>QShape::RoundedSquare</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QShape" name="shape_2">
+           <property name="renderHints">
+            <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
+           </property>
+           <property name="brush">
+            <brush brushstyle="Dense5Pattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </property>
+           <property name="shape">
+            <enum>QShape::SquaredDiamond</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QShape" name="shape_3">
+           <property name="renderHints">
+            <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
+           </property>
+           <property name="brush">
+            <brush brushstyle="Dense5Pattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </property>
+           <property name="shape">
+            <enum>QShape::SquaredCircle</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QShape" name="shape_4">
+           <property name="renderHints">
+            <set>QPainter::Antialiasing|QPainter::Qt4CompatiblePainting</set>
+           </property>
+           <property name="brush">
+            <brush brushstyle="Dense5Pattern">
+             <color alpha="255">
+              <red>0</red>
+              <green>0</green>
+              <blue>255</blue>
+             </color>
+            </brush>
+           </property>
+           <property name="shape">
+            <enum>QShape::SquaredTriangle</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>8</width>
+             <height>8</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCollapsibleFrame" name="collapsibleFrame">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
+         </property>
+         <property name="expanded">
+          <bool>true</bool>
+         </property>
+         <property name="titleObjectName">
+          <string>label_4</string>
+         </property>
+         <property name="widgetObjectName">
+          <string>textBrowser</string>
+         </property>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>The title</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QTextBrowser" name="textBrowser">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The widget&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </widget>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;The widget to show or hide when collapsed or expanded.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem upsum lorem upsum lorem upsum lorem upsum lorem upsum.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem upsum lorem upsum lorem upsum lorem upsum lorem upsum.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem upsum lorem upsum lorem upsum lorem upsum lorem upsum.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem upsum lorem upsum lorem upsum lorem upsum lorem upsum.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem upsum lorem upsum lorem upsum lorem upsum lorem upsum.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>8</width>
+           <height>8</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="wGroupBox">
       <attribute name="title">
