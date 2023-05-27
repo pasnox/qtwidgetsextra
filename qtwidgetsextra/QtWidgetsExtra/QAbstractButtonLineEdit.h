@@ -1,14 +1,13 @@
 #pragma once
 
-#include <QLineEdit>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonLineEdit : public QLineEdit
-{
+#include <QLineEdit>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QAbstractButtonLineEdit : public QLineEdit {
     Q_OBJECT
     friend class QAbstractButtonLineEditPrivate;
-    class QAbstractButtonLineEditPrivate* d;
+    class QAbstractButtonLineEditPrivate *d;
 
 public:
     explicit QAbstractButtonLineEdit(QWidget *parent = nullptr);

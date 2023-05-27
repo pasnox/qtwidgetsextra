@@ -1,16 +1,15 @@
 #include "QtWidgetsExtraCache.h"
 
+#include <QCache>
+#include <QIcon>
 #include <QPixmap>
 #include <QPixmapCache>
-#include <QIcon>
-#include <QCache>
 
 namespace QtWidgetsExtraCache {
-    QCache<qint64, QIcon> cachedIcons;
+QCache<qint64, QIcon> cachedIcons;
 }
 
-bool QtWidgetsExtraCache::cachePixmap(const QString &key, const QPixmap &pixmap)
-{
+bool QtWidgetsExtraCache::cachePixmap(const QString &key, const QPixmap &pixmap) {
     if (!QPixmapCache::insert(key, pixmap)) {
         qWarning("%s: Can not cache pixmap with key: %s", Q_FUNC_INFO, qPrintable(key));
         return false;
@@ -19,20 +18,17 @@ bool QtWidgetsExtraCache::cachePixmap(const QString &key, const QPixmap &pixmap)
     return true;
 }
 
-QPixmap QtWidgetsExtraCache::cachedPixmap(const QString &key)
-{
+QPixmap QtWidgetsExtraCache::cachedPixmap(const QString &key) {
     QPixmap pixmap;
     QPixmapCache::find(key, &pixmap);
     return pixmap;
 }
 
-QPixmap QtWidgetsExtraCache::cachedPixmapColor(const QColor &color, const QSize &size)
-{
+QPixmap QtWidgetsExtraCache::cachedPixmapColor(const QColor &color, const QSize &size) {
     const QString key = QString(QStringLiteral("%1-%2x%3-pixmap"))
-        .arg(color.name(QColor::HexArgb))
-        .arg(size.width())
-        .arg(size.height())
-    ;
+                            .arg(color.name(QColor::HexArgb))
+                            .arg(size.width())
+                            .arg(size.height());
     QPixmap pixmap = QtWidgetsExtraCache::cachedPixmap(key);
 
     if (pixmap.isNull()) {
@@ -44,8 +40,7 @@ QPixmap QtWidgetsExtraCache::cachedPixmapColor(const QColor &color, const QSize 
     return pixmap;
 }
 
-bool QtWidgetsExtraCache::cacheIcon(const QString &key, const QIcon &icon)
-{
+bool QtWidgetsExtraCache::cacheIcon(const QString &key, const QIcon &icon) {
     if (icon.isNull()) {
         qWarning("%s: Can not cache null icon with key: %s", Q_FUNC_INFO, qPrintable(key));
         return false;
@@ -62,19 +57,14 @@ bool QtWidgetsExtraCache::cacheIcon(const QString &key, const QIcon &icon)
     return true;
 }
 
-QIcon QtWidgetsExtraCache::cachedIcon(const QString &key)
-{
-    QIcon* icon = cachedIcons.object(qHash(key));
+QIcon QtWidgetsExtraCache::cachedIcon(const QString &key) {
+    QIcon *icon = cachedIcons.object(qHash(key));
     return icon ? *icon : QIcon();
 }
 
-QIcon QtWidgetsExtraCache::cachedIconColor(const QColor &color, const QSize &size)
-{
-    const QString key = QString(QStringLiteral("%1-%2x%3-icon"))
-        .arg(color.name(QColor::HexArgb))
-        .arg(size.width())
-        .arg(size.height())
-    ;
+QIcon QtWidgetsExtraCache::cachedIconColor(const QColor &color, const QSize &size) {
+    const QString key =
+        QString(QStringLiteral("%1-%2x%3-icon")).arg(color.name(QColor::HexArgb)).arg(size.width()).arg(size.height());
     QIcon icon = QtWidgetsExtraCache::cachedIcon(key);
 
     if (icon.isNull()) {

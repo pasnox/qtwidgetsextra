@@ -1,8 +1,8 @@
 #include "QButtonGroupBox.h"
-#include "QtWidgetsExtra/ButtonGroupBox/QAbstractButtonListModel.h"
+#include "QAbstractButtonListModel.h"
 
-#include <QButtonGroup>
 #include <QBoxLayout>
+#include <QButtonGroup>
 #include <QCheckBox>
 #include <QRadioButton>
 #include <QStyle>
@@ -22,47 +22,48 @@ public:
         const int hint = widget->style()->pixelMetric(QStyle::PM_ButtonIconSize);
         iconSize = QSize(hint, hint);
 
-        connect(model, &QAbstractButtonListModel::rowsInserted,
-                this, [this](const QModelIndex &parent, int first, int last) {
-            Q_UNUSED(parent);
+        connect(model, &QAbstractButtonListModel::rowsInserted, this,
+                [this](const QModelIndex &parent, int first, int last) {
+                    Q_UNUSED(parent);
 
-            for (int i = first; i <= last; ++i) {
-                createButton(i);
-            }
-        });
-        connect(model, &QAbstractButtonListModel::dataChanged,
-                this, [this](const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
-            for (int i = topLeft.row(); i <= bottomRight.row(); ++i) {
-                updateButton(i, roles);
-            }
-        });
-        connect(model, &QAbstractButtonListModel::rowsRemoved,
-                this, [this](const QModelIndex &parent, int first, int last) {
-            Q_UNUSED(parent);
+                    for (int i = first; i <= last; ++i) {
+                        createButton(i);
+                    }
+                });
+        connect(model, &QAbstractButtonListModel::dataChanged, this,
+                [this](const QModelIndex &topLeft, const QModelIndex &bottomRight, const QVector<int> &roles) {
+                    for (int i = topLeft.row(); i <= bottomRight.row(); ++i) {
+                        updateButton(i, roles);
+                    }
+                });
+        connect(model, &QAbstractButtonListModel::rowsRemoved, this,
+                [this](const QModelIndex &parent, int first, int last) {
+                    Q_UNUSED(parent);
 
-            for (int i = last; i >= first; --i) {
-                removeButton(i);
-            }
-        });
+                    for (int i = last; i >= first; --i) {
+                        removeButton(i);
+                    }
+                });
 
-        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonClicked),
-                this, [this](QAbstractButton *button) {
-            Q_EMIT this->widget->buttonClicked(layout->indexOf(button), group->id(button));
-        });
-        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonPressed),
-                this, [this](QAbstractButton *button) {
-            Q_EMIT this->widget->buttonPressed(layout->indexOf(button), group->id(button));
-        });
-        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonReleased),
-                this, [this](QAbstractButton *button) {
-            Q_EMIT this->widget->buttonReleased(layout->indexOf(button), group->id(button));
-        });
-        connect(group, qOverload<QAbstractButton *, bool>(&QButtonGroup::buttonToggled),
-                this, [this](QAbstractButton *button, bool checked) {
-            const int index = layout->indexOf(button);
-            this->model->setData(this->model->index(index), checked ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
-            Q_EMIT this->widget->buttonToggled(index, group->id(button), checked);
-        });
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonClicked), this,
+                [this](QAbstractButton *button) {
+                    Q_EMIT this->widget->buttonClicked(layout->indexOf(button), group->id(button));
+                });
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonPressed), this,
+                [this](QAbstractButton *button) {
+                    Q_EMIT this->widget->buttonPressed(layout->indexOf(button), group->id(button));
+                });
+        connect(group, qOverload<QAbstractButton *>(&QButtonGroup::buttonReleased), this,
+                [this](QAbstractButton *button) {
+                    Q_EMIT this->widget->buttonReleased(layout->indexOf(button), group->id(button));
+                });
+        connect(group, qOverload<QAbstractButton *, bool>(&QButtonGroup::buttonToggled), this,
+                [this](QAbstractButton *button, bool checked) {
+                    const int index = layout->indexOf(button);
+                    this->model->setData(this->model->index(index), checked ? Qt::Checked : Qt::Unchecked,
+                                         Qt::CheckStateRole);
+                    Q_EMIT this->widget->buttonToggled(index, group->id(button), checked);
+                });
     }
 
     void resetButtons() {
@@ -110,7 +111,8 @@ public:
         }
 
         // Exclusive group would not undeck the checked button
-        if (button->isChecked() != (data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked)) {
+        if (button->isChecked()
+            != (data.value(Qt::CheckStateRole, Qt::Unchecked).value<Qt::CheckState>() == Qt::Checked)) {
             model->setData(model->index(index), button->isChecked() ? Qt::Checked : Qt::Unchecked, Qt::CheckStateRole);
         }
     }
@@ -135,31 +137,22 @@ public:
 
 QButtonGroupBox::QButtonGroupBox(QWidget *parent)
     : QGroupBox(parent)
-    , d(new QButtonGroupBoxPrivate(this))
-{
+    , d(new QButtonGroupBoxPrivate(this)) {
 }
 
-Qt::Orientation QButtonGroupBox::orientation() const
-{
-    return d->layout->direction() == QBoxLayout::LeftToRight
-            ? Qt::Horizontal
-            : Qt::Vertical;
+Qt::Orientation QButtonGroupBox::orientation() const {
+    return d->layout->direction() == QBoxLayout::LeftToRight ? Qt::Horizontal : Qt::Vertical;
 }
 
-void QButtonGroupBox::setOrientation(Qt::Orientation orientation)
-{
-    d->layout->setDirection(orientation == Qt::Horizontal
-                             ? QBoxLayout::LeftToRight
-                             : QBoxLayout::TopToBottom);
+void QButtonGroupBox::setOrientation(Qt::Orientation orientation) {
+    d->layout->setDirection(orientation == Qt::Horizontal ? QBoxLayout::LeftToRight : QBoxLayout::TopToBottom);
 }
 
-QButtonGroupBox::Type QButtonGroupBox::type() const
-{
+QButtonGroupBox::Type QButtonGroupBox::type() const {
     return d->type;
 }
 
-void QButtonGroupBox::setType(QButtonGroupBox::Type type)
-{
+void QButtonGroupBox::setType(QButtonGroupBox::Type type) {
     if (d->type == type) {
         return;
     }
@@ -168,13 +161,11 @@ void QButtonGroupBox::setType(QButtonGroupBox::Type type)
     d->resetButtons();
 }
 
-QSize QButtonGroupBox::iconSize() const
-{
+QSize QButtonGroupBox::iconSize() const {
     return d->iconSize;
 }
 
-void QButtonGroupBox::setIconSize(const QSize &iconSize)
-{
+void QButtonGroupBox::setIconSize(const QSize &iconSize) {
     if (d->iconSize == iconSize) {
         return;
     }
@@ -184,76 +175,63 @@ void QButtonGroupBox::setIconSize(const QSize &iconSize)
     if (!d->layout->isEmpty()) {
         const auto buttons = d->group->buttons();
 
-        for (QAbstractButton *button: buttons) {
+        for (QAbstractButton *button : buttons) {
             button->setIconSize(d->iconSize);
         }
     }
 }
 
-bool QButtonGroupBox::exclusive() const
-{
+bool QButtonGroupBox::exclusive() const {
     return d->group->exclusive();
 }
 
-void QButtonGroupBox::setExclusive(bool exclusive)
-{
+void QButtonGroupBox::setExclusive(bool exclusive) {
     d->group->setExclusive(exclusive);
 }
 
-void QButtonGroupBox::insertButton(int index, const QButtonGroupBox::Button &button)
-{
+void QButtonGroupBox::insertButton(int index, const QButtonGroupBox::Button &button) {
     if (d->model->insertRow(index)) {
         d->model->setItemData(d->model->index(index), button);
     }
 }
 
-void QButtonGroupBox::addButton(const QButtonGroupBox::Button &button)
-{
+void QButtonGroupBox::addButton(const QButtonGroupBox::Button &button) {
     insertButton(count(), button);
 }
 
-void QButtonGroupBox::removeButton(int index)
-{
+void QButtonGroupBox::removeButton(int index) {
     d->model->removeRow(index);
 }
 
-QVariant QButtonGroupBox::buttonData(int index, int role) const
-{
+QVariant QButtonGroupBox::buttonData(int index, int role) const {
     return d->model->data(d->model->index(index), role);
 }
 
-void QButtonGroupBox::setButtonData(int index, int role, const QVariant &data)
-{
+void QButtonGroupBox::setButtonData(int index, int role, const QVariant &data) {
     d->model->setData(d->model->index(index), data, role);
 }
 
-void QButtonGroupBox::clear()
-{
+void QButtonGroupBox::clear() {
     d->model->clear();
 }
 
-int QButtonGroupBox::count() const
-{
+int QButtonGroupBox::count() const {
     return d->layout->count();
 }
 
-bool QButtonGroupBox::isEmpty() const
-{
+bool QButtonGroupBox::isEmpty() const {
     return d->layout->isEmpty();
 }
 
-int QButtonGroupBox::checkedIndex() const
-{
+int QButtonGroupBox::checkedIndex() const {
     return d->layout->indexOf(d->group->checkedButton());
 }
 
-int QButtonGroupBox::checkedId() const
-{
+int QButtonGroupBox::checkedId() const {
     return d->group->checkedId();
 }
 
-QStringList QButtonGroupBox::items() const
-{
+QStringList QButtonGroupBox::items() const {
     QStringList items;
 
     for (int i = 0; i < count(); ++i) {
@@ -263,19 +241,17 @@ QStringList QButtonGroupBox::items() const
     return items;
 }
 
-void QButtonGroupBox::setItems(const QStringList &items)
-{
+void QButtonGroupBox::setItems(const QStringList &items) {
     clear();
 
-    for (const QString &item: items) {
+    for (const QString &item : items) {
         QButtonGroupBox::Button button;
         button[Qt::DisplayRole] = item;
         addButton(button);
     }
 }
 
-QAbstractButton *QButtonGroupBox::createButton() const
-{
+QAbstractButton *QButtonGroupBox::createButton() const {
     switch (d->type) {
     case QButtonGroupBox::CheckBox:
         return new QCheckBox;

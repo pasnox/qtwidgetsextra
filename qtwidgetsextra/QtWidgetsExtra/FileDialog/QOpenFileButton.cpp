@@ -1,7 +1,6 @@
 #include "QOpenFileButton.h"
 
-class QOpenFileButtonPrivate : public QObject
-{
+class QOpenFileButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -18,63 +17,52 @@ public:
     }
 
 public:
-    QOpenFileButton* widget;
+    QOpenFileButton *widget;
     QFileAction *action;
 };
 
 QOpenFileButton::QOpenFileButton(QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QOpenFileButtonPrivate(this))
-{
+    , d(new QOpenFileButtonPrivate(this)) {
 }
 
-QString QOpenFileButton::filePath() const
-{
+QString QOpenFileButton::filePath() const {
     return d->action->filePath();
 }
 
-void QOpenFileButton::setFilePath(const QString &filePath)
-{
+void QOpenFileButton::setFilePath(const QString &filePath) {
     d->action->setFilePath(filePath);
 }
 
-QString QOpenFileButton::caption() const
-{
+QString QOpenFileButton::caption() const {
     return d->action->caption();
 }
 
-void QOpenFileButton::setCaption(const QString &caption)
-{
+void QOpenFileButton::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QString QOpenFileButton::directory() const
-{
+QString QOpenFileButton::directory() const {
     return d->action->directory();
 }
 
-void QOpenFileButton::setDirectory(const QString &directory)
-{
+void QOpenFileButton::setDirectory(const QString &directory) {
     d->action->setDirectory(directory);
 }
 
-QStringList QOpenFileButton::filter() const
-{
+QStringList QOpenFileButton::filter() const {
     return d->action->filter();
 }
 
-void QOpenFileButton::setFilter(const QStringList &filter)
-{
+void QOpenFileButton::setFilter(const QStringList &filter) {
     d->action->setFilter(filter);
 }
 
-QFileDialog::Options QOpenFileButton::options() const
-{
+QFileDialog::Options QOpenFileButton::options() const {
     return d->action->options();
 }
 
-void QOpenFileButton::setOptions(QFileDialog::Options options)
-{
+void QOpenFileButton::setOptions(QFileDialog::Options options) {
     d->action->setOptions(options);
 }
 

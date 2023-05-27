@@ -1,16 +1,14 @@
 #include "QSaveFileLineEdit.h"
-#include "QtWidgetsExtra/FileDialog/QFileAction.h"
+#include "QFileAction.h"
 
-class QSaveFileLineEditPrivate : public QObject
-{
+class QSaveFileLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
     QSaveFileLineEditPrivate(QSaveFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , action(new QFileAction(this))
-    {
+        , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
         action->setType(QFileAction::SaveFile);
@@ -40,17 +38,14 @@ public:
 
 QSaveFileLineEdit::QSaveFileLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QSaveFileLineEditPrivate(this))
-{
+    , d(new QSaveFileLineEditPrivate(this)) {
 }
 
-QLineEdit::ActionPosition QSaveFileLineEdit::embededActionPosition() const
-{
+QLineEdit::ActionPosition QSaveFileLineEdit::embededActionPosition() const {
     return d->position;
 }
 
-void QSaveFileLineEdit::setEmbededActionPosition(ActionPosition position)
-{
+void QSaveFileLineEdit::setEmbededActionPosition(ActionPosition position) {
     if (d->position != position) {
         d->position = position;
         addAction(d->action, d->position);
@@ -58,53 +53,43 @@ void QSaveFileLineEdit::setEmbededActionPosition(ActionPosition position)
     }
 }
 
-QString QSaveFileLineEdit::filePath() const
-{
+QString QSaveFileLineEdit::filePath() const {
     return d->action->filePath();
 }
 
-void QSaveFileLineEdit::setFilePath(const QString &filePath)
-{
+void QSaveFileLineEdit::setFilePath(const QString &filePath) {
     d->action->setFilePath(filePath);
 }
 
-QString QSaveFileLineEdit::caption() const
-{
+QString QSaveFileLineEdit::caption() const {
     return d->action->caption();
 }
 
-void QSaveFileLineEdit::setCaption(const QString &caption)
-{
+void QSaveFileLineEdit::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QString QSaveFileLineEdit::directory() const
-{
+QString QSaveFileLineEdit::directory() const {
     return d->action->directory();
 }
 
-void QSaveFileLineEdit::setDirectory(const QString &directory)
-{
+void QSaveFileLineEdit::setDirectory(const QString &directory) {
     d->action->setDirectory(directory);
 }
 
-QStringList QSaveFileLineEdit::filter() const
-{
+QStringList QSaveFileLineEdit::filter() const {
     return d->action->filter();
 }
 
-void QSaveFileLineEdit::setFilter(const QStringList &filter)
-{
+void QSaveFileLineEdit::setFilter(const QStringList &filter) {
     d->action->setFilter(filter);
 }
 
-QFileDialog::Options QSaveFileLineEdit::options() const
-{
+QFileDialog::Options QSaveFileLineEdit::options() const {
     return d->action->options();
 }
 
-void QSaveFileLineEdit::setOptions(QFileDialog::Options options)
-{
+void QSaveFileLineEdit::setOptions(QFileDialog::Options options) {
     d->action->setOptions(options);
 }
 

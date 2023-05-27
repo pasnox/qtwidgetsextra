@@ -1,12 +1,11 @@
 #pragma once
 
-#include <QWidget>
-#include <QToolButton>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QUpDownButton : public QWidget
-{
+#include <QToolButton>
+#include <QWidget>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QUpDownButton : public QWidget {
     Q_OBJECT
     class QUpDownButtonPrivate *d;
 

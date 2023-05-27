@@ -1,13 +1,13 @@
 #include "QCollapsibleFrame.h"
 
+#include <QHBoxLayout>
 #include <QIcon>
+#include <QPainter>
 #include <QPointer>
 #include <QStyle>
 #include <QTimer>
 #include <QToolButton>
-#include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QPainter>
 
 class QCollapsibleToolButton : public QToolButton {
 public:
@@ -80,8 +80,7 @@ public Q_SLOTS:
 
         if (collapsed) {
             Q_EMIT editor->aboutToCollapse();
-        }
-        else {
+        } else {
             Q_EMIT editor->aboutToExpand();
         }
 
@@ -94,9 +93,8 @@ public Q_SLOTS:
 
         switch (resizeBehavior) {
         case QCollapsibleFrame::RestoreWindowSizeBehavior:
-            QMetaObject::invokeMethod(this, [this]() {
-                restoreSize(editor->window());
-            }, Qt::QueuedConnection);
+            QMetaObject::invokeMethod(
+                this, [this]() { restoreSize(editor->window()); }, Qt::QueuedConnection);
             break;
         case QCollapsibleFrame::NoRestoreSizeBehavior:
             break;
@@ -120,7 +118,7 @@ public Q_SLOTS:
         if (collapsed) {
             if (oldCollapsedSize.isValid()) {
                 const auto layouts = widget->findChildren<QLayout *>();
-                for (QLayout *layout: layouts) {
+                for (QLayout *layout : layouts) {
                     layout->invalidate();
                     layout->activate();
                 }
@@ -131,7 +129,7 @@ public Q_SLOTS:
         } else {
             if (oldExpandedSize.isValid()) {
                 const auto layouts = widget->findChildren<QLayout *>();
-                for (QLayout *layout: layouts) {
+                for (QLayout *layout : layouts) {
                     layout->invalidate();
                     layout->activate();
                 }
@@ -157,8 +155,7 @@ QSize QCollapsibleFrame::minimumSizeHint() const {
     sh.rheight() += margins.top() + margins.bottom();
 
     if (d->collapsed) {
-    }
-    else if (d->widget) {
+    } else if (d->widget) {
         int spacing = d->verticalLayout->spacing();
 
         if (spacing == -1) {
@@ -167,10 +164,7 @@ QSize QCollapsibleFrame::minimumSizeHint() const {
 
         if (spacing == -1) {
             spacing = style()->layoutSpacing(d->button->sizePolicy().controlType(),
-                                             d->widget->sizePolicy().controlType(),
-                                             Qt::Vertical,
-                                             0,
-                                             this);
+                                             d->widget->sizePolicy().controlType(), Qt::Vertical, 0, this);
         }
 
         sh.rwidth() = qMax(sh.width(), d->widget->minimumSizeHint().width());
@@ -181,13 +175,11 @@ QSize QCollapsibleFrame::minimumSizeHint() const {
     return sh;
 }
 
-QCollapsibleFrame::RestoreSizeBehavior QCollapsibleFrame::restoreSizeBehavior() const
-{
+QCollapsibleFrame::RestoreSizeBehavior QCollapsibleFrame::restoreSizeBehavior() const {
     return d->resizeBehavior;
 }
 
-void QCollapsibleFrame::setRestoreSizeBehavior(QCollapsibleFrame::RestoreSizeBehavior behavior)
-{
+void QCollapsibleFrame::setRestoreSizeBehavior(QCollapsibleFrame::RestoreSizeBehavior behavior) {
     if (d->resizeBehavior == behavior) {
         return;
     }
@@ -196,13 +188,11 @@ void QCollapsibleFrame::setRestoreSizeBehavior(QCollapsibleFrame::RestoreSizeBeh
     d->button_toggled(d->button->isChecked());
 }
 
-QWidget *QCollapsibleFrame::title() const
-{
+QWidget *QCollapsibleFrame::title() const {
     return d->title;
 }
 
-QWidget *QCollapsibleFrame::takeTitle()
-{
+QWidget *QCollapsibleFrame::takeTitle() {
     if (!d->title) {
         return nullptr;
     }
@@ -217,8 +207,7 @@ QWidget *QCollapsibleFrame::takeTitle()
     return title;
 }
 
-void QCollapsibleFrame::setTitle(QWidget *title)
-{
+void QCollapsibleFrame::setTitle(QWidget *title) {
     if (d->title == title) {
         return;
     }
@@ -269,14 +258,12 @@ void QCollapsibleFrame::setWidget(QWidget *widget) {
     Q_EMIT widgetChanged();
 }
 
-QString QCollapsibleFrame::collapseToolTip() const
-{
+QString QCollapsibleFrame::collapseToolTip() const {
     return d->button->toolTip();
 }
 
 QIcon QCollapsibleFrame::collapsedIcon() const {
-    return d->collapsedIcon.isNull() ? style()->standardIcon(QStyle::SP_ArrowRight)
-                                     : d->collapsedIcon;
+    return d->collapsedIcon.isNull() ? style()->standardIcon(QStyle::SP_ArrowRight) : d->collapsedIcon;
 }
 
 QIcon QCollapsibleFrame::expandedIcon() const {
@@ -295,8 +282,7 @@ int QCollapsibleFrame::indentation() const {
     return d->verticalLayout->contentsMargins().left();
 }
 
-void QCollapsibleFrame::setCollapseToolTip(const QString &toolTip)
-{
+void QCollapsibleFrame::setCollapseToolTip(const QString &toolTip) {
     d->button->setToolTip(toolTip);
 }
 

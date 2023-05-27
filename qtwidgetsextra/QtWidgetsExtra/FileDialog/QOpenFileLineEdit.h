@@ -4,12 +4,12 @@
 
 #include <QFileDialog>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFileLineEdit : public QAbstractButtonLineEdit
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFileLineEdit : public QAbstractButtonLineEdit {
     Q_OBJECT
-    class QOpenFileLineEditPrivate* d;
+    class QOpenFileLineEditPrivate *d;
 
-    Q_PROPERTY(QLineEdit::ActionPosition embededActionPosition READ embededActionPosition WRITE setEmbededActionPosition NOTIFY embededActionPositionChanged)
+    Q_PROPERTY(QLineEdit::ActionPosition embededActionPosition READ embededActionPosition WRITE setEmbededActionPosition
+                   NOTIFY embededActionPositionChanged)
     Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption)
     Q_PROPERTY(QString directory READ directory WRITE setDirectory)

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <QListView>
-
 #include <QtWidgetsExtra/Color/QColorListModel.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListView : public QListView
-{
+#include <QListView>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorListView : public QListView {
     Q_OBJECT
     class QColorListViewPrivate *d;
 

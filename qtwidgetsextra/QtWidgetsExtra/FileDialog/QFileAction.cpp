@@ -21,15 +21,15 @@ public:
 
     void updateIcon() {
         switch (type) {
-            case QFileAction::OpenFile:
-                action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogOpenButton));
-                break;
-            case QFileAction::SaveFile:
-                action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogSaveButton));
-                break;
-            case QFileAction::OpenFolder:
-                action->setIcon(qApp->style()->standardIcon(QStyle::SP_DirIcon));
-                break;
+        case QFileAction::OpenFile:
+            action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogOpenButton));
+            break;
+        case QFileAction::SaveFile:
+            action->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogSaveButton));
+            break;
+        case QFileAction::OpenFolder:
+            action->setIcon(qApp->style()->standardIcon(QStyle::SP_DirIcon));
+            break;
         }
     }
 
@@ -43,15 +43,15 @@ public Q_SLOTS:
         }
 
         switch (type) {
-            case QFileAction::OpenFile:
-                fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
-                break;
-            case QFileAction::SaveFile:
-                fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
-                break;
-            case QFileAction::OpenFolder:
-                fn = QFileDialog::getExistingDirectory(0, caption, dir, options);
-                break;
+        case QFileAction::OpenFile:
+            fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
+            break;
+        case QFileAction::SaveFile:
+            fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
+            break;
+        case QFileAction::OpenFolder:
+            fn = QFileDialog::getExistingDirectory(0, caption, dir, options);
+            break;
         }
 
         if (!fn.isNull()) {
@@ -71,28 +71,23 @@ public:
 
 QFileAction::QFileAction(QObject *parent)
     : QAction(parent)
-    , d(new QFileActionPrivate(this))
-{
+    , d(new QFileActionPrivate(this)) {
 }
 
-QFileAction::Type QFileAction::type() const
-{
+QFileAction::Type QFileAction::type() const {
     return d->type;
 }
 
-void QFileAction::setType(QFileAction::Type type)
-{
+void QFileAction::setType(QFileAction::Type type) {
     d->type = type;
     d->updateIcon();
 }
 
-QString QFileAction::filePath() const
-{
+QString QFileAction::filePath() const {
     return d->filePath;
 }
 
-void QFileAction::setFilePath(const QString &filePath)
-{
+void QFileAction::setFilePath(const QString &filePath) {
     if (d->filePath == filePath) {
         return;
     }
@@ -102,43 +97,35 @@ void QFileAction::setFilePath(const QString &filePath)
     Q_EMIT filePathChanged(filePath);
 }
 
-QString QFileAction::caption() const
-{
+QString QFileAction::caption() const {
     return d->caption;
 }
 
-void QFileAction::setCaption(const QString &caption)
-{
+void QFileAction::setCaption(const QString &caption) {
     d->caption = caption;
 }
 
-QString QFileAction::directory() const
-{
+QString QFileAction::directory() const {
     return d->directory;
 }
 
-void QFileAction::setDirectory(const QString &directory)
-{
+void QFileAction::setDirectory(const QString &directory) {
     d->directory = directory;
 }
 
-QStringList QFileAction::filter() const
-{
+QStringList QFileAction::filter() const {
     return d->filter;
 }
 
-void QFileAction::setFilter(const QStringList &filter)
-{
+void QFileAction::setFilter(const QStringList &filter) {
     d->filter = filter;
 }
 
-QFileDialog::Options QFileAction::options() const
-{
+QFileDialog::Options QFileAction::options() const {
     return d->options;
 }
 
-void QFileAction::setOptions(QFileDialog::Options options)
-{
+void QFileAction::setOptions(QFileDialog::Options options) {
     d->options = options;
 }
 

@@ -1,14 +1,13 @@
 #pragma once
 
+#include <QtWidgetsExtraLibExport.h>
+
 #include <QAction>
 #include <QColorDialog>
 
-#include <QtWidgetsExtraLibExport.h>
-
 // NOTE: This class duplicate QColorDialog::ColorDialogOptions because Qt forgot to make this enum a flag (Q_FLAG)
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorAction : public QAction
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorAction : public QAction {
     Q_OBJECT
     class QColorActionPrivate *d;
 

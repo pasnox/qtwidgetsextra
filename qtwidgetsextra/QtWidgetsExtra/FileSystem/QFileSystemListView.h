@@ -1,14 +1,13 @@
 #pragma once
 
-#include <QListView>
-#include <QDir>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemListView : public QListView
-{
+#include <QDir>
+#include <QListView>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemListView : public QListView {
     Q_OBJECT
-    class QFileSystemListViewPrivate* d;
+    class QFileSystemListViewPrivate *d;
 
     Q_PROPERTY(bool nameFilterDisables READ nameFilterDisables WRITE setNameFilterDisables)
     Q_PROPERTY(bool readOnly READ readOnly WRITE setReadOnly)

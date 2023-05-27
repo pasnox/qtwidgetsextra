@@ -1,8 +1,8 @@
 #include "QColorListModel.h"
 #include "QtWidgetsExtra/QtWidgetsExtraCache.h"
 
-#include <QVector>
 #include <QIcon>
+#include <QVector>
 
 #include <algorithm>
 
@@ -23,33 +23,28 @@ public:
     QStringList colors;
 };
 
-static bool ascendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2)
-{
+static bool ascendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2) {
     return s1.first < s2.first;
 }
 
-static bool decendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2)
-{
+static bool decendingLessThan(const QPair<QString, int> &s1, const QPair<QString, int> &s2) {
     return s1.first > s2.first;
 }
 
 QColorListModel::QColorListModel(QObject *parent)
     : QAbstractListModel(parent)
-    , d(new QColorListModelPrivate(this))
-{
+    , d(new QColorListModelPrivate(this)) {
 }
 
 QColorListModel::QColorListModel(const QStringList &colorListNames, QObject *parent)
     : QAbstractListModel(parent)
-    , d(new QColorListModelPrivate(this))
-{
+    , d(new QColorListModelPrivate(this)) {
     d->colors = colorListNames;
 }
 
 QColorListModel::QColorListModel(const QList<QColor> &colorsList, QObject *parent)
     : QAbstractListModel(parent)
-    , d(new QColorListModelPrivate(this))
-{
+    , d(new QColorListModelPrivate(this)) {
     QStringList colors;
 
     foreach (const QColor &color, colorsList) {
@@ -59,8 +54,7 @@ QColorListModel::QColorListModel(const QList<QColor> &colorsList, QObject *paren
     d->colors = colors;
 }
 
-int QColorListModel::rowCount(const QModelIndex &parent) const
-{
+int QColorListModel::rowCount(const QModelIndex &parent) const {
     if (parent.isValid()) {
         return 0;
     }
@@ -68,8 +62,7 @@ int QColorListModel::rowCount(const QModelIndex &parent) const
     return d->colors.count();
 }
 
-QModelIndex QColorListModel::sibling(int row, int column, const QModelIndex &idx) const
-{
+QModelIndex QColorListModel::sibling(int row, int column, const QModelIndex &idx) const {
     if (!idx.isValid() || column != 0 || row >= d->colors.count()) {
         return QModelIndex();
     }
@@ -77,27 +70,23 @@ QModelIndex QColorListModel::sibling(int row, int column, const QModelIndex &idx
     return createIndex(row, 0);
 }
 
-QVariant QColorListModel::data(const QModelIndex &index, int role) const
-{
+QVariant QColorListModel::data(const QModelIndex &index, int role) const {
     if (index.row() < 0 || index.row() >= d->colors.size()) {
         return QVariant();
     }
 
     if (role == Qt::DecorationRole) {
         return QtWidgetsExtraCache::cachedIconColor(QColor(d->colors.at(index.row())), QSize(64, 64));
-    }
-    else if (role == Qt::DisplayRole || role == Qt::EditRole) {
+    } else if (role == Qt::DisplayRole || role == Qt::EditRole) {
         return QColor(d->colors.at(index.row())).name(QColor::NameFormat(d->nameFormat));
-    }
-    else if (role == QColorListModel::HexArgbName) {
+    } else if (role == QColorListModel::HexArgbName) {
         return d->colors.at(index.row());
     }
 
     return QVariant();
 }
 
-Qt::ItemFlags QColorListModel::flags(const QModelIndex &index) const
-{
+Qt::ItemFlags QColorListModel::flags(const QModelIndex &index) const {
     if (!index.isValid()) {
         return QAbstractListModel::flags(index) | Qt::ItemIsDropEnabled;
     }
@@ -105,10 +94,8 @@ Qt::ItemFlags QColorListModel::flags(const QModelIndex &index) const
     return QAbstractListModel::flags(index) | Qt::ItemIsEditable | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled;
 }
 
-bool QColorListModel::setData(const QModelIndex &index, const QVariant &value, int role)
-{
-    if (index.row() >= 0 && index.row() < d->colors.size()
-        && (role == Qt::EditRole || role == Qt::DisplayRole)) {
+bool QColorListModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if (index.row() >= 0 && index.row() < d->colors.size() && (role == Qt::EditRole || role == Qt::DisplayRole)) {
         d->colors.replace(index.row(), value.value<QColor>().name(QColor::HexArgb));
         Q_EMIT dataChanged(index, index, QVector<int>() << role);
         return true;
@@ -117,13 +104,12 @@ bool QColorListModel::setData(const QModelIndex &index, const QVariant &value, i
     return false;
 }
 
-bool QColorListModel::insertRows(int row, int count, const QModelIndex &parent)
-{
+bool QColorListModel::insertRows(int row, int count, const QModelIndex &parent) {
     if (count < 1 || row < 0 || row > rowCount(parent)) {
         return false;
     }
 
-    beginInsertRows(QModelIndex(), row, row +count -1);
+    beginInsertRows(QModelIndex(), row, row + count - 1);
 
     for (int r = 0; r < count; ++r) {
         d->colors.insert(row, QString());
@@ -134,13 +120,12 @@ bool QColorListModel::insertRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
-bool QColorListModel::removeRows(int row, int count, const QModelIndex &parent)
-{
-    if (count <= 0 || row < 0 || (row +count) > rowCount(parent)) {
+bool QColorListModel::removeRows(int row, int count, const QModelIndex &parent) {
+    if (count <= 0 || row < 0 || (row + count) > rowCount(parent)) {
         return false;
     }
 
-    beginRemoveRows(QModelIndex(), row, row +count -1);
+    beginRemoveRows(QModelIndex(), row, row + count - 1);
 
     for (int r = 0; r < count; ++r) {
         d->colors.removeAt(row);
@@ -151,19 +136,17 @@ bool QColorListModel::removeRows(int row, int count, const QModelIndex &parent)
     return true;
 }
 
-void QColorListModel::sort(int, Qt::SortOrder order)
-{
+void QColorListModel::sort(int, Qt::SortOrder order) {
     Q_EMIT layoutAboutToBeChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
 
-    QList<QPair<QString, int> > list;
+    QList<QPair<QString, int>> list;
     for (int i = 0; i < d->colors.count(); ++i) {
         list.append(QPair<QString, int>(d->colors.at(i), i));
     }
 
     if (order == Qt::AscendingOrder) {
         std::sort(list.begin(), list.end(), ascendingLessThan);
-    }
-    else {
+    } else {
         std::sort(list.begin(), list.end(), decendingLessThan);
     }
 
@@ -184,32 +167,27 @@ void QColorListModel::sort(int, Qt::SortOrder order)
     Q_EMIT layoutChanged(QList<QPersistentModelIndex>(), VerticalSortHint);
 }
 
-Qt::DropActions QColorListModel::supportedDropActions() const
-{
+Qt::DropActions QColorListModel::supportedDropActions() const {
     return QAbstractItemModel::supportedDropActions() | Qt::MoveAction;
 }
 
-QColorListModel::NameFormat QColorListModel::nameFormat() const
-{
+QColorListModel::NameFormat QColorListModel::nameFormat() const {
     return d->nameFormat;
 }
 
-void QColorListModel::setNameFormat(QColorListModel::NameFormat nameFormat)
-{
+void QColorListModel::setNameFormat(QColorListModel::NameFormat nameFormat) {
     d->nameFormat = nameFormat;
 
     if (rowCount() > 0) {
-        Q_EMIT dataChanged(index(0,0), index(rowCount() -1, 0), QVector<int>() << Qt::DisplayRole);
+        Q_EMIT dataChanged(index(0, 0), index(rowCount() - 1, 0), QVector<int>() << Qt::DisplayRole);
     }
 }
 
-QStringList QColorListModel::colorListNames() const
-{
+QStringList QColorListModel::colorListNames() const {
     return d->colors;
 }
 
-void QColorListModel::setColorListNames(const QStringList &colorListNames)
-{
+void QColorListModel::setColorListNames(const QStringList &colorListNames) {
     QStringList colors;
 
     foreach (const QString &colorName, colorListNames) {
@@ -221,8 +199,7 @@ void QColorListModel::setColorListNames(const QStringList &colorListNames)
     Q_EMIT endResetModel();
 }
 
-QList<QColor> QColorListModel::colorsList() const
-{
+QList<QColor> QColorListModel::colorsList() const {
     QList<QColor> colors;
 
     foreach (const QString &colorName, d->colors) {
@@ -232,8 +209,7 @@ QList<QColor> QColorListModel::colorsList() const
     return colors;
 }
 
-void QColorListModel::setColorsList(const QList<QColor> &colorsList)
-{
+void QColorListModel::setColorsList(const QList<QColor> &colorsList) {
     QStringList colors;
 
     foreach (const QColor &color, colorsList) {

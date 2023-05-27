@@ -1,12 +1,11 @@
 #pragma once
 
+#include <QtWidgetsExtraLibExport.h>
+
 #include <QAction>
 #include <QFileDialog>
 
-#include <QtWidgetsExtraLibExport.h>
-
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileAction : public QAction
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileAction : public QAction {
     Q_OBJECT
     class QFileActionPrivate *d;
 

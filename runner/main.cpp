@@ -6,7 +6,7 @@
 
 #include <memory>
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     std::unique_ptr<QCoreApplication> app(new QCoreApplication(argc, argv));
 
     const QString uiFile = QStringLiteral(":/QtWidgetsExtra.ui");
@@ -19,7 +19,11 @@ int main(int argc, char** argv) {
 #else // QT_VERSION >= 0x060000
     const QString qtTools = QLibraryInfo::location(QLibraryInfo::BinariesPath);
 #endif // QT_VERSION >= 0x060000
-    const QString designer = QDir(qtTools).entryInfoList(QStringList(QStringLiteral("*designer*")), QDir::Dirs | QDir::Files | QDir::Executable).value(0).absoluteFilePath();
+    const QString designer =
+        QDir(qtTools)
+            .entryInfoList(QStringList(QStringLiteral("*designer*")), QDir::Dirs | QDir::Files | QDir::Executable)
+            .value(0)
+            .absoluteFilePath();
 
     QString appDirPath = app->applicationDirPath();
 #if defined(Q_OS_MACX)
@@ -38,7 +42,8 @@ int main(int argc, char** argv) {
     qDebug("QT_PLUGIN_PATH=%s && %s %s", qPrintable(appDirPath), qPrintable(designer), qPrintable(file->fileName()));
 
     QObject::connect(&process, &QProcess::errorOccurred, app.get(), &QCoreApplication::quit);
-    QObject::connect(&process, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), app.get(), &QCoreApplication::quit);
+    QObject::connect(&process, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), app.get(),
+                     &QCoreApplication::quit);
 
     process.start();
     return app->exec();

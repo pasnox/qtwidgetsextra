@@ -25,56 +25,46 @@ public:
 
 QColorListView::QColorListView(QWidget *parent)
     : QListView(parent)
-    , d(new QColorListViewPrivate(this))
-{
+    , d(new QColorListViewPrivate(this)) {
 }
 
 QColorListView::QColorListView(const QStringList &colorListNames, QWidget *parent)
     : QListView(parent)
-    , d(new QColorListViewPrivate(this))
-{
+    , d(new QColorListViewPrivate(this)) {
     d->model->setColorListNames(colorListNames);
 }
 
 QColorListView::QColorListView(const QList<QColor> &colors, QWidget *parent)
     : QListView(parent)
-    , d(new QColorListViewPrivate(this))
-{
+    , d(new QColorListViewPrivate(this)) {
     d->model->setColorsList(colors);
 }
 
-QColorListModel::NameFormat QColorListView::nameFormat() const
-{
+QColorListModel::NameFormat QColorListView::nameFormat() const {
     return d->model->nameFormat();
 }
 
-void QColorListView::setNameFormat(QColorListModel::NameFormat nameFormat)
-{
+void QColorListView::setNameFormat(QColorListModel::NameFormat nameFormat) {
     d->model->setNameFormat(nameFormat);
 }
 
-QStringList QColorListView::colorListNames() const
-{
+QStringList QColorListView::colorListNames() const {
     return d->model->colorListNames();
 }
 
-void QColorListView::setColorListNames(const QStringList &colorNames)
-{
+void QColorListView::setColorListNames(const QStringList &colorNames) {
     d->model->setColorListNames(colorNames);
 }
 
-QList<QColor> QColorListView::colorsList() const
-{
+QList<QColor> QColorListView::colorsList() const {
     return d->model->colorsList();
 }
 
-void QColorListView::setColorsList(const QList<QColor> &colors)
-{
+void QColorListView::setColorsList(const QList<QColor> &colors) {
     d->model->setColorsList(colors);
 }
 
-QStringList QColorListView::selectedColorListNames() const
-{
+QStringList QColorListView::selectedColorListNames() const {
     const QModelIndexList indexes = selectionModel()->selectedRows();
     QStringList colors;
 
@@ -85,8 +75,7 @@ QStringList QColorListView::selectedColorListNames() const
     return colors;
 }
 
-void QColorListView::setSelectedColorListNames(const QStringList &colorListNames)
-{
+void QColorListView::setSelectedColorListNames(const QStringList &colorListNames) {
     QSet<QString> colors;
     QItemSelection selection;
 
@@ -95,7 +84,7 @@ void QColorListView::setSelectedColorListNames(const QStringList &colorListNames
     }
 
     for (int i = 0; i < d->model->rowCount(); i++) {
-        const QModelIndex index = d->model->index(i,0);
+        const QModelIndex index = d->model->index(i, 0);
         const QString colorName = index.data(QColorListModel::HexArgbName).toString();
 
         if (colors.contains(colorName)) {
@@ -106,8 +95,7 @@ void QColorListView::setSelectedColorListNames(const QStringList &colorListNames
     selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
-QList<QColor> QColorListView::selectedColorsList() const
-{
+QList<QColor> QColorListView::selectedColorsList() const {
     const QModelIndexList indexes = selectionModel()->selectedRows();
     QList<QColor> colors;
 
@@ -118,8 +106,7 @@ QList<QColor> QColorListView::selectedColorsList() const
     return colors;
 }
 
-void QColorListView::setSelectedColorsList(const QList<QColor> &colorsList)
-{
+void QColorListView::setSelectedColorsList(const QList<QColor> &colorsList) {
     QSet<QString> colors;
     QItemSelection selection;
 
@@ -128,7 +115,7 @@ void QColorListView::setSelectedColorsList(const QList<QColor> &colorsList)
     }
 
     for (int i = 0; i < d->model->rowCount(); i++) {
-        const QModelIndex index = d->model->index(i,0);
+        const QModelIndex index = d->model->index(i, 0);
         const QString colorName = index.data(QColorListModel::HexArgbName).toString();
 
         if (colors.contains(colorName)) {

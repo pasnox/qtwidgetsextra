@@ -1,14 +1,13 @@
 #pragma once
 
+#include <QtWidgetsExtraLibExport.h>
+
 #include <QGroupBox>
 #include <QVariant>
 
-#include <QtWidgetsExtraLibExport.h>
-
 class QAbstractButton;
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QButtonGroupBox : public QGroupBox
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QButtonGroupBox : public QGroupBox {
     Q_OBJECT
     friend class QButtonGroupBoxPrivate;
     class QButtonGroupBoxPrivate *d;

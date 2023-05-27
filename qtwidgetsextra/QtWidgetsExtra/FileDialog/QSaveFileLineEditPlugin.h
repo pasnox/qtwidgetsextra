@@ -2,8 +2,7 @@
 
 #include <QtUiPlugin/QDesignerCustomWidgetInterface>
 
-class QSaveFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface
-{
+class QSaveFileLineEditPlugin : public QObject, public QDesignerCustomWidgetInterface {
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetInterface)
 

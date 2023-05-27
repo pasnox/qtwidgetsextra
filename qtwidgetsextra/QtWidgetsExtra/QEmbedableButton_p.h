@@ -1,11 +1,10 @@
 #pragma once
 
-#include <QToolButton>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QEmbedableButton : public QToolButton
-{
+#include <QToolButton>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QEmbedableButton : public QToolButton {
     Q_OBJECT
 
 public:

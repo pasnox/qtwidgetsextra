@@ -1,18 +1,12 @@
 #include "QButtonGroupBoxPlugin.h"
 #include "QButtonGroupBox.h"
 
-#include <QtPlugin>
-#include <QApplication>
-#include <QStyle>
-
 QButtonGroupBoxPlugin::QButtonGroupBoxPlugin(QObject *parent)
-    : QObject(parent)
-{
+    : QObject(parent) {
     m_initialized = false;
 }
 
-void QButtonGroupBoxPlugin::initialize(QDesignerFormEditorInterface * /* core */)
-{
+void QButtonGroupBoxPlugin::initialize(QDesignerFormEditorInterface * /* core */) {
     if (m_initialized) {
         return;
     }
@@ -22,52 +16,42 @@ void QButtonGroupBoxPlugin::initialize(QDesignerFormEditorInterface * /* core */
     m_initialized = true;
 }
 
-bool QButtonGroupBoxPlugin::isInitialized() const
-{
+bool QButtonGroupBoxPlugin::isInitialized() const {
     return m_initialized;
 }
 
-QWidget *QButtonGroupBoxPlugin::createWidget(QWidget *parent)
-{
+QWidget *QButtonGroupBoxPlugin::createWidget(QWidget *parent) {
     return new QButtonGroupBox(parent);
 }
 
-QString QButtonGroupBoxPlugin::name() const
-{
+QString QButtonGroupBoxPlugin::name() const {
     return QStringLiteral("QButtonGroupBox");
 }
 
-QString QButtonGroupBoxPlugin::group() const
-{
+QString QButtonGroupBoxPlugin::group() const {
     return QStringLiteral("Qt Widgets Extra / Group Box");
 }
 
-QIcon QButtonGroupBoxPlugin::icon() const
-{
+QIcon QButtonGroupBoxPlugin::icon() const {
     return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/groupbox.png"));
 }
 
-QString QButtonGroupBoxPlugin::toolTip() const
-{
+QString QButtonGroupBoxPlugin::toolTip() const {
     return QStringLiteral("A widget to manage multiple checkable buttons");
 }
 
-QString QButtonGroupBoxPlugin::whatsThis() const
-{
+QString QButtonGroupBoxPlugin::whatsThis() const {
     return toolTip();
 }
 
-bool QButtonGroupBoxPlugin::isContainer() const
-{
+bool QButtonGroupBoxPlugin::isContainer() const {
     return false;
 }
 
-QString QButtonGroupBoxPlugin::domXml() const
-{
+QString QButtonGroupBoxPlugin::domXml() const {
     return QStringLiteral("<widget class=\"QButtonGroupBox\" name=\"buttonGroupBox\">\n</widget>\n");
 }
 
-QString QButtonGroupBoxPlugin::includeFile() const
-{
+QString QButtonGroupBoxPlugin::includeFile() const {
     return QStringLiteral("QButtonGroupBox.h");
 }

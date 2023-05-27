@@ -1,10 +1,9 @@
 #pragma once
 
-#include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/Color/QColorAction.h>
+#include <QtWidgetsExtra/QEmbedableButton_p.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorToolButton : public QEmbedableButton
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorToolButton : public QEmbedableButton {
     Q_OBJECT
     class QColorToolButtonPrivate *d;
 

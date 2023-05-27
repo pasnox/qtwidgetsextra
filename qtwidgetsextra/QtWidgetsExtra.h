@@ -3,8 +3,7 @@
 #include <QtDesigner>
 #include <QtPlugin>
 
-class QtWidgetsExtra : public QObject, public QDesignerCustomWidgetCollectionInterface
-{
+class QtWidgetsExtra : public QObject, public QDesignerCustomWidgetCollectionInterface {
     Q_OBJECT
     Q_INTERFACES(QDesignerCustomWidgetCollectionInterface)
 #if QT_VERSION >= 0x050000
@@ -14,8 +13,8 @@ class QtWidgetsExtra : public QObject, public QDesignerCustomWidgetCollectionInt
 public:
     explicit QtWidgetsExtra(QObject *parent = nullptr);
 
-    virtual QList<QDesignerCustomWidgetInterface*> customWidgets() const;
+    virtual QList<QDesignerCustomWidgetInterface *> customWidgets() const;
 
 private:
-    QList<QDesignerCustomWidgetInterface*> m_widgets;
+    QList<QDesignerCustomWidgetInterface *> m_widgets;
 };

@@ -1,27 +1,23 @@
 #include "QEmbedableButton_p.h"
 
-#include <QStylePainter>
 #include <QStyleOptionToolButton>
+#include <QStylePainter>
 
 QEmbedableButton::QEmbedableButton(QWidget *parent)
     : QToolButton(parent)
-    , embeded(false)
-{
+    , embeded(false) {
 }
 
-bool QEmbedableButton::isEmbeded() const
-{
+bool QEmbedableButton::isEmbeded() const {
     return embeded;
 }
 
-void QEmbedableButton::setEmbeded(bool embed)
-{
+void QEmbedableButton::setEmbeded(bool embed) {
     embeded = embed;
     update();
 }
 
-void QEmbedableButton::paintEvent(QPaintEvent *event)
-{
+void QEmbedableButton::paintEvent(QPaintEvent *event) {
     if (embeded) {
         QStylePainter p(this);
         QStyleOptionToolButton opt;
@@ -29,13 +25,12 @@ void QEmbedableButton::paintEvent(QPaintEvent *event)
         opt.state |= QStyle::State_AutoRaise;
         opt.state &= ~QStyle::State_Raised;
         opt.state &= ~QStyle::State_Sunken;
-        //opt.state &= ~QStyle::State_On;
+        // opt.state &= ~QStyle::State_On;
 #if defined(Q_OS_MACX)
         opt.subControls &= ~QStyle::SC_ToolButton;
 #endif
         p.drawComplexControl(QStyle::CC_ToolButton, opt);
-    }
-    else {
+    } else {
         QToolButton::paintEvent(event);
     }
 }

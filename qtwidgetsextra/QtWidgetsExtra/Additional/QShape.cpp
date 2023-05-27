@@ -17,7 +17,8 @@ public:
     }
 
     void updateShape() {
-        const QRect contentsRect = widget->contentsRect().adjusted(margins.left(), margins.top(), -margins.right(), -margins.bottom());
+        const QRect contentsRect =
+            widget->contentsRect().adjusted(margins.left(), margins.top(), -margins.right(), -margins.bottom());
         const int min = qMin(contentsRect.width(), contentsRect.height());
         QRect area = QRect(QPoint(), contentsRect.size());
         QPainterPath newPath;
@@ -35,60 +36,47 @@ public:
         }
 
         switch (shape) {
-            case QShape::Circle:
-            case QShape::SquaredCircle: {
-                newPath.addEllipse(area);
-                break;
-            }
-            case QShape::Diamond:
-            case QShape::SquaredDiamond: {
-                const QPoint center = area.center();
-                newPath.addPolygon(
-                    QPolygon(
-                        QVector<QPoint>()
-                            << QPoint(center.x(), area.top())
-                            << QPoint(area.right(), center.y())
-                            << QPoint(center.x(), area.bottom())
-                            << QPoint(area.left(), center.y())
-                            << QPoint(center.x(), area.top())
-                        )
-                );
-                break;
-            }
-            case QShape::Rectangle: {
-                newPath.addRect(area);
-                break;
-            }
-            case QShape::RoundedRectangle: {
-                newPath.addRoundedRect(area, radius.x(), radius.y());
-                break;
-            }
-            case QShape::Square: {
-                newPath.addRect(area);
-                break;
-            }
-            case QShape::RoundedSquare: {
-                newPath.addRoundedRect(area, radius.x(), radius.y());
-                break;
-            }
-            case QShape::Triangle:
-            case QShape::SquaredTriangle: {
-                const QPoint center = area.center();
-                newPath.addPolygon(
-                    QPolygon(
-                        QVector<QPoint>()
-                        << QPoint(center.x(), area.top())
-                        << area.bottomRight()
-                        << area.bottomLeft()
-                        << QPoint(center.x(), area.top())
-                    )
-                );
-                break;
-            }
-            case QShape::User: {
-                newPath = userPath;
-                break;
-            }
+        case QShape::Circle:
+        case QShape::SquaredCircle: {
+            newPath.addEllipse(area);
+            break;
+        }
+        case QShape::Diamond:
+        case QShape::SquaredDiamond: {
+            const QPoint center = area.center();
+            newPath.addPolygon(QPolygon(QVector<QPoint>()
+                                        << QPoint(center.x(), area.top()) << QPoint(area.right(), center.y())
+                                        << QPoint(center.x(), area.bottom()) << QPoint(area.left(), center.y())
+                                        << QPoint(center.x(), area.top())));
+            break;
+        }
+        case QShape::Rectangle: {
+            newPath.addRect(area);
+            break;
+        }
+        case QShape::RoundedRectangle: {
+            newPath.addRoundedRect(area, radius.x(), radius.y());
+            break;
+        }
+        case QShape::Square: {
+            newPath.addRect(area);
+            break;
+        }
+        case QShape::RoundedSquare: {
+            newPath.addRoundedRect(area, radius.x(), radius.y());
+            break;
+        }
+        case QShape::Triangle:
+        case QShape::SquaredTriangle: {
+            const QPoint center = area.center();
+            newPath.addPolygon(QPolygon(QVector<QPoint>() << QPoint(center.x(), area.top()) << area.bottomRight()
+                                                          << area.bottomLeft() << QPoint(center.x(), area.top())));
+            break;
+        }
+        case QShape::User: {
+            newPath = userPath;
+            break;
+        }
         }
 
         path = newPath;
@@ -109,39 +97,32 @@ public:
 
 QShape::QShape(QWidget *parent)
     : QFrame(parent)
-    , d(new QShapePrivate(this))
-{
+    , d(new QShapePrivate(this)) {
 }
 
 QShape::QShape(QShape::Shape shape, QWidget *parent)
     : QFrame(parent)
-    , d(new QShapePrivate(this))
-{
+    , d(new QShapePrivate(this)) {
     setShape(shape);
 }
 
-QSize QShape::minimumSizeHint() const
-{
+QSize QShape::minimumSizeHint() const {
     return d->shape == QShape::User ? d->userPath.boundingRect().size().toSize() : QSize(30, 30);
 }
 
-QSize QShape::sizeHint() const
-{
+QSize QShape::sizeHint() const {
     return d->shape == QShape::User ? d->userPath.boundingRect().size().toSize() : QSize(50, 50);
 }
 
-QBrush QShape::brush() const
-{
+QBrush QShape::brush() const {
     return d->brush;
 }
 
-QPainter::RenderHints QShape::renderHints() const
-{
+QPainter::RenderHints QShape::renderHints() const {
     return d->renderHints;
 }
 
-void QShape::setRenderHints(QPainter::RenderHints renderHints)
-{
+void QShape::setRenderHints(QPainter::RenderHints renderHints) {
     if (d->renderHints == renderHints) {
         return;
     }
@@ -150,13 +131,11 @@ void QShape::setRenderHints(QPainter::RenderHints renderHints)
     d->updateShape();
 }
 
-QMargins QShape::margins() const
-{
+QMargins QShape::margins() const {
     return d->margins;
 }
 
-void QShape::setMargins(const QMargins &margins)
-{
+void QShape::setMargins(const QMargins &margins) {
     if (d->margins == margins) {
         return;
     }
@@ -165,8 +144,7 @@ void QShape::setMargins(const QMargins &margins)
     d->updateShape();
 }
 
-void QShape::setBrush(const QBrush &brush)
-{
+void QShape::setBrush(const QBrush &brush) {
     if (d->brush == brush) {
         return;
     }
@@ -175,13 +153,11 @@ void QShape::setBrush(const QBrush &brush)
     d->updateShape();
 }
 
-QPen QShape::pen() const
-{
+QPen QShape::pen() const {
     return d->pen;
 }
 
-void QShape::setPen(const QPen &pen)
-{
+void QShape::setPen(const QPen &pen) {
     if (d->pen == pen) {
         return;
     }
@@ -190,13 +166,11 @@ void QShape::setPen(const QPen &pen)
     d->updateShape();
 }
 
-QShape::Shape QShape::shape() const
-{
+QShape::Shape QShape::shape() const {
     return d->shape;
 }
 
-void QShape::setShape(QShape::Shape shape)
-{
+void QShape::setShape(QShape::Shape shape) {
     if (d->shape == shape) {
         return;
     }
@@ -205,13 +179,11 @@ void QShape::setShape(QShape::Shape shape)
     d->updateShape();
 }
 
-QPoint QShape::radius() const
-{
+QPoint QShape::radius() const {
     return d->radius;
 }
 
-void QShape::setRadius(const QPoint &radius)
-{
+void QShape::setRadius(const QPoint &radius) {
     if (d->radius == radius) {
         return;
     }
@@ -220,13 +192,11 @@ void QShape::setRadius(const QPoint &radius)
     d->updateShape();
 }
 
-QPainterPath QShape::userPath() const
-{
+QPainterPath QShape::userPath() const {
     return d->userPath;
 }
 
-void QShape::setUserPath(const QPainterPath &userPath)
-{
+void QShape::setUserPath(const QPainterPath &userPath) {
     if (d->userPath == userPath) {
         return;
     }
@@ -235,8 +205,7 @@ void QShape::setUserPath(const QPainterPath &userPath)
     d->updateShape();
 }
 
-void QShape::paintEvent(QPaintEvent *event)
-{
+void QShape::paintEvent(QPaintEvent *event) {
     QFrame::paintEvent(event);
 
     QPainter painter(this);
@@ -246,8 +215,7 @@ void QShape::paintEvent(QPaintEvent *event)
     painter.drawPath(d->path);
 }
 
-void QShape::resizeEvent(QResizeEvent *event)
-{
+void QShape::resizeEvent(QResizeEvent *event) {
     QFrame::resizeEvent(event);
     d->updateShape();
 }

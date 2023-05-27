@@ -1,16 +1,12 @@
 #include "QFileSystemListViewPlugin.h"
 #include "QFileSystemListView.h"
 
-#include <QtPlugin>
-
 QFileSystemListViewPlugin::QFileSystemListViewPlugin(QObject *parent)
     : QObject(parent)
-    , m_initialized(false)
-{
+    , m_initialized(false) {
 }
 
-void QFileSystemListViewPlugin::initialize(QDesignerFormEditorInterface * /* core */)
-{
+void QFileSystemListViewPlugin::initialize(QDesignerFormEditorInterface * /* core */) {
     if (m_initialized) {
         return;
     }
@@ -20,55 +16,43 @@ void QFileSystemListViewPlugin::initialize(QDesignerFormEditorInterface * /* cor
     m_initialized = true;
 }
 
-bool QFileSystemListViewPlugin::isInitialized() const
-{
+bool QFileSystemListViewPlugin::isInitialized() const {
     return m_initialized;
 }
 
-QWidget *QFileSystemListViewPlugin::createWidget(QWidget *parent)
-{
+QWidget *QFileSystemListViewPlugin::createWidget(QWidget *parent) {
     return new QFileSystemListView(parent);
 }
 
-QString QFileSystemListViewPlugin::name() const
-{
+QString QFileSystemListViewPlugin::name() const {
     return QStringLiteral("QFileSystemListView");
 }
 
-QString QFileSystemListViewPlugin::group() const
-{
+QString QFileSystemListViewPlugin::group() const {
     return QStringLiteral("Qt Widgets Extra / File System");
 }
 
-QIcon QFileSystemListViewPlugin::icon() const
-{
+QIcon QFileSystemListViewPlugin::icon() const {
     return QIcon(QStringLiteral(":/designer/treeview.png"));
 }
 
-QString QFileSystemListViewPlugin::toolTip() const
-{
+QString QFileSystemListViewPlugin::toolTip() const {
     return QStringLiteral("A QListView presenting a QFileSystemModel");
 }
 
-QString QFileSystemListViewPlugin::whatsThis() const
-{
+QString QFileSystemListViewPlugin::whatsThis() const {
     return toolTip();
 }
 
-bool QFileSystemListViewPlugin::isContainer() const
-{
+bool QFileSystemListViewPlugin::isContainer() const {
     return false;
 }
 
-QString QFileSystemListViewPlugin::domXml() const
-{
-    return QStringLiteral(
-        "<widget class=\"QFileSystemListView\" name=\"filesystemListView\">\n"
-        "</widget>\n"
-    );
+QString QFileSystemListViewPlugin::domXml() const {
+    return QStringLiteral("<widget class=\"QFileSystemListView\" name=\"filesystemListView\">\n"
+                          "</widget>\n");
 }
 
-QString QFileSystemListViewPlugin::includeFile() const
-{
+QString QFileSystemListViewPlugin::includeFile() const {
     return QStringLiteral("QFileSystemListView.h");
 }

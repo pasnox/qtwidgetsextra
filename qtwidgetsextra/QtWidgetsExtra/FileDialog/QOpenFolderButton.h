@@ -1,12 +1,11 @@
 #pragma once
 
-#include <QtWidgetsExtra/QEmbedableButton_p.h>
 #include <QtWidgetsExtra/FileDialog/QFileAction.h>
+#include <QtWidgetsExtra/QEmbedableButton_p.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFolderButton : public QEmbedableButton
-{
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QOpenFolderButton : public QEmbedableButton {
     Q_OBJECT
-    class QOpenFolderButtonPrivate* d;
+    class QOpenFolderButtonPrivate *d;
 
     Q_PROPERTY(QString filePath READ filePath WRITE setFilePath USER true NOTIFY filePathChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption)

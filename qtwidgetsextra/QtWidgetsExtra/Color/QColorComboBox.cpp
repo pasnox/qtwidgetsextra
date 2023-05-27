@@ -16,7 +16,8 @@ public:
         updateValidator();
 
         connect(widget, &QComboBox::textActivated, this, &QColorComboBoxPrivate::textActivated);
-        connect(widget, qOverload<int>(&QComboBox::currentIndexChanged), this, &QColorComboBoxPrivate::currentIndexChanged);
+        connect(widget, qOverload<int>(&QComboBox::currentIndexChanged), this,
+                &QColorComboBoxPrivate::currentIndexChanged);
         connect(widget, &QComboBox::currentTextChanged, this, &QColorComboBoxPrivate::currentTextChanged);
         connect(widget, &QComboBox::editTextChanged, this, &QColorComboBoxPrivate::editTextChanged);
         connect(widget, &QComboBox::textHighlighted, this, &QColorComboBoxPrivate::textHighlighted);
@@ -68,107 +69,87 @@ public:
 
 QColorComboBox::QColorComboBox(QWidget *parent)
     : QComboBox(parent)
-    , d(new QColorComboBoxPrivate(this))
-{
+    , d(new QColorComboBoxPrivate(this)) {
 }
 
 QColorComboBox::QColorComboBox(const QStringList &colorListNames, QWidget *parent)
     : QComboBox(parent)
-    , d(new QColorComboBoxPrivate(this))
-{
+    , d(new QColorComboBoxPrivate(this)) {
     d->model->setColorListNames(colorListNames);
 }
 
 QColorComboBox::QColorComboBox(const QList<QColor> &colors, QWidget *parent)
     : QComboBox(parent)
-    , d(new QColorComboBoxPrivate(this))
-{
+    , d(new QColorComboBoxPrivate(this)) {
     d->model->setColorsList(colors);
 }
 
-QColorListModel::NameFormat QColorComboBox::nameFormat() const
-{
+QColorListModel::NameFormat QColorComboBox::nameFormat() const {
     return d->model->nameFormat();
 }
 
-void QColorComboBox::setNameFormat(QColorListModel::NameFormat nameFormat)
-{
+void QColorComboBox::setNameFormat(QColorListModel::NameFormat nameFormat) {
     d->model->setNameFormat(nameFormat);
     d->updateValidator();
 }
 
-QStringList QColorComboBox::colorListNames() const
-{
+QStringList QColorComboBox::colorListNames() const {
     return d->model->colorListNames();
 }
 
-void QColorComboBox::setColorListNames(const QStringList &colorNames)
-{
+void QColorComboBox::setColorListNames(const QStringList &colorNames) {
     d->model->setColorListNames(colorNames);
 }
 
-QList<QColor> QColorComboBox::colorsList() const
-{
+QList<QColor> QColorComboBox::colorsList() const {
     return d->model->colorsList();
 }
 
-void QColorComboBox::setColorsList(const QList<QColor> &colors)
-{
+void QColorComboBox::setColorsList(const QList<QColor> &colors) {
     d->model->setColorsList(colors);
 }
 
-QString QColorComboBox::currentColorName() const
-{
+QString QColorComboBox::currentColorName() const {
     return currentData(QColorListModel::HexArgbName).toString();
 }
 
-void QColorComboBox::setCurrentColorName(const QString &colorName)
-{
+void QColorComboBox::setCurrentColorName(const QString &colorName) {
     setCurrentIndex(findData(d->internalColorName(QColor(colorName)), QColorListModel::HexArgbName));
 }
 
-QString QColorComboBox::currentTextColorName() const
-{
+QString QColorComboBox::currentTextColorName() const {
     return d->internalColorName(QColor(currentText()));
 }
 
-void QColorComboBox::setCurrentTextColorName(const QString &colorName)
-{
+void QColorComboBox::setCurrentTextColorName(const QString &colorName) {
     setCurrentText(d->internalColorName(QColor(colorName)));
 }
 
-void QColorComboBox::setEditTextColorName(const QString &colorName)
-{
+void QColorComboBox::setEditTextColorName(const QString &colorName) {
     setEditText(d->internalColorName(QColor(colorName)));
 }
 
-QColor QColorComboBox::currentColor() const
-{
+QColor QColorComboBox::currentColor() const {
     return QColor(currentColorName());
 }
 
-void QColorComboBox::setCurrentColor(const QColor &color)
-{
+void QColorComboBox::setCurrentColor(const QColor &color) {
     setCurrentColorName(d->internalColorName(color));
 }
 
-QColor QColorComboBox::currentTextColor() const
-{
+QColor QColorComboBox::currentTextColor() const {
     return QColor(currentTextColorName());
 }
 
-void QColorComboBox::setCurrentTextColor(const QColor &color)
-{
+void QColorComboBox::setCurrentTextColor(const QColor &color) {
     setCurrentTextColorName(d->internalColorName(color));
 }
 
-void QColorComboBox::setEditTextColor(const QColor &color)
-{
+void QColorComboBox::setEditTextColor(const QColor &color) {
     setEditTextColorName(d->internalColorName(color));
 }
 
-void QColorComboBox::paintEvent(QPaintEvent *event)
-{
+void QColorComboBox::paintEvent(QPaintEvent *event) {
     QComboBox::paintEvent(event);
 
     // there is no real way to be notified about "editable" property change so let check it here...

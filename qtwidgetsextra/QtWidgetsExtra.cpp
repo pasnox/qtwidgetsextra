@@ -4,7 +4,7 @@
 QtWidgetsExtra::QtWidgetsExtra(QObject *parent)
     : QObject(parent)
 {
-    #include "generated/pluginsNew.h"
+#include "generated/pluginsNew.h"
 }
 
 QList<QDesignerCustomWidgetInterface*> QtWidgetsExtra::customWidgets() const

@@ -23,21 +23,18 @@ public:
 
 QAbstractButtonLineEdit::QAbstractButtonLineEdit(QWidget *parent)
     : QLineEdit(parent)
-    , d(new QAbstractButtonLineEditPrivate(this))
-{
+    , d(new QAbstractButtonLineEditPrivate(this)) {
 }
 
 QAbstractButtonLineEdit::QAbstractButtonLineEdit(QAction *action, ActionPosition position, QWidget *parent)
     : QLineEdit(parent)
-    , d(new QAbstractButtonLineEditPrivate(this))
-{
+    , d(new QAbstractButtonLineEditPrivate(this)) {
     addAction(action, position);
 }
 
 QAbstractButtonLineEdit::QAbstractButtonLineEdit(QMenu *menu, ActionPosition position, QWidget *parent)
     : QLineEdit(parent)
-    , d(new QAbstractButtonLineEditPrivate(this))
-{
+    , d(new QAbstractButtonLineEditPrivate(this)) {
     addAction(menu->menuAction(), position);
 }
 

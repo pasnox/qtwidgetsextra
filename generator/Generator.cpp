@@ -4,240 +4,185 @@ QString Generator::Tab = QString(4, QLatin1Char(' '));
 
 // Entry
 
-QString Generator::Entry::propertyName() const
-{
+QString Generator::Entry::propertyName() const {
     return Generator::nonTitleCased(n);
 }
 
-QString Generator::Entry::getterName() const
-{
-    return QStringLiteral(
-        "%1%2"
-    )
+QString Generator::Entry::getterName() const {
+    return QStringLiteral("%1%2")
         .arg(t == QStringLiteral("bool") ? QStringLiteral("is") : QString())
-        .arg(t == QStringLiteral("bool") ? Generator::titleCased(propertyName()) : propertyName())
-    ;
+        .arg(t == QStringLiteral("bool") ? Generator::titleCased(propertyName()) : propertyName());
 }
 
-QString Generator::Entry::setterName() const
-{
-    return QStringLiteral(
-        "set%1"
-    )
-        .arg(Generator::titleCased(propertyName()))
-    ;
+QString Generator::Entry::setterName() const {
+    return QStringLiteral("set%1").arg(Generator::titleCased(propertyName()));
 }
 
-QString Generator::Entry::signalName() const
-{
-    return propertyName()
-        .append(QStringLiteral("Changed"))
-    ;
+QString Generator::Entry::signalName() const {
+    return propertyName().append(QStringLiteral("Changed"));
 }
 
-QString Generator::Entry::typeReturn() const
-{
+QString Generator::Entry::typeReturn() const {
     switch (pt) {
-        case Generator::Variable:
-        case Generator::Reference:
-            return t;
-        case Generator::Pointer:
-            return QStringLiteral("%1 *").arg(t);
+    case Generator::Variable:
+    case Generator::Reference:
+        return t;
+    case Generator::Pointer:
+        return QStringLiteral("%1 *").arg(t);
     }
 
     Q_ASSERT(false);
     return QString();
 }
 
-QString Generator::Entry::typeValue() const
-{
+QString Generator::Entry::typeValue() const {
     switch (pt) {
-        case Generator::Variable:
-            return QStringLiteral("%1 %2").arg(t).arg(propertyName());
-        case Generator::Reference:
-            return QStringLiteral("const %1 &%2").arg(t).arg(propertyName());
-        case Generator::Pointer:
-            return QStringLiteral("%1 *%2").arg(t).arg(propertyName());
+    case Generator::Variable:
+        return QStringLiteral("%1 %2").arg(t).arg(propertyName());
+    case Generator::Reference:
+        return QStringLiteral("const %1 &%2").arg(t).arg(propertyName());
+    case Generator::Pointer:
+        return QStringLiteral("%1 *%2").arg(t).arg(propertyName());
     }
 
     Q_ASSERT(false);
     return QString();
 }
 
-QString Generator::Entry::property() const
-{
-    return QStringLiteral(
-        "Q_PROPERTY(%1 %2 READ %3 WRITE %4%5)"
-    )
+QString Generator::Entry::property() const {
+    return QStringLiteral("Q_PROPERTY(%1 %2 READ %3 WRITE %4%5)")
         .arg(typeReturn())
         .arg(propertyName())
         .arg(getterName())
         .arg(setterName())
-        .arg(s ? QStringLiteral(" NOTIFY %1").arg(signalName()) : QString())
-    ;
+        .arg(s ? QStringLiteral(" NOTIFY %1").arg(signalName()) : QString());
 }
 
-QString Generator::Entry::signal() const
-{
+QString Generator::Entry::signal() const {
     return QStringLiteral("void %1(%2);").arg(signalName()).arg(typeValue());
 }
 
-QString Generator::Entry::headerGetter() const
-{
-    return QStringLiteral(
-        "%1%2%3() const;"
-    )
+QString Generator::Entry::headerGetter() const {
+    return QStringLiteral("%1%2%3() const;")
         .arg(typeReturn())
         .arg(pt == Generator::Pointer ? QString() : QStringLiteral(" "))
-        .arg(getterName())
-    ;
+        .arg(getterName());
 }
 
-QString Generator::Entry::headerSetter() const
-{
-    return QStringLiteral(
-        "void %1(%2%3);"
-    )
+QString Generator::Entry::headerSetter() const {
+    return QStringLiteral("void %1(%2%3);")
         .arg(setterName())
         .arg(typeValue())
-        .arg(dv.isEmpty() ? QString() : QStringLiteral(" = %1").arg(dv))
-    ;
+        .arg(dv.isEmpty() ? QString() : QStringLiteral(" = %1").arg(dv));
 }
 
-QStringList Generator::Entry::sourceGetter(const QString &className, const QString &tab) const
-{
-    return QStringLiteral(
-        "%1%2%3::%4() const\n"
-        "{\n"
-        "\treturn d->%5;\n"
-        "}"
-    )
+QStringList Generator::Entry::sourceGetter(const QString &className, const QString &tab) const {
+    return QStringLiteral("%1%2%3::%4() const\n"
+                          "{\n"
+                          "\treturn d->%5;\n"
+                          "}")
         .arg(typeReturn())
         .arg(pt == Generator::Pointer ? QString() : QStringLiteral(" "))
         .arg(className)
         .arg(getterName())
         .arg(propertyName())
         .replace(QStringLiteral("\t"), tab)
-        .split(QStringLiteral("\n"))
-    ;
+        .split(QStringLiteral("\n"));
 }
 
-QStringList Generator::Entry::sourceSetter(const QString &className, const QString &tab) const
-{
-    return QStringLiteral(
-        "void %1::%2(%3)\n"
-        "{\n"
-        "\tif (d->%4 == %4) {\n"
-        "\t\treturn;\n"
-        "\t}\n"
-        "\n"
-        "\td->%4 = %4;\n"
-        "%5"
-        "}"
-    )
+QStringList Generator::Entry::sourceSetter(const QString &className, const QString &tab) const {
+    return QStringLiteral("void %1::%2(%3)\n"
+                          "{\n"
+                          "\tif (d->%4 == %4) {\n"
+                          "\t\treturn;\n"
+                          "\t}\n"
+                          "\n"
+                          "\td->%4 = %4;\n"
+                          "%5"
+                          "}")
         .arg(className)
         .arg(setterName())
         .arg(typeValue())
         .arg(propertyName())
         .arg(s ? QStringLiteral("\n\temit %1(%2);\n").arg(signalName()).arg(propertyName()) : QString())
         .replace(QStringLiteral("\t"), tab)
-        .split(QStringLiteral("\n"))
-    ;
+        .split(QStringLiteral("\n"));
 }
 
 // Generator
 
-Generator::Generator()
-{
+Generator::Generator() {
 }
 
-Generator::Entry::List Generator::entries() const
-{
+Generator::Entry::List Generator::entries() const {
     return m_entries;
 }
 
-void Generator::setEntries(const Generator::Entry::List &entries)
-{
+void Generator::setEntries(const Generator::Entry::List &entries) {
     m_entries = entries;
 }
 
-QString Generator::nameSpace() const
-{
+QString Generator::nameSpace() const {
     return m_nameSpace;
 }
 
-void Generator::setNameSpace(const QString &nameSpace)
-{
+void Generator::setNameSpace(const QString &nameSpace) {
     m_nameSpace = nameSpace;
 }
 
-QString Generator::className() const
-{
+QString Generator::className() const {
     return m_className;
 }
 
-void Generator::setClassName(const QString &className)
-{
+void Generator::setClassName(const QString &className) {
     m_className = className;
 }
 
-QString Generator::inheriting() const
-{
+QString Generator::inheriting() const {
     return m_inheriting;
 }
 
-void Generator::setInheriting(const QString &inheriting)
-{
+void Generator::setInheriting(const QString &inheriting) {
     m_inheriting = inheriting;
 }
 
-Generator::InheritingType Generator::inheritingType() const
-{
+Generator::InheritingType Generator::inheritingType() const {
     return m_inheritingType;
 }
 
-void Generator::setInheritingType(Generator::InheritingType inheritingType)
-{
+void Generator::setInheritingType(Generator::InheritingType inheritingType) {
     m_inheritingType = inheritingType;
 }
 
-QString Generator::pluginGroup() const
-{
+QString Generator::pluginGroup() const {
     return m_pluginGroup;
 }
 
-QString Generator::normalizedPluginGroup() const
-{
+QString Generator::normalizedPluginGroup() const {
     return m_pluginGroup.toLower().simplified().replace(QStringLiteral(" "), QString());
 }
 
-void Generator::setPluginGroup(const QString &pluginGroup)
-{
+void Generator::setPluginGroup(const QString &pluginGroup) {
     m_pluginGroup = pluginGroup;
 }
 
-QString Generator::pluginIconFilePath() const
-{
+QString Generator::pluginIconFilePath() const {
     return m_pluginIconFilePath;
 }
 
-void Generator::setPluginIconFilePath(const QString &pluginIconFilePath)
-{
+void Generator::setPluginIconFilePath(const QString &pluginIconFilePath) {
     m_pluginIconFilePath = pluginIconFilePath;
 }
 
-QString Generator::pluginToolTip() const
-{
+QString Generator::pluginToolTip() const {
     return m_pluginToolTip;
 }
 
-void Generator::setPluginToolTip(const QString &pluginToolTip)
-{
+void Generator::setPluginToolTip(const QString &pluginToolTip) {
     m_pluginToolTip = pluginToolTip;
 }
 
-QString Generator::classHeader() const
-{
+QString Generator::classHeader() const {
     QStringList output;
     bool hasProperties = false;
     bool hasSignals = false;
@@ -260,13 +205,13 @@ QString Generator::classHeader() const
 
     foreach (const Generator::Entry &entry, m_entries) {
         switch (entry.pt) {
-            case Generator::Variable:
-                break;
-            case Generator::Reference:
-            case Generator::Pointer:
-                output << QStringLiteral("class %1;").arg(entry.t);
-                hasReferencesOrPointers = true;
-                break;
+        case Generator::Variable:
+            break;
+        case Generator::Reference:
+        case Generator::Pointer:
+            output << QStringLiteral("class %1;").arg(entry.t);
+            hasReferencesOrPointers = true;
+            break;
         }
     }
 
@@ -274,7 +219,9 @@ QString Generator::classHeader() const
         output << QString();
     }
 
-    output << QStringLiteral("class %1%2").arg(m_className).arg(m_inheriting.isEmpty() ? QString() : QStringLiteral(" : public %1").arg(m_inheriting));
+    output << QStringLiteral("class %1%2")
+                  .arg(m_className)
+                  .arg(m_inheriting.isEmpty() ? QString() : QStringLiteral(" : public %1").arg(m_inheriting));
     output << QStringLiteral("{");
     output << QStringLiteral("Q_OBJECT").prepend(Generator::Tab);
     output << QStringLiteral("class %1Private *d;").arg(m_className).prepend(Generator::Tab);
@@ -293,7 +240,10 @@ QString Generator::classHeader() const
     }
 
     output << QStringLiteral("public:");
-    output << QStringLiteral("explicit %1(%2 *parent = 0);").arg(m_className).arg(inheritingTypeClassName()).prepend(Generator::Tab);
+    output << QStringLiteral("explicit %1(%2 *parent = 0);")
+                  .arg(m_className)
+                  .arg(inheritingTypeClassName())
+                  .prepend(Generator::Tab);
 
     foreach (const Generator::Entry &entry, m_entries) {
         output << QString();
@@ -335,8 +285,7 @@ QString Generator::classHeader() const
     return output.join(QStringLiteral("\n"));
 }
 
-QString Generator::classSource() const
-{
+QString Generator::classSource() const {
     QStringList output;
     bool hasReferencesOrPointers = false;
     bool hasDefaultValues = false;
@@ -352,13 +301,13 @@ QString Generator::classSource() const
 
     foreach (const Generator::Entry &entry, m_entries) {
         switch (entry.pt) {
-            case Generator::Variable:
-                break;
-            case Generator::Reference:
-            case Generator::Pointer:
-                output << QStringLiteral("#include <%1>").arg(entry.t);
-                hasReferencesOrPointers = true;
-                break;
+        case Generator::Variable:
+            break;
+        case Generator::Reference:
+        case Generator::Pointer:
+            output << QStringLiteral("#include <%1>").arg(entry.t);
+            hasReferencesOrPointers = true;
+            break;
         }
 
         if (!entry.dv.isEmpty()) {
@@ -379,12 +328,20 @@ QString Generator::classSource() const
     output << QStringLiteral("public:");
     output << QStringLiteral("%1Private(%1 *%2P)").arg(m_className).arg(privateObjectName()).prepend(Generator::Tab);
     output << QStringLiteral(": QObject(%1P)").arg(privateObjectName()).prepend(Generator::Tab).prepend(Generator::Tab);
-    output << QStringLiteral(", %1(%1P)%2").arg(privateObjectName()).arg(hasDefaultValues ? QString() : QStringLiteral(" {")).prepend(Generator::Tab).prepend(Generator::Tab);
+    output << QStringLiteral(", %1(%1P)%2")
+                  .arg(privateObjectName())
+                  .arg(hasDefaultValues ? QString() : QStringLiteral(" {"))
+                  .prepend(Generator::Tab)
+                  .prepend(Generator::Tab);
 
     if (hasDefaultValues) {
         foreach (const Generator::Entry &entry, m_entries) {
             if (!entry.dv.isEmpty()) {
-                output << QStringLiteral(", %1(%2)").arg(entry.propertyName()).arg(entry.dv).prepend(Generator::Tab).prepend(Generator::Tab);
+                output << QStringLiteral(", %1(%2)")
+                              .arg(entry.propertyName())
+                              .arg(entry.dv)
+                              .prepend(Generator::Tab)
+                              .prepend(Generator::Tab);
             }
         }
 
@@ -400,7 +357,11 @@ QString Generator::classSource() const
     output << QStringLiteral("%1 *%2;").arg(m_className).arg(privateObjectName()).prepend(Generator::Tab);
 
     foreach (const Generator::Entry &entry, m_entries) {
-        output << QStringLiteral("%1%2%3;").arg(entry.typeReturn()).arg(entry.pt == Generator::Pointer ? QString() : QStringLiteral(" ")).arg(entry.propertyName()).prepend(Generator::Tab);
+        output << QStringLiteral("%1%2%3;")
+                      .arg(entry.typeReturn())
+                      .arg(entry.pt == Generator::Pointer ? QString() : QStringLiteral(" "))
+                      .arg(entry.propertyName())
+                      .prepend(Generator::Tab);
     }
 
     output << QStringLiteral("};");
@@ -434,8 +395,7 @@ QString Generator::classSource() const
     return output.join(QStringLiteral("\n"));
 }
 
-QString Generator::pluginHeader() const
-{
+QString Generator::pluginHeader() const {
     QStringList output;
 
     output << QStringLiteral("#ifndef %1PLUGIN_H").arg(m_className.toUpper());
@@ -486,8 +446,7 @@ QString Generator::pluginHeader() const
     return output.join(QStringLiteral("\n"));
 }
 
-QString Generator::pluginSource() const
-{
+QString Generator::pluginSource() const {
     QStringList output;
 
     output << QStringLiteral("#include \"%1Plugin.h\"").arg(m_className);
@@ -533,7 +492,10 @@ QString Generator::pluginSource() const
 
     output << QStringLiteral("QWidget *%1Plugin::createWidget(QWidget *parent)").arg(m_className);
     output << QStringLiteral("{");
-    output << QStringLiteral("return new %1%2(parent);").arg(m_nameSpace.isEmpty() ? QString() : QStringLiteral("%1::").arg(m_nameSpace)).arg(m_className).prepend(Generator::Tab);
+    output << QStringLiteral("return new %1%2(parent);")
+                  .arg(m_nameSpace.isEmpty() ? QString() : QStringLiteral("%1::").arg(m_nameSpace))
+                  .arg(m_className)
+                  .prepend(Generator::Tab);
     output << QStringLiteral("}");
 
     output << QString();
@@ -547,7 +509,9 @@ QString Generator::pluginSource() const
 
     output << QStringLiteral("QString %1Plugin::group() const").arg(m_className);
     output << QStringLiteral("{");
-    output << QStringLiteral("return QStringLiteral(\"Qt Widgets Extra / %1\");").arg(m_pluginGroup).prepend(Generator::Tab);
+    output << QStringLiteral("return QStringLiteral(\"Qt Widgets Extra / %1\");")
+                  .arg(m_pluginGroup)
+                  .prepend(Generator::Tab);
     output << QStringLiteral("}");
 
     output << QString();
@@ -582,7 +546,10 @@ QString Generator::pluginSource() const
 
     output << QStringLiteral("QString %1Plugin::domXml() const").arg(m_className);
     output << QStringLiteral("{");
-    output << QStringLiteral("return QStringLiteral(\"<widget class=\\\"%1\\\" name=\\\"%2\\\">\\n</widget>\\n\");").arg(m_className).arg(Generator::nonTitleCased(m_className.mid(1))).prepend(Generator::Tab);
+    output << QStringLiteral("return QStringLiteral(\"<widget class=\\\"%1\\\" name=\\\"%2\\\">\\n</widget>\\n\");")
+                  .arg(m_className)
+                  .arg(Generator::nonTitleCased(m_className.mid(1)))
+                  .prepend(Generator::Tab);
     output << QStringLiteral("}");
 
     output << QString();
@@ -597,8 +564,7 @@ QString Generator::pluginSource() const
     return output.join(QStringLiteral("\n"));
 }
 
-QString Generator::projectFileSource() const
-{
+QString Generator::projectFileSource() const {
     const QString normalizedGroup = normalizedPluginGroup();
     QStringList output;
 
@@ -620,8 +586,7 @@ QString Generator::projectFileSource() const
     return output.join(QStringLiteral("\n"));
 }
 
-QString Generator::titleCased(const QString &string)
-{
+QString Generator::titleCased(const QString &string) {
     QString s = string;
 
     if (!s.isEmpty()) {
@@ -631,8 +596,7 @@ QString Generator::titleCased(const QString &string)
     return s;
 }
 
-QString Generator::nonTitleCased(const QString &string)
-{
+QString Generator::nonTitleCased(const QString &string) {
     QString s = string;
 
     if (!s.isEmpty()) {
@@ -642,20 +606,18 @@ QString Generator::nonTitleCased(const QString &string)
     return s;
 }
 
-QString Generator::privateObjectName() const
-{
+QString Generator::privateObjectName() const {
     switch (m_inheritingType) {
-        case Generator::Widget:
-            return QStringLiteral("widget");
-        case Generator::Object:
-            return QStringLiteral("object");
+    case Generator::Widget:
+        return QStringLiteral("widget");
+    case Generator::Object:
+        return QStringLiteral("object");
     }
 
     Q_ASSERT(false);
     return QString();
 }
 
-QString Generator::inheritingTypeClassName() const
-{
+QString Generator::inheritingTypeClassName() const {
     return m_inheritingType == Generator::Widget ? QStringLiteral("QWidget") : QStringLiteral("QObject");
 }

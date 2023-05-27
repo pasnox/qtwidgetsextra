@@ -1,20 +1,18 @@
 #pragma once
 
-#include <QPushButton>
-
 #include <QtWidgetsExtra/Color/QColorAction.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorPushButton : public QPushButton
-{
+#include <QPushButton>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QColorPushButton : public QPushButton {
     Q_OBJECT
-    class QColorPushButtonPrivate* d;
+    class QColorPushButtonPrivate *d;
 
     Q_PROPERTY(QColor color READ color WRITE setColor USER true NOTIFY colorChanged)
     Q_PROPERTY(QString caption READ caption WRITE setCaption)
     Q_PROPERTY(QColorAction::ColorDialogOptions options READ options WRITE setOptions)
 
 public:
-
     explicit QColorPushButton(QWidget *parent = nullptr);
     explicit QColorPushButton(const QColor &color, QWidget *parent = nullptr);
     explicit QColorPushButton(const QString &colorName, QWidget *parent = nullptr);

@@ -1,10 +1,9 @@
 #include "QFileSystemListView.h"
 
-#include <QFileSystemModel>
 #include <QApplication>
+#include <QFileSystemModel>
 
-class QFileSystemListViewPrivate : public QObject
-{
+class QFileSystemListViewPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -21,9 +20,10 @@ public:
         connect(widget, &QFileSystemListView::activated, this, &QFileSystemListViewPrivate::activated);
     }
 
-    void updateItemSelection(const QStringList &selection, QItemSelectionModel::SelectionFlags flags, int column = 0) const {
+    void updateItemSelection(const QStringList &selection, QItemSelectionModel::SelectionFlags flags,
+                             int column = 0) const {
         // QMap give us sorting for free
-        QMap<QModelIndex, QMap<QModelIndex, int> > mapIndexes;
+        QMap<QModelIndex, QMap<QModelIndex, int>> mapIndexes;
         QItemSelection itemSelection;
 
         foreach (const QString &item, selection) {
@@ -41,36 +41,32 @@ public:
 
             for (int i = 0; i < indexes.count(); i++) {
                 const QModelIndex &index = indexes[i];
-                const bool hasNext = i +1 < indexes.count();
+                const bool hasNext = i + 1 < indexes.count();
 
-                if (top ==-1) {
+                if (top == -1) {
                     top = index.row();
-                }
-                else {
+                } else {
                     if (bottom == -1) {
                         // index is not contiguous
-                        if (index.row() != top +1) {
+                        if (index.row() != top + 1) {
                             const QModelIndex idx = model->index(top, column, parent);
                             itemSelection << QItemSelectionRange(idx, idx);
 
                             top = index.row();
                             bottom = -1;
-                        }
-                        else {
+                        } else {
                             bottom = index.row();
                         }
-                    }
-                    else if (index.row() != bottom +1) {
+                    } else if (index.row() != bottom + 1) {
                         // index is not contiguous
-                        if (index.row() != top +1) {
+                        if (index.row() != top + 1) {
                             const QModelIndex idx1 = model->index(top, column, parent);
                             const QModelIndex idx2 = model->index(bottom, column, parent);
                             itemSelection << QItemSelectionRange(idx1, idx2);
 
                             top = index.row();
                             bottom = -1;
-                        }
-                        else {
+                        } else {
                             bottom = index.row();
                         }
                     }
@@ -106,8 +102,7 @@ public Q_SLOTS:
 
             if (fileInfo.isRoot() || !browsable) {
                 model->setFilter(model->filter() | QDir::NoDotDot);
-            }
-            else {
+            } else {
                 model->setFilter(model->filter() & ~QDir::NoDotDot);
             }
         }
@@ -121,55 +116,45 @@ public:
 
 QFileSystemListView::QFileSystemListView(QWidget *parent)
     : QListView(parent)
-    , d(new QFileSystemListViewPrivate(this))
-{
+    , d(new QFileSystemListViewPrivate(this)) {
     setUniformItemSizes(true);
     QListView::setModel(d->model);
     setRootPath(QDir::homePath());
 }
 
-void QFileSystemListView::setModel(QAbstractItemModel *model)
-{
+void QFileSystemListView::setModel(QAbstractItemModel *model) {
     Q_UNUSED(model);
 }
 
-bool QFileSystemListView::nameFilterDisables() const
-{
+bool QFileSystemListView::nameFilterDisables() const {
     return d->model->nameFilterDisables();
 }
 
-void QFileSystemListView::setNameFilterDisables(bool nameFilterDisables)
-{
+void QFileSystemListView::setNameFilterDisables(bool nameFilterDisables) {
     d->model->setNameFilterDisables(nameFilterDisables);
 }
 
-bool QFileSystemListView::readOnly() const
-{
+bool QFileSystemListView::readOnly() const {
     return d->model->isReadOnly();
 }
 
-void QFileSystemListView::setReadOnly(bool readOnly)
-{
+void QFileSystemListView::setReadOnly(bool readOnly) {
     d->model->setReadOnly(readOnly);
 }
 
-bool QFileSystemListView::resolveSymlinks() const
-{
+bool QFileSystemListView::resolveSymlinks() const {
     return d->model->resolveSymlinks();
 }
 
-void QFileSystemListView::setResolveSymlinks(bool resolveSymlinks)
-{
+void QFileSystemListView::setResolveSymlinks(bool resolveSymlinks) {
     d->model->setResolveSymlinks(resolveSymlinks);
 }
 
-bool QFileSystemListView::browsable() const
-{
+bool QFileSystemListView::browsable() const {
     return d->browsable;
 }
 
-void QFileSystemListView::setBrowsable(bool browsable)
-{
+void QFileSystemListView::setBrowsable(bool browsable) {
     if (d->browsable == browsable) {
         return;
     }
@@ -178,82 +163,72 @@ void QFileSystemListView::setBrowsable(bool browsable)
 
     if (d->model->rootDirectory().isRoot() || !d->browsable) {
         d->model->setFilter(d->model->filter() | QDir::NoDotDot);
-    }
-    else {
+    } else {
         d->model->setFilter(d->model->filter() & ~QDir::NoDotDot);
     }
 }
 
-QDir::Filters QFileSystemListView::filters() const
-{
+QDir::Filters QFileSystemListView::filters() const {
     return d->model->filter();
 }
 
-void QFileSystemListView::setFilters(QDir::Filters filters)
-{
+void QFileSystemListView::setFilters(QDir::Filters filters) {
     d->model->setFilter(filters);
 }
 
-QStringList QFileSystemListView::nameFilters() const
-{
+QStringList QFileSystemListView::nameFilters() const {
     return d->model->nameFilters();
 }
 
-void QFileSystemListView::setNameFilters(const QStringList &nameFilters)
-{
+void QFileSystemListView::setNameFilters(const QStringList &nameFilters) {
     d->model->setNameFilters(nameFilters);
 }
 
-QFileSystemListView::SectionFlag QFileSystemListView::visibleSection() const
-{
+QFileSystemListView::SectionFlag QFileSystemListView::visibleSection() const {
     switch (modelColumn()) {
-        case QFileSystemListView::NameColumn:
-            return QFileSystemListView::NameSection;
-        case QFileSystemListView::SizeColumn:
-            return QFileSystemListView::SizeSection;
-        case QFileSystemListView::TypeColumn:
-            return QFileSystemListView::TypeSection;
-        case QFileSystemListView::LastModificationColumn:
-            return QFileSystemListView::LastModificationSection;
-        default:
-            return QFileSystemListView::NameSection;
+    case QFileSystemListView::NameColumn:
+        return QFileSystemListView::NameSection;
+    case QFileSystemListView::SizeColumn:
+        return QFileSystemListView::SizeSection;
+    case QFileSystemListView::TypeColumn:
+        return QFileSystemListView::TypeSection;
+    case QFileSystemListView::LastModificationColumn:
+        return QFileSystemListView::LastModificationSection;
+    default:
+        return QFileSystemListView::NameSection;
     }
 }
 
-void QFileSystemListView::setVisibleSection(QFileSystemListView::SectionFlag section)
-{
+void QFileSystemListView::setVisibleSection(QFileSystemListView::SectionFlag section) {
     switch (section) {
-        case QFileSystemListView::NameSection:
-            setModelColumn(QFileSystemListView::NameColumn);
-            break;
-        case QFileSystemListView::SizeSection:
-            setModelColumn(QFileSystemListView::SizeColumn);
-            break;
-        case QFileSystemListView::TypeSection:
-            setModelColumn(QFileSystemListView::TypeColumn);
-            break;
-        case QFileSystemListView::LastModificationSection:
-            setModelColumn(QFileSystemListView::LastModificationColumn);
-            break;
-        default:
-            setModelColumn(QFileSystemListView::NameColumn);
-            break;
+    case QFileSystemListView::NameSection:
+        setModelColumn(QFileSystemListView::NameColumn);
+        break;
+    case QFileSystemListView::SizeSection:
+        setModelColumn(QFileSystemListView::SizeColumn);
+        break;
+    case QFileSystemListView::TypeSection:
+        setModelColumn(QFileSystemListView::TypeColumn);
+        break;
+    case QFileSystemListView::LastModificationSection:
+        setModelColumn(QFileSystemListView::LastModificationColumn);
+        break;
+    default:
+        setModelColumn(QFileSystemListView::NameColumn);
+        break;
     }
 }
 
-QString QFileSystemListView::rootPath() const
-{
+QString QFileSystemListView::rootPath() const {
     return d->model->rootPath();
 }
 
-void QFileSystemListView::setRootPath(const QString &rootPath)
-{
+void QFileSystemListView::setRootPath(const QString &rootPath) {
     d->model->setRootPath(rootPath);
     setRootIndex(d->model->index(rootPath));
 }
 
-QStringList QFileSystemListView::selection() const
-{
+QStringList QFileSystemListView::selection() const {
     const QModelIndexList indexes = selectionModel()->selectedRows(modelColumn());
     QStringList selection;
 
@@ -264,18 +239,15 @@ QStringList QFileSystemListView::selection() const
     return selection;
 }
 
-void QFileSystemListView::setSelection(const QStringList &selection)
-{
+void QFileSystemListView::setSelection(const QStringList &selection) {
     d->updateItemSelection(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows, modelColumn());
 }
 
-void QFileSystemListView::addSelection(QStringList &selection)
-{
+void QFileSystemListView::addSelection(QStringList &selection) {
     d->updateItemSelection(selection, QItemSelectionModel::Select | QItemSelectionModel::Rows, modelColumn());
 }
 
-void QFileSystemListView::clearSelection()
-{
+void QFileSystemListView::clearSelection() {
     selectionModel()->clearSelection();
 }
 

@@ -1,14 +1,13 @@
 #pragma once
 
-#include <QFrame>
-#include <QBrush>
-#include <QPen>
-#include <QPainter>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QShape : public QFrame
-{
+#include <QBrush>
+#include <QFrame>
+#include <QPainter>
+#include <QPen>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QShape : public QFrame {
     Q_OBJECT
     class QShapePrivate *d;
     friend class QShapePrivate;

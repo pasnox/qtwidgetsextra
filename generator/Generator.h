@@ -1,11 +1,10 @@
 #pragma once
 
-#include <QObject>
 #include <QList>
+#include <QObject>
 #include <QStringList>
 
-class Generator
-{
+class Generator {
     Q_GADGET
 
 public:

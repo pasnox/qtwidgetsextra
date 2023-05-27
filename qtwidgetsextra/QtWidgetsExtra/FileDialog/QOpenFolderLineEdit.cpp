@@ -1,16 +1,14 @@
 #include "QOpenFolderLineEdit.h"
-#include "QtWidgetsExtra/FileDialog/QFileAction.h"
+#include "QFileAction.h"
 
-class QOpenFolderLineEditPrivate : public QObject
-{
+class QOpenFolderLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
     QOpenFolderLineEditPrivate(QOpenFolderLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , action(new QFileAction(this))
-    {
+        , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
         action->setType(QFileAction::OpenFolder);
@@ -40,17 +38,14 @@ public:
 
 QOpenFolderLineEdit::QOpenFolderLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QOpenFolderLineEditPrivate(this))
-{
+    , d(new QOpenFolderLineEditPrivate(this)) {
 }
 
-QLineEdit::ActionPosition QOpenFolderLineEdit::embededActionPosition() const
-{
+QLineEdit::ActionPosition QOpenFolderLineEdit::embededActionPosition() const {
     return d->position;
 }
 
-void QOpenFolderLineEdit::setEmbededActionPosition(ActionPosition position)
-{
+void QOpenFolderLineEdit::setEmbededActionPosition(ActionPosition position) {
     if (d->position != position) {
         d->position = position;
         addAction(d->action, d->position);
@@ -58,43 +53,35 @@ void QOpenFolderLineEdit::setEmbededActionPosition(ActionPosition position)
     }
 }
 
-QString QOpenFolderLineEdit::filePath() const
-{
+QString QOpenFolderLineEdit::filePath() const {
     return d->action->filePath();
 }
 
-void QOpenFolderLineEdit::setFilePath(const QString &filePath)
-{
+void QOpenFolderLineEdit::setFilePath(const QString &filePath) {
     d->action->setFilePath(filePath);
 }
 
-QString QOpenFolderLineEdit::caption() const
-{
+QString QOpenFolderLineEdit::caption() const {
     return d->action->caption();
 }
 
-void QOpenFolderLineEdit::setCaption(const QString &caption)
-{
+void QOpenFolderLineEdit::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QString QOpenFolderLineEdit::directory() const
-{
+QString QOpenFolderLineEdit::directory() const {
     return d->action->directory();
 }
 
-void QOpenFolderLineEdit::setDirectory(const QString &directory)
-{
+void QOpenFolderLineEdit::setDirectory(const QString &directory) {
     d->action->setDirectory(directory);
 }
 
-QFileDialog::Options QOpenFolderLineEdit::options() const
-{
+QFileDialog::Options QOpenFolderLineEdit::options() const {
     return d->action->options();
 }
 
-void QOpenFolderLineEdit::setOptions(QFileDialog::Options options)
-{
+void QOpenFolderLineEdit::setOptions(QFileDialog::Options options) {
     d->action->setOptions(options);
 }
 

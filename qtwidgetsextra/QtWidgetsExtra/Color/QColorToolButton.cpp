@@ -1,7 +1,5 @@
 #include "QColorToolButton.h"
 
-#include <QDebug>
-
 class QColorToolButtonPrivate : public QObject {
     Q_OBJECT
 
@@ -25,51 +23,42 @@ public:
 
 QColorToolButton::QColorToolButton(QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QColorToolButtonPrivate(this))
-{
+    , d(new QColorToolButtonPrivate(this)) {
 }
 
 QColorToolButton::QColorToolButton(const QColor &color, QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QColorToolButtonPrivate(this))
-{
+    , d(new QColorToolButtonPrivate(this)) {
     d->action->setColor(color);
 }
 
 QColorToolButton::QColorToolButton(const QString &colorName, QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QColorToolButtonPrivate(this))
-{
+    , d(new QColorToolButtonPrivate(this)) {
     d->action->setColor(QColor(colorName));
 }
 
-QColor QColorToolButton::color() const
-{
+QColor QColorToolButton::color() const {
     return d->action->color();
 }
 
-void QColorToolButton::setColor(const QColor &color)
-{
+void QColorToolButton::setColor(const QColor &color) {
     d->action->setColor(color);
 }
 
-QString QColorToolButton::caption() const
-{
+QString QColorToolButton::caption() const {
     return d->action->caption();
 }
 
-void QColorToolButton::setCaption(const QString &caption)
-{
+void QColorToolButton::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QColorAction::ColorDialogOptions QColorToolButton::options() const
-{
+QColorAction::ColorDialogOptions QColorToolButton::options() const {
     return d->action->options();
 }
 
-void QColorToolButton::setOptions(QColorAction::ColorDialogOptions options)
-{
+void QColorToolButton::setOptions(QColorAction::ColorDialogOptions options) {
     d->action->setOptions(options);
 }
 

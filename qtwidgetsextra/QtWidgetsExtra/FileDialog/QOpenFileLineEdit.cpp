@@ -1,16 +1,14 @@
 #include "QOpenFileLineEdit.h"
-#include "QtWidgetsExtra/FileDialog/QFileAction.h"
+#include "QFileAction.h"
 
-class QOpenFileLineEditPrivate : public QObject
-{
+class QOpenFileLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
     QOpenFileLineEditPrivate(QOpenFileLineEdit *widgetP)
         : QObject(widgetP)
         , widget(widgetP)
-        , action(new QFileAction(this))
-    {
+        , action(new QFileAction(this)) {
         Q_ASSERT(widget);
 
         action->setType(QFileAction::OpenFile);
@@ -40,17 +38,14 @@ public:
 
 QOpenFileLineEdit::QOpenFileLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QOpenFileLineEditPrivate(this))
-{
+    , d(new QOpenFileLineEditPrivate(this)) {
 }
 
-QLineEdit::ActionPosition QOpenFileLineEdit::embededActionPosition() const
-{
+QLineEdit::ActionPosition QOpenFileLineEdit::embededActionPosition() const {
     return d->position;
 }
 
-void QOpenFileLineEdit::setEmbededActionPosition(ActionPosition position)
-{
+void QOpenFileLineEdit::setEmbededActionPosition(ActionPosition position) {
     if (d->position != position) {
         d->position = position;
         addAction(d->action, d->position);
@@ -58,53 +53,43 @@ void QOpenFileLineEdit::setEmbededActionPosition(ActionPosition position)
     }
 }
 
-QString QOpenFileLineEdit::filePath() const
-{
+QString QOpenFileLineEdit::filePath() const {
     return d->action->filePath();
 }
 
-void QOpenFileLineEdit::setFilePath(const QString &filePath)
-{
+void QOpenFileLineEdit::setFilePath(const QString &filePath) {
     d->action->setFilePath(filePath);
 }
 
-QString QOpenFileLineEdit::caption() const
-{
+QString QOpenFileLineEdit::caption() const {
     return d->action->caption();
 }
 
-void QOpenFileLineEdit::setCaption(const QString &caption)
-{
+void QOpenFileLineEdit::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QString QOpenFileLineEdit::directory() const
-{
+QString QOpenFileLineEdit::directory() const {
     return d->action->directory();
 }
 
-void QOpenFileLineEdit::setDirectory(const QString &directory)
-{
+void QOpenFileLineEdit::setDirectory(const QString &directory) {
     d->action->setDirectory(directory);
 }
 
-QStringList QOpenFileLineEdit::filter() const
-{
+QStringList QOpenFileLineEdit::filter() const {
     return d->action->filter();
 }
 
-void QOpenFileLineEdit::setFilter(const QStringList &filter)
-{
+void QOpenFileLineEdit::setFilter(const QStringList &filter) {
     d->action->setFilter(filter);
 }
 
-QFileDialog::Options QOpenFileLineEdit::options() const
-{
+QFileDialog::Options QOpenFileLineEdit::options() const {
     return d->action->options();
 }
 
-void QOpenFileLineEdit::setOptions(QFileDialog::Options options)
-{
+void QOpenFileLineEdit::setOptions(QFileDialog::Options options) {
     d->action->setOptions(options);
 }
 

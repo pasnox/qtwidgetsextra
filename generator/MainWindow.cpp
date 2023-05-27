@@ -1,17 +1,16 @@
 #include "MainWindow.h"
-#include "ui_MainWindow.h"
 #include "GeneratorDelegate.h"
+#include "ui_MainWindow.h"
 
-#include <QHeaderView>
 #include <QAbstractButton>
-#include <QFileDialog>
-#include <QMessageBox>
 #include <QDebug>
+#include <QFileDialog>
+#include <QHeaderView>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+    , ui(new Ui::MainWindow) {
     ui->setupUi(this);
     ui->cbInheritingType->addItem(QStringLiteral("Widget"), Generator::Widget);
     ui->cbInheritingType->addItem(QStringLiteral("Object"), Generator::Object);
@@ -24,22 +23,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->twMembers->headerItem()->setText(GeneratorDelegate::ColumnProperty, QStringLiteral("Property"));
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnType, QHeaderView::ResizeToContents);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnName, QHeaderView::Stretch);
-    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnParameterType, QHeaderView::ResizeToContents);
+    ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnParameterType,
+                                                  QHeaderView::ResizeToContents);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnDefaultValue, QHeaderView::ResizeToContents);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnSignal, QHeaderView::ResizeToContents);
     ui->twMembers->header()->setSectionResizeMode(GeneratorDelegate::ColumnProperty, QHeaderView::ResizeToContents);
     ui->twMembers->setItemDelegate(new GeneratorDelegate(this));
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::on_tbAdd_clicked()
-{
+void MainWindow::on_tbAdd_clicked() {
     static int i = 0;
-    QTreeWidgetItem* item = new QTreeWidgetItem;
+    QTreeWidgetItem *item = new QTreeWidgetItem;
 
     item->setText(GeneratorDelegate::ColumnType, QStringLiteral("type%1").arg(i));
     item->setText(GeneratorDelegate::ColumnName, QStringLiteral("name%1").arg(i));
@@ -55,60 +53,55 @@ void MainWindow::on_tbAdd_clicked()
     i++;
 }
 
-void MainWindow::on_tbRemove_clicked()
-{
+void MainWindow::on_tbRemove_clicked() {
     delete ui->twMembers->selectedItems().value(0);
 }
 
-void MainWindow::on_tbUp_clicked()
-{
-    QTreeWidgetItem* item = ui->twMembers->selectedItems().value(0);
+void MainWindow::on_tbUp_clicked() {
+    QTreeWidgetItem *item = ui->twMembers->selectedItems().value(0);
     int row = ui->twMembers->indexOfTopLevelItem(item);
 
     if (row > 0) {
         ui->twMembers->takeTopLevelItem(row);
-        ui->twMembers->insertTopLevelItem(row -1, item);
+        ui->twMembers->insertTopLevelItem(row - 1, item);
         ui->twMembers->setCurrentItem(item);
     }
 }
 
-void MainWindow::on_tbDown_clicked()
-{
-    QTreeWidgetItem* item = ui->twMembers->selectedItems().value(0);
+void MainWindow::on_tbDown_clicked() {
+    QTreeWidgetItem *item = ui->twMembers->selectedItems().value(0);
     int row = ui->twMembers->indexOfTopLevelItem(item);
 
-    if (row < ui->twMembers->topLevelItemCount() -1) {
+    if (row < ui->twMembers->topLevelItemCount() - 1) {
         ui->twMembers->takeTopLevelItem(row);
-        ui->twMembers->insertTopLevelItem(row +1, item);
+        ui->twMembers->insertTopLevelItem(row + 1, item);
         ui->twMembers->setCurrentItem(item);
     }
 }
 
-void MainWindow::on_dbbButtons_clicked(QAbstractButton *button)
-{
+void MainWindow::on_dbbButtons_clicked(QAbstractButton *button) {
     QDialogButtonBox::StandardButton sb = ui->dbbButtons->standardButton(button);
 
     switch (sb) {
-        case QDialogButtonBox::Close:
-            close();
-            break;
+    case QDialogButtonBox::Close:
+        close();
+        break;
 
-        case QDialogButtonBox::Apply:
-            apply();
-            break;
+    case QDialogButtonBox::Apply:
+        apply();
+        break;
 
-        case QDialogButtonBox::Save:
-            save();
-            break;
+    case QDialogButtonBox::Save:
+        save();
+        break;
 
-        default:
-            Q_ASSERT(0);
-            break;
+    default:
+        Q_ASSERT(0);
+        break;
     }
 }
 
-bool MainWindow::saveFile(const QString &content, const QString &filePath) const
-{
+bool MainWindow::saveFile(const QString &content, const QString &filePath) const {
     QDir dir;
 
     if (!dir.mkpath(QFileInfo(filePath).absolutePath())) {
@@ -131,8 +124,7 @@ bool MainWindow::saveFile(const QString &content, const QString &filePath) const
     return true;
 }
 
-void MainWindow::apply()
-{
+void MainWindow::apply() {
     Generator::Entry::List entries;
 
     for (int i = 0; i < ui->twMembers->topLevelItemCount(); i++) {
@@ -165,9 +157,9 @@ void MainWindow::apply()
     ui->pteProjectFile->setPlainText(m_generator.projectFileSource());
 }
 
-void MainWindow::save()
-{
-    const QString projectSourceFilePath = QFileDialog::getExistingDirectory(this, tr("Please select project source folder"));
+void MainWindow::save() {
+    const QString projectSourceFilePath =
+        QFileDialog::getExistingDirectory(this, tr("Please select project source folder"));
 
     if (projectSourceFilePath.isEmpty()) {
         return;
@@ -175,25 +167,42 @@ void MainWindow::save()
 
     apply();
 
-    const QString projectFile = QStringLiteral("%1/%2/%2.pri").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup());
+    const QString projectFile =
+        QStringLiteral("%1/%2/%2.pri").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup());
 
-    saveFile(ui->pteHeader->toPlainText(), QStringLiteral("%1/%2/%3.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->pteSource->toPlainText(), QStringLiteral("%1/%2/%3.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->ptePluginHeader->toPlainText(), QStringLiteral("%1/%2/%3Plugin.h").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
-    saveFile(ui->ptePluginSource->toPlainText(), QStringLiteral("%1/%2/%3Plugin.cpp").arg(projectSourceFilePath).arg(m_generator.normalizedPluginGroup()).arg(m_generator.className()));
+    saveFile(ui->pteHeader->toPlainText(),
+             QStringLiteral("%1/%2/%3.h")
+                 .arg(projectSourceFilePath)
+                 .arg(m_generator.normalizedPluginGroup())
+                 .arg(m_generator.className()));
+    saveFile(ui->pteSource->toPlainText(),
+             QStringLiteral("%1/%2/%3.cpp")
+                 .arg(projectSourceFilePath)
+                 .arg(m_generator.normalizedPluginGroup())
+                 .arg(m_generator.className()));
+    saveFile(ui->ptePluginHeader->toPlainText(),
+             QStringLiteral("%1/%2/%3Plugin.h")
+                 .arg(projectSourceFilePath)
+                 .arg(m_generator.normalizedPluginGroup())
+                 .arg(m_generator.className()));
+    saveFile(ui->ptePluginSource->toPlainText(),
+             QStringLiteral("%1/%2/%3Plugin.cpp")
+                 .arg(projectSourceFilePath)
+                 .arg(m_generator.normalizedPluginGroup())
+                 .arg(m_generator.className()));
 
     if (!QFile::exists(projectFile)) {
         saveFile(ui->pteProjectFile->toPlainText(), projectFile);
     }
 
     const QStringList text = QStringList()
-        << tr( "Don't forget to:" ).prepend(QStringLiteral("<b>")).append(QStringLiteral("</b>"))
+        << tr("Don't forget to:").prepend(QStringLiteral("<b>")).append(QStringLiteral("</b>"))
         << QStringLiteral("<ul>")
-        << tr( "Update the source project file to add the generated project include file if needed" ).prepend(QStringLiteral("<li>"))
-        << tr( "Update the source project file HEADERS / SOURCES to add the new plugin" ).prepend(QStringLiteral("<li>"))
-        << tr( "Update the source class registering the plugins to add the new plugin" ).prepend(QStringLiteral("<li>"))
-        << QStringLiteral("<ul>")
-    ;
+        << tr("Update the source project file to add the generated project include file if needed")
+               .prepend(QStringLiteral("<li>"))
+        << tr("Update the source project file HEADERS / SOURCES to add the new plugin").prepend(QStringLiteral("<li>"))
+        << tr("Update the source class registering the plugins to add the new plugin").prepend(QStringLiteral("<li>"))
+        << QStringLiteral("<ul>");
 
     QMessageBox::information(this, windowTitle(), text.join(QStringLiteral("\n")));
 }

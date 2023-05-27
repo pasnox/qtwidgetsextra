@@ -18,7 +18,8 @@ public:
 
 public Q_SLOTS:
     void triggered() {
-        const QColor newColor = QColorDialog::getColor(color, 0, caption, QColorDialog::ColorDialogOptions(int(options)));
+        const QColor newColor =
+            QColorDialog::getColor(color, 0, caption, QColorDialog::ColorDialogOptions(int(options)));
 
         if (newColor.isValid()) {
             action->setColor(newColor);
@@ -34,32 +35,27 @@ public:
 
 QColorAction::QColorAction(QObject *parent)
     : QAction(parent)
-    , d(new QColorActionPrivate(this))
-{
+    , d(new QColorActionPrivate(this)) {
     setColor(Qt::black);
 }
 
 QColorAction::QColorAction(const QColor &color, QObject *parent)
     : QAction(parent)
-    , d(new QColorActionPrivate(this))
-{
+    , d(new QColorActionPrivate(this)) {
     setColor(color);
 }
 
 QColorAction::QColorAction(const QString &colorName, QObject *parent)
     : QAction(parent)
-    , d(new QColorActionPrivate(this))
-{
+    , d(new QColorActionPrivate(this)) {
     setColor(QColor(colorName));
 }
 
-QColor QColorAction::color() const
-{
+QColor QColorAction::color() const {
     return d->color;
 }
 
-void QColorAction::setColor(const QColor &color)
-{
+void QColorAction::setColor(const QColor &color) {
     if (color.alpha() != 255 && !d->options.testFlag(QColorAction::ShowAlphaChannel)) {
         qWarning("%s: Trying to set a color with alpha with options not allowing alpha", Q_FUNC_INFO);
     }
@@ -75,35 +71,29 @@ void QColorAction::setColor(const QColor &color)
     Q_EMIT colorChanged(d->color);
 }
 
-QString QColorAction::caption() const
-{
+QString QColorAction::caption() const {
     return d->caption;
 }
 
-void QColorAction::setCaption(const QString &caption)
-{
+void QColorAction::setCaption(const QString &caption) {
     d->caption = caption;
 }
 
-QColorAction::ColorDialogOptions QColorAction::options() const
-{
+QColorAction::ColorDialogOptions QColorAction::options() const {
     return d->options;
 }
 
-void QColorAction::setOptions(QColorAction::ColorDialogOptions options)
-{
+void QColorAction::setOptions(QColorAction::ColorDialogOptions options) {
     d->options = options;
 }
 
-QIcon QColorAction::colorIcon(const QColor &color) const
-{
-    QAbstractButton* button = property("button").value<QAbstractButton*>();
-    const QSize size = (button ? button->iconSize() : QSize(24, 24)) *2;
+QIcon QColorAction::colorIcon(const QColor &color) const {
+    QAbstractButton *button = property("button").value<QAbstractButton *>();
+    const QSize size = (button ? button->iconSize() : QSize(24, 24)) * 2;
     return QtWidgetsExtraCache::cachedIconColor(color, size);
 }
 
-QString QColorAction::colorName(const QColor &color) const
-{
+QString QColorAction::colorName(const QColor &color) const {
     return color.name(d->options.testFlag(QColorAction::ShowAlphaChannel) ? QColor::HexArgb : QColor::HexRgb);
 }
 

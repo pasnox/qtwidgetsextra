@@ -1,7 +1,6 @@
 #include "QColorLineEdit.h"
 
-class QColorLineEditPrivate : public QObject
-{
+class QColorLineEditPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -23,8 +22,7 @@ public:
     void updateValidator() {
         if (action->options().testFlag(QColorAction::ShowAlphaChannel)) {
             widget->setInputMask(QStringLiteral("\\#HHHhhhhh"));
-        }
-        else {
+        } else {
             widget->setInputMask(QStringLiteral("\\#HHHhhh"));
         }
     }
@@ -35,8 +33,7 @@ public Q_SLOTS:
 
         if (color.isValid()) {
             action->setIcon(action->colorIcon(color));
-        }
-        else {
+        } else {
             action->setIcon(action->colorIcon(action->color()));
         }
     }
@@ -46,8 +43,7 @@ public Q_SLOTS:
 
         if (color.isValid()) {
             action->setColor(color);
-        }
-        else {
+        } else {
             action->setIcon(action->colorIcon(action->color()));
             widget->setText(action->colorName(action->color()));
         }
@@ -66,31 +62,26 @@ public:
 
 QColorLineEdit::QColorLineEdit(QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QColorLineEditPrivate(this))
-{
+    , d(new QColorLineEditPrivate(this)) {
 }
 
 QColorLineEdit::QColorLineEdit(const QColor &color, QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QColorLineEditPrivate(this))
-{
+    , d(new QColorLineEditPrivate(this)) {
     d->action->setColor(color);
 }
 
 QColorLineEdit::QColorLineEdit(const QString &colorName, QWidget *parent)
     : QAbstractButtonLineEdit(parent)
-    , d(new QColorLineEditPrivate(this))
-{
+    , d(new QColorLineEditPrivate(this)) {
     d->action->setColor(QColor(colorName));
 }
 
-QLineEdit::ActionPosition QColorLineEdit::embededActionPosition() const
-{
+QLineEdit::ActionPosition QColorLineEdit::embededActionPosition() const {
     return d->position;
 }
 
-void QColorLineEdit::setEmbededActionPosition(ActionPosition position)
-{
+void QColorLineEdit::setEmbededActionPosition(ActionPosition position) {
     if (d->position != position) {
         d->position = position;
         addAction(d->action, d->position);
@@ -98,36 +89,29 @@ void QColorLineEdit::setEmbededActionPosition(ActionPosition position)
     }
 }
 
-QColor QColorLineEdit::color() const
-{
+QColor QColorLineEdit::color() const {
     return d->action->color();
 }
 
-void QColorLineEdit::setColor(const QColor &color)
-{
+void QColorLineEdit::setColor(const QColor &color) {
     d->action->setColor(color);
 }
 
-QString QColorLineEdit::caption() const
-{
+QString QColorLineEdit::caption() const {
     return d->action->caption();
 }
 
-void QColorLineEdit::setCaption(const QString &caption)
-{
+void QColorLineEdit::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QColorAction::ColorDialogOptions QColorLineEdit::options() const
-{
+QColorAction::ColorDialogOptions QColorLineEdit::options() const {
     return d->action->options();
 }
 
-void QColorLineEdit::setOptions(QColorAction::ColorDialogOptions options)
-{
+void QColorLineEdit::setOptions(QColorAction::ColorDialogOptions options) {
     d->action->setOptions(options);
     d->updateValidator();
 }
 
 #include "QColorLineEdit.moc"
-

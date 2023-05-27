@@ -3,8 +3,7 @@
 #include <QFileSystemModel>
 #include <QHeaderView>
 
-class QFileSystemTreeViewPrivate : public QObject
-{
+class QFileSystemTreeViewPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -17,9 +16,10 @@ public:
         connect(model, &QFileSystemModel::rootPathChanged, widget, &QFileSystemTreeView::rootPathChanged);
     }
 
-    void updateItemSelection(const QStringList &selection, QItemSelectionModel::SelectionFlags flags, int column = 0) const {
+    void updateItemSelection(const QStringList &selection, QItemSelectionModel::SelectionFlags flags,
+                             int column = 0) const {
         // QMap give us sorting for free
-        QMap<QModelIndex, QMap<QModelIndex, int> > mapIndexes;
+        QMap<QModelIndex, QMap<QModelIndex, int>> mapIndexes;
         QItemSelection itemSelection;
 
         foreach (const QString &item, selection) {
@@ -37,36 +37,32 @@ public:
 
             for (int i = 0; i < indexes.count(); i++) {
                 const QModelIndex &index = indexes[i];
-                const bool hasNext = i +1 < indexes.count();
+                const bool hasNext = i + 1 < indexes.count();
 
-                if (top ==-1) {
+                if (top == -1) {
                     top = index.row();
-                }
-                else {
+                } else {
                     if (bottom == -1) {
                         // index is not contiguous
-                        if (index.row() != top +1) {
+                        if (index.row() != top + 1) {
                             const QModelIndex idx = model->index(top, column, parent);
                             itemSelection << QItemSelectionRange(idx, idx);
 
                             top = index.row();
                             bottom = -1;
-                        }
-                        else {
+                        } else {
                             bottom = index.row();
                         }
-                    }
-                    else if (index.row() != bottom +1) {
+                    } else if (index.row() != bottom + 1) {
                         // index is not contiguous
-                        if (index.row() != top +1) {
+                        if (index.row() != top + 1) {
                             const QModelIndex idx1 = model->index(top, column, parent);
                             const QModelIndex idx2 = model->index(bottom, column, parent);
                             itemSelection << QItemSelectionRange(idx1, idx2);
 
                             top = index.row();
                             bottom = -1;
-                        }
-                        else {
+                        } else {
                             bottom = index.row();
                         }
                     }
@@ -97,8 +93,7 @@ public:
 
 QFileSystemTreeView::QFileSystemTreeView(QWidget *parent)
     : QTreeView(parent)
-    , d(new QFileSystemTreeViewPrivate(this))
-{
+    , d(new QFileSystemTreeViewPrivate(this)) {
     setUniformRowHeights(true);
     QTreeView::setModel(d->model);
     setRootPath(QDir::homePath());
@@ -106,63 +101,51 @@ QFileSystemTreeView::QFileSystemTreeView(QWidget *parent)
     header()->setSectionResizeMode(QFileSystemTreeView::NameColumn, QHeaderView::Stretch);
 }
 
-void QFileSystemTreeView::setModel(QAbstractItemModel *model)
-{
+void QFileSystemTreeView::setModel(QAbstractItemModel *model) {
     Q_UNUSED(model);
 }
 
-bool QFileSystemTreeView::nameFilterDisables() const
-{
+bool QFileSystemTreeView::nameFilterDisables() const {
     return d->model->nameFilterDisables();
 }
 
-void QFileSystemTreeView::setNameFilterDisables(bool nameFilterDisables)
-{
+void QFileSystemTreeView::setNameFilterDisables(bool nameFilterDisables) {
     d->model->setNameFilterDisables(nameFilterDisables);
 }
 
-bool QFileSystemTreeView::readOnly() const
-{
+bool QFileSystemTreeView::readOnly() const {
     return d->model->isReadOnly();
 }
 
-void QFileSystemTreeView::setReadOnly(bool readOnly)
-{
+void QFileSystemTreeView::setReadOnly(bool readOnly) {
     d->model->setReadOnly(readOnly);
 }
 
-bool QFileSystemTreeView::resolveSymlinks() const
-{
+bool QFileSystemTreeView::resolveSymlinks() const {
     return d->model->resolveSymlinks();
 }
 
-void QFileSystemTreeView::setResolveSymlinks(bool resolveSymlinks)
-{
+void QFileSystemTreeView::setResolveSymlinks(bool resolveSymlinks) {
     d->model->setResolveSymlinks(resolveSymlinks);
 }
 
-QDir::Filters QFileSystemTreeView::filters() const
-{
+QDir::Filters QFileSystemTreeView::filters() const {
     return d->model->filter();
 }
 
-void QFileSystemTreeView::setFilters(QDir::Filters filters)
-{
+void QFileSystemTreeView::setFilters(QDir::Filters filters) {
     d->model->setFilter(filters);
 }
 
-QStringList QFileSystemTreeView::nameFilters() const
-{
+QStringList QFileSystemTreeView::nameFilters() const {
     return d->model->nameFilters();
 }
 
-void QFileSystemTreeView::setNameFilters(const QStringList &nameFilters)
-{
+void QFileSystemTreeView::setNameFilters(const QStringList &nameFilters) {
     d->model->setNameFilters(nameFilters);
 }
 
-QFileSystemTreeView::Sections QFileSystemTreeView::visibleSections() const
-{
+QFileSystemTreeView::Sections QFileSystemTreeView::visibleSections() const {
     QFileSystemTreeView::Sections sections = QFileSystemTreeView::AllSections;
 
     if (header()->hiddenSectionCount() > 0) {
@@ -186,19 +169,21 @@ QFileSystemTreeView::Sections QFileSystemTreeView::visibleSections() const
     return sections;
 }
 
-void QFileSystemTreeView::setVisibleSections(QFileSystemTreeView::Sections sections)
-{
+void QFileSystemTreeView::setVisibleSections(QFileSystemTreeView::Sections sections) {
     if (sections == QFileSystemTreeView::AllSections) {
         header()->setSectionHidden(QFileSystemTreeView::NameColumn, false);
         header()->setSectionHidden(QFileSystemTreeView::SizeColumn, false);
         header()->setSectionHidden(QFileSystemTreeView::TypeColumn, false);
         header()->setSectionHidden(QFileSystemTreeView::LastModificationColumn, false);
-    }
-    else {
-        header()->setSectionHidden(QFileSystemTreeView::NameColumn, !sections.testFlag(QFileSystemTreeView::NameSection));
-        header()->setSectionHidden(QFileSystemTreeView::SizeColumn, !sections.testFlag(QFileSystemTreeView::SizeSection));
-        header()->setSectionHidden(QFileSystemTreeView::TypeColumn, !sections.testFlag(QFileSystemTreeView::TypeSection));
-        header()->setSectionHidden(QFileSystemTreeView::LastModificationColumn, !sections.testFlag(QFileSystemTreeView::LastModificationSection));
+    } else {
+        header()->setSectionHidden(QFileSystemTreeView::NameColumn,
+                                   !sections.testFlag(QFileSystemTreeView::NameSection));
+        header()->setSectionHidden(QFileSystemTreeView::SizeColumn,
+                                   !sections.testFlag(QFileSystemTreeView::SizeSection));
+        header()->setSectionHidden(QFileSystemTreeView::TypeColumn,
+                                   !sections.testFlag(QFileSystemTreeView::TypeSection));
+        header()->setSectionHidden(QFileSystemTreeView::LastModificationColumn,
+                                   !sections.testFlag(QFileSystemTreeView::LastModificationSection));
     }
 
     header()->setStretchLastSection(header()->isSectionHidden(QFileSystemTreeView::NameColumn));
@@ -208,19 +193,16 @@ void QFileSystemTreeView::setVisibleSections(QFileSystemTreeView::Sections secti
     header()->resizeSection(QFileSystemTreeView::LastModificationColumn, header()->defaultSectionSize());
 }
 
-QString QFileSystemTreeView::rootPath() const
-{
+QString QFileSystemTreeView::rootPath() const {
     return d->model->rootPath();
 }
 
-void QFileSystemTreeView::setRootPath(const QString &rootPath)
-{
+void QFileSystemTreeView::setRootPath(const QString &rootPath) {
     d->model->setRootPath(rootPath);
     setRootIndex(d->model->index(rootPath));
 }
 
-QStringList QFileSystemTreeView::selection() const
-{
+QStringList QFileSystemTreeView::selection() const {
     const QModelIndexList indexes = selectionModel()->selectedRows();
     QStringList selection;
 
@@ -231,18 +213,15 @@ QStringList QFileSystemTreeView::selection() const
     return selection;
 }
 
-void QFileSystemTreeView::setSelection(const QStringList &selection)
-{
+void QFileSystemTreeView::setSelection(const QStringList &selection) {
     d->updateItemSelection(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Rows);
 }
 
-void QFileSystemTreeView::addSelection(QStringList &selection)
-{
+void QFileSystemTreeView::addSelection(QStringList &selection) {
     d->updateItemSelection(selection, QItemSelectionModel::Select | QItemSelectionModel::Rows);
 }
 
-void QFileSystemTreeView::clearSelection()
-{
+void QFileSystemTreeView::clearSelection() {
     selectionModel()->clearSelection();
 }
 

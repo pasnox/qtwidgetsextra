@@ -1,16 +1,12 @@
 #include "QColorPushButtonPlugin.h"
 #include "QColorPushButton.h"
 
-#include <QtPlugin>
-
 QColorPushButtonPlugin::QColorPushButtonPlugin(QObject *parent)
     : QObject(parent)
-    , m_initialized(false)
-{
+    , m_initialized(false) {
 }
 
-void QColorPushButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */)
-{
+void QColorPushButtonPlugin::initialize(QDesignerFormEditorInterface * /* core */) {
     if (m_initialized) {
         return;
     }
@@ -20,52 +16,42 @@ void QColorPushButtonPlugin::initialize(QDesignerFormEditorInterface * /* core *
     m_initialized = true;
 }
 
-bool QColorPushButtonPlugin::isInitialized() const
-{
+bool QColorPushButtonPlugin::isInitialized() const {
     return m_initialized;
 }
 
-QWidget *QColorPushButtonPlugin::createWidget(QWidget *parent)
-{
+QWidget *QColorPushButtonPlugin::createWidget(QWidget *parent) {
     return new QColorPushButton(parent);
 }
 
-QString QColorPushButtonPlugin::name() const
-{
+QString QColorPushButtonPlugin::name() const {
     return QStringLiteral("QColorPushButton");
 }
 
-QString QColorPushButtonPlugin::group() const
-{
+QString QColorPushButtonPlugin::group() const {
     return QStringLiteral("Qt Widgets Extra / Color");
 }
 
-QIcon QColorPushButtonPlugin::icon() const
-{
+QIcon QColorPushButtonPlugin::icon() const {
     return QIcon(QStringLiteral(":/qt-project.org/formeditor/images/widgets/pushbutton.png"));
 }
 
-QString QColorPushButtonPlugin::toolTip() const
-{
+QString QColorPushButtonPlugin::toolTip() const {
     return QStringLiteral("A push button that present a QColorDialog on click");
 }
 
-QString QColorPushButtonPlugin::whatsThis() const
-{
+QString QColorPushButtonPlugin::whatsThis() const {
     return toolTip();
 }
 
-bool QColorPushButtonPlugin::isContainer() const
-{
+bool QColorPushButtonPlugin::isContainer() const {
     return false;
 }
 
-QString QColorPushButtonPlugin::domXml() const
-{
+QString QColorPushButtonPlugin::domXml() const {
     return QStringLiteral("<widget class=\"QColorPushButton\" name=\"colorPushButton\">\n</widget>\n");
 }
 
-QString QColorPushButtonPlugin::includeFile() const
-{
+QString QColorPushButtonPlugin::includeFile() const {
     return QStringLiteral("QColorPushButton.h");
 }

@@ -1,7 +1,6 @@
 #include "QSaveFileButton.h"
 
-class QSaveFileButtonPrivate : public QObject
-{
+class QSaveFileButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -18,63 +17,52 @@ public:
     }
 
 public:
-    QSaveFileButton* widget;
+    QSaveFileButton *widget;
     QFileAction *action;
 };
 
 QSaveFileButton::QSaveFileButton(QWidget *parent)
     : QEmbedableButton(parent)
-    , d(new QSaveFileButtonPrivate(this))
-{
+    , d(new QSaveFileButtonPrivate(this)) {
 }
 
-QString QSaveFileButton::filePath() const
-{
+QString QSaveFileButton::filePath() const {
     return d->action->filePath();
 }
 
-void QSaveFileButton::setFilePath(const QString &filePath)
-{
+void QSaveFileButton::setFilePath(const QString &filePath) {
     d->action->setFilePath(filePath);
 }
 
-QString QSaveFileButton::caption() const
-{
+QString QSaveFileButton::caption() const {
     return d->action->caption();
 }
 
-void QSaveFileButton::setCaption(const QString &caption)
-{
+void QSaveFileButton::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QString QSaveFileButton::directory() const
-{
+QString QSaveFileButton::directory() const {
     return d->action->directory();
 }
 
-void QSaveFileButton::setDirectory(const QString &directory)
-{
+void QSaveFileButton::setDirectory(const QString &directory) {
     d->action->setDirectory(directory);
 }
 
-QStringList QSaveFileButton::filter() const
-{
+QStringList QSaveFileButton::filter() const {
     return d->action->filter();
 }
 
-void QSaveFileButton::setFilter(const QStringList &filter)
-{
+void QSaveFileButton::setFilter(const QStringList &filter) {
     d->action->setFilter(filter);
 }
 
-QFileDialog::Options QSaveFileButton::options() const
-{
+QFileDialog::Options QSaveFileButton::options() const {
     return d->action->options();
 }
 
-void QSaveFileButton::setOptions(QFileDialog::Options options)
-{
+void QSaveFileButton::setOptions(QFileDialog::Options options) {
     d->action->setOptions(options);
 }
 

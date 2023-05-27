@@ -1,7 +1,6 @@
 #include "QColorPushButton.h"
 
-class QColorPushButtonPrivate : public QObject
-{
+class QColorPushButtonPrivate : public QObject {
     Q_OBJECT
 
 public:
@@ -33,51 +32,42 @@ public:
 
 QColorPushButton::QColorPushButton(QWidget *parent)
     : QPushButton(parent)
-    , d(new QColorPushButtonPrivate(this))
-{
+    , d(new QColorPushButtonPrivate(this)) {
 }
 
 QColorPushButton::QColorPushButton(const QColor &color, QWidget *parent)
     : QPushButton(parent)
-    , d(new QColorPushButtonPrivate(this))
-{
+    , d(new QColorPushButtonPrivate(this)) {
     d->action->setColor(color);
 }
 
 QColorPushButton::QColorPushButton(const QString &colorName, QWidget *parent)
     : QPushButton(parent)
-    , d(new QColorPushButtonPrivate(this))
-{
+    , d(new QColorPushButtonPrivate(this)) {
     d->action->setColor(QColor(colorName));
 }
 
-QColor QColorPushButton::color() const
-{
+QColor QColorPushButton::color() const {
     return d->action->color();
 }
 
-void QColorPushButton::setColor(const QColor &color)
-{
+void QColorPushButton::setColor(const QColor &color) {
     d->action->setColor(color);
 }
 
-QString QColorPushButton::caption() const
-{
+QString QColorPushButton::caption() const {
     return d->action->caption();
 }
 
-void QColorPushButton::setCaption(const QString &caption)
-{
+void QColorPushButton::setCaption(const QString &caption) {
     d->action->setCaption(caption);
 }
 
-QColorAction::ColorDialogOptions QColorPushButton::options() const
-{
+QColorAction::ColorDialogOptions QColorPushButton::options() const {
     return d->action->options();
 }
 
-void QColorPushButton::setOptions(QColorAction::ColorDialogOptions options)
-{
+void QColorPushButton::setOptions(QColorAction::ColorDialogOptions options) {
     d->action->setOptions(options);
 }
 

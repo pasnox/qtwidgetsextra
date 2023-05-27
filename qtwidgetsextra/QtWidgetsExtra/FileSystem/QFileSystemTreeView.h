@@ -1,14 +1,13 @@
 #pragma once
 
-#include <QTreeView>
-#include <QDir>
-
 #include <QtWidgetsExtraLibExport.h>
 
-class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemTreeView : public QTreeView
-{
+#include <QDir>
+#include <QTreeView>
+
+class QT_WIDGETS_EXTRA_QT_WIDGETS_EXTRA_LIB_EXPORT QFileSystemTreeView : public QTreeView {
     Q_OBJECT
-    class QFileSystemTreeViewPrivate* d;
+    class QFileSystemTreeViewPrivate *d;
 
     Q_PROPERTY(bool nameFilterDisables READ nameFilterDisables WRITE setNameFilterDisables)
     Q_PROPERTY(bool readOnly READ readOnly WRITE setReadOnly)
