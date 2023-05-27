@@ -220,11 +220,11 @@
         </widget>
        </item>
        <item row="2" column="0" colspan="2">
-        <widget class="QColorComboBox" name="colorComboBox">
+        <widget class="QColorComboBox" name="colorComboBoxEditable">
          <property name="editable">
           <bool>true</bool>
          </property>
-         <property name="colorListNames">
+         <property name="colorNames">
           <stringlist>
            <string>#ffccffdd</string>
            <string>#ff0000ff</string>
@@ -239,8 +239,8 @@
         </widget>
        </item>
        <item row="3" column="0" colspan="2">
-        <widget class="QColorComboBox" name="colorComboBox_2">
-         <property name="colorListNames">
+        <widget class="QColorComboBox" name="colorComboBox">
+         <property name="colorNames">
           <stringlist>
            <string>#ffccffdd</string>
            <string>#ff0000ff</string>
@@ -262,7 +262,7 @@
            <height>16</height>
           </size>
          </property>
-         <property name="colorListNames">
+         <property name="colorNames">
           <stringlist>
            <string>#ffff0000</string>
            <string>#ff00ff00</string>
@@ -282,7 +282,7 @@
         <widget class="QLabel" name="filesystemTreeViewLabel"/>
        </item>
        <item>
-        <widget class="QFileSystemTreeView" name="filesystemTreeView">
+        <widget class="QFileSystemTreeView" name="fileSystemTreeView">
          <property name="selectionMode">
           <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
@@ -292,7 +292,7 @@
           </stringlist>
          </property>
          <property name="visibleSections">
-          <set>QFileSystemTreeView::NameSection|QFileSystemTreeView::TypeSection</set>
+          <set>QFileSystemTreeView::Name|QFileSystemTreeView::Type</set>
          </property>
         </widget>
        </item>
@@ -300,7 +300,7 @@
         <widget class="QLabel" name="filesystemListViewLabel"/>
        </item>
        <item>
-        <widget class="QFileSystemListView" name="filesystemListView">
+        <widget class="QFileSystemListView" name="fileSystemListView">
          <property name="browsable">
           <bool>true</bool>
          </property>
@@ -601,88 +601,88 @@ p, li { white-space: pre-wrap; }
   <customwidget>
    <class>QCollapsibleFrame</class>
    <extends>QFrame</extends>
-   <header>QCollapsibleFrame.h</header>
+   <header>QtWidgetsExtra/Additional/QCollapsibleFrame.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>QShape</class>
    <extends>QFrame</extends>
-   <header>QShape.h</header>
+   <header>QtWidgetsExtra/Additional/QShape.h</header>
   </customwidget>
   <customwidget>
    <class>QUpDownButton</class>
    <extends>QWidget</extends>
-   <header>QUpDownButton.h</header>
+   <header>QtWidgetsExtra/Additional/QUpDownButton.h</header>
   </customwidget>
   <customwidget>
    <class>QButtonGroupBox</class>
    <extends>QGroupBox</extends>
-   <header>QButtonGroupBox.h</header>
+   <header>QtWidgetsExtra/ButtonGroupBox/QButtonGroupBox.h</header>
   </customwidget>
   <customwidget>
    <class>QColorComboBox</class>
    <extends>QComboBox</extends>
-   <header>QColorComboBox.h</header>
+   <header>QtWidgetsExtra/Color/QColorComboBox.h</header>
   </customwidget>
   <customwidget>
    <class>QColorLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>QColorLineEdit.h</header>
+   <header>QtWidgetsExtra/Color/QColorLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>QColorListView</class>
    <extends>QListView</extends>
-   <header>QColorListView.h</header>
+   <header>QtWidgetsExtra/Color/QColorListView.h</header>
   </customwidget>
   <customwidget>
    <class>QColorPushButton</class>
    <extends>QPushButton</extends>
-   <header>QColorPushButton.h</header>
+   <header>QtWidgetsExtra/Color/QColorPushButton.h</header>
   </customwidget>
   <customwidget>
    <class>QColorToolButton</class>
    <extends>QToolButton</extends>
-   <header>QColorToolButton.h</header>
+   <header>QtWidgetsExtra/Color/QColorToolButton.h</header>
   </customwidget>
   <customwidget>
    <class>QOpenFileButton</class>
    <extends>QToolButton</extends>
-   <header>QOpenFileButton.h</header>
+   <header>QtWidgetsExtra/FileDialog/QOpenFileButton.h</header>
   </customwidget>
   <customwidget>
    <class>QOpenFileLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>QOpenFileLineEdit.h</header>
+   <header>QtWidgetsExtra/FileDialog/QOpenFileLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>QOpenFolderButton</class>
    <extends>QToolButton</extends>
-   <header>QOpenFolderButton.h</header>
+   <header>QtWidgetsExtra/FileDialog/QOpenFolderButton.h</header>
   </customwidget>
   <customwidget>
    <class>QOpenFolderLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>QOpenFolderLineEdit.h</header>
+   <header>QtWidgetsExtra/FileDialog/QOpenFolderLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>QSaveFileButton</class>
    <extends>QToolButton</extends>
-   <header>QSaveFileButton.h</header>
+   <header>QtWidgetsExtra/FileDialog/QSaveFileButton.h</header>
   </customwidget>
   <customwidget>
    <class>QSaveFileLineEdit</class>
    <extends>QLineEdit</extends>
-   <header>QSaveFileLineEdit.h</header>
+   <header>QtWidgetsExtra/FileDialog/QSaveFileLineEdit.h</header>
   </customwidget>
   <customwidget>
    <class>QFileSystemListView</class>
    <extends>QListView</extends>
-   <header>QFileSystemListView.h</header>
+   <header>QtWidgetsExtra/FileSystem/QFileSystemListView.h</header>
   </customwidget>
   <customwidget>
    <class>QFileSystemTreeView</class>
    <extends>QTreeView</extends>
-   <header>QFileSystemTreeView.h</header>
+   <header>QtWidgetsExtra/FileSystem/QFileSystemTreeView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -736,7 +736,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>filesystemTreeView</sender>
+   <sender>fileSystemTreeView</sender>
    <signal>rootPathChanged(QString)</signal>
    <receiver>filesystemTreeViewLabel</receiver>
    <slot>setText(QString)</slot>
@@ -752,7 +752,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
   <connection>
-   <sender>filesystemListView</sender>
+   <sender>fileSystemListView</sender>
    <signal>rootPathChanged(QString)</signal>
    <receiver>filesystemListViewLabel</receiver>
    <slot>setText(QString)</slot>
