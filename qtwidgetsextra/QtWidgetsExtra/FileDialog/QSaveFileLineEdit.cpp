@@ -25,7 +25,7 @@ public:
 
     void filePathChanged(const QString &text) {
         if (widget->text() != text) {
-            widget->setText(text);
+            widget->QAbstractButtonLineEdit::setText(text);
         }
     }
 

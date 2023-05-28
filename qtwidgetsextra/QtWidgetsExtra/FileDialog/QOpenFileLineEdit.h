@@ -40,4 +40,7 @@ public:
 Q_SIGNALS:
     void embededActionPositionChanged(QLineEdit::ActionPosition position);
     void filePathChanged(const QString &filePath);
+
+private:
+    using QAbstractButtonLineEdit::setText;
 };
