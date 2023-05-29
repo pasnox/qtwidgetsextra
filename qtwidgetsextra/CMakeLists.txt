@@ -36,6 +36,7 @@ gateau_add_library(QtWidgetsExtraLib
         QtWidgetsExtra/FileDialog/QOpenFolderButton.h
         QtWidgetsExtra/FileDialog/QSaveFileLineEdit.h
         QtWidgetsExtra/FileDialog/QSaveFileButton.h
+        QtWidgetsExtra/FileSystem/QFileSystemComboBox.h
         QtWidgetsExtra/FileSystem/QFileSystemTreeView.h
         QtWidgetsExtra/FileSystem/QFileSystemListView.h
     SOURCES
@@ -61,6 +62,7 @@ gateau_add_library(QtWidgetsExtraLib
         QtWidgetsExtra/FileDialog/QOpenFolderButton.cpp
         QtWidgetsExtra/FileDialog/QSaveFileLineEdit.cpp
         QtWidgetsExtra/FileDialog/QSaveFileButton.cpp
+        QtWidgetsExtra/FileSystem/QFileSystemComboBox.cpp
         QtWidgetsExtra/FileSystem/QFileSystemTreeView.cpp
         QtWidgetsExtra/FileSystem/QFileSystemListView.cpp
 )
