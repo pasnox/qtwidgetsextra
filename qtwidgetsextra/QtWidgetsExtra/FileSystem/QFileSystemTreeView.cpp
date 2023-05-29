@@ -208,8 +208,8 @@ QString QFileSystemTreeView::rootPath() const {
 }
 
 void QFileSystemTreeView::setRootPath(const QString &rootPath) {
-    d->model->setRootPath(rootPath);
     setRootIndex(d->model->index(rootPath));
+    d->model->setRootPath(rootPath);
 }
 
 QStringList QFileSystemTreeView::selection() const {

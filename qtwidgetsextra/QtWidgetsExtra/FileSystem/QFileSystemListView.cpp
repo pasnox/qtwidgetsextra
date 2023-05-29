@@ -223,8 +223,8 @@ QString QFileSystemListView::rootPath() const {
 }
 
 void QFileSystemListView::setRootPath(const QString &rootPath) {
-    d->model->setRootPath(rootPath);
     setRootIndex(d->model->index(rootPath));
+    d->model->setRootPath(rootPath);
 }
 
 QStringList QFileSystemListView::selection() const {
