@@ -38,5 +38,6 @@ Q_SIGNALS:
     void filePathChanged(const QString &filePath);
 
 private:
+    using QAbstractButtonLineEdit::text;
     using QAbstractButtonLineEdit::setText;
 };
