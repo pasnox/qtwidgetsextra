@@ -2,8 +2,26 @@
 #include "QFileSystemListView.h"
 
 #include <QFileSystemModel>
+#include <QCompleter>
 
 #include <optional>
+
+class QFileSystemComboBoxCompleter : public QCompleter {
+public:
+    using QCompleter::QCompleter;
+
+    QString pathFromIndex(const QModelIndex &index) const override {
+        return index.data(completionRole()).toString();
+    }
+
+    QStringList splitPath(const QString &path) const override {
+        if (const auto model = qobject_cast<QFileSystemModel *>(QCompleter::model())) {
+            return QCompleter::splitPath(QDir(model->rootPath()).filePath(path));
+        }
+
+        Q_UNREACHABLE();
+    }
+};
 
 class QFileSystemComboBoxPrivate : public QObject {
     Q_OBJECT
@@ -21,11 +39,18 @@ public:
         view->setReadOnly(true);
 
         widget->blockSignals(true);
-        widget->QComboBox::setEditable(false);
+        widget->QComboBox::setEditable(true);
         widget->QComboBox::setModel(view->model());
         widget->QComboBox::setView(view);
         widget->QComboBox::setRootModelIndex(view->rootIndex());
         widget->QComboBox::setCurrentIndex(-1);
+
+        auto completer = new QFileSystemComboBoxCompleter(view->model(), this);
+        completer->setCaseSensitivity(Qt::CaseInsensitive);
+        completer->setCompletionRole(Qt::DisplayRole);
+        completer->setFilterMode(Qt::MatchContains);
+        completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
+        widget->setCompleter(completer);
 
         // QFileSystemModel sorting is delayed and use layoutChanged.
         // And QComboBox model watching does not listen to layoutChanged...
