@@ -180,12 +180,11 @@ void QFileSystemComboBox::setRootPath(const QString &rootPath) {
 }
 
 QString QFileSystemComboBox::currentFileName() const {
-    return currentData(QFileSystemModel::FileNameRole).toString();
+    return QFileInfo(currentFilePath()).fileName();
 }
 
 void QFileSystemComboBox::setCurrentFileName(const QString &fileName) {
-    d->layoutValue.reset();
-    setCurrentText(fileName);
+    setCurrentFilePath(QDir(rootPath()).filePath(fileName));
 }
 
 QString QFileSystemComboBox::currentFilePath() const {
@@ -196,9 +195,13 @@ void QFileSystemComboBox::setCurrentFilePath(const QString &filePath) {
     const QFileInfo fileInfo(filePath);
 
     if (rootPath() != fileInfo.absolutePath()) {
-        d->setRootPath(fileInfo.absolutePath(), qMakePair(-1, QFileInfo(fileInfo.absoluteFilePath())));
+        d->setRootPath(fileInfo.absolutePath(), qMakePair(-1, fileInfo.absoluteFilePath()));
     } else {
-        setCurrentFileName(fileInfo.fileName());
+        if (d->initialSorting || d->layoutValue) {
+            d->layoutValue = qMakePair(-1, fileInfo.absoluteFilePath());
+        } else {
+            setCurrentIndex(findFileName(fileInfo.fileName()));
+        }
     }
 }
 
