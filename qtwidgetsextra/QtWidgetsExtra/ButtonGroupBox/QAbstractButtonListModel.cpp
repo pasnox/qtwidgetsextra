@@ -30,7 +30,7 @@ int QAbstractButtonListModel::rowCount(const QModelIndex &parent) const {
         return 0;
     }
 
-    return d->buttons.count();
+    return static_cast<int>(d->buttons.count());
 }
 
 QVariant QAbstractButtonListModel::data(const QModelIndex &index, int role) const {

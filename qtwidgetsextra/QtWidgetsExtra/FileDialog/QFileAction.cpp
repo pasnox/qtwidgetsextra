@@ -43,13 +43,13 @@ public:
 
         switch (type) {
         case QFileAction::Type::OpenFile:
-            fn = QFileDialog::getOpenFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
+            fn = QFileDialog::getOpenFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr, options);
             break;
         case QFileAction::Type::SaveFile:
-            fn = QFileDialog::getSaveFileName(0, caption, dir, filter.join(QStringLiteral(";;")), 0, options);
+            fn = QFileDialog::getSaveFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr, options);
             break;
         case QFileAction::Type::OpenFolder:
-            fn = QFileDialog::getExistingDirectory(0, caption, dir, options);
+            fn = QFileDialog::getExistingDirectory(nullptr, caption, dir, options);
             break;
         }
 

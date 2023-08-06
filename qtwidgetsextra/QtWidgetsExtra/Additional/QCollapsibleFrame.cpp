@@ -15,7 +15,7 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override {
-        Q_UNUSED(event);
+        Q_UNUSED(event)
 
         if (!icon().isNull()) {
             const QIcon::Mode mode = isEnabled() ? QIcon::Normal : QIcon::Disabled;
@@ -100,40 +100,40 @@ public:
         }
     }
 
-    void storeSizes(QWidget *widget) {
-        if (widget->isHidden() || !widget->size().isValid()) {
+    void storeSizes(QWidget *window) {
+        if (window->isHidden() || !window->size().isValid()) {
             return;
         }
 
-        oldCollapsedSize = collapsed ? widget->size() : oldCollapsedSize;
-        oldExpandedSize = collapsed ? oldExpandedSize : widget->size();
+        oldCollapsedSize = collapsed ? window->size() : oldCollapsedSize;
+        oldExpandedSize = collapsed ? oldExpandedSize : window->size();
     }
 
-    void restoreSize(QWidget *widget) {
-        if (widget->isHidden()) {
+    void restoreSize(QWidget *window) {
+        if (window->isHidden()) {
             return;
         }
 
         if (collapsed) {
             if (oldCollapsedSize.isValid()) {
-                const auto layouts = widget->findChildren<QLayout *>();
+                const auto layouts = window->findChildren<QLayout *>();
                 for (QLayout *layout : layouts) {
                     layout->invalidate();
                     layout->activate();
                 }
 
-                widget->resize(oldCollapsedSize);
+                window->resize(oldCollapsedSize);
             }
             Q_EMIT editor->collapsed();
         } else {
             if (oldExpandedSize.isValid()) {
-                const auto layouts = widget->findChildren<QLayout *>();
+                const auto layouts = window->findChildren<QLayout *>();
                 for (QLayout *layout : layouts) {
                     layout->invalidate();
                     layout->activate();
                 }
 
-                widget->resize(oldExpandedSize);
+                window->resize(oldExpandedSize);
             }
             Q_EMIT editor->expanded();
         }
@@ -163,7 +163,7 @@ QSize QCollapsibleFrame::minimumSizeHint() const {
 
         if (spacing == -1) {
             spacing = style()->layoutSpacing(d->button->sizePolicy().controlType(),
-                                             d->widget->sizePolicy().controlType(), Qt::Vertical, 0, this);
+                                             d->widget->sizePolicy().controlType(), Qt::Vertical, nullptr, this);
         }
 
         sh.rwidth() = qMax(sh.width(), d->widget->minimumSizeHint().width());
@@ -226,13 +226,13 @@ QWidget *QCollapsibleFrame::widget() const {
 
 QWidget *QCollapsibleFrame::takeWidget() {
     if (!d->widget) {
-        return 0;
+        return nullptr;
     }
 
     QWidget *widget = d->widget;
-    d->widget = 0;
+    d->widget = nullptr;
     d->verticalLayout->removeWidget(widget);
-    widget->setParent(0);
+    widget->setParent(nullptr);
 
     d->button_toggled(d->button->isChecked());
 

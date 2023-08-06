@@ -6,7 +6,7 @@
 #include <QPixmapCache>
 
 namespace QtWidgetsExtraCache {
-QCache<qint64, QIcon> cachedIcons;
+static QCache<quint64, QIcon> cachedIcons;
 }
 
 bool QtWidgetsExtraCache::cachePixmap(const QString &key, const QPixmap &pixmap) {

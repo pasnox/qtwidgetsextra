@@ -18,7 +18,7 @@ public:
 
     void triggered() {
         const QColor newColor =
-            QColorDialog::getColor(color, 0, caption, QColorDialog::ColorDialogOptions(int(options)));
+            QColorDialog::getColor(color, nullptr, caption, QColorDialog::ColorDialogOptions(int(options)));
 
         if (newColor.isValid()) {
             action->setColor(newColor);

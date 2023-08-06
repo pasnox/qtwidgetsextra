@@ -195,10 +195,10 @@ void QFileSystemComboBox::setCurrentFilePath(const QString &filePath) {
     const QFileInfo fileInfo(filePath);
 
     if (rootPath() != fileInfo.absolutePath()) {
-        d->setRootPath(fileInfo.absolutePath(), qMakePair(-1, fileInfo.absoluteFilePath()));
+        d->setRootPath(fileInfo.absolutePath(), qMakePair(-1, fileInfo));
     } else {
         if (d->initialSorting || d->layoutValue) {
-            d->layoutValue = qMakePair(-1, fileInfo.absoluteFilePath());
+            d->layoutValue = qMakePair(-1, fileInfo);
         } else {
             setCurrentIndex(findFileName(fileInfo.fileName()));
         }

@@ -59,7 +59,7 @@ int QColorListModel::rowCount(const QModelIndex &parent) const {
         return 0;
     }
 
-    return d->colors.count();
+    return static_cast<int>(d->colors.count());
 }
 
 QModelIndex QColorListModel::sibling(int row, int column, const QModelIndex &idx) const {

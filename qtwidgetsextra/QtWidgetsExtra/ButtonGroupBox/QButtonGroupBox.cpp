@@ -24,7 +24,7 @@ public:
 
         connect(model, &QAbstractButtonListModel::rowsInserted, this,
                 [this](const QModelIndex &parent, int first, int last) {
-                    Q_UNUSED(parent);
+                    Q_UNUSED(parent)
 
                     for (int i = first; i <= last; ++i) {
                         createButton(i);
@@ -38,7 +38,7 @@ public:
                 });
         connect(model, &QAbstractButtonListModel::rowsRemoved, this,
                 [this](const QModelIndex &parent, int first, int last) {
-                    Q_UNUSED(parent);
+                    Q_UNUSED(parent)
 
                     for (int i = last; i >= first; --i) {
                         removeButton(i);
@@ -89,7 +89,7 @@ public:
     }
 
     void updateButton(int index, const QVector<int> &roles = {}) {
-        Q_UNUSED(roles);
+        Q_UNUSED(roles)
 
         const QButtonGroupBox::Button data = model->itemData(model->index(index));
         QAbstractButton *button = qobject_cast<QAbstractButton *>(layout->itemAt(index)->widget());
@@ -263,11 +263,9 @@ QAbstractButton *QButtonGroupBox::createButton() const {
         return new QCheckBox;
     case QButtonGroupBox::Type::RadioBox:
         return new QRadioButton;
-    default:
-        Q_UNREACHABLE();
     }
 
-    return nullptr;
+    Q_UNREACHABLE();
 }
 
 #include "QButtonGroupBox.moc"

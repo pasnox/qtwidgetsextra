@@ -47,9 +47,10 @@ public:
             return Qt::Horizontal;
         case QBoxLayout::TopToBottom:
         case QBoxLayout::BottomToTop:
-        default:
             return Qt::Vertical;
         }
+
+        Q_UNREACHABLE();
     }
 
     QBoxLayout::Direction orientationToDirection(Qt::Orientation orientation) const {
@@ -57,9 +58,10 @@ public:
         case Qt::Horizontal:
             return QBoxLayout::LeftToRight;
         case Qt::Vertical:
-        default:
             return QBoxLayout::TopToBottom;
         }
+
+        Q_UNREACHABLE();
     }
 
     void updateButtonArrows() {
@@ -69,7 +71,6 @@ public:
             downButton->setArrowType(Qt::RightArrow);
             break;
         case Qt::Vertical:
-        default:
             upButton->setArrowType(Qt::UpArrow);
             downButton->setArrowType(Qt::DownArrow);
             break;

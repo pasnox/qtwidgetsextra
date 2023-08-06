@@ -122,7 +122,7 @@ QFileSystemListView::QFileSystemListView(QWidget *parent)
 }
 
 void QFileSystemListView::setModel(QAbstractItemModel *model) {
-    Q_UNUSED(model);
+    Q_UNUSED(model)
 }
 
 bool QFileSystemListView::nameFilterDisables() const {
@@ -193,13 +193,14 @@ QFileSystemListView::Section QFileSystemListView::visibleSection() const {
         return QFileSystemListView::Section::Type;
     case QFileSystemListView::Column::LastModification:
         return QFileSystemListView::Section::LastModification;
-    default:
-        return QFileSystemListView::Section::Name;
     }
+
+    return QFileSystemListView::Section::Name;
 }
 
 void QFileSystemListView::setVisibleSection(QFileSystemListView::Section section) {
     switch (section) {
+    case QFileSystemListView::Section::All:
     case QFileSystemListView::Section::Name:
         setModelColumn(static_cast<int>(QFileSystemListView::Column::Name));
         break;
@@ -211,9 +212,6 @@ void QFileSystemListView::setVisibleSection(QFileSystemListView::Section section
         break;
     case QFileSystemListView::Section::LastModification:
         setModelColumn(static_cast<int>(QFileSystemListView::Column::LastModification));
-        break;
-    default:
-        setModelColumn(static_cast<int>(QFileSystemListView::Column::Name));
         break;
     }
 }

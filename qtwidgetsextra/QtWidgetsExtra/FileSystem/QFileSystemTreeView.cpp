@@ -102,7 +102,7 @@ QFileSystemTreeView::QFileSystemTreeView(QWidget *parent)
 }
 
 void QFileSystemTreeView::setModel(QAbstractItemModel *model) {
-    Q_UNUSED(model);
+    Q_UNUSED(model)
 }
 
 bool QFileSystemTreeView::nameFilterDisables() const {
