@@ -3,6 +3,8 @@
 #include <QApplication>
 #include <QStyle>
 
+#include <optional>
+
 class QFileActionPrivate : public QObject {
     Q_OBJECT
 
@@ -43,13 +45,30 @@ public:
 
         switch (type) {
         case QFileAction::Type::OpenFile:
-            fn = QFileDialog::getOpenFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr, options);
+            if (options) {
+                fn = QFileDialog::getOpenFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr,
+                                                  *options);
+            } else {
+                fn = QFileDialog::getOpenFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")));
+            }
+
             break;
         case QFileAction::Type::SaveFile:
-            fn = QFileDialog::getSaveFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr, options);
+            if (options) {
+                fn = QFileDialog::getSaveFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")), nullptr,
+                                                  *options);
+            } else {
+                fn = QFileDialog::getSaveFileName(nullptr, caption, dir, filter.join(QStringLiteral(";;")));
+            }
+
             break;
         case QFileAction::Type::OpenFolder:
-            fn = QFileDialog::getExistingDirectory(nullptr, caption, dir, options);
+            if (options) {
+                fn = QFileDialog::getExistingDirectory(nullptr, caption, dir, *options);
+            } else {
+                fn = QFileDialog::getExistingDirectory(nullptr, caption, dir);
+            }
+
             break;
         }
 
@@ -65,7 +84,7 @@ public:
     QString caption;
     QString directory;
     QStringList filter;
-    QFileDialog::Options options;
+    std::optional<QFileDialog::Options> options;
 };
 
 QFileAction::QFileAction(QObject *parent)
@@ -121,7 +140,7 @@ void QFileAction::setFilter(const QStringList &filter) {
 }
 
 QFileDialog::Options QFileAction::options() const {
-    return d->options;
+    return d->options ? *d->options : QFileDialog::Options();
 }
 
 void QFileAction::setOptions(QFileDialog::Options options) {
