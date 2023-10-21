@@ -184,7 +184,11 @@ QString QFileSystemComboBox::currentFileName() const {
 }
 
 void QFileSystemComboBox::setCurrentFileName(const QString &fileName) {
-    setCurrentFilePath(QDir(rootPath()).filePath(fileName));
+    if (fileName.isEmpty()) {
+        setCurrentIndex(-1);
+    } else {
+        setCurrentFilePath(QDir(rootPath()).filePath(fileName));
+    }
 }
 
 QString QFileSystemComboBox::currentFilePath() const {
