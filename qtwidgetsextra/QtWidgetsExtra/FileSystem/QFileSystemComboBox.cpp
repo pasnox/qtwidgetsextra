@@ -209,6 +209,10 @@ void QFileSystemComboBox::setCurrentFilePath(const QString &filePath) {
     }
 }
 
+bool QFileSystemComboBox::isEmpty() const {
+    return currentText().isEmpty();
+}
+
 QString QFileSystemComboBox::fileName(int index) const {
     return itemData(index, QFileSystemModel::FileNameRole).toString();
 }

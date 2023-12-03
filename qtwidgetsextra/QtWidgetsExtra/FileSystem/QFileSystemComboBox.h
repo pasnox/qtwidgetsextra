@@ -62,6 +62,8 @@ public:
     QString currentFilePath() const;
     void setCurrentFilePath(const QString &filePath);
 
+    bool isEmpty() const;
+
     QString fileName(int index) const;
     QString filePath(int index) const;
 
