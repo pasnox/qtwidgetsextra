@@ -39,6 +39,7 @@ gateau_add_library(QtWidgetsExtraLib
         QtWidgetsExtra/FileSystem/QFileSystemComboBox.h
         QtWidgetsExtra/FileSystem/QFileSystemTreeView.h
         QtWidgetsExtra/FileSystem/QFileSystemListView.h
+        QtWidgetsExtra/QKeySequenceRevealerFilter.h
     SOURCES
         QtWidgetsExtra/QtWidgetsExtraCache.cpp
         QtWidgetsExtra/QAbstractButtonLineEdit.cpp
@@ -65,6 +66,7 @@ gateau_add_library(QtWidgetsExtraLib
         QtWidgetsExtra/FileSystem/QFileSystemComboBox.cpp
         QtWidgetsExtra/FileSystem/QFileSystemTreeView.cpp
         QtWidgetsExtra/FileSystem/QFileSystemListView.cpp
+        QtWidgetsExtra/QKeySequenceRevealerFilter.cpp
 )
 
 if (QT_WIDGETS_EXTRA_BUILD_DESIGNER)
